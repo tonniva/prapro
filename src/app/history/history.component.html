@@ -1,0 +1,16 @@
+<div class="wrapper-title">
+    ประวัติ
+</div>
+<div class="wrapper-list">
+    <div class="card m-4" *ngFor="let item of list">
+        <div>
+            <img [src]="item.image_url" class="float-left wrapper-image" alt="...">
+        </div>
+        <div class="wrapper-detial">
+            {{item.name}}
+        </div>
+        <div class="wrapper-detial">
+            {{item.line1}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="owl-carousel owl-theme">
+    <div class="item" *ngFor="let item of dashboardlist">
+        <img [src]="item.image_url">
+    </div>
+</div>
+
+<div class="wrapper-list">
+    <div class="card m-4" *ngFor="let item of list" routerLink="/list/detail/{{item.id}}">
+        <div>
+            <img [src]="item.image_url" class="float-left wrapper-image" alt="...">
+        </div>
+        <div class="wrapper-detial">
+            {{item.name}}
+        </div>
+        <div class="wrapper-detial">
+            {{item.line1}}
+        </div>
+
+    </div>
+</div>

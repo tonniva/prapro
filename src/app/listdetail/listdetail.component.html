@@ -1,0 +1,25 @@
+<div class="wrapper-image-detail">
+    <img class="img-fluid wrapper-image" [src]="listdetail.FullImageUrl">
+</div>
+
+<div class="container">
+    <div class="text-success">
+        {{listdetail.Name}}
+    </div>
+    <div class="row">
+        <div class="col text-center wrapper-tab" (click)="showdetail()">
+            รายละเอียด
+        </div>
+        <div class="col text-center wrapper-tab" (click)="showcondition()">
+            เงื่อนไข
+        </div>
+    </div>
+    <div class="text-info" [hidden]="!ishowdetail">
+        {{listdetail.Detail}}
+    </div>
+    <div class="text-primary" [hidden]="ishowdetail">
+        {{listdetail.Condition}}
+    </div>
+
+
+</div>
