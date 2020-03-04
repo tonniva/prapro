@@ -6,10 +6,13 @@ import { PostlistComponent } from './postlist/postlist.component';
 import { ListdetailComponent } from './listdetail/listdetail.component';
 import { HistoryComponent } from './history/history.component';
 import { OthermenuComponent } from './othermenu/othermenu.component';
+import { LandingComponent } from './landing/landing.component';
 
 
 const routes: Routes = [ 
-  { path: '', component: HomeComponent },
+  
+  { path: '', component: LandingComponent },
+  { path: 'landing', component: LandingComponent },
   { path: 'home', component: HomeComponent },
   { path: 'list/one', component: ListComponent },
   { path: 'list/two', component: PostlistComponent },

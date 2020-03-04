@@ -12,6 +12,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HttpClientModule } from '@angular/common/http';
 import { HistoryComponent } from './history/history.component';
 import { OthermenuComponent } from './othermenu/othermenu.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OthermenuComponent } from './othermenu/othermenu.component';
     PostlistComponent,
     ListdetailComponent,
     HistoryComponent,
-    OthermenuComponent
+    OthermenuComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
