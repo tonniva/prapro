@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<div class="p-3 wrapper-bg">
+    <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
+        <!-- <div class=" pt-4">
+
+            <div class=" custom-control custom-radio text-center m-auto">
+                <input id="typereferee" type="radio" class="custom-control-input" value="typereferee" name="type" ngModel>
+                <label class="custom-control-label text-white" for="typereferee">พิมพ์กรรมการ</label>
+            </div>
+
+            <div class="custom-control custom-radio text-center m-auto">
+                <input id="typebig" type="radio" class="custom-control-input" value="typebig" name="type" ngModel>
+                <label class="custom-control-label text-white" for="typebig">พิมพ์ใหญ่</label>
+            </div>
+
+            <div class="custom-control custom-radio text-center m-auto">
+                <input id="typemiddle" type="radio" class="custom-control-input" value="typemiddle" name="type" ngModel>
+                <label class="custom-control-label text-white" for="typemiddle">พิมพ์กลาง</label>
+            </div>
+            <div class="custom-control custom-radio text-center m-auto">
+                <input id="typesmall" type="radio" class="custom-control-input" value="typesmall" name="type" ngModel>
+                <label class="custom-control-label text-white" for="typesmall">พิมพ์พระรอด</label>
+            </div>
+
+
+
+
+        </div> -->
+        <div class="row pt-4">
+            <div class="col text-white f-s text-center">
+                ชื่อ
+            </div>
+            <div class="col">
+                <input class="form-control text-center" type="text" name="firstname" placeholder="ชื่อ" ngModel>
+            </div>
+        </div>
+        <div class="row pt-4">
+            <div class="col text-white f-s text-center">
+                นามสกุล
+            </div>
+            <div class="col">
+                <input class="form-control text-center" type="text" name="lastname" placeholder="นามสกุล" ngModel>
+            </div>
+        </div>
+        <div class="row pt-4">
+            <div class="col text-white f-s text-center">
+                เบอร์ติดต่อ
+            </div>
+            <div class="col">
+                <input class="form-control text-center" type="number" name="tel" placeholder="เบอร์ติดต่อ" ngModel>
+            </div>
+        </div>
+        <div class="row pt-4">
+            <div class="col text-white f-s text-center">
+                E-mail
+            </div>
+            <div class="col">
+                <input class="form-control text-center" type="text" name="email" placeholder="E-mail" ngModel>
+            </div>
+        </div>
+
+        <div class="wrapper-input p-3">
+            <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>
+        </div>
+
+    </form>
+
+</div>

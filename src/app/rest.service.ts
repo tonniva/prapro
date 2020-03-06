@@ -17,9 +17,8 @@ optionsGetProfile = {
   headers: new HttpHeaders().set('Authorization', 'Bearer')
 };
 
-  
-  //https://access.line.me/oauth2/v2.1/login?loginState=rsqb6MNEEFSsG3Z9u2BI0X&loginChannelId=1653915528&returnUri=%2Foauth2%2Fv2.1%2Fauthorize%2Fconsent%3Fscope%3Dopenid%2Bemail%26response_type%3Dcode%26state%3D12345abcde%26redirect_uri%3Dhttps%253A%252F%252Fmusing-brahmagupta-fc2121.netlify.com%26client_id%3D1653915528#/
-  
+
+ 
  body = new URLSearchParams();
 
   data= {
@@ -40,6 +39,26 @@ optionsGetProfile = {
   .toPromise()
   .then((response) => response);
  }
+
+ 
+ PramoonRegister(item:any){ 
+   debugger  
+  const PramoonRegisteroptions = {
+    headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+  };  
+  this.body.set('firstname', item.firstname);
+  this.body.set('lastname', item.lastname);
+  this.body.set('email', item.email);
+  this.body.set('tel', item.tel);
+  this.body.set('password', "123456"); 
+  this.body.set('cpassword',"123456"); 
+  this.body.set('access_token', ""); 
+  this.body.set('id_token', ""); 
+return this.httpClient.post('http://localhost:3000/api/account/register', this.body.toString(), PramoonRegisteroptions)
+.toPromise()
+.then((response) => response);
+}
+
 
 
   GetProfile(access_token){   

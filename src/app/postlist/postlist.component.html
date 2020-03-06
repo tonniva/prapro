@@ -1,42 +1,100 @@
 <div class="wrapper-post-content">
-    <div class="container">
-        <div class="row">
-            <div class="col wrapper-upload">
-                <span class="hiddenFileInput">
+    <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
+        <div class="container">
+            <div class="row">
+                <div class="col wrapper-upload">
+                    <span class="hiddenFileInput">
                                 <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
                         </span>
-                <div>
-                    <img class="img-fluid wrapper-uploaded" [src]="image" [hidden]="!image">
+                    <div>
+                        <img class="img-fluid wrapper-uploaded" [src]="objimage[0]" [hidden]="!objimage[0]">
+                    </div>
+                </div>
+                <div class="col wrapper-upload">
+                    <span class="hiddenFileInput">
+                            <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                    </span>
+                    <div>
+                        <img class="img-fluid wrapper-uploaded" [src]="objimage[1]" [hidden]="!objimage[1]">
+                    </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col wrapper-upload">
+                    <span class="hiddenFileInput">
+                            <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                    </span>
+                    <div>
+                        <img class="img-fluid wrapper-uploaded" [src]="objimage[2]" [hidden]="!objimage[2]">
+                    </div>
+                </div>
+                <div class="col wrapper-upload">
+                    <span class="hiddenFileInput">
+                            <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                    </span>
+                    <div>
+                        <img class="img-fluid wrapper-uploaded" [src]="objimage[3]" [hidden]="!objimage[3]">
+                    </div>
                 </div>
             </div>
-            <div class="col wrapper-upload"> </div>
-            <div class="w-100"></div>
-            <div class="col wrapper-upload"> </div>
-            <div class="col wrapper-upload"> </div>
         </div>
-    </div>
+        <div class=" pt-4">
 
-    <div class="container pt-3">
-        <div class="input-group mb-3">
+            <div class=" custom-control custom-radio text-center m-auto">
+                <input id="typereferee" type="radio" class="custom-control-input" value="typereferee" name="type" ngModel>
+                <label class="custom-control-label text-white" for="typereferee">พิมพ์กรรมการ</label>
+            </div>
+
+            <div class="custom-control custom-radio text-center m-auto">
+                <input id="typebig" type="radio" class="custom-control-input" value="typebig" name="type" ngModel>
+                <label class="custom-control-label text-white" for="typebig">พิมพ์ใหญ่</label>
+            </div>
+
+            <div class="custom-control custom-radio text-center m-auto">
+                <input id="typemiddle" type="radio" class="custom-control-input" value="typemiddle" name="type" ngModel>
+                <label class="custom-control-label text-white" for="typemiddle">พิมพ์กลาง</label>
+            </div>
+            <div class="custom-control custom-radio text-center m-auto">
+                <input id="typesmall" type="radio" class="custom-control-input" value="typesmall" name="type" ngModel>
+                <label class="custom-control-label text-white" for="typesmall">พิมพ์พระรอด</label>
+            </div>
+        </div>
+        <div class="container pt-3">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">ราคาเปิดประมูล</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <!-- <label for="birthday text-white">วันปิดประมูล:</label> -->
+                <div class="input-group-prepend">
+                    <span class="input-group-text">วันปิดประมูล</span>
+                </div>
+                <input type="date" id="dateEnd" name="dateEnd">
+                <div class="input-group-append">
+                    <span class="input-group-text"></span>
+                </div>
+            </div>
+            <!-- <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+                <span class="input-group-text" id="inputGroup-sizing-default">รายละเอียด</span>
             </div>
             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-            <div class="input-group-append">
-                <span class="input-group-text">.00</span>
+        </div> -->
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">รายละเอียด</span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
             </div>
         </div>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">With textarea</span>
-            </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+        <div class="wrapper-input p-3">
+            <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>
         </div>
-    </div>
+
+    </form>
 </div>

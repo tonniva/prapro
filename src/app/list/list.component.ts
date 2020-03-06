@@ -24,7 +24,8 @@ export interface RootObject {
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
+  heroes = ['http://img-196.uamulet.com/uauctions/AU364/2019/3/1/U17017346368704345750776481.jpg'
+  , 'http://www.99wat.com/management/chmod/4073/product/119/1-wm.jpg', 'https://fq.lnwfile.com/dxsfhk.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-ronjrqSF1EIuIocSHV18RIDfEm6RqiCYkXIg38SEFguWjGVH'];
   list:any;
   dashboardlist:any;
   

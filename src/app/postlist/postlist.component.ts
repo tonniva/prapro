@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { UtilService } from '../util.service';
 
 @Component({
   selector: 'app-postlist',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostlistComponent implements OnInit {
   image:any;
-  constructor() { }
+  objimage:Array<any> = [];
+
+  constructor(private Util:UtilService) { }
 
   ngOnInit(): void {
   }
@@ -22,10 +26,21 @@ export class PostlistComponent implements OnInit {
     var myReader:FileReader = new FileReader();
   
     myReader.onloadend = (e) => {
-      //รูปที่ได้
-      this.image = myReader.result;
+     
+      //รูปที่ได้ 
+     this.image = myReader.result; 
+    
+      this.objimage.push(this.image);
       //รูปที่ได้
     }
     myReader.readAsDataURL(file);
+  }
+
+
+  onClickSubmit(data) { 
+    // this.apiService.PramoonRegister(data).then((response) => {  
+    //   console.log(data) 
+    //   this.router.navigate(['/list/two'])   
+    // });   
   }
 }

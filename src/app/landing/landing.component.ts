@@ -10,14 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class LandingComponent implements OnInit { 
   listdetail:any
   constructor(private apiService: RestService, private route: ActivatedRoute) { }
-  ngOnInit(): void { 
-    
-    window.location.replace("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1653915528&redirect_uri=http://localhost:4200/home&state=12345abcde&scope=openid%20profile");
-    
-    
-    // const code: string = this.route.snapshot.queryParamMap.get('code');
-    // if(typeof(code)!=undefined){
-    //   this.apiService.GetAccessTokensLine(code).then((response) => {this.listdetail = response, console.log(this.listdetail)});  
-    // }
+  ngOnInit(): void {  
+    window.location.replace("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1653915528&redirect_uri=http://localhost:4200/home&state=12345abcde&scope=openid%20profile"); 
   }
 }

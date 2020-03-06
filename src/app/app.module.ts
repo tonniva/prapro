@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HistoryComponent } from './history/history.component';
 import { OthermenuComponent } from './othermenu/othermenu.component';
 import { LandingComponent } from './landing/landing.component';
+import { PramoonregisterComponent } from './pramoonregister/pramoonregister.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +25,15 @@ import { LandingComponent } from './landing/landing.component';
     ListdetailComponent,
     HistoryComponent,
     OthermenuComponent,
-    LandingComponent
+    LandingComponent,
+    PramoonregisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CarouselModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

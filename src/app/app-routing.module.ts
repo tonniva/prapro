@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; 
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ListComponent } from './list/list.component';
@@ -7,6 +7,7 @@ import { ListdetailComponent } from './listdetail/listdetail.component';
 import { HistoryComponent } from './history/history.component';
 import { OthermenuComponent } from './othermenu/othermenu.component';
 import { LandingComponent } from './landing/landing.component';
+import { PramoonregisterComponent } from './pramoonregister/pramoonregister.component';
 
 
 const routes: Routes = [ 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'list/detail/:id', component: ListdetailComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'other', component: OthermenuComponent }, 
+  { path: 'pramoonregister', component: PramoonregisterComponent }, 
 ];
 
 

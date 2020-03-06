@@ -1,5 +1,5 @@
 .wrapper-upload {
-    min-height: 20vh;
+    min-height: 30vh;
     background-color: #d8d8d8;
     border: dotted;
     border-color: white;
@@ -29,10 +29,11 @@
     top: 1px;
     left: 0px;
     height: -webkit-fill-available;
+    width: 100%;
 }
 
 .wrapper-post-content {
-    height: 100vh;
+    height: 200vh;
     width: 100%;
     overflow-y: scroll;
 }
