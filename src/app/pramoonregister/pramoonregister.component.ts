@@ -36,6 +36,8 @@ export class PramoonregisterComponent implements OnInit {
   }
 
   onClickSubmit(data) { 
+    data.access_token = localStorage.getItem("access_token");
+    data.id_token = localStorage.getItem("id_token");
     this.apiService.PramoonRegister(data,this.objimageprofile).then((response) => {  
       console.log(data) 
       this.router.navigate(['/list/two'])   
