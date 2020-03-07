@@ -66,6 +66,65 @@
                 <input class="form-control text-center" type="text" name="email" placeholder="E-mail" ngModel>
             </div>
         </div>
+        <div class="row pt-4">
+            <div class="col text-white f-s text-center">
+                เลขบัญชีธนาคาร
+            </div>
+            <div class="col">
+                <input class="form-control text-center" type="number" name="bankaccount" placeholder="เลขบัญชีธนาคาร" ngModel>
+            </div>
+        </div>
+        <div class="row pt-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col wrapper-upload">
+                        รูปภาพ บัตรประขาชน
+                        <div class="bg-gold">
+                            <span class="hiddenFileInput">
+                                            <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                    </span>
+                            <div>
+                                <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[0]" [hidden]="!objimageprofile[0]">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wrapper-upload">
+                        รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน
+                        <div class="bg-gold">
+                            <span class="hiddenFileInput">
+                                        <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                </span>
+                            <div>
+                                <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[1]" [hidden]="!objimageprofile[1]">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col wrapper-upload">
+                        รูปภาพ บัตรประขาชน พร้อม ถ่ายกับข้อความ หลวงปู่ทวด 24
+                        <div class="bg-gold">
+                            <span class="hiddenFileInput">
+                                        <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                </span>
+                            <div>
+                                <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[2]" [hidden]="!objimageprofile[2]">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wrapper-upload">
+                        รูปภาพ บัญชีธนาคาร
+                        <div class="bg-gold">
+                            <span class="hiddenFileInput">
+                                        <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                </span>
+                            <div>
+                                <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[3]" [hidden]="!objimageprofile[3]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="wrapper-input p-3">
             <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>

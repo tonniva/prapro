@@ -41,8 +41,8 @@ optionsGetProfile = {
  }
 
  
- PramoonRegister(item:any){ 
-   debugger  
+ PramoonRegister(item:any,file:any){ 
+      
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
   };  
@@ -50,10 +50,16 @@ optionsGetProfile = {
   this.body.set('lastname', item.lastname);
   this.body.set('email', item.email);
   this.body.set('tel', item.tel);
+  this.body.set('bankaccount', item.bankaccount);
+  debugger
   this.body.set('password', "123456"); 
   this.body.set('cpassword',"123456"); 
   this.body.set('access_token', ""); 
   this.body.set('id_token', ""); 
+  this.body.set('imageidcard',"1234"); //บัตรประชาชน
+  this.body.set('imageidcardconfirmation', "1234");  //บัตรประชาชน พร้อม เขียนข้อความ 
+  this.body.set('imgagehomeregistration', "1234"); //ทะเบียนบ้าน
+  this.body.set('imgagabnkaccount', "1234"); //สมุทรบัญชี
 return this.httpClient.post('http://localhost:3000/api/account/register', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
