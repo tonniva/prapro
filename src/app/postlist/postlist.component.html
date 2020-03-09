@@ -64,7 +64,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">ราคาเปิดประมูล</span>
                 </div>
-                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control" ngModel ngDefaultControl rows="5" cols="60" required name="pricestart" aria-label="Amount (to the nearest dollar)">
                 <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                 </div>
@@ -74,7 +74,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">วันปิดประมูล</span>
                 </div>
-                <input type="datetime-local" id="dateEnd" name="dateEnd">
+                <input type="datetime-local" id="dateEnd" ngModel ngDefaultControl rows="5" cols="60" required name="dateEnd" name="dateEnd">
                 <div class="input-group-append">
                     <span class="input-group-text"></span>
                 </div>
@@ -89,7 +89,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">รายละเอียด</span>
                 </div>
-                <textarea class="form-control wrapper-text-area" aria-label="With textarea"></textarea>
+                <textarea class="form-control wrapper-text-area" ngModel ngDefaultControl name="description" rows="5" cols="60" required></textarea>
             </div>
         </div>
         <div class="wrapper-input p-3">

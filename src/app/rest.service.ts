@@ -3,6 +3,7 @@ import {Http, Headers} from '@angular/http';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators'; 
+import { analytics } from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
@@ -66,23 +67,57 @@ return this.httpClient.post('http://localhost:3000/api/account/register', this.b
 
 
 
-postpramoon(item:any,file:any){ 
+postpramoon(item:any,file:any,token:any){ 
+  
       // ต้องใช้ Token login
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbkBnbWFpbC5jb20iLCJpYXQiOjE1ODM1OTgwMzEsImV4cCI6MTU4MzYwMTYzMX0._y158OsnXibojYXEOUwKPCsMv7IALNniL8GC6gBKU6w')
+    .set('Authorization', 'Bearer '+token)
   };  
-  this.body.set('price', "1");
-  this.body.set('date',"2020-03-07");
-  this.body.set('description', "xxxxxxxx"); 
+  this.body.set('pricestart', item.pricestart);
+  this.body.set('priceend', "");
+  this.body.set('date',(new Date()).toString());
+  this.body.set('dateend',item.dateEnd);
+  this.body.set('description', item.description); 
   this.body.set('imageone',"1234"); //บัตรประชาชน
   this.body.set('imagetwo', "1234");  //บัตรประชาชน พร้อม เขียนข้อความ 
   this.body.set('imagethree', "1234"); //ทะเบียนบ้าน
   this.body.set('imagefour', "1234"); //สมุทรบัญชี
+  this.body.set('id_token', token); 
+  this.body.set('status', ""); 
+  this.body.set('lastbit', ""); 
+  this.body.set('condition', "");  
+  this.body.set('type', item.type);  
+
 return this.httpClient.post('http://localhost:3000/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
+
+
+itemdata= {
+  "email":"",
+  "password":""
+  }
+logingetToken(email:any){ 
+  
+
+  // ต้องใช้ Token login
+const PramoonRegisteroptions = {
+headers: new HttpHeaders().set('Content-Type', 'application/json')
+};  
+
+this.itemdata.email = email;
+this.itemdata.password = "123456";
+// this.body.set('email', email);
+// this.body.set('password', "123456");
+
+return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/login', this.itemdata, PramoonRegisteroptions)
+.toPromise()
+.then((response) => response);
+}
+
+
 
 
   GetProfile(access_token){   

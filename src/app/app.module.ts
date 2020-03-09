@@ -14,6 +14,8 @@ import { HistoryComponent } from './history/history.component';
 import { OthermenuComponent } from './othermenu/othermenu.component';
 import { LandingComponent } from './landing/landing.component';
 import { PramoonregisterComponent } from './pramoonregister/pramoonregister.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { PramoonregisterComponent } from './pramoonregister/pramoonregister.comp
     AppRoutingModule,
     CarouselModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,   
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
