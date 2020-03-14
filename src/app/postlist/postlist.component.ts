@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core'; 
 import { RestService } from '../rest.service';
 
-
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage'; 
  
-// import { Observable } from '../../rxjs/Observable';
-import { Observable } from 'rxjs';  
-import { map,finalize  } from 'rxjs/operators' 
  
 @Component({
   selector: 'app-postlist',
@@ -19,14 +14,6 @@ export class PostlistComponent implements OnInit {
 
 
 
-  //upload
-  ref: AngularFireStorageReference;
-  task: AngularFireUploadTask;
-  uploadProgress: Observable<number>;
-  downloadURL:any;
-  storage:any;
-  uploadState: Observable<string>;
-  //upload
   constructor(private apiService:RestService) { }
 email:any;
 token:any; 
@@ -37,7 +24,7 @@ token:any;
     
       this.token = response.accessToken;
       localStorage.setItem("logintoken",this.token); 
-      console.log(this.token)
+     
       // this.router.navigate(['/list/two'])   
     });   
   }
@@ -75,6 +62,10 @@ token:any;
     //   this.router.navigate(['/list/two'])   
     // });   
   }
+  uploadimage(){
+    
+    window.location.replace("http://localhost:4201/");
 
+  }
  
 }

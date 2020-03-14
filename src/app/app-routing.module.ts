@@ -8,6 +8,7 @@ import { HistoryComponent } from './history/history.component';
 import { OthermenuComponent } from './othermenu/othermenu.component';
 import { LandingComponent } from './landing/landing.component';
 import { PramoonregisterComponent } from './pramoonregister/pramoonregister.component';
+import { UploaderComponent } from './uploader/uploader.component';
 
 
 const routes: Routes = [ 
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: 'list/detail/:id', component: ListdetailComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'other', component: OthermenuComponent }, 
-  { path: 'pramoonregister', component: PramoonregisterComponent }, 
+  { path: 'pramoonregister', component: PramoonregisterComponent }
 ];
 
 

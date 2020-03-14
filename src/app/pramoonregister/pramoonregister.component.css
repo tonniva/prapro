@@ -1,0 +1,39 @@
+.custom-control-label {
+  text-indent: 30px;
+}
+
+.wrapper-upload {
+  min-height: 30vh;
+  background-color: #d8d8d8;
+  border: dotted;
+  border-color: white;
+  margin: 10px;
+  font-size: 5vw;
+  text-align: center;
+  padding: 0;
+}
+
+.hiddenFileInput > input {
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.hiddenFileInput {
+  height: auto;
+  display: inline-block;
+  overflow: hidden;
+  /*for the background, optional*/
+  background: center center no-repeat;
+  background-size: 75% 75%;
+  position: relative;
+}
+
+.wrapper-title-pramool {
+  font-size: 10vw;
+}
+
+.f-s {
+  font-size: 6vw;
+}
+/*# sourceMappingURL=pramoonregister.component.css.map */

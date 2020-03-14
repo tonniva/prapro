@@ -14,12 +14,29 @@ import { HistoryComponent } from './history/history.component';
 import { OthermenuComponent } from './othermenu/othermenu.component';
 import { LandingComponent } from './landing/landing.component';
 import { PramoonregisterComponent } from './pramoonregister/pramoonregister.component';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireStorageModule } from 'angularfire2/storage';
+ 
+ 
+ import { DropzoneDirective } from './dropzone.directive';
+ import { UploaderComponent } from './uploader/uploader.component';
+ import { UploadTaskComponent } from './upload-task/upload-task.component';
+// import { AngularFireAuthModule } from '@angular/fire/auth';
 
+// 1. Import the libs you need
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+// 2. Add your credentials from step 1
+import { environment } from 'src/environments/environment';
+ 
+ 
 @NgModule({
   declarations: [
     AppComponent,
+    UploaderComponent,
+    UploadTaskComponent,
+    DropzoneDirective,
     FooterComponent,
     HomeComponent,
     ListComponent,
@@ -28,15 +45,18 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     HistoryComponent,
     OthermenuComponent,
     LandingComponent,
-    PramoonregisterComponent
+    PramoonregisterComponent 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CarouselModule,
     HttpClientModule,
-    FormsModule,   
-    AngularFireStorageModule
+    FormsModule,    
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule // storage
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,14 @@
+.wrapper-list {
+  height: 200vh;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.wrapper-image {
+  width: 100%;
+}
+
+.wrapper-detial {
+  padding: 16px;
+}
+/*# sourceMappingURL=list.component.css.map */
