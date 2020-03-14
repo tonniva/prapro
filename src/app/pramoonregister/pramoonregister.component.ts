@@ -17,6 +17,7 @@ import { finalize, tap } from 'rxjs/operators';
 export class PramoonregisterComponent implements OnInit {
   image:any;
   objimageprofile:Array<any> = [];
+  arrayfile:Array<any> = [];
 
 
 
@@ -27,7 +28,7 @@ export class PramoonregisterComponent implements OnInit {
   snapshot: Observable<any>;
   downloadURL;
 
-
+  resultFile:any;
   constructor(private router: Router,private apiService:RestService) { }
 
   ngOnInit(): void { 
@@ -42,61 +43,56 @@ export class PramoonregisterComponent implements OnInit {
     var file:File = inputValue.files[0];
     var myReader:FileReader = new FileReader();
   
+ 
+   this.apiService.uploadimage(file).then((response) => { 
+     
+    this.resultFile = response;
+         console.log(response)  
+       });   
+
     myReader.onloadend = (e) => {
      
       //รูปที่ได้ 
      this.image = myReader.result; 
     
-      this.objimageprofile.push(this.image);
+      this.objimageprofile.push(this.image); 
+      this.arrayfile.push(this.resultFile.url);
       //รูปที่ได้
       // this.startUpload();
     }
     myReader.readAsDataURL(file);
   }
 
-  onClickSubmit(data) { 
-    debugger 
+  onClickSubmit(data) {  
     localStorage.setItem("email", data.email); 
     data.access_token = localStorage.getItem("access_token");
     data.id_token = localStorage.getItem("id_token");
  
-    this.apiService.PramoonRegister(data,this.objimageprofile).then((response) => { 
+    this.apiService.PramoonRegister(data,this.arrayfile).then((response) => { 
      
    
       console.log(data) 
 
       this.router.navigate(['/list/two'])   
     });   
+
+     
+  //  for (let index = 0; index < this.arrayfile.length; index++) { 
+  //   debugger
+  //   this.apiService.uploadimage(this.arrayfile[index])
+
+  //     this.apiService.uploadimage(this.inputValue.files[0]).then((response) => { 
+     
+   
+  //     console.log(data) 
+
+  //     this.router.navigate(['/list/two'])   
+  //   });   
+
+  //  }
+
+    
   }
 
-
-  // upload(item){
-  //   window.location.replace('https://objective-johnson-0d553e.netlify.com/?'+item);
-  // }
-
-  // startUpload() {
-  //   debugger
-
-  //   // The storage path
-  //   const path = `test/${Date.now()}_${this.image.name}`;
-
-  //   // Reference to storage bucket
-  //   const ref = this.storage.ref(path);
-
-  //   // The main task
-  //   this.task = this.storage.upload(path, this.image);
-
-  //   // Progress monitoring
-  //   this.percentage = this.task.percentageChanges();
-
-  //   this.snapshot   = this.task.snapshotChanges().pipe(
-  //     tap(console.log),
-  //     // The file's download URL
-  //     finalize( async() =>  {
-  //       this.downloadURL = await ref.getDownloadURL().toPromise();
-
-  //       this.db.collection('files').add( { downloadURL: this.downloadURL, path });
-  //     }),
-  //   );
-  // }
+ 
 }

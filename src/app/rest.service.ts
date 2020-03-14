@@ -67,8 +67,30 @@ return this.httpClient.post('http://localhost:3000/api/account/register', this.b
 
 
 
+
+uploadimage(profileImage:File){  
+ 
+
+// //  this.image.profileImage=item; 
+// //  this.body.set('profileImage', item); 
+// return this.httpClient.post('http://localhost:3000/profile',profileImage)
+// .toPromise()
+// .then((response) => response);
+
+const formData = new FormData();
+formData.append('profileImage', profileImage);
+return this.httpClient.post('http://localhost:3001/profile', formData)
+ .toPromise()
+ .then((response) => response);
+}
+
+
+ 
+
+
+
 postpramoon(item:any,file:any,token:any){ 
-  
+  debugger
       // ต้องใช้ Token login
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -79,10 +101,10 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('date',(new Date()).toString());
   this.body.set('dateend',item.dateEnd);
   this.body.set('description', item.description); 
-  this.body.set('imageone',"1234"); //บัตรประชาชน
-  this.body.set('imagetwo', "1234");  //บัตรประชาชน พร้อม เขียนข้อความ 
-  this.body.set('imagethree', "1234"); //ทะเบียนบ้าน
-  this.body.set('imagefour', "1234"); //สมุทรบัญชี
+  this.body.set('imageone',file[0]); //บัตรประชาชน
+  this.body.set('imagetwo', file[1]);  //บัตรประชาชน พร้อม เขียนข้อความ 
+  this.body.set('imagethree', file[2]); //ทะเบียนบ้าน
+  this.body.set('imagefour', file[3]); //สมุทรบัญชี
   this.body.set('id_token', token); 
   this.body.set('status', ""); 
   this.body.set('lastbit', ""); 

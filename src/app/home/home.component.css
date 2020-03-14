@@ -1,6 +1,8 @@
 .wrapper-home {
-  height: 200vh;
-  width: 100%;
-  overflow-y: scroll;
+    height: 200vh;
+    width: 100%;
+    overflow-y: scroll;
 }
+
+
 /*# sourceMappingURL=home.component.css.map */

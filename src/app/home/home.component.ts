@@ -8,10 +8,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   listdetail:any
-  GetProfilelist:any
+  GetProfilelist:any;
+  pictureUrl:any;
   constructor(private apiService: RestService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {    
     const code: string = this.route.snapshot.queryParamMap.get('code');
     if(typeof(code)!=undefined){
       this.apiService.GetAccessTokensLine(code).then((response) => {this.listdetail = response, 
@@ -27,8 +28,8 @@ export class HomeComponent implements OnInit {
    
   }
 
-  GetProfile(access_token){
-    this.apiService.GetProfile(access_token).then((response) => {this.GetProfilelist = response});  
+  GetProfile(access_token){ 
+    this.apiService.GetProfile(access_token).then((response) => {this.GetProfilelist = response });  
 
   }
 }
