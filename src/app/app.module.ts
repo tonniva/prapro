@@ -29,6 +29,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // 2. Add your credentials from step 1
 import { environment } from 'src/environments/environment';
+import { ModalComponent } from './modal/modal.component';
  
  
 @NgModule({
@@ -45,7 +46,8 @@ import { environment } from 'src/environments/environment';
     HistoryComponent,
     OthermenuComponent,
     LandingComponent,
-    PramoonregisterComponent 
+    PramoonregisterComponent,
+    ModalComponent 
   ],
   imports: [
     BrowserModule,

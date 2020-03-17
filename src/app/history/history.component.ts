@@ -10,6 +10,7 @@ export class HistoryComponent implements OnInit {
 
   constructor(private apiService: RestService) { }
   list:any;
+  access_token:any;
 
   ngOnInit(): void {
     this.apiService.getlist().then((response) => {this.list = response,console.log(this.list)}); 

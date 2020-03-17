@@ -56,10 +56,10 @@ optionsGetProfile = {
   this.body.set('cpassword',"123456"); 
   this.body.set('access_token', item.access_token); 
   this.body.set('id_token', item.id_token); 
-  this.body.set('imageidcard',"1234"); //บัตรประชาชน
-  this.body.set('imageidcardconfirmation', "1234");  //บัตรประชาชน พร้อม เขียนข้อความ 
-  this.body.set('imgagehomeregistration', "1234"); //ทะเบียนบ้าน
-  this.body.set('imgagabnkaccount', "1234"); //สมุทรบัญชี
+  this.body.set('imageidcard',file[0]); //บัตรประชาชน
+  this.body.set('imageidcardconfirmation', file[1]);  //บัตรประชาชน พร้อม เขียนข้อความ 
+  this.body.set('imgagehomeregistration', file[2]); //ทะเบียนบ้าน
+  this.body.set('imgagabnkaccount', file[3]); //สมุทรบัญชี
 return this.httpClient.post('http://localhost:3000/api/account/register', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
@@ -149,13 +149,20 @@ return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/login'
     .then((response) => response);
   }
 
-
-  getlist(){ 
-    return this.httpClient.get(`https://dev.buzzebees.com/api/dashboard/nestle_rtd_luckydraw?locale=1054&timestamp=20200225103012&device_app_id=1134824876670846`)
-    .toPromise()
-    .then((response) => response);
+ 
+  getlist(){   
+    // this.optionsGetProfile={headers: new HttpHeaders().set('Authorization', 'Bearer '+access_token)}
+     return this.httpClient.get('http://localhost:3000/api/pramoon/pramoonlist')
+     .toPromise()
+     .then((response) => response);
+   }
+ 
+  // getlist(){ 
+  //   return this.httpClient.get(`https://dev.buzzebees.com/api/dashboard/nestle_rtd_luckydraw?locale=1054&timestamp=20200225103012&device_app_id=1134824876670846`)
+  //   .toPromise()
+  //   .then((response) => response);
     
-  }
+  // }
   getlistdetail(){
     return this.httpClient.get(`https://stg7.buzzebees.com/api/campaign/522582?device_app_id=1134824876670846`)
     .toPromise()

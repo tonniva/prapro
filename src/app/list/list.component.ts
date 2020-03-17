@@ -31,10 +31,9 @@ export class ListComponent implements OnInit {
   
   constructor(private apiService: RestService) { }
 
-  
+  access_token:any
   ngOnInit() {
- 
-    this.apiService.getlist().then((response) => this.list = response); 
+    this.apiService.getlist().then((response) => {this.list = response, console.log(this.list)}); 
 
     this.apiService.getdashboard().then((response) =>  { this.dashboardlist = response ,
       setTimeout(() => {

@@ -17,7 +17,8 @@ import { finalize, tap } from 'rxjs/operators';
 export class PramoonregisterComponent implements OnInit {
   image:any;
   objimageprofile:Array<any> = [];
-  arrayfile:Array<any> = [];
+  arrayfile:Array<File> = [];
+  arrayPathfile:Array<String> = [];
 
 
 
@@ -44,11 +45,7 @@ export class PramoonregisterComponent implements OnInit {
     var myReader:FileReader = new FileReader();
   
  
-   this.apiService.uploadimage(file).then((response) => { 
-     
-    this.resultFile = response;
-         console.log(response)  
-       });   
+ 
 
     myReader.onloadend = (e) => {
      
@@ -56,7 +53,7 @@ export class PramoonregisterComponent implements OnInit {
      this.image = myReader.result; 
     
       this.objimageprofile.push(this.image); 
-      this.arrayfile.push(this.resultFile.url);
+      this.arrayfile.push(file);
       //รูปที่ได้
       // this.startUpload();
     }
@@ -64,17 +61,34 @@ export class PramoonregisterComponent implements OnInit {
   }
 
   onClickSubmit(data) {  
+
+for (let index = 0; index < this.arrayfile.length; index++) {
+  debugger
+        this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
+        this.resultFile = response; 
+        this.arrayPathfile.push(this.resultFile.url); 
+
+if(index == this.arrayfile.length -1)
+{
+   
     localStorage.setItem("email", data.email); 
     data.access_token = localStorage.getItem("access_token");
-    data.id_token = localStorage.getItem("id_token");
- 
-    this.apiService.PramoonRegister(data,this.arrayfile).then((response) => { 
-     
-   
-      console.log(data) 
-
+    data.id_token = localStorage.getItem("id_token"); 
+    this.apiService.PramoonRegister(data,this.arrayPathfile).then((response) => {  
+      console.log(data)  
       this.router.navigate(['/list/two'])   
     });   
+  
+ 
+
+}
+
+       });   
+}
+
+
+
+
 
      
   //  for (let index = 0; index < this.arrayfile.length; index++) { 

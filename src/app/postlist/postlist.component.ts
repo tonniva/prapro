@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core'; 
-import { RestService } from '../rest.service';
-
- 
+import { RestService } from '../rest.service'; 
+import {Router,ActivatedRoute,Params} from "@angular/router"; 
  
 @Component({
   selector: 'app-postlist',
@@ -14,11 +13,14 @@ export class PostlistComponent implements OnInit {
 
 
 
-  constructor(private apiService:RestService) { }
+  constructor(private router: Router,private apiService:RestService) { }
 email:any;
 token:any; 
-  ngOnInit(): void {
-    debugger
+arrayfile:Array<File> = [];
+arrayPathfile:Array<String> = [];
+resultFile:any;
+
+  ngOnInit(): void { 
     this.email = localStorage.getItem("email");
     this.apiService.logingetToken(this.email).then((response:any) => {  
     
@@ -44,6 +46,7 @@ token:any;
      this.image = myReader.result; 
     
       this.objimage.push(this.image);
+      this.arrayfile.push(file);
       //รูปที่ได้
     }
     myReader.readAsDataURL(file);
@@ -51,21 +54,38 @@ token:any;
   
 
   onClickSubmit(data) {  
-    debugger
-    this.apiService.postpramoon(data,this.objimage,this.token).then((response) => {  
-      debugger
-      console.log(data) 
-      // this.router.navigate(['/list/two'])   
-    });   
-    // this.apiService.PramoonRegister(data).then((response) => {  
-    //   console.log(data) 
-    //   this.router.navigate(['/list/two'])   
-    // });   
-  }
-  uploadimage(){
-    
-    window.location.replace("http://localhost:4201/");
 
+
+    for (let index = 0; index < this.arrayfile.length; index++) {
+      debugger
+            this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
+            this.resultFile = response; 
+            this.arrayPathfile.push(this.resultFile.url); 
+    
+    if(index == this.arrayfile.length -1)
+    {
+       
+        localStorage.setItem("email", data.email); 
+        data.access_token = localStorage.getItem("access_token");
+        data.id_token = localStorage.getItem("id_token"); 
+        this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => {   
+          console.log(data)  
+          this.router.navigate(['/list/one'])   
+        }); 
+     
+    
+    }
+    
+           });   
+    }
+    
+
+
+
+
+
+    debugger
+    
   }
- 
+  
 }
