@@ -60,6 +60,10 @@ optionsGetProfile = {
   this.body.set('imageidcardconfirmation', file[1]);  //บัตรประชาชน พร้อม เขียนข้อความ 
   this.body.set('imgagehomeregistration', file[2]); //ทะเบียนบ้าน
   this.body.set('imgagabnkaccount', file[3]); //สมุทรบัญชี
+  this.body.set('status_pramoon_register', "waitingcheck");
+
+  localStorage.setItem("status_pramoon_register","waitingcheck"); 
+
 return this.httpClient.post('http://localhost:3000/api/account/register', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
@@ -78,8 +82,8 @@ uploadimage(profileImage:File){
 // .then((response) => response);
 
 const formData = new FormData();
-formData.append('profileImage', profileImage);
-return this.httpClient.post('http://localhost:3001/profile', formData)
+formData.append('image', profileImage);
+return this.httpClient.post('http://uploadfile.ap-southeast-1.elasticbeanstalk.com/upload/image-upload', formData)
  .toPromise()
  .then((response) => response);
 }
@@ -110,6 +114,8 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('lastbit', ""); 
   this.body.set('condition', "");  
   this.body.set('type', item.type);  
+  this.body.set('status_pramoon_permission',"waitingcheck");  
+  
 
 return this.httpClient.post('http://localhost:3000/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()

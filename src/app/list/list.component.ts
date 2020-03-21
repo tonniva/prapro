@@ -33,13 +33,18 @@ export class ListComponent implements OnInit {
 
   access_token:any
   ngOnInit() {
-    this.apiService.getlist().then((response) => {this.list = response, console.log(this.list)}); 
-
-    this.apiService.getdashboard().then((response) =>  { this.dashboardlist = response ,
-      setTimeout(() => {
-      this.setupowl()
-    }, 0);
-    });
+    this.apiService.getlist().then((response) => {this.list = response,
+       console.log(this.list)
+       setTimeout(() => {
+        this.setupowl()
+      }, 0);
+      }); 
+    
+    // this.apiService.getdashboard().then((response) =>  { this.dashboardlist = response ,
+    //   setTimeout(() => {
+    //   this.setupowl()
+    // }, 0);
+    // });
  
 
   }
@@ -47,8 +52,10 @@ export class ListComponent implements OnInit {
   setupowl(){  
     $('.owl-carousel').owlCarousel({
       loop:true,
+      items:1,
       margin:10,
-
+      autoHeight:true,
+      lazyLoad: true,
       nav:false,
       responsive:{
           0:{

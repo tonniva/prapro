@@ -28,11 +28,15 @@ export class PramoonregisterComponent implements OnInit {
   percentage: Observable<number>;
   snapshot: Observable<any>;
   downloadURL;
-
+  status_pramoon_register:string;
   resultFile:any;
   constructor(private router: Router,private apiService:RestService) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    this.status_pramoon_register = localStorage.getItem("status_pramoon_register");
+    if(this.status_pramoon_register){ 
+      this.router.navigate(['/list/two'])  
+    } 
   }
 
 
@@ -61,16 +65,15 @@ export class PramoonregisterComponent implements OnInit {
   }
 
   onClickSubmit(data) {  
-
-for (let index = 0; index < this.arrayfile.length; index++) {
-  debugger
+    this.arrayPathfile=[];
+for (let index = 0; index < this.arrayfile.length; index++) { 
         this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
         this.resultFile = response; 
-        this.arrayPathfile.push(this.resultFile.url); 
-
-if(index == this.arrayfile.length -1)
+        this.arrayPathfile.push(this.resultFile.imageUrl); 
+        debugger
+if(this.arrayPathfile.length == 4)
 {
-   
+   debugger
     localStorage.setItem("email", data.email); 
     data.access_token = localStorage.getItem("access_token");
     data.id_token = localStorage.getItem("id_token"); 

@@ -7,8 +7,34 @@
 
 .wrapper-image {
     width: 100%;
+    padding-bottom: 5vh;
+    margin-top: -5%;
 }
 
 .wrapper-detial {
-    padding: 16px;
+    // padding: 20px;
+    font-size: 7vw;
+    margin: 12px;
+}
+
+.wrapper-detial-price {
+    // padding: 20px;
+    font-size: 7vw;
+    margin: 12px;
+    color: red;
+}
+
+.wrapper-content-list {
+    // padding-bottom: 10vh;
+}
+
+.wrapper-title-header {
+    color: white;
+    text-align: center;
+    font-size: 10vw;
+    padding: 15px;
+}
+
+.owl-carousel {
+    box-shadow: inset -3px -2px 20px 1px #a2a0a0;
 }

@@ -77,12 +77,15 @@
         </div>
         <div class="row pt-4">
             <div class="container">
+                <div class="wrapper-title-upload">
+                    อัพโหลดไฟล์ ส่วนตัว
+                </div>
                 <div class="row">
                     <div class="col wrapper-upload">
                         รูปภาพ บัตรประขาชน
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
-                                            <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                            <input [ngClass]="{'click-heigth': objimageprofile[0] == null}" name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
                                     </span>
                             <div>
                                 <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[0]" [hidden]="!objimageprofile[0]">
@@ -93,7 +96,7 @@
                         รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
-                                        <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                        <input [ngClass]="{'click-heigth': objimageprofile[1] == null}" name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
                                 </span>
                             <div>
                                 <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[1]" [hidden]="!objimageprofile[1]">
@@ -105,7 +108,7 @@
                         รูปภาพ บัตรประขาชน พร้อม ถ่ายกับข้อความ หลวงปู่ทวด 24
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
-                                        <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                        <input [ngClass]="{'click-heigth': objimageprofile[2] == null}" name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
                                 </span>
                             <div>
                                 <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[2]" [hidden]="!objimageprofile[2]">
@@ -116,7 +119,7 @@
                         รูปภาพ บัญชีธนาคาร
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
-                                        <input name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                        <input [ngClass]="{'click-heigth': objimageprofile[3] == null}" name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
                                 </span>
                             <div>
                                 <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[3]" [hidden]="!objimageprofile[3]">
