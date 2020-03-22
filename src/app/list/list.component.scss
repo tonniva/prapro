@@ -21,11 +21,8 @@
     // padding: 20px;
     font-size: 7vw;
     margin: 12px;
-    color: red;
-}
-
-.wrapper-content-list {
-    // padding-bottom: 10vh;
+    color: #24ff42;
+    ;
 }
 
 .wrapper-title-header {
@@ -36,5 +33,10 @@
 }
 
 .owl-carousel {
-    box-shadow: inset -3px -2px 20px 1px #a2a0a0;
+    box-shadow: inset 0px 0px 20px 20px #000000;
+    background: url("https://upload-file-pra-1.s3.ap-southeast-1.amazonaws.com/1584880328825") center !important;
+    background-size: 94% auto;
+    width: 100%;
+    min-height: 68vh;
+    color: white;
 }

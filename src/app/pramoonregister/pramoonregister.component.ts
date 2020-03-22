@@ -69,12 +69,12 @@ export class PramoonregisterComponent implements OnInit {
 for (let index = 0; index < this.arrayfile.length; index++) { 
         this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
         this.resultFile = response; 
-        this.arrayPathfile.push(this.resultFile.imageUrl); 
-        debugger
+        this.arrayPathfile.push(this.resultFile.imageUrl);  
 if(this.arrayPathfile.length == 4)
 {
-   debugger
+   
     localStorage.setItem("email", data.email); 
+    data.userId = localStorage.getItem("userId"); 
     data.access_token = localStorage.getItem("access_token");
     data.id_token = localStorage.getItem("id_token"); 
     this.apiService.PramoonRegister(data,this.arrayPathfile).then((response) => {  

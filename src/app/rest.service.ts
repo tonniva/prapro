@@ -47,6 +47,7 @@ optionsGetProfile = {
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
   };  
+  this.body.set('userId', item.userId);
   this.body.set('firstname', item.firstname);
   this.body.set('lastname', item.lastname);
   this.body.set('email', item.email);
@@ -93,8 +94,7 @@ return this.httpClient.post('http://uploadfile.ap-southeast-1.elasticbeanstalk.c
 
 
 
-postpramoon(item:any,file:any,token:any){ 
-  debugger
+postpramoon(item:any,file:any,token:any){  
       // ต้องใช้ Token login
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -121,6 +121,21 @@ return this.httpClient.post('http://localhost:3000/api/pramoon/pramooncreate', t
 .toPromise()
 .then((response) => response);
 }
+
+itemgetdetailRegister= {
+  "userId":""
+  }
+getdetailRegister(userId:any){
+  const PramoonRegisteroptions = {
+    headers: new HttpHeaders().set('Content-Type', 'application/json')
+  };  
+// ต้องใช้ Token login
+this.itemgetdetailRegister.userId = userId.toString();  
+return this.httpClient.post('http://localhost:3000/api/account/getprofileregister', this.itemdatadetail,PramoonRegisteroptions)
+.toPromise()
+.then((response) => response); 
+}
+
 
 
 itemdata= {
@@ -169,11 +184,19 @@ return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/login'
   //   .then((response) => response);
     
   // }
-  getlistdetail(){
-    return this.httpClient.get(`https://stg7.buzzebees.com/api/campaign/522582?device_app_id=1134824876670846`)
-    .toPromise()
-    .then((response) => response);
-    
+
+  itemdatadetail= {
+    "id_token":""
+    }
+  getlistdetail(pram_id_token:any){
+    const PramoonRegisteroptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };  
+  // ต้องใช้ Token login
+  this.itemdatadetail.id_token = pram_id_token.toString();  
+  return this.httpClient.post('http://localhost:3000/api/pramoon/pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
+  .toPromise()
+  .then((response) => response); 
   }
 
   

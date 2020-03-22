@@ -1,18 +1,20 @@
 .wrapper-title {
-  text-align: center;
-  font-size: 7vw;
+    text-align: center;
+    font-size: 7vw;
 }
 
 body {
-  font-family: 'Charmonman', cursive !important;
-  background: url(http://www.sikhiu.dk/wp-content/uploads/2019/02/66091330-stock-vector-thai-art-pattern-on-black-background-vector-illustration.jpg) center;
-  background-size: 94% auto;
-  width: 100%;
-  min-height: 68vh;
-  font-size: 7vw !important;
+    font-family: 'Charmonman', cursive !important;
+    background: url(https://upload-file-pra-1.s3.ap-southeast-1.amazonaws.com/1584880363232) center;
+    background-size: 94% auto;
+    width: 100%;
+    min-height: 68vh;
+    font-size: 7vw !important;
 }
 
 .wrapper-bg {
-  min-height: 150vh;
+    min-height: 150vh;
 }
+
+
 /*# sourceMappingURL=app.component.css.map */

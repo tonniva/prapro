@@ -1,7 +1,71 @@
-<div class="wrapper-title">
-    ประวัติ
+<div class="wrapper-title-header">
+    ประวัติ รายการพระเครื่องที่ปล่อยเช่า
 </div>
 <div class="wrapper-list">
+    <div class="owl-carousel owl-theme card" *ngFor="let item of list" routerLink="/list/detail/{{item.id}}">
+
+        <div class="item">
+            <img [src]="item.imageone" class="owl-lazy float-left wrapper-image" alt="...">
+            <div class="wrapper-content-list">
+
+                <div class="wrapper-detial-price">
+                    {{item.pricestart}} บาท
+                </div>
+                <div class="wrapper-detial">
+                    {{item.name}}
+                </div>
+                <div class="wrapper-detial">
+                    {{item.description}}
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img [src]="item.imagetwo" class="owl-lazy float-left wrapper-image" alt="...">
+            <div class="wrapper-content-list">
+                <div class="wrapper-detial-price">
+                    {{item.pricestart}} บาท
+                </div>
+                <div class="wrapper-detial">
+                    {{item.name}}
+                </div>
+                <div class="wrapper-detial">
+                    {{item.description}}
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img [src]="item.imagethree" class="owl-lazy float-left wrapper-image" alt="...">
+            <div class="wrapper-content-list">
+                <div class="wrapper-detial-price">
+                    {{item.pricestart}} บาท
+                </div>
+                <div class="wrapper-detial">
+                    {{item.name}}
+                </div>
+                <div class="wrapper-detial">
+                    {{item.description}}
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img [src]="item.imagefour" class="owl-lazy float-left wrapper-image" alt="...">
+            <div class="wrapper-content-list">
+                <div class="wrapper-detial-price">
+                    {{item.pricestart}} บาท
+                </div>
+                <div class="wrapper-detial">
+                    {{item.name}}
+                </div>
+                <div class="wrapper-detial">
+                    {{item.description}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- <div class="wrapper-list">
     <div class="card m-4" *ngFor="let item of list">
         <div>
             <img [src]="item.image_url" class="float-left wrapper-image" alt="...">
@@ -13,4 +77,4 @@
             {{item.line1}}
         </div>
     </div>
-</div>
+</div> -->

@@ -13,7 +13,7 @@ export class ListdetailComponent implements OnInit {
 
   
   ngOnInit(): void { 
-    this.apiService.getlistdetail().then((response) => {this.listdetail = response,console.log(this.listdetail)}); 
+    // this.apiService.getlistdetail().then((response) => {this.listdetail = response,console.log(this.listdetail)}); 
   }
 
   showdetail(){ 

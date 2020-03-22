@@ -21,15 +21,13 @@ arrayPathfile:Array<String> = [];
 resultFile:any;
 
   ngOnInit(): void { 
-    this.email = localStorage.getItem("email");
-    this.apiService.logingetToken(this.email).then((response:any) => {  
+    // if()
+    // this.email = localStorage.getItem("email");
+    // this.apiService.logingetToken(this.email).then((response:any) => {  
     
-      this.token = response.accessToken;
-      localStorage.setItem("logintoken",this.token);  
-      
-     
-      // this.router.navigate(['/list/two'])   
-    });   
+    //   this.token = response.accessToken;
+    //   localStorage.setItem("logintoken",this.token);   
+    // });   
   }
 
 
@@ -56,37 +54,33 @@ resultFile:any;
 
   onClickSubmit(data) {  
 
-
+    this.arrayPathfile =[];
     for (let index = 0; index < this.arrayfile.length; index++) {
-      debugger
             this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
             this.resultFile = response; 
             this.arrayPathfile.push(this.resultFile.imageUrl); 
     
-    if( this.arrayPathfile.length == 4 )
-    {
-       
-        localStorage.setItem("email", data.email); 
-        data.access_token = localStorage.getItem("access_token");
-        data.id_token = localStorage.getItem("id_token"); 
-        this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => {   
-          console.log(data)  
-          this.router.navigate(['/list/one'])   
-        }); 
-     
-    
-    }
-    
+            if( this.arrayPathfile.length == 4 )
+            { 
+              setTimeout(() => {
+                localStorage.setItem("email", data.email); 
+                data.access_token = localStorage.getItem("access_token");
+                data.id_token = localStorage.getItem("id_token"); 
+                this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => {   
+                  console.log(data)  
+                  this.router.navigate(['/list/one'])   
+                }); 
+              
+              }, 1000); 
+            } 
            });   
+
+           if( this.arrayPathfile.length == 4 ) break;
     }
-    
-
-
-
-
-
-    debugger
+      
     
   }
+  
+  
   
 }

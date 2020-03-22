@@ -10,15 +10,17 @@ export class HomeComponent implements OnInit {
   listdetail:any
   GetProfilelist:any;
   pictureUrl:any;
+  Registerdetail:any;
   constructor(private apiService: RestService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void { 
+    
+ 
     const code: string = this.route.snapshot.queryParamMap.get('code');
     if(typeof(code)!=undefined){
       this.apiService.GetAccessTokensLine(code).then((response) => {this.listdetail = response, 
-        
-        console.log(this.listdetail)
-         debugger 
+      
+        console.log(this.listdetail) 
         localStorage.setItem("access_token", this.listdetail.access_token);
         localStorage.setItem("id_token", this.listdetail.id_token);
         this.GetProfile(this.listdetail.access_token) 
@@ -31,7 +33,27 @@ export class HomeComponent implements OnInit {
   }
 
   GetProfile(access_token){ 
-    this.apiService.GetProfile(access_token).then((response) => {this.GetProfilelist = response });  
+    this.apiService.GetProfile(access_token).then((response) => {this.GetProfilelist = response,
+      console.log(this.GetProfilelist) 
+      //เอา้ไป ใช้ใน หน้า pramoonregister เพื่อระบุว่า สร้าง จาก ไลน์ userId นี้
+      localStorage.setItem("userId",this.GetProfilelist.userId); 
+     
+      //เอา้ไป ใช้ใน หน้า pramoonregister เพื่อระบุว่า สร้าง จาก ไลน์ userId นี้
+
+      this.GetRegisterdetail(this.GetProfilelist.userId)});  
 
   }
+  
+GetRegisterdetail(p_userId:string){ 
+  debugger
+  this.apiService.getdetailRegister(p_userId).then((response) => {this.Registerdetail = response, 
+  
+     localStorage.setItem("status_pramoon_register",this.Registerdetail[0].status_pramoon_register); 
+     localStorage.setItem("email", this.Registerdetail[0].email); 
+    console.log(this.Registerdetail)
+    
+  }); 
+
+}
+
 }
