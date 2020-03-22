@@ -54,8 +54,7 @@ import { ModalComponent } from './modal/modal.component';
     AppRoutingModule,
     CarouselModule,
     HttpClientModule,
-    FormsModule,    
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    FormsModule,     
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule // storage

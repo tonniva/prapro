@@ -65,7 +65,7 @@ resultFile:any;
               setTimeout(() => {
                 localStorage.setItem("email", data.email); 
                 data.access_token = localStorage.getItem("access_token");
-                data.id_token = localStorage.getItem("id_token"); 
+                data.id_token = localStorage.getItem("userId"); 
                 this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => {   
                   console.log(data)  
                   this.router.navigate(['/list/one'])   

@@ -65,7 +65,7 @@ optionsGetProfile = {
 
   localStorage.setItem("status_pramoon_register","waitingcheck"); 
 
-return this.httpClient.post('http://localhost:3000/api/account/register', this.body.toString(), PramoonRegisteroptions)
+return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/register', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -117,7 +117,7 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('status_pramoon_permission',"waitingcheck");  
   
 
-return this.httpClient.post('http://localhost:3000/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
+return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -131,7 +131,7 @@ getdetailRegister(userId:any){
   };  
 // ต้องใช้ Token login
 this.itemgetdetailRegister.userId = userId.toString();  
-return this.httpClient.post('http://localhost:3000/api/account/getprofileregister', this.itemdatadetail,PramoonRegisteroptions)
+return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/getprofileregister', this.itemdatadetail,PramoonRegisteroptions)
 .toPromise()
 .then((response) => response); 
 }
@@ -173,7 +173,7 @@ return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/login'
  
   getlist(){   
     // this.optionsGetProfile={headers: new HttpHeaders().set('Authorization', 'Bearer '+access_token)}
-     return this.httpClient.get('http://localhost:3000/api/pramoon/pramoonlist')
+     return this.httpClient.get('https://pro-nestjs.herokuapp.com/api/pramoon/pramoonlist')
      .toPromise()
      .then((response) => response);
    }
@@ -194,7 +194,7 @@ return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/login'
     };  
   // ต้องใช้ Token login
   this.itemdatadetail.id_token = pram_id_token.toString();  
-  return this.httpClient.post('http://localhost:3000/api/pramoon/pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
+  return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/pramoon/pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
   .toPromise()
   .then((response) => response); 
   }

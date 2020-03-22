@@ -44,8 +44,7 @@ export class HomeComponent implements OnInit {
 
   }
   
-GetRegisterdetail(p_userId:string){ 
-  debugger
+GetRegisterdetail(p_userId:string){  
   this.apiService.getdetailRegister(p_userId).then((response) => {this.Registerdetail = response, 
   
      localStorage.setItem("status_pramoon_register",this.Registerdetail[0].status_pramoon_register); 

@@ -9,7 +9,8 @@
 }
 
 .wrapper-detial {
-    padding: 16px;
+    font-size: 7vw;
+    margin: 12px;
 }
 
 .wrapper-title-header {
@@ -17,4 +18,19 @@
     text-align: center;
     font-size: 10vw;
     padding: 15px;
+}
+
+.wrapper-detial-price {
+    font-size: 7vw;
+    margin: 12px;
+    color: #24ff42;
+}
+
+.owl-carousel {
+    box-shadow: inset 0px 0px 20px 20px #000000;
+    background: url("https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/mainbgImgUrl.jpg") center !important;
+    background-size: 94% auto;
+    width: 100%;
+    min-height: 68vh;
+    color: white;
 }
