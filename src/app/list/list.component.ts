@@ -54,7 +54,7 @@ export class ListComponent implements OnInit {
       loop:true,
       items:1,
       margin:10,
-      autoHeight:true,
+      // autoHeight:true,
       lazyLoad: true,
       nav:false,
       responsive:{

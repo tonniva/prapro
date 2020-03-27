@@ -37,6 +37,8 @@ export class HomeComponent implements OnInit {
       console.log(this.GetProfilelist) 
       //เอา้ไป ใช้ใน หน้า pramoonregister เพื่อระบุว่า สร้าง จาก ไลน์ userId นี้
       localStorage.setItem("userId",this.GetProfilelist.userId); 
+      localStorage.setItem("pictureUrl",this.GetProfilelist.pictureUrl); 
+      localStorage.setItem("displayName",this.GetProfilelist.displayName);  
      
       //เอา้ไป ใช้ใน หน้า pramoonregister เพื่อระบุว่า สร้าง จาก ไลน์ userId นี้
 
@@ -46,10 +48,14 @@ export class HomeComponent implements OnInit {
   
 GetRegisterdetail(p_userId:string){  
   this.apiService.getdetailRegister(p_userId).then((response) => {this.Registerdetail = response, 
-  
+ 
      localStorage.setItem("status_pramoon_register",this.Registerdetail[0].status_pramoon_register); 
      localStorage.setItem("email", this.Registerdetail[0].email); 
-    console.log(this.Registerdetail)
+     localStorage.setItem("name", this.Registerdetail[0].email); 
+     localStorage.setItem("firstname", this.Registerdetail[0].firstname); 
+     localStorage.setItem("lastname", this.Registerdetail[0].lastname); 
+     localStorage.setItem("tel", this.Registerdetail[0].tel);   
+    // console.log(this.Registerdetail)
     
   }); 
 

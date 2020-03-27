@@ -1,5 +1,6 @@
 .wrapper-image-detail {
     text-align: center;
+    padding-bottom: 100vh;
 }
 
 .wrapper-image {
@@ -10,4 +11,30 @@
 .wrapper-tab {
     font-size: 5vw;
     padding: 10px;
+}
+
+.wrapper-detial-price {
+    font-size: 12vw;
+    font-weight: 800;
+    margin: 12px;
+    color: #24ff42;
+}
+
+.wrapper-description {
+    font-size: 12vw;
+    color: white !important;
+}
+
+.card {
+    background-color: black !important;
+    margin-top: -4%;
+}
+
+.wrapper-primary {
+    font-size: 9vw;
+    font-weight: 800;
+}
+
+.wrapper-font-btn {
+    font-size: 8vw;
 }

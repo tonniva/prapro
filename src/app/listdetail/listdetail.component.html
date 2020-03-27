@@ -1,25 +1,36 @@
 <div class="wrapper-image-detail">
-    <img class="img-fluid wrapper-image" [src]="listdetail.FullImageUrl">
-</div>
-
-<div class="container">
-    <div class="text-success">
-        {{listdetail.Name}}
+    <div class="owl-carousel owl-theme card">
+        <img class="item img-fluid wrapper-image" [src]="listdetail[0].imageone">
+        <img class="item img-fluid wrapper-image" [src]="listdetail[0].imagetwo">
+        <img class="item img-fluid wrapper-image" [src]="listdetail[0].imagethree">
+        <img class="item img-fluid wrapper-image" [src]="listdetail[0].imagefour">
     </div>
-    <div class="row">
-        <div class="col text-center wrapper-tab" (click)="showdetail()">
-            รายละเอียด
+    <div class="container">
+        <div class="wrapper-detial-price">
+            ราคาปัจจุบัน {{listdetail[0].pricestart}}
         </div>
-        <div class="col text-center wrapper-tab" (click)="showcondition()">
-            เงื่อนไข
+        <div class="wrapper-detial-price text-info">
+            คุณ
+        </div>
+        <div class="wrapper-input p-3 ">
+            <button routerLink="/list/bid/{{id_token}}" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">กดประมูล</button>
+        </div>
+        <div class="text-success  wrapper-description">
+            {{listdetail[0].description}}
+        </div>
+        <div class="row">
+            <div class="col text-center wrapper-tab" (click)="showdetail()">
+                รายละเอียด
+            </div>
+            <div class="col text-center wrapper-tab" (click)="showcondition()">
+                เงื่อนไข
+            </div>
+        </div>
+        <div class="text-info" [hidden]="!ishowdetail">
+            {{listdetail[0].pricestart}}
+        </div>
+        <div class="text-primary wrapper-primary" [hidden]="ishowdetail">
+            {{listdetail[0].description}}
         </div>
     </div>
-    <div class="text-info" [hidden]="!ishowdetail">
-        {{listdetail.Detail}}
-    </div>
-    <div class="text-primary" [hidden]="ishowdetail">
-        {{listdetail.Condition}}
-    </div>
-
-
 </div>

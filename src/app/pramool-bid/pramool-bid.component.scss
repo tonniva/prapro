@@ -16,11 +16,11 @@
 .wrapper-upload {
     min-height: 25vh;
     background-color: #d8d8d8;
-    border: dashed;
-    border-color: #dbcb19;
+    border: dotted;
+    border-color: white;
     margin: 10px;
     background: url(https://cdn.pixabay.com/photo/2016/02/19/15/29/frame-1210511_960_720.png) no-repeat center center;
-    background-size: cover;
+    background-size: contain;
 }
 
 .hiddenFileInput>input {
@@ -35,7 +35,6 @@
     height: 100px;
     display: inline-block;
     overflow: hidden;
-    min-height: 21vh;
     /*for the background, optional*/
     background: center center no-repeat;
     background-size: 75% 75%;
@@ -47,8 +46,24 @@
     min-height: 30vh;
 }
 
-.non-active {
-    background-color: black;
-    opacity: 0.9;
-    pointer-events: none;
+.current-price {
+    color: green;
+    font-weight: 800;
+    font-size: 7vw;
+    text-align: center;
+}
+
+.current-bid {
+    color: blue;
+    font-weight: 800;
+    font-size: 7vw;
+    text-align: center;
+}
+
+.wrapper-bid {
+    font-size: 8vw;
+}
+
+input {
+    font-size: 8vw;
 }

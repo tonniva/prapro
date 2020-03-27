@@ -4,13 +4,16 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators'; 
 import { analytics } from 'firebase';
+import { UtilService } from './util.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class RestService { 
 
-  constructor(private httpClient: HttpClient) { } 
+  constructor(private httpClient: HttpClient,private UtilService:UtilService) { } 
  
+
 options = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 };
@@ -25,7 +28,7 @@ optionsGetProfile = {
   data= {
     "grant_type":"authorization_code",
     "code":"",
-    "redirect_uri":"http://localhost:4200/home",
+    "redirect_uri":this.UtilService.Getweb(),
     "client_id":"1653915528", 
     "client_secret":"e394b8a72a9bcdf28d44e6867e8c878c",
     }
@@ -65,7 +68,7 @@ optionsGetProfile = {
 
   localStorage.setItem("status_pramoon_register","waitingcheck"); 
 
-return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/register', this.body.toString(), PramoonRegisteroptions)
+return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/register', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -74,17 +77,10 @@ return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/regist
 
 
 uploadimage(profileImage:File){  
- 
-
-// //  this.image.profileImage=item; 
-// //  this.body.set('profileImage', item); 
-// return this.httpClient.post('http://localhost:3000/profile',profileImage)
-// .toPromise()
-// .then((response) => response);
-
+  
 const formData = new FormData();
 formData.append('image', profileImage);
-return this.httpClient.post('http://uploadfile.ap-southeast-1.elasticbeanstalk.com/upload/image-upload', formData)
+return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/upload/image-upload', formData)
  .toPromise()
  .then((response) => response);
 }
@@ -117,7 +113,7 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('status_pramoon_permission',"waitingcheck");  
   
 
-return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
+return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -131,7 +127,7 @@ getdetailRegister(userId:any){
   };  
 // ต้องใช้ Token login
 this.itemgetdetailRegister.userId = userId.toString();  
-return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/getprofileregister', this.itemdatadetail,PramoonRegisteroptions)
+return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/getprofileregister', this.itemdatadetail,PramoonRegisteroptions)
 .toPromise()
 .then((response) => response); 
 }
@@ -143,8 +139,7 @@ itemdata= {
   "password":""
   }
 logingetToken(email:any){ 
-  
-
+   
   // ต้องใช้ Token login
 const PramoonRegisteroptions = {
 headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -155,7 +150,7 @@ this.itemdata.password = "123456";
 // this.body.set('email', email);
 // this.body.set('password', "123456");
 
-return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/login', this.itemdata, PramoonRegisteroptions)
+return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', this.itemdata, PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -173,7 +168,7 @@ return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/login'
  
   getlist(){   
     // this.optionsGetProfile={headers: new HttpHeaders().set('Authorization', 'Bearer '+access_token)}
-     return this.httpClient.get('https://pro-nestjs.herokuapp.com/api/pramoon/pramoonlist')
+     return this.httpClient.get(this.UtilService.GetAPIurl()+'/api/pramoon/pramoonlist')
      .toPromise()
      .then((response) => response);
    }
@@ -194,7 +189,7 @@ return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/account/login'
     };  
   // ต้องใช้ Token login
   this.itemdatadetail.id_token = pram_id_token.toString();  
-  return this.httpClient.post('https://pro-nestjs.herokuapp.com/api/pramoon/pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
+  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
   .toPromise()
   .then((response) => response); 
   }
