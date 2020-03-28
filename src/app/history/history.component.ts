@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
+import { NgxSpinnerService } from "ngx-spinner"; 
 declare let $: any;
 @Component({
   selector: 'app-history',
@@ -8,15 +9,21 @@ declare let $: any;
 })
 export class HistoryComponent implements OnInit {
 
-  constructor(private apiService: RestService) { }
+  constructor(private apiService: RestService,private spinner: NgxSpinnerService) { }
   list:any;
   access_token:any;
   id_token:string;
 
   ngOnInit(): void {
+    this.spinner.show();
+  
+    
     this.id_token = localStorage.getItem("userId");  
     this.apiService.getlistdetail(this.id_token).then((response) => {this.list = response,
-    
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 5000);
       console.log(this.list)
      
       setTimeout(() => {

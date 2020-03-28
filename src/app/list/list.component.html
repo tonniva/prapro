@@ -15,13 +15,10 @@
     <a class="sold_out" href="https://abc.com/">Sold out</a>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, tempore?</p>
 </div> -->
-
+<ngx-spinner>
+</ngx-spinner>
 <div class="wrapper-list" *ngIf="list!=null">
-
     <div class="owl-carousel owl-theme card" *ngFor="let item of list; let indexliistselect = index">
-
-
-
         <div [ngClass]="{'no-tuch-sold-out': item.status =='close'}" routerLink="/list/detail/{{item.id_token}}/{{indexliistselect}}">
             <div class="item" [ngClass]="{'img__wrapper': item.status =='close'}">
                 <div *ngIf="item.status=='close'">

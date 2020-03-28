@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
+ 
 @Component({
   selector: 'app-pramool-bid',
   templateUrl: './pramool-bid.component.html',
@@ -8,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PramoolBidComponent implements OnInit {
 
-  constructor(private apiService: RestService,private route: ActivatedRoute) { }
+  constructor(private apiService: RestService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
   firstname:string;
   lastname:string;
   email:string;
@@ -36,6 +38,7 @@ export class PramoolBidComponent implements OnInit {
   temp_pramoonperson:any;
    
   ngOnInit(): void { 
+    this.spinner.show();
     this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
     this.getdetail();
     this.firstname = localStorage.getItem("firstname");
@@ -55,7 +58,10 @@ export class PramoolBidComponent implements OnInit {
   this.pramoonperson[0].userId= this.userId;
   this.pramoonperson[0].email=this.email
   this.pramoonperson[0].date= new Date();
- 
+  setTimeout(() => {
+    /** spinner ends after 5 seconds */
+    this.spinner.hide();
+  }, 5000);
     window.scroll(0,0);
   }
 
@@ -78,6 +84,10 @@ export class PramoolBidComponent implements OnInit {
       else{
        this.postbid(data);
       }
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 5000);
     });  
     
   }
@@ -92,7 +102,7 @@ getdetail(){
   });  
 }
   postbid(data){
-     
+    console.log(this.list)
     //update ข้อมูล ใครที่ ประมูล บ้าง คนใหม่ ใส่ไป 
     //มี คนเคยประมูลแล้ว
     if(this.list.pramoonperson)
@@ -108,6 +118,10 @@ getdetail(){
     this.id_token = localStorage.getItem("userId"); 
     this.apiService.updatepramoodetail(this.list._id, data.priceBid,this.temp_pramoonperson,null).then((response) => {this.list = response, 
       window.history.back();
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 5000);
     });  
   }
 

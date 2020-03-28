@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,15 +12,18 @@ export class HomeComponent implements OnInit {
   GetProfilelist:any;
   pictureUrl:any;
   Registerdetail:any;
-  constructor(private apiService: RestService, private route: ActivatedRoute) { }
+  constructor(private apiService: RestService, private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void { 
     
- 
+    this.spinner.show();
     const code: string = this.route.snapshot.queryParamMap.get('code');
     if(typeof(code)!=undefined){
       this.apiService.GetAccessTokensLine(code).then((response) => {this.listdetail = response, 
-      
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.spinner.hide();
+        }, 5000);
         console.log(this.listdetail) 
         localStorage.setItem("access_token", this.listdetail.access_token);
         localStorage.setItem("id_token", this.listdetail.id_token);

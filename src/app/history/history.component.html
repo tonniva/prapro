@@ -1,9 +1,11 @@
+<ngx-spinner>
+</ngx-spinner>
 <div class="wrapper-title-header">
     ประวัติ รายการพระเครื่องที่ปล่อยเช่า
 </div>
 <div class="wrapper-list">
     <div class="owl-carousel owl-theme card" *ngFor="let item of  list; let indexliistselect = index">
-        <div [ngClass]="{'no-tuch-sold-out': item.status =='close'}" routerLink="/list/history/{{item.id_token}}/{{indexliistselect}}">
+        <div routerLink="/list/history/{{item.id_token}}/{{indexliistselect}}">
             <div class="item" [ngClass]="{'img__wrapper': item.status =='close'}">
                 <div *ngIf="item.status=='close'">
                     <img src="http://www.savoy-sharm.com/media-room/images/hi-res/king-bed-room-accommodation-savoy-luxury-5-stars-accommodation-sharm-el-sheikh.jpg" alt="" />

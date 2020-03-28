@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { UtilService } from '../util.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-historydetail',
   templateUrl: './historydetail.component.html',
@@ -18,20 +18,27 @@ export class HistorydetailComponent implements OnInit {
   splitted:any;
   status:string;
   detail_after_close:any;
-  index_list_select:string;
+  index_list_select:string; 
   lastperson_bid:any={
     "firstname":"",
-    "lastname":""
+    "lastname":"",
+    "tell":"",
+    "pictureUrl":""
   }
-  constructor(private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute) { }
+  constructor(private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
   
   ngOnInit(): void {   
+    this.spinner.show();
+ 
     this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
     this.id_token = this.route.snapshot.params.id_token; 
      this.apiService.getlistdetail(this.id_token).then((response) => {this.listdetail =  response[this.index_list_select],
       this.temp_pramoonperson =  response[this.index_list_select].pramoonperson,
-    
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 5000);
       console.log(this.listdetail)
       if(this.listdetail.pramoonperson){
 
@@ -40,9 +47,10 @@ export class HistorydetailComponent implements OnInit {
         
         this.splitted = this.subobject.split("||"); 
         //เอาค่า คนที่ประมูลคนล่าสุด มาแสดง
-        
         this.lastperson_bid.firstname = JSON.parse(this.splitted[this.splitted.length-1])[0].firstname;
         this.lastperson_bid.lastname = JSON.parse(this.splitted[this.splitted.length-1])[0].lastname;
+        this.lastperson_bid.tell = JSON.parse(this.splitted[this.splitted.length-1])[0].tell;
+        this.lastperson_bid.pictureUrl = JSON.parse(this.splitted[this.splitted.length-1])[0].pictureUrl;
         
       }
       else {
@@ -71,4 +79,5 @@ export class HistorydetailComponent implements OnInit {
     });  
 
   }
+
 }

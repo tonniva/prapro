@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { UtilService } from '../util.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-listdetail',
   templateUrl: './listdetail.component.html',
@@ -21,17 +21,21 @@ export class ListdetailComponent implements OnInit {
     "firstname":"",
     "lastname":""
   }
-  constructor(private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute) { }
+  constructor(private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
   
   ngOnInit(): void {   
+    this.spinner.show();
     this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
     this.id_token = this.route.snapshot.params.id_token; 
      this.apiService.getlistdetail(this.id_token).then((response) => {this.listdetail = response[this.index_list_select],
       this.temp_pramoonperson =  response[this.index_list_select].pramoonperson,
      
       console.log(this.listdetail)
-    
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 5000);
       if(this.listdetail.pramoonperson){
 
         this.subobject = this.listdetail.pramoonperson; 

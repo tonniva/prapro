@@ -32,7 +32,7 @@ import { environment } from 'src/environments/environment';
 import { ModalComponent } from './modal/modal.component';
 import { PramoolBidComponent } from './pramool-bid/pramool-bid.component';
 import { HistorydetailComponent } from './historydetail/historydetail.component';
- 
+import { NgxSpinnerModule } from "ngx-spinner";
  
 @NgModule({
   declarations: [
@@ -61,7 +61,8 @@ import { HistorydetailComponent } from './historydetail/historydetail.component'
     FormsModule,     
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
-    AngularFireStorageModule // storage
+    AngularFireStorageModule, // storage
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

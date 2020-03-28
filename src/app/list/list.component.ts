@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, JsonpInterceptor } from '@angular/common/http';   
 import { RestService } from '../rest.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
 declare let $: any;
 export interface RootObject {
   type: string;
@@ -29,11 +29,20 @@ export class ListComponent implements OnInit {
   list:any;
   dashboardlist:any;
   
-  constructor(private apiService: RestService) { }
+  constructor(private apiService: RestService,private spinner: NgxSpinnerService) { }
+   
 
   access_token:any
-  ngOnInit() {
+  ngOnInit() { 
+ 
+    this.spinner.show();
+ 
+   
     this.apiService.getlist().then((response) => {this.list = response,
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 5000);
        console.log(this.list)
        setTimeout(() => {
         this.setupowl()
