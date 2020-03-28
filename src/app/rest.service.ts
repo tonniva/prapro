@@ -105,7 +105,7 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('imagetwo', file[1]);  //บัตรประชาชน พร้อม เขียนข้อความ 
   this.body.set('imagethree', file[2]); //ทะเบียนบ้าน
   this.body.set('imagefour', file[3]); //สมุทรบัญชี
-  this.body.set('id_token', token); 
+  this.body.set('id_token', item.id_token); 
   this.body.set('status', ""); 
   this.body.set('lastbit', ""); 
   this.body.set('condition', "");  
@@ -121,6 +121,7 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramooncr
 itemgetdetailRegister= {
   "userId":""
   }
+  
 getdetailRegister(userId:any){
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -193,6 +194,31 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   .toPromise()
   .then((response) => response); 
   }
+
+
+  itemupdate= {
+    "user":"",
+    "priceend":"",
+    "pramoonperson":"",
+    "status":""
+    }
+  updatepramoodetail(_id:string,priceBid:any,pramoonperson:any,status:string){
+    const PramoonRegisteroptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };   
+  this.itemupdate.user = _id.toString();  
+  this.itemupdate.priceend = priceBid.toString();  
+  this.itemupdate.pramoonperson = pramoonperson;
+  this.itemupdate.status = status;
+  
+ 
+  // return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
+  return this.httpClient.post('http://localhost:3000/api/pramoon/update-pramoonlistbydetail',this.itemupdate
+  ,PramoonRegisteroptions)
+  .toPromise()
+  .then((response) => response); 
+  }
+
 
   
   getdashboard(){ 

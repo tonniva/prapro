@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';  
+import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { UtilService } from '../util.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-listdetail',
-  templateUrl: './listdetail.component.html',
-  styleUrls: ['./listdetail.component.scss']
+  selector: 'app-historydetail',
+  templateUrl: './historydetail.component.html',
+  styleUrls: ['./historydetail.component.scss']
 })
-export class ListdetailComponent implements OnInit {
+export class HistorydetailComponent implements OnInit {
   listdetail:any;
+  temp_pramoonperson:any;
   ishowdetail:boolean;
   isshowcondition:boolean;
   id_token:any;  
   subobject:any;
   splitted:any;
-  index_list_select:any;
-  temp_pramoonperson:any;
+  status:string;
+  detail_after_close:any;
+  index_list_select:string;
   lastperson_bid:any={
     "firstname":"",
     "lastname":""
@@ -27,28 +29,27 @@ export class ListdetailComponent implements OnInit {
   ngOnInit(): void {   
     this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
     this.id_token = this.route.snapshot.params.id_token; 
-     this.apiService.getlistdetail(this.id_token).then((response) => {this.listdetail = response[this.index_list_select],
+     this.apiService.getlistdetail(this.id_token).then((response) => {this.listdetail =  response[this.index_list_select],
       this.temp_pramoonperson =  response[this.index_list_select].pramoonperson,
-     
-      console.log(this.listdetail)
     
+      console.log(this.listdetail)
       if(this.listdetail.pramoonperson){
 
+         
         this.subobject = this.listdetail.pramoonperson; 
         
         this.splitted = this.subobject.split("||"); 
         //เอาค่า คนที่ประมูลคนล่าสุด มาแสดง
-        this.lastperson_bid.firstname =  JSON.parse(this.splitted[this.splitted.length-1])[0].firstname;
+        
+        this.lastperson_bid.firstname = JSON.parse(this.splitted[this.splitted.length-1])[0].firstname;
         this.lastperson_bid.lastname = JSON.parse(this.splitted[this.splitted.length-1])[0].lastname;
-       
+        
       }
       else {
         this.lastperson_bid.firstname="";
         this.lastperson_bid.lastname="";
       }
-     
 
-   
     }); 
   }
 
@@ -61,6 +62,13 @@ export class ListdetailComponent implements OnInit {
     this.isshowcondition = true; 
     this.ishowdetail = false;
   }
+
+  closeOrder(){
+    this.id_token = localStorage.getItem("userId"); 
+     this.status ="close";
+    this.apiService.updatepramoodetail(this.listdetail._id, this.listdetail.priceend,this.temp_pramoonperson,this.status).then((response) => {this.detail_after_close = response, 
+      window.history.back();
+    });  
+
+  }
 }
-
-

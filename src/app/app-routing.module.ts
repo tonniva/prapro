@@ -10,6 +10,7 @@ import { LandingComponent } from './landing/landing.component';
 import { PramoonregisterComponent } from './pramoonregister/pramoonregister.component';
 import { UploaderComponent } from './uploader/uploader.component';
 import { PramoolBidComponent } from './pramool-bid/pramool-bid.component';
+import { HistorydetailComponent } from './historydetail/historydetail.component';
 
 
 const routes: Routes = [ 
@@ -19,8 +20,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'list/one', component: ListComponent },
   { path: 'list/two', component: PostlistComponent },
-  { path: 'list/detail/:id_token', component: ListdetailComponent },
-  { path: 'list/bid/:id_token', component: PramoolBidComponent },
+  { path: 'list/detail/:id_token/:indexlistselect', component: ListdetailComponent },
+  { path: 'list/history/:id_token/:indexlistselect', component: HistorydetailComponent },
+  { path: 'list/bid/:id_token/:indexlistselect', component: PramoolBidComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'other', component: OthermenuComponent }, 
   { path: 'pramoonregister', component: PramoonregisterComponent }

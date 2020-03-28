@@ -31,6 +31,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { ModalComponent } from './modal/modal.component';
 import { PramoolBidComponent } from './pramool-bid/pramool-bid.component';
+import { HistorydetailComponent } from './historydetail/historydetail.component';
  
  
 @NgModule({
@@ -49,7 +50,8 @@ import { PramoolBidComponent } from './pramool-bid/pramool-bid.component';
     LandingComponent,
     PramoonregisterComponent,
     ModalComponent,
-    PramoolBidComponent 
+    PramoolBidComponent,
+    HistorydetailComponent 
   ],
   imports: [
     BrowserModule,

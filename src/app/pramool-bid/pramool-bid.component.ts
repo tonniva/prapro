@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { RestService } from '../rest.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-pramool-bid',
   templateUrl: './pramool-bid.component.html',
@@ -7,24 +8,109 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PramoolBidComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apiService: RestService,private route: ActivatedRoute) { }
   firstname:string;
   lastname:string;
   email:string;
   tel:string;
   displayName:string;
-  currentprice:string;
-  ngOnInit(): void {
-    this.currentprice = localStorage.getItem("currentprice");
+  pricestart:string;
+  pricebidend:string;
+  iserror:boolean = false;
+  id_token:string;
+  index_list_select:string;
+  list:any; 
+  
+  pictureUrl:any; 
+  userId:any;  
+
+  pramoonperson:any =[{
+    "firstname":"",
+    "lastname":"",
+    "displayName":"",
+    "tell":"",
+    "pictureUrl":"",
+    "userId":"",
+    "date":"",
+  }];
+  temp_pramoonperson:any;
+   
+  ngOnInit(): void { 
+    this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
+    this.getdetail();
     this.firstname = localStorage.getItem("firstname");
     this.lastname = localStorage.getItem("lastname");
     this.email = localStorage.getItem("email");
     this.tel = localStorage.getItem("tel");
+    this.userId = localStorage.getItem("userId");
+    this.pictureUrl = localStorage.getItem("pictureUrl");
     this.displayName = localStorage.getItem("displayName"); 
+
+    
+  this.pramoonperson[0].firstname = this.firstname;
+  this.pramoonperson[0].lastname=this.lastname;
+  this.pramoonperson[0].displayName=this.displayName;
+  this.pramoonperson[0].tell= this.tel
+  this.pramoonperson[0].pictureUrl=this.pictureUrl;
+  this.pramoonperson[0].userId= this.userId;
+  this.pramoonperson[0].email=this.email
+  this.pramoonperson[0].date= new Date();
+ 
     window.scroll(0,0);
   }
-  onClickSubmit(data) {  
 
+  onClickSubmit(data) {   
+
+    
+    this.id_token = localStorage.getItem("userId"); 
+    this.apiService.getlistdetail(this.id_token).then((response) => {this.list = response[this.index_list_select], 
+      console.log(this.list)
+      if(data.priceBid <= this.list.pricestart)
+      { 
+        alert("กรุณากรอกราคาประมูลให้สูงกว่า ราคาปัจจุบัน");
+        this.iserror = true;
+      }
+      else if(data.priceBid <= this.list.priceend)
+      { 
+        alert("กรุณากรอกราคาประมูลให้สูงกว่า ราคาปัจจุบัน");
+        this.iserror = true;
+      }
+      else{
+       this.postbid(data);
+      }
+    });  
+    
   }
+
+getdetail(){
+
+  this.id_token = localStorage.getItem("userId"); 
+  this.apiService.getlistdetail(this.id_token).then((response) => {this.list = response[this.index_list_select], 
+    console.log(this.list)
+    this.pricestart = this.list.pricestart
+    this.pricebidend = this.list.priceend
+  });  
+}
+  postbid(data){
+     
+    //update ข้อมูล ใครที่ ประมูล บ้าง คนใหม่ ใส่ไป 
+    //มี คนเคยประมูลแล้ว
+    if(this.list.pramoonperson)
+    {
+      this.temp_pramoonperson = JSON.stringify(this.list.pramoonperson) +"||"+ JSON.stringify(this.pramoonperson); 
+    }
+    else {
+      //ยังไม่มีมี คนเคยประมูลแล้ว
+      this.temp_pramoonperson = JSON.stringify(this.pramoonperson); 
+    }
+     //update ข้อมูล ใครที่ ประมูล บ้าง คนใหม่ ใส่ไป 
+    
+    this.id_token = localStorage.getItem("userId"); 
+    this.apiService.updatepramoodetail(this.list._id, data.priceBid,this.temp_pramoonperson,null).then((response) => {this.list = response, 
+      window.history.back();
+    });  
+  }
+
+  
 
 }

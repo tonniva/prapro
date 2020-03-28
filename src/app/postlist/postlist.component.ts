@@ -59,19 +59,9 @@ resultFile:any;
             this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
             this.resultFile = response; 
             this.arrayPathfile.push(this.resultFile.imageUrl); 
-    
             if( this.arrayPathfile.length == 4 )
             { 
-              setTimeout(() => {
-                localStorage.setItem("email", data.email); 
-                data.access_token = localStorage.getItem("access_token");
-                data.id_token = localStorage.getItem("userId"); 
-                this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => {   
-                  console.log(data)  
-                  this.router.navigate(['/list/one'])   
-                }); 
-              
-              }, 1000); 
+              this.postpra(data);
             } 
            });   
 
@@ -79,6 +69,21 @@ resultFile:any;
     }
       
     
+  }
+
+  postpra(data){
+
+    setTimeout(() => {
+      localStorage.setItem("email", data.email); 
+      data.access_token = localStorage.getItem("access_token");
+      data.id_token = localStorage.getItem("userId"); 
+      
+      this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => {   
+        console.log(data)  
+        this.router.navigate(['/list/one'])   
+      }); 
+    
+    }, 1000); 
   }
   
   

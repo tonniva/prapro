@@ -95,7 +95,7 @@ if(this.arrayPathfile.length == 4)
 
      
   //  for (let index = 0; index < this.arrayfile.length; index++) { 
-  //   debugger
+ 
   //   this.apiService.uploadimage(this.arrayfile[index])
 
   //     this.apiService.uploadimage(this.inputValue.files[0]).then((response) => { 

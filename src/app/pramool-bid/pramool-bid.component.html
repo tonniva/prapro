@@ -30,9 +30,19 @@
         <div class="container pt-3">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">ราคาปัจจุบัน</span>
+                    <span class="input-group-text">ราคาเริ่มต้น</span>
                 </div>
-                <input type="text" value="{{currentprice}}" id="currentprice" class="form-control current-price" placeholder="tel" readonly>
+                <input type="text" value="{{pricestart}}" id="pricestart" class="form-control current-price" placeholder="tel" readonly>
+                <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">ราคาประมูลล่าสุด!!!</span>
+                </div>
+                <input type="text" value="{{pricebidend||pricestart}}" id="pricebidend" class="form-control current-price" readonly>
                 <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                 </div>
@@ -41,7 +51,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">ราคาประมูล</span>
                 </div>
-                <input type="number" class="form-control current-bid" ngModel ngDefaultControl rows="5" cols="60" required name="pricestart" aria-label="Amount (to the nearest dollar)">
+                <input [ngClass]="{'error-red': iserror}" type="number" class="form-control current-bid" ngModel ngDefaultControl rows="5" cols="60" required name="priceBid" aria-label="Amount (to the nearest dollar)">
                 <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                 </div>

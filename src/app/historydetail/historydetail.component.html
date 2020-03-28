@@ -14,14 +14,29 @@
         <div class="wrapper-detial-price">
             ราคาปัจจุบัน {{listdetail.priceend}}
         </div>
-        <div class="wrapper-detial-price text-primary" [hidden]="!lastperson_bid.firstname && lastperson_bid.lastname">
-            ล่าสุด !!คุณ
-            <div>
+        <div class="wrapper-detial-price text-white" [hidden]="!lastperson_bid.firstname && lastperson_bid.lastname">
+            ล่าสุด ลูกค้า !!คุณ
+            <div *ngIf="lastperson_bid != null ">
                 {{lastperson_bid.firstname }} {{lastperson_bid.lastname }}
             </div>
         </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center" *ngIf="lastperson_bid[0]!=null">
+                <img class="card-img-top" [src]="lastperson_bid[0].pictureUrl" alt="Card image cap">
+            </div>
+        </div>
+
+        <div class="wrapper-detial-price text-white" [hidden]="!lastperson_bid.firstname && lastperson_bid.lastname">
+            <div>
+
+            </div>
+            <div *ngIf="lastperson_bid[0]!=null">
+                โทร : {{lastperson_bid[0].tell}}
+            </div>
+        </div>
+
         <div class="wrapper-input p-3 ">
-            <button routerLink="/list/bid/{{id_token}}/{{index_list_select}}" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">กดประมูล</button>
+            <button (click)="closeOrder()" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">ปิดการขาย</button>
         </div>
         <div class="text-success  wrapper-description">
             {{listdetail.description}}

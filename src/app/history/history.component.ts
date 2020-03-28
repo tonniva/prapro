@@ -14,10 +14,11 @@ export class HistoryComponent implements OnInit {
   id_token:string;
 
   ngOnInit(): void {
-    this.id_token = localStorage.getItem("userId"); 
+    this.id_token = localStorage.getItem("userId");  
     this.apiService.getlistdetail(this.id_token).then((response) => {this.list = response,
     
       console.log(this.list)
+     
       setTimeout(() => {
         this.setupowl()
       }, 0);
