@@ -114,7 +114,7 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('status_pramoon_check',item.status_pramoon_check);  
   
   // this.UtilService.GetAPIurl()+
-return this.httpClient.post('http://localhost:3000/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
+return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -148,9 +148,7 @@ headers: new HttpHeaders().set('Content-Type', 'application/json')
 };  
 
 this.itemdata.email = email;
-this.itemdata.password = "123456";
-// this.body.set('email', email);
-// this.body.set('password', "123456");
+this.itemdata.password = "123456"; 
 
 return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', this.itemdata, PramoonRegisteroptions)
 .toPromise()
@@ -169,19 +167,13 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
 
  
   getlist(){   
-    // this.optionsGetProfile={headers: new HttpHeaders().set('Authorization', 'Bearer '+access_token)}
+    
      return this.httpClient.get(this.UtilService.GetAPIurl()+'/api/pramoon/pramoonlist')
      .toPromise()
      .then((response) => response);
    }
  
-  // getlist(){ 
-  //   return this.httpClient.get(`https://dev.buzzebees.com/api/dashboard/nestle_rtd_luckydraw?locale=1054&timestamp=20200225103012&device_app_id=1134824876670846`)
-  //   .toPromise()
-  //   .then((response) => response);
-    
-  // }
-
+  
   itemdatadetail= {
     "id_token":""
     }
@@ -212,8 +204,7 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   this.itemupdate.pramoonperson = pramoonperson;
   this.itemupdate.status = status;
   
- 
-  // return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
+  
   return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-pramoonlistbydetail',this.itemupdate
   ,PramoonRegisteroptions)
   .toPromise()
@@ -236,22 +227,13 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   this.itemupdatecheckpra.count_pra_false = data.count_pra_false;
   this.itemupdatecheckpra.count_pra_criminals = data.count_pra_criminals; 
   this.itemupdatecheckpra.status_pramoon_check = data.status_check;
-  
- 
-  // return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
+   
   return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-updatecheckpra',this.itemupdatecheckpra
   ,PramoonRegisteroptions)
   .toPromise()
   .then((response) => response); 
   }
 
-
-
-  
-  // getdashboard(){ 
-  // return this.httpClient.get('https://dev.buzzebees.com/api/dashboard/nestle_rtd_luckydraw?locale=1054&timestamp=20200225103012&device_app_id=1134824876670846')
-  // .toPromise().then((response) => response); 
-  // }
 }
 
 
