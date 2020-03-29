@@ -92,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col wrapper-upload">
+                    <div class="col wrapper-upload" [ngClass]="{'non-active': objimageprofile[0] == null}">
                         รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="w-100"></div>
-                    <div class="col wrapper-upload">
+                    <div class="col wrapper-upload" [ngClass]="{'non-active': objimageprofile[1] == null}">
                         รูปภาพ บัตรประขาชน พร้อม ถ่ายกับข้อความ หลวงปู่ทวด 24
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
@@ -115,7 +115,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col wrapper-upload">
+                    <div class="col wrapper-upload" [ngClass]="{'non-active': objimageprofile[2] == null}">
                         รูปภาพ บัญชีธนาคาร
                         <div class="bg-gold">
                             <span class="hiddenFileInput">

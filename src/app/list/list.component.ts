@@ -29,6 +29,13 @@ export class ListComponent implements OnInit {
   list:any;
   dashboardlist:any;
   
+
+
+  isshow_checking:boolean=false;
+  isshow_pra_true:boolean=false;
+  isshow_pra_false:boolean=false;
+  isshow_pra_criminals:boolean=false;
+
   constructor(private apiService: RestService,private spinner: NgxSpinnerService) { }
    
 
@@ -49,14 +56,78 @@ export class ListComponent implements OnInit {
       }, 0);
       }); 
     
-    // this.apiService.getdashboard().then((response) =>  { this.dashboardlist = response ,
-    //   setTimeout(() => {
-    //   this.setupowl()
-    // }, 0);
-    // });
  
 
   }
+
+  calcheckconditonstatus_pra_checking(item){
+    const all =  parseInt(item.count_pra_true) + parseInt(item.count_pra_false) + parseInt(item.count_pra_criminals)  
+   
+    if(all>5){  
+    const pra_true = (parseInt(item.count_pra_true)/all)*100;
+    const pra_false = (parseInt(item.count_pra_false)/all)*100;
+    const criminals = (parseInt(item.count_pra_criminals)/all)*100;
+          if(pra_true < 80 && pra_false <80 && criminals <70){ 
+            debugger
+            return  true;
+          }
+         
+   }
+   else if (isNaN(all)||all < 5)
+   {
+    return  true; 
+   }   
+
+      
+  }
+  calcheckconditonstatus_pra_true(item){
+    const all =  parseInt(item.count_pra_true) + parseInt(item.count_pra_false) + parseInt(item.count_pra_criminals)  
+   if(all>5){ 
+  
+    const pra_true = (parseInt(item.count_pra_true)/all)*100;
+    const pra_false = (parseInt(item.count_pra_false)/all)*100;
+    const criminals = (parseInt(item.count_pra_criminals)/all)*100;
+  
+          if(pra_true > 80 && pra_false < 80 && criminals < 70){ 
+            return  true;
+          }
+          else 
+          {
+            return false; 
+          }   
+   } 
+ }
+ calcheckconditonstatus_pra_false(item){
+  const all =  parseInt(item.count_pra_true) + parseInt(item.count_pra_false) + parseInt(item.count_pra_criminals)  
+ if(all>5){ 
+  const pra_true = (parseInt(item.count_pra_true)/all)*100;
+  const pra_false = (parseInt(item.count_pra_false)/all)*100;
+  const criminals = (parseInt(item.count_pra_criminals)/all)*100;
+        if(pra_true < 80 && pra_false > 80 && criminals < 50){ 
+          return  true;
+        }
+        else 
+        {
+          return false; 
+        }   
+ } 
+}
+calcheckconditonstatus_pra_criminals(item){
+  const all =  parseInt(item.count_pra_true) + parseInt(item.count_pra_false) + parseInt(item.count_pra_criminals)  
+ if(all>5){ 
+  const pra_true = (parseInt(item.count_pra_true)/all)*100;
+  const pra_false = (parseInt(item.count_pra_false)/all)*100;
+  const criminals = (parseInt(item.count_pra_criminals)/all)*100;
+        if(criminals > 70){ 
+          return  true;
+        }
+        else 
+        {
+          return false; 
+        }   
+ } 
+}
+ 
  
   setupowl(){  
     $('.owl-carousel').owlCarousel({

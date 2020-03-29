@@ -35,7 +35,7 @@ export class PramoonregisterComponent implements OnInit {
   ngOnInit(): void {
     this.status_pramoon_register = localStorage.getItem("status_pramoon_register");
     if(this.status_pramoon_register){ 
-      this.router.navigate(['/list/two'])  
+       this.router.navigate(['/list/two'])  
     } 
   }
 

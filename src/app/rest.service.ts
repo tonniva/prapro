@@ -111,9 +111,10 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('condition', "");  
   this.body.set('type', item.type);  
   this.body.set('status_pramoon_permission',"waitingcheck");  
+  this.body.set('status_pramoon_check',item.status_pramoon_check);  
   
-
-return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
+  // this.UtilService.GetAPIurl()+
+return this.httpClient.post('http://localhost:3000/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -213,18 +214,44 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   
  
   // return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
-  return this.httpClient.post('http://localhost:3000/api/pramoon/update-pramoonlistbydetail',this.itemupdate
+  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-pramoonlistbydetail',this.itemupdate
+  ,PramoonRegisteroptions)
+  .toPromise()
+  .then((response) => response); 
+  }
+
+  itemupdatecheckpra= {
+    "user":"",
+    "count_pra_true":"",
+    "count_pra_false":"",
+    "count_pra_criminals":"",
+    "status_pramoon_check":""
+    }
+  updatecheckpra(_id:string,data:any){
+    const PramoonRegisteroptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };   
+  this.itemupdatecheckpra.user = _id.toString();  
+  this.itemupdatecheckpra.count_pra_true = data.count_pra_true;  
+  this.itemupdatecheckpra.count_pra_false = data.count_pra_false;
+  this.itemupdatecheckpra.count_pra_criminals = data.count_pra_criminals; 
+  this.itemupdatecheckpra.status_pramoon_check = data.status_check;
+  
+ 
+  // return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-pramoonlistbydetail', this.itemdatadetail,PramoonRegisteroptions)
+  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-updatecheckpra',this.itemupdatecheckpra
   ,PramoonRegisteroptions)
   .toPromise()
   .then((response) => response); 
   }
 
 
+
   
-  getdashboard(){ 
-  return this.httpClient.get('https://dev.buzzebees.com/api/dashboard/nestle_rtd_luckydraw?locale=1054&timestamp=20200225103012&device_app_id=1134824876670846')
-  .toPromise().then((response) => response); 
-  }
+  // getdashboard(){ 
+  // return this.httpClient.get('https://dev.buzzebees.com/api/dashboard/nestle_rtd_luckydraw?locale=1054&timestamp=20200225103012&device_app_id=1134824876670846')
+  // .toPromise().then((response) => response); 
+  // }
 }
 
 

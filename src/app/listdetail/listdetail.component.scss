@@ -36,5 +36,97 @@
 }
 
 .wrapper-font-btn {
-    font-size: 8vw;
+    font-size: 7vw;
 }
+
+.wrapper-procee-pra {
+    color: white;
+    font-size: 9vw;
+    padding-bottom: 10px;
+}
+
+hr.hr-white {
+    border-top: 2px dashed white;
+}
+
+//ตรวจสอบพระ สถานะ
+.wrapper-ball {
+    height: auto;
+    width: 200px !important;
+    position: absolute;
+    top: -50px;
+    left: -3%;
+}
+
+.wrapper_pra_true {
+    height: auto;
+    width: 100% !important;
+    position: absolute;
+    top: -7px;
+    left: 350%;
+}
+
+.wrapper_pra_false {
+    height: auto;
+    width: 100% !important;
+    position: absolute;
+    top: 5%;
+    left: 400%;
+}
+
+.wrapper_pra_criminals {
+    height: auto;
+    width: 100% !important;
+    position: absolute;
+    top: -5px;
+    left: 430%;
+}
+
+.checking {
+    position: absolute;
+    left: 450%;
+    top: 10%;
+    font-size: 6vw;
+    white-space: nowrap;
+    color: white;
+}
+
+.wrapper-box-status {
+    padding-bottom: 10%;
+}
+
+.like {
+    position: absolute;
+    left: 530%;
+    top: -289%;
+    font-size: 9vw;
+    white-space: nowrap;
+    color: #1ef327;
+    font-weight: 800;
+}
+
+.un-like {
+    position: absolute;
+    left: 590%;
+    top: -400%;
+    font-size: 9vw;
+    white-space: nowrap;
+    color: red;
+    font-weight: 800;
+}
+
+.criminals {
+    position: absolute;
+    left: 580%;
+    top: -155%;
+    font-size: 9vw;
+    white-space: nowrap;
+    color: red;
+    font-weight: 800;
+}
+
+.zoom:hover {
+    transform: scale(1.5);
+}
+
+//ตรวจสอบพระ สถานะ

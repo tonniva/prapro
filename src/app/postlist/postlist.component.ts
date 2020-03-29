@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'; 
 import { RestService } from '../rest.service'; 
 import {Router,ActivatedRoute,Params} from "@angular/router"; 
+import { NgxSpinnerService } from "ngx-spinner";
+
  
 @Component({
   selector: 'app-postlist',
@@ -13,7 +15,7 @@ export class PostlistComponent implements OnInit {
 
 
 
-  constructor(private router: Router,private apiService:RestService) { }
+  constructor(private router: Router,private apiService:RestService,private spinner: NgxSpinnerService) { }
 email:any;
 token:any; 
 arrayfile:Array<File> = [];
@@ -21,6 +23,7 @@ arrayPathfile:Array<String> = [];
 resultFile:any;
 
   ngOnInit(): void { 
+    
     // if()
     // this.email = localStorage.getItem("email");
     // this.apiService.logingetToken(this.email).then((response:any) => {  
@@ -53,7 +56,7 @@ resultFile:any;
   
 
   onClickSubmit(data) {  
-
+    this.spinner.show();
     this.arrayPathfile =[];
     for (let index = 0; index < this.arrayfile.length; index++) {
             this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
@@ -77,10 +80,15 @@ resultFile:any;
       localStorage.setItem("email", data.email); 
       data.access_token = localStorage.getItem("access_token");
       data.id_token = localStorage.getItem("userId"); 
+      data.status_pramoon_check = "checking"; 
       
       this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => {   
-        console.log(data)  
-        this.router.navigate(['/list/one'])   
+        console.log(response)  
+        setTimeout(() => { 
+          this.spinner.hide();
+        }, 5000);
+        window.location.href = window.location.origin+'/list/one';
+        // this.router.navigate(['/list/one'])   
       }); 
     
     }, 1000); 

@@ -93,3 +93,81 @@
 }
 
 //ปิดการขาย
+//ตรวจสอบพระ สถานะ
+.wrapper-ball {
+    height: auto;
+    width: 200px !important;
+    position: absolute;
+    top: -50px;
+    left: -3%;
+}
+
+.wrapper_pra_true {
+    height: auto;
+    width: 10% !important;
+    position: absolute;
+    top: -7px;
+    left: 30%;
+}
+
+.wrapper_pra_false {
+    height: auto;
+    width: 10% !important;
+    position: absolute;
+    top: -7px;
+    left: 30%;
+}
+
+.wrapper_pra_criminals {
+    height: auto;
+    width: 10% !important;
+    position: absolute;
+    top: -20px;
+    left: 30%;
+}
+
+.checking {
+    position: absolute;
+    left: 33%;
+    top: 10%;
+    font-size: 6vw;
+    white-space: nowrap;
+    color: white;
+}
+
+.wrapper-box-status {
+    padding-bottom: 10%;
+}
+
+.like {
+    position: absolute;
+    left: 43%;
+    top: -9%;
+    font-size: 9vw;
+    white-space: nowrap;
+    color: #1ef327;
+}
+
+.un-like {
+    position: absolute;
+    left: 43%;
+    top: -45%;
+    font-size: 9vw;
+    white-space: nowrap;
+    color: red;
+}
+
+.criminals {
+    position: absolute;
+    left: 43%;
+    top: -45%;
+    font-size: 9vw;
+    white-space: nowrap;
+    color: red;
+}
+
+.zoom:hover {
+    transform: scale(1.5);
+}
+
+//ตรวจสอบพระ สถานะ

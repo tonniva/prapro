@@ -59,3 +59,9 @@
     color: white;
     font-size: 7vw;
 }
+
+.non-active {
+    background-color: black;
+    opacity: 0.9;
+    pointer-events: none;
+}
