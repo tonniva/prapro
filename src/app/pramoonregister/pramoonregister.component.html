@@ -3,7 +3,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
+<ngx-spinner>
+</ngx-spinner>
 
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
 
@@ -85,44 +86,44 @@
                         รูปภาพ บัตรประขาชน
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
-                                            <input [ngClass]="{'click-heigth': objimageprofile[0] == null}" name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                            <input [ngClass]="{'click-heigth': temp_path_image1 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_one($event)"/>
                                     </span>
                             <div>
-                                <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[0]" [hidden]="!objimageprofile[0]">
+                                <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1" [hidden]="!temp_path_image1">
                             </div>
                         </div>
                     </div>
-                    <div class="col wrapper-upload" [ngClass]="{'non-active': objimageprofile[0] == null}">
+                    <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image1 == null}">
                         รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
-                                        <input [ngClass]="{'click-heigth': objimageprofile[1] == null}" name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                        <input [ngClass]="{'click-heigth': temp_path_image2 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_two($event)"/>
                                 </span>
                             <div>
-                                <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[1]" [hidden]="!objimageprofile[1]">
+                                <img class="img-fluid wrapper-uploaded" [src]="temp_path_image2" [hidden]="!temp_path_image2">
                             </div>
                         </div>
                     </div>
                     <div class="w-100"></div>
-                    <div class="col wrapper-upload" [ngClass]="{'non-active': objimageprofile[1] == null}">
+                    <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image2 == null}">
                         รูปภาพ บัตรประขาชน พร้อม ถ่ายกับข้อความ หลวงปู่ทวด 24
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
-                                        <input [ngClass]="{'click-heigth': objimageprofile[2] == null}" name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                        <input [ngClass]="{'click-heigth': temp_path_image3 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_three($event)"/>
                                 </span>
                             <div>
-                                <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[2]" [hidden]="!objimageprofile[2]">
+                                <img class="img-fluid wrapper-uploaded" [src]="temp_path_image3" [hidden]="!temp_path_image3">
                             </div>
                         </div>
                     </div>
-                    <div class="col wrapper-upload" [ngClass]="{'non-active': objimageprofile[2] == null}">
+                    <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image3 == null}">
                         รูปภาพ บัญชีธนาคาร
                         <div class="bg-gold">
                             <span class="hiddenFileInput">
-                                        <input [ngClass]="{'click-heigth': objimageprofile[3] == null}" name="theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                        <input [ngClass]="{'click-heigth': temp_path_image4 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_four($event)"/>
                                 </span>
                             <div>
-                                <img class="img-fluid wrapper-uploaded" [src]="objimageprofile[3]" [hidden]="!objimageprofile[3]">
+                                <img class="img-fluid wrapper-uploaded" [src]="temp_path_image4" [hidden]="!temp_path_image4">
                             </div>
                         </div>
                     </div>

@@ -61,7 +61,7 @@ export class PramoolBidComponent implements OnInit {
   setTimeout(() => {
     /** spinner ends after 5 seconds */
     this.spinner.hide();
-  }, 5000);
+  }, 1000);
     window.scroll(0,0);
   }
 
@@ -87,7 +87,7 @@ export class PramoolBidComponent implements OnInit {
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 5000);
+      }, 1000);
     });  
     
   }
@@ -121,7 +121,7 @@ getdetail(){
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 5000);
+      }, 1000);
     });  
   }
 

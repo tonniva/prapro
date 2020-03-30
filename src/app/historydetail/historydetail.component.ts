@@ -38,7 +38,7 @@ export class HistorydetailComponent implements OnInit {
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 5000);
+      }, 1000);
       console.log(this.listdetail)
       if(this.listdetail.pramoonperson){
 

@@ -8,35 +8,35 @@
             <div class="row">
                 <div class="col wrapper-upload ">
                     <span class="hiddenFileInput ">
-                                <input name="theFile" class="wrapper-theFile bb" type="file" accept="image/*" (change)="changeListener($event)"/>
+                                <input name="theFile1" class="wrapper-theFile bb" type="file" accept="image/*" (change)="changeListener_one($event)"/>
                         </span>
                     <div>
-                        <img class="img-fluid wrapper-uploaded" [src]="objimage[0]" [hidden]="!objimage[0]">
+                        <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1" [hidden]="!temp_path_image1">
                     </div>
                 </div>
-                <div class="col wrapper-upload" [ngClass]="{'non-active': objimage[0] == null}">
+                <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image1 == null}">
                     <span class="hiddenFileInput">
-                            <input name="theFile"  class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                            <input name="theFile2"  class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_two($event)"/>
                     </span>
                     <div>
-                        <img class="img-fluid wrapper-uploaded" [src]="objimage[1]" [hidden]="!objimage[1]">
+                        <img class="img-fluid wrapper-uploaded" [src]="temp_path_image2" [hidden]="!temp_path_image2">
                     </div>
                 </div>
                 <div class="w-100"></div>
-                <div class="col wrapper-upload" [ngClass]="{'non-active': objimage[1] == null}">
+                <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image2 == null}">
                     <span class="hiddenFileInput">
-                            <input name="theFile" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                            <input name="theFile3" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_three($event)"/>
                     </span>
                     <div>
-                        <img class="img-fluid wrapper-uploaded" [src]="objimage[2]" [hidden]="!objimage[2]">
+                        <img class="img-fluid wrapper-uploaded" [src]="temp_path_image3" [hidden]="!temp_path_image3">
                     </div>
                 </div>
-                <div class="col wrapper-upload" [ngClass]="{'non-active': objimage[2] == null}">
+                <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image3 == null}">
                     <span class="hiddenFileInput">
-                            <input name="theFile" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener($event)"/>
+                            <input name="theFile4" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_four($event)"/>
                     </span>
                     <div>
-                        <img class="img-fluid wrapper-uploaded" [src]="objimage[3]" [hidden]="!objimage[3]">
+                        <img class="img-fluid wrapper-uploaded" [src]="temp_path_image4" [hidden]="!temp_path_image4">
                     </div>
                 </div>
             </div>

@@ -23,18 +23,18 @@ export class HistoryComponent implements OnInit {
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 5000);
+      }, 1000);
       console.log(this.list)
      
       setTimeout(() => {
-        this.setupowl()
+         this.setupowl()
       }, 0);
     });  
   }
   
   setupowl(){  
     $('.owl-carousel').owlCarousel({
-      loop:true,
+      loop:false,
       items:1,
       margin:10,
       autoHeight:true,

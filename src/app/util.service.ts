@@ -9,7 +9,12 @@ export class UtilService {
 
 
   Getweb(){
+    //for test
+    // return "http://localhost:4200/home";  
+    //for test
+    //production
      return "https://web-pra.firebaseapp.com/home";  
+    //production
   }
   GetAPIurl(){
       return "https://pro-nestjs.herokuapp.com"; 

@@ -2,7 +2,7 @@
     position: absolute;
     top: 1px;
     left: 0px;
-    height: -webkit-fill-available;
+    height: 24vh;
     width: 100%;
 }
 
@@ -28,6 +28,8 @@
     width: 100;
     opacity: 0;
     cursor: pointer;
+    z-index: 1;
+    position: absolute;
 }
 
 .hiddenFileInput {

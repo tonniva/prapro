@@ -65,7 +65,7 @@ bankaccount_own_pra:string;
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 5000);
+      }, 1000);
       if(this.listdetail.pramoonperson){
 
         this.subobject = this.listdetail.pramoonperson; 
@@ -137,7 +137,7 @@ updatecheckpra() {
         
               setTimeout(() => {
                 this.spinner.hide();
-              }, 5000);
+              }, 1000);
             });  
 
 }

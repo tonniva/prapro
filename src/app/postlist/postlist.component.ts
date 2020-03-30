@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service'; 
 import {Router,ActivatedRoute,Params} from "@angular/router"; 
 import { NgxSpinnerService } from "ngx-spinner";
-
+import {DomSanitizer} from '@angular/platform-browser';
  
 @Component({
   selector: 'app-postlist',
@@ -13,14 +13,25 @@ export class PostlistComponent implements OnInit {
   image:any;
   objimage:Array<any> = [];
 
+  image1:any;
+  image2:any;
+  image3:any;
+  image4:any;
+
+  temp_path_image1:any;
+  temp_path_image2:any;
+  temp_path_image3:any;
+  temp_path_image4:any;
+  
 
 
-  constructor(private router: Router,private apiService:RestService,private spinner: NgxSpinnerService) { }
-email:any;
-token:any; 
-arrayfile:Array<File> = [];
-arrayPathfile:Array<String> = [];
-resultFile:any;
+
+  constructor(private router: Router,private apiService:RestService,private spinner: NgxSpinnerService,private sanitizer:DomSanitizer) { }
+    email:any;
+    token:any; 
+    arrayfile:Array<File> = [];
+    arrayPathfile:Array<String> = [];
+    resultFile:any;
 
   ngOnInit(): void { 
     
@@ -33,43 +44,56 @@ resultFile:any;
     // });   
   }
 
-
-  changeListener($event) : void {
-    this.readThis($event.target);
+  
+  
+  changeListener_one($event) : void { 
+    this.image1 =  this.readThis($event.target); 
+    this.temp_path_image1 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image1));  
+  }
+  changeListener_two($event) : void { 
+    this.image2 =   this.readThis($event.target);
+    this.temp_path_image2 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image2));  
+  }
+  changeListener_three($event) : void { 
+    this.image3 =   this.readThis($event.target);
+    this.temp_path_image3 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image3));  
+  }
+  changeListener_four($event) : void { 
+    this.image4 =  this.readThis($event.target);
+    this.temp_path_image4 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image4));  
   }
   
-  readThis(inputValue: any): void { 
+  readThis(inputValue: any) { 
     var file:File = inputValue.files[0];
-    var myReader:FileReader = new FileReader();
-  
-    myReader.onloadend = (e) => {
-     
-      //รูปที่ได้ 
-     this.image = myReader.result; 
+    return file;
     
-      this.objimage.push(this.image);
-      this.arrayfile.push(file);
-      //รูปที่ได้
-    }
-    myReader.readAsDataURL(file);
   }
   
 
   onClickSubmit(data) {  
     this.spinner.show();
-    this.arrayPathfile =[];
-    for (let index = 0; index < this.arrayfile.length; index++) {
-            this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
-            this.resultFile = response; 
-            this.arrayPathfile.push(this.resultFile.imageUrl); 
-            if( this.arrayPathfile.length == 4 )
-            { 
-              this.postpra(data);
-            } 
-           });   
+    this.arrayfile[0] =this.image1;
+    this.arrayfile[1] =this.image2;
+    this.arrayfile[2] =this.image3;
+    this.arrayfile[3] =this.image4;
 
-           if( this.arrayPathfile.length == 4 ) break;
-    }
+    setTimeout(() => { 
+      for (let index = 0; index < this.arrayfile.length; index++) {
+        this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
+        this.resultFile = response; 
+        this.arrayPathfile.push(this.resultFile.imageUrl); 
+        if( this.arrayPathfile.length == 4 )
+        { 
+          this.postpra(data);
+        } 
+       });   
+
+       if( this.arrayPathfile.length == 4 ) break;
+}
+    }, 3000);
+    this.arrayPathfile =[];
+
+  
       
     
   }
@@ -86,7 +110,7 @@ resultFile:any;
         console.log(response)  
         setTimeout(() => { 
           this.spinner.hide();
-        }, 5000);
+        }, 1000);
         window.location.href = window.location.origin+'/list/one';
         // this.router.navigate(['/list/one'])   
       }); 

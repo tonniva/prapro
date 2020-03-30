@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
         setTimeout(() => {
           /** spinner ends after 5 seconds */
           this.spinner.hide();
-        }, 5000);
+        }, 1000);
         console.log(this.listdetail) 
         localStorage.setItem("access_token", this.listdetail.access_token);
         localStorage.setItem("id_token", this.listdetail.id_token);
@@ -36,8 +36,7 @@ export class HomeComponent implements OnInit {
    
   }
 
-  GetProfile(access_token){ 
-    debugger
+  GetProfile(access_token){  
     this.apiService.GetProfile(access_token).then((response) => {this.GetProfilelist = response,
       console.log(this.GetProfilelist) 
       //เอา้ไป ใช้ใน หน้า pramoonregister เพื่อระบุว่า สร้าง จาก ไลน์ userId นี้

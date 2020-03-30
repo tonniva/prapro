@@ -1,5 +1,6 @@
 .wrapper-list {
     height: 200vh;
+    padding-bottom: 20vh;
     width: 100%;
     overflow-y: scroll;
 }
@@ -35,7 +36,7 @@
     color: white;
 }
 
-//ปิดการขาย
+//ปิดการขาย+++++++++++++++++++++++++++++++++++++++++++++++++++++
 .no-tuch-sold-out {
     pointer-events: none;
 }
