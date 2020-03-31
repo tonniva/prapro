@@ -11,6 +11,7 @@ import { PramoonregisterComponent } from './pramoonregister/pramoonregister.comp
 import { UploaderComponent } from './uploader/uploader.component';
 import { PramoolBidComponent } from './pramool-bid/pramool-bid.component';
 import { HistorydetailComponent } from './historydetail/historydetail.component';
+import { HereMapComponent  } from './here-map/here-map.component';
 
 
 const routes: Routes = [ 
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'list/bid/:id_token/:indexlistselect', component: PramoolBidComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'other', component: OthermenuComponent }, 
-  { path: 'pramoonregister', component: PramoonregisterComponent }
+  { path: 'pramoonregister', component: PramoonregisterComponent },
+  { path: 'map', component: HereMapComponent }
 ];
 
 

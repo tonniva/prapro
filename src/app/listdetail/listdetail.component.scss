@@ -18,6 +18,7 @@
     font-weight: 800;
     margin: 12px;
     color: #24ff42;
+    font-family: "Charmonman", cursive !important;
 }
 
 .wrapper-description {
@@ -33,16 +34,20 @@
 .wrapper-primary {
     font-size: 9vw;
     font-weight: 800;
+    font-family: "Charmonman", cursive !important;
 }
 
 .wrapper-font-btn {
     font-size: 7vw;
+    font-family: "Charmonman", cursive !important;
 }
 
 .wrapper-procee-pra {
     color: white;
     font-size: 9vw;
     padding-bottom: 10px;
+    padding-top: 30px;
+    font-family: "Charmonman", cursive !important;
 }
 
 hr.hr-white {
@@ -79,7 +84,7 @@ hr.hr-white {
     width: 100% !important;
     position: absolute;
     top: -5px;
-    left: 430%;
+    left: 250%;
 }
 
 .checking {
@@ -89,6 +94,7 @@ hr.hr-white {
     font-size: 6vw;
     white-space: nowrap;
     color: white;
+    font-family: "Charmonman", cursive !important;
 }
 
 .wrapper-box-status {
@@ -117,8 +123,8 @@ hr.hr-white {
 
 .criminals {
     position: absolute;
-    left: 580%;
-    top: -155%;
+    left: 450%;
+    top: -360%;
     font-size: 9vw;
     white-space: nowrap;
     color: red;
@@ -130,3 +136,16 @@ hr.hr-white {
 }
 
 //ตรวจสอบพระ สถานะ
+//location
+agm-map {
+    height: 300px;
+}
+
+.ct {
+    text-align: -webkit-center;
+    color: white;
+    font-family: "Charmonman", cursive !important;
+    padding: 18px;
+}
+
+//location

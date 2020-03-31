@@ -112,9 +112,10 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('type', item.type);  
   this.body.set('status_pramoon_permission',"waitingcheck");  
   this.body.set('status_pramoon_check',item.status_pramoon_check);  
-  
+  this.body.set('Latitude',item.Latitude);  
+  this.body.set('Longitude',item.Longitude);   
   // this.UtilService.GetAPIurl()+
-return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
+return this.httpClient.post('http://localhost:3000/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }

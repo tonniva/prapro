@@ -28,12 +28,14 @@ export class ListdetailComponent implements OnInit {
   isshow_pra_false:boolean=false;
   isshow_pra_criminals:boolean=false;
 
-
+ 
   //เจ้าของพระ
 firstname_own_pra:string;
 lastname_own_pra:string;
 tell_own_pra:string; 
 bankaccount_own_pra:string; 
+
+
 
   //เจ้าของพระ
   checkpra_data:any={
@@ -46,6 +48,15 @@ bankaccount_own_pra:string;
     "firstname":"",
     "lastname":""
   }
+
+  //location
+  public geolocationPosition;
+  model: any = {};
+  lat: number =0;
+  lng: number = 0; 
+  //location
+
+
   constructor(private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
   
@@ -63,6 +74,7 @@ bankaccount_own_pra:string;
      
       console.log(this.listdetail)
       setTimeout(() => {
+        this.showlocation();
         /** spinner ends after 5 seconds */
         this.spinner.hide();
       }, 1000);
@@ -210,6 +222,43 @@ calcheckconditonstatus_pra_criminals(item){
 }
     
 
+
+showlocation(){
+
+  setTimeout(() => { 
+    if (window.navigator && window.navigator.geolocation) {
+        window.navigator.geolocation.getCurrentPosition(
+            position => {
+                this.geolocationPosition = position,
+  
+                     console.log(position) 
+              
+                    var Longitude = this.listdetail.Longitude;
+                    var Latitude =  this.listdetail.Latitude;
+
+                    console.log("Latitude:"+Latitude +"Longitude:"+Longitude)
+                    this.lat = Number(Latitude)
+                    this.lng = Number(Longitude)
+            },
+            error => {
+                switch (error.code) {
+                    case 1:
+                        console.log('Permission Denied');
+                        break;
+                    case 2:
+                        console.log('Position Unavailable');
+                        break;
+                    case 3:
+                        console.log('Timeout');
+                        break;
+                }
+            }
+        );
+    };
+  
+}, 1200);
+
+}
 
   
   

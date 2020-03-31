@@ -45,6 +45,7 @@ export class PramoonregisterComponent implements OnInit {
   constructor(private router: Router,private apiService:RestService,private sanitizer:DomSanitizer,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     this.status_pramoon_register = localStorage.getItem("status_pramoon_register");
     if(this.status_pramoon_register){ 
         this.router.navigate(['/list/two'])  

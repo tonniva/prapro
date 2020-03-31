@@ -1,3 +1,5 @@
+ 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -33,6 +35,8 @@ import { ModalComponent } from './modal/modal.component';
 import { PramoolBidComponent } from './pramool-bid/pramool-bid.component';
 import { HistorydetailComponent } from './historydetail/historydetail.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { HereMapComponent } from './here-map/here-map.component';
+import { AgmCoreModule } from '@agm/core';
  
 @NgModule({
   declarations: [
@@ -51,7 +55,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     PramoonregisterComponent,
     ModalComponent,
     PramoolBidComponent,
-    HistorydetailComponent 
+    HistorydetailComponent,
+    HereMapComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +67,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

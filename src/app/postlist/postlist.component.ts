@@ -22,7 +22,8 @@ export class PostlistComponent implements OnInit {
   temp_path_image2:any;
   temp_path_image3:any;
   temp_path_image4:any;
-  
+
+ 
 
 
 
@@ -34,14 +35,18 @@ export class PostlistComponent implements OnInit {
     resultFile:any;
 
   ngOnInit(): void { 
-    
+   
+    window.scrollTo(0,0);
     // if()
     // this.email = localStorage.getItem("email");
     // this.apiService.logingetToken(this.email).then((response:any) => {  
     
     //   this.token = response.accessToken;
     //   localStorage.setItem("logintoken",this.token);   
-    // });   
+    // });    
+
+
+   
   }
 
   
@@ -101,9 +106,15 @@ export class PostlistComponent implements OnInit {
   postpra(data){
 
     setTimeout(() => {
+
+     
+    
+
       localStorage.setItem("email", data.email); 
       data.access_token = localStorage.getItem("access_token");
       data.id_token = localStorage.getItem("userId"); 
+      data.Latitude =   localStorage.getItem("Latitude");
+      data.Longitude = localStorage.getItem("Longitude");
       data.status_pramoon_check = "checking"; 
       
       this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => {   
@@ -117,6 +128,9 @@ export class PostlistComponent implements OnInit {
     
     }, 1000); 
   }
+  
+  
+
   
   
   

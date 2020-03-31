@@ -11,14 +11,14 @@
 
         <div class="wrapper-detial-price text-warning">
 
-            ราคาเปิด {{listdetail.pricestart}}
+            ราคาเปิด {{listdetail.pricestart |number}}
         </div>
 
         <div class="wrapper-detial-price" [hidden]="listdetail.status =='close'">
-            ราคาปัจจุบัน {{listdetail.priceend}}
+            ราคาปัจจุบัน {{listdetail.priceend |number}}
         </div>
         <div class="wrapper-detial-price" [hidden]="listdetail.status !='close'">
-            ราคาปิด {{listdetail.priceend}}
+            ราคาปิด {{listdetail.priceend |number}}
         </div>
         <div class="wrapper-detial-price text-white" [hidden]="!lastperson_bid.firstname && lastperson_bid.lastname">
             ล่าสุด ลูกค้า !!คุณ
