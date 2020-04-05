@@ -11,19 +11,21 @@
 
         <div class="wrapper-detial-price text-warning">
 
-            ราคาเปิด {{listdetail.pricestart |number}}
+            ราคาเปิด {{listdetail.pricestart || 0 |number}} บาท
         </div>
 
         <div class="wrapper-detial-price" [hidden]="listdetail.status =='close'">
-            ราคาปัจจุบัน {{listdetail.priceend |number}}
+            ราคาปัจจุบัน {{listdetail.priceend || 0 |number}} บาท
         </div>
         <div class="wrapper-detial-price" [hidden]="listdetail.status !='close'">
-            ราคาปิด {{listdetail.priceend |number}}
+            ราคาปิด {{listdetail.priceend || 0 |number}} บาท
         </div>
         <div class="wrapper-detial-price text-white" [hidden]="!lastperson_bid.firstname && lastperson_bid.lastname">
-            ล่าสุด ลูกค้า !!คุณ
-            <div *ngIf="lastperson_bid != null ">
-                {{lastperson_bid.firstname }} {{lastperson_bid.lastname }}
+            <div *ngIf="lastperson_bid.firstname == '' ">
+                ล่าสุด ยังไม่มีผู้ประมูล..
+            </div>
+            <div *ngIf="lastperson_bid.firstname != '' ">
+                ล่าสุด ลูกค้า !!คุณ {{lastperson_bid.firstname }} {{lastperson_bid.lastname }}
             </div>
         </div>
         <div class="row">
@@ -36,30 +38,21 @@
             <div>
 
             </div>
-            <div *ngIf="lastperson_bid.tell!=null">
+            <div *ngIf="lastperson_bid.tell!=''">
                 โทร : {{lastperson_bid.tell}}
             </div>
         </div>
 
         <div class="wrapper-input p-3 " [hidden]="listdetail.status =='close'">
-            <button (click)="closeOrder()" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">ปิดการขาย</button>
+            <button (click)="clickclose()" #submitButton class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">ปิดการขาย</button>
+        </div>
+
+        <div class="wrapper-input p-3 " [hidden]="listdetail.status =='close'">
+            <button routerLink="/editorderpost/{{id_token}}/{{index_list_select}}" #submitButton class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">แก้ไขข้อมูล</button>
         </div>
         <div class="text-success  wrapper-description">
             {{listdetail.description}}
         </div>
-        <div class="row">
-            <div class="col text-center wrapper-tab" (click)="showdetail()">
-                รายละเอียด
-            </div>
-            <div class="col text-center wrapper-tab" (click)="showcondition()">
-                เงื่อนไข
-            </div>
-        </div>
-        <div class="text-info" [hidden]="!ishowdetail">
-            {{listdetail.pricestart}}
-        </div>
-        <div class="text-primary wrapper-primary" [hidden]="ishowdetail">
-            {{listdetail.description}}
-        </div>
+
     </div>
 </div>

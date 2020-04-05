@@ -15,6 +15,7 @@
 <!-- map -->
 <script src="https://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@200&display=swap" rel="stylesheet">
 <!-- map -->
 <style>
      :host {
@@ -90,13 +91,18 @@
 
 <!-- Toolbar -->
 
-<div class="toolbar" role="banner" routerLink="/home">
+<div class="toolbar" role="banner" routerLink="/landing">
+
     <img width="40" class="Logo" alt="Angular Logo" src="https://fq.lnwfile.com/dxsfhk.jpg" />
-    <span class="fontsize-title">เฉพาะหลวงปู่ทวดปี 2524</span>
+    <span class="fontsize-title">เฉพาะหลวงปู่ทวด</span>
     <div class="spacer"></div>
     <img width="40" class="Logo" alt="Angular Logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-ronjrqSF1EIuIocSHV18RIDfEm6RqiCYkXIg38SEFguWjGVH" />
 </div>
+<div [hidden]="!ishide()" class="text-light wrapper-back" (click)="goblak()">
+    กลับ
+</div>
 <div class="content" role="main">
+
 
 </div>
 

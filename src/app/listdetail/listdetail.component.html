@@ -37,13 +37,18 @@
         </div>
 
         <hr class="hr-white" />
+
         <div class="wrapper-detial-price text-warning">
-            ราคาเปิด {{listdetail.pricestart}}
+            ราคาเปิด {{listdetail.pricestart | number}}
         </div>
         <div class="wrapper-detial-price">
-            ราคาปัจจุบัน {{listdetail.priceend ||0}}
+            ราคาปัจจุบัน {{listdetail.priceend || 0 | number}}
         </div>
-        <div class="wrapper-detial-price text-primary" [hidden]="!lastperson_bid.firstname && lastperson_bid.lastname">
+        <div class="wrapper-detial-price text-white">
+            เวลาปิดประมูล
+            <input class="wrapper-enddate" type="datetime-local" [ngModel]="listdetail.dateend | date:'yyyy-MM-ddTHH:mm'" id="dateEnd" ngModel ngDefaultControl rows="5" cols="60" required name="dateEnd" name="dateEnd">
+        </div>
+        <div class="wrapper-detial-price text-warning" [hidden]="!lastperson_bid.firstname && lastperson_bid.lastname">
             ล่าสุด !!คุณ
             <div>
                 {{lastperson_bid.firstname }} {{lastperson_bid.lastname }}
@@ -58,12 +63,15 @@
         <div class="text-info" [hidden]="!ishowdetail">
             {{listdetail.pricestart}}
         </div>
-        <div class="text-primary wrapper-primary" [hidden]="ishowdetail">
+        <div class="text-light wrapper-primary" [hidden]="ishowdetail">
             {{listdetail.description}}
         </div>
         <div class="wrapper-procee-pra">
             ข้อมูลส่วนตัว เจ้าของพระ<br/>
             <hr class="hr-white" /> คุณ {{firstname_own_pra}} {{lastname_own_pra}} {{tell_own_pra}}
+            <div class="wrapper-procee-pra">
+                {{bankname_own_pra}}
+            </div>
             <div class="wrapper-procee-pra">
                 เลขบัญชี ธนาคาร {{bankaccount_own_pra}}
             </div>
@@ -86,13 +94,13 @@
         <hr class="hr-white" />
 
         <div class="row p-4">
-            <button (click)="onclick_count_pra_true()" class="btn btn-success btn-lg btn-block  wrapper-font-btn">พระแท้</button>
+            <button [ngClass]="{'disabled': Isdisable}" #submitButton (click)="clickonclick_count_pra_true();submitButton.disabled = true" class="btn btn-success btn-lg btn-block  wrapper-font-btn">พระแท้</button>
         </div>
         <div class="row p-4">
-            <button (click)="onclick_count_pra_false()" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">พระไม่แท้</button>
+            <button [ngClass]="{'disabled': Isdisable}" #submitButton (click)="clickonclick_count_pra_false();submitButton.disabled = true" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">พระไม่แท้</button>
         </div>
         <div class="row p-4">
-            <button (click)="onclick_count_pra_criminals()" class="btn btn btn-danger btn-lg btn-block  wrapper-font-btn">เค้าเป็นมิจฉาชีพ</button>
+            <button [ngClass]="{'disabled': Isdisable}" #submitButton (click)="clickonclick_count_pra_criminals();submitButton.disabled = true" class="btn btn btn-danger btn-lg btn-block  wrapper-font-btn">เค้าเป็นมิจฉาชีพ</button>
         </div>
 
         <hr class="hr-white" />

@@ -57,7 +57,7 @@
                 เบอร์ติดต่อ
             </div>
             <div class="col">
-                <input class="form-control text-center" type="number" name="tel" placeholder="เบอร์ติดต่อ" ngModel>
+                <input class="form-control text-center" type="tel" name="tel" placeholder="เบอร์ติดต่อ" ngModel>
             </div>
         </div>
         <div class="row pt-4">
@@ -68,7 +68,27 @@
                 <input class="form-control text-center" type="text" name="email" placeholder="E-mail" ngModel>
             </div>
         </div>
+
+
         <div class="row pt-4">
+
+            <div class="col text-white f-s text-center">
+                ชื่อธนาคาร
+            </div>
+            <div class="col">
+                <select class='form-control' (change)="selectBankFrom($event)">
+                            <option value="" disabled selected hidden>เลือกธนาคารโอนจาก</option> 
+                            <option  value='ธนาคารไทยพาณิชย์'>ธนาคารไทยพาณิชย์</option>
+                            <option  value='ธนาคารกรุงเทพ'>ธนาคารกรุงเทพ</option>
+                            <option  value='ธนาคารกสิกรไทย'>ธนาคารกสิกรไทย</option>
+                            <option  value='ธนาคารกรุงศรีอยุธยา'>ธนาคารกรุงศรีอยุธยา</option>
+                            <option  value='ธนาคารกรุงไทย'>ธนาคารกรุงไทย</option>
+                            <option  value='ธนาคารทหารไทย'>ธนาคารทหารไทย</option>
+                        </select>
+            </div>
+        </div>
+        <div class="row pt-4">
+
             <div class="col text-white f-s text-center">
                 เลขบัญชีธนาคาร
             </div>
@@ -85,7 +105,7 @@
                     <div class="col wrapper-upload">
                         รูปภาพ บัตรประขาชน
                         <div class="bg-gold">
-                            <span class="hiddenFileInput">
+                            <span class="hiddenFileInput " [ngClass]="{'post-click': temp_path_image1 == null}">
                                             <input [ngClass]="{'click-heigth': temp_path_image1 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_one($event)"/>
                                     </span>
                             <div>
@@ -96,7 +116,7 @@
                     <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image1 == null}">
                         รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน
                         <div class="bg-gold">
-                            <span class="hiddenFileInput">
+                            <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image1 != null &&  temp_path_image2 == null }">
                                         <input [ngClass]="{'click-heigth': temp_path_image2 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_two($event)"/>
                                 </span>
                             <div>
@@ -106,9 +126,9 @@
                     </div>
                     <div class="w-100"></div>
                     <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image2 == null}">
-                        รูปภาพ บัตรประขาชน พร้อม ถ่ายกับข้อความ หลวงปู่ทวด 24
+                        รูปภาพ บัตรประขาชน ถ่ายพร้อม กับ หน้าตัวเอง
                         <div class="bg-gold">
-                            <span class="hiddenFileInput">
+                            <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image2 != null &&  temp_path_image3 == null }">
                                         <input [ngClass]="{'click-heigth': temp_path_image3 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_three($event)"/>
                                 </span>
                             <div>
@@ -119,7 +139,7 @@
                     <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image3 == null}">
                         รูปภาพ บัญชีธนาคาร
                         <div class="bg-gold">
-                            <span class="hiddenFileInput">
+                            <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image3 != null &&  temp_path_image4 == null }">
                                         <input [ngClass]="{'click-heigth': temp_path_image4 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_four($event)"/>
                                 </span>
                             <div>

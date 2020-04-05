@@ -49,7 +49,7 @@ export class ListComponent implements OnInit {
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 1000);
+      }, 5000);
        console.log(this.list)
        setTimeout(() => {
         this.setupowl()

@@ -37,6 +37,7 @@ import { HistorydetailComponent } from './historydetail/historydetail.component'
 import { NgxSpinnerModule } from "ngx-spinner";
 import { HereMapComponent } from './here-map/here-map.component';
 import { AgmCoreModule } from '@agm/core';
+import { EditorderpostComponent } from './editorderpost/editorderpost.component';
  
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { AgmCoreModule } from '@agm/core';
     ModalComponent,
     PramoolBidComponent,
     HistorydetailComponent,
-    HereMapComponent
+    HereMapComponent,
+    EditorderpostComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,7 @@ import { AgmCoreModule } from '@agm/core';
     AngularFireStorageModule, // storage
     NgxSpinnerModule,
     AgmCoreModule.forRoot({
-      apiKey: ''
+      apiKey: 'AIzaSyBEhGVQ826hKnlqPsa2EX2M0GQbcPN0eEA'
     })
   ],
   providers: [],

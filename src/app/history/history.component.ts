@@ -20,10 +20,9 @@ export class HistoryComponent implements OnInit {
     
     this.id_token = localStorage.getItem("userId");  
     this.apiService.getlistdetail(this.id_token).then((response) => {this.list = response,
-      setTimeout(() => {
-        /** spinner ends after 5 seconds */
+      setTimeout(() => { 
         this.spinner.hide();
-      }, 1000);
+      }, 3000);
       console.log(this.list)
      
       setTimeout(() => {

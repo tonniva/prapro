@@ -3,6 +3,9 @@ import { RestService } from '../rest.service';
 import {Router,ActivatedRoute,Params} from "@angular/router"; 
 import { NgxSpinnerService } from "ngx-spinner";
 import {DomSanitizer} from '@angular/platform-browser';
+import {UtilService} from '../util.service';
+
+import Swal from 'sweetalert2'
  
 @Component({
   selector: 'app-postlist',
@@ -27,7 +30,7 @@ export class PostlistComponent implements OnInit {
 
 
 
-  constructor(private router: Router,private apiService:RestService,private spinner: NgxSpinnerService,private sanitizer:DomSanitizer) { }
+  constructor(private UtilService :UtilService, private router: Router,private apiService:RestService,private spinner: NgxSpinnerService,private sanitizer:DomSanitizer) { }
     email:any;
     token:any; 
     arrayfile:Array<File> = [];
@@ -48,9 +51,7 @@ export class PostlistComponent implements OnInit {
 
    
   }
-
-  
-  
+ 
   changeListener_one($event) : void { 
     this.image1 =  this.readThis($event.target); 
     this.temp_path_image1 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image1));  
@@ -76,6 +77,101 @@ export class PostlistComponent implements OnInit {
   
 
   onClickSubmit(data) {  
+
+    if(data.pricestart <= 0){
+      this.UtilService.showError("กรุณากรอก <br/> ราคาเริ่มต้น","")
+      return;
+    }else if(data.dateEnd =="" || data.dateEnd.trim().length == 0){
+      this.UtilService.showError("กรุณากรอก <br/> วันที่-เวลา ปิดประมูล","")
+      return;
+    }
+    else if(typeof(this.temp_path_image1) ==='undefined'){
+      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัตรประขาชน ","");
+      return;
+    }
+    else if(typeof(this.temp_path_image2) ==='undefined'){
+      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน ","");
+      return;
+    }
+    else if(typeof(this.temp_path_image3) ==='undefined'){
+      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัตรประขาชน พร้อม ถ่ายกับข้อความ หลวงปู่ทวด","");
+      return;
+    }
+    else if(typeof(this.temp_path_image4) ==='undefined'){
+      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัญชีธนาคาร ","");
+      return;
+    }
+    else{
+
+      // this.UtilService.showConfirm("คุณต้องการเปิดประมูลใช่หรือไม่"
+      // ,"เมื่อทำการลงทะเบียนแล้ว <br/> สามารถแก้ไขได้ <br/> ที่ 'เพิมเติม'"
+      // ,function(response:any){ 
+      //   if(response){  
+      //   alert("asdasdasd");
+      //     this.douploadimage(data)
+          
+      //   } 
+      // }); 
+
+      Swal.fire({
+        title: 'คุณต้องการเปิดประมูลใช่หรือไม่',
+        text: "เมื่อทำการลงทะเบียนแล้วสามารถแก้ไขได้  ที่ 'เพิมเติม'",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText:'ยกเลิก'
+      }).then((result) => {
+        if (result.value) {
+          this.douploadimage(data);   
+        }
+      }) 
+
+   
+      } 
+  }
+
+  
+
+
+
+  public postpra(data){
+
+    setTimeout(() => {  
+      debugger
+      data.access_token = localStorage.getItem("access_token");
+      data.id_token = localStorage.getItem("userId"); 
+      data.Latitude =   localStorage.getItem("Latitude");
+      data.Longitude = localStorage.getItem("Longitude");
+      data.ip = localStorage.getItem("ip"); 
+      data.status_pramoon_check = "checking"; 
+      
+      this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => { 
+      
+       
+        setTimeout(() => { 
+          this.spinner.hide();
+        }, 0);
+
+
+        Swal.fire(
+          'สำเร็จ !',
+          'ขอบคุณครับ',
+          'success'
+        )
+        window.location.href = window.location.origin+'/list/one';
+         
+      }); 
+    
+    }, 1000); 
+  }
+  
+
+
+  
+  public douploadimage(data)
+  {  
     this.spinner.show();
     this.arrayfile[0] =this.image1;
     this.arrayfile[1] =this.image2;
@@ -89,49 +185,18 @@ export class PostlistComponent implements OnInit {
         this.arrayPathfile.push(this.resultFile.imageUrl); 
         if( this.arrayPathfile.length == 4 )
         { 
+           
           this.postpra(data);
         } 
        });   
 
        if( this.arrayPathfile.length == 4 ) break;
-}
+        }
     }, 3000);
     this.arrayPathfile =[];
-
-  
-      
-    
-  }
-
-  postpra(data){
-
-    setTimeout(() => {
-
-     
-    
-
-      localStorage.setItem("email", data.email); 
-      data.access_token = localStorage.getItem("access_token");
-      data.id_token = localStorage.getItem("userId"); 
-      data.Latitude =   localStorage.getItem("Latitude");
-      data.Longitude = localStorage.getItem("Longitude");
-      data.status_pramoon_check = "checking"; 
-      
-      this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => {   
-        console.log(response)  
-        setTimeout(() => { 
-          this.spinner.hide();
-        }, 1000);
-        window.location.href = window.location.origin+'/list/one';
-        // this.router.navigate(['/list/one'])   
-      }); 
-    
-    }, 1000); 
   }
   
-  
 
-  
-  
+ 
   
 }

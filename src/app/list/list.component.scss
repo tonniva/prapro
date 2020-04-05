@@ -168,4 +168,15 @@
     transform: scale(1.5);
 }
 
+.wrapper-enddate {
+    width: 100%;
+    font-size: 2rem;
+    text-align: end;
+    pointer-events: none;
+    background-color: transparent;
+    border: none;
+    color: #fcfcfc;
+    padding-bottom: 10%;
+}
+
 //ตรวจสอบพระ สถานะ

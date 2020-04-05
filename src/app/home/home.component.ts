@@ -14,8 +14,7 @@ export class HomeComponent implements OnInit {
   Registerdetail:any;
   constructor(private apiService: RestService, private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
-  ngOnInit(): void { 
-    
+  ngOnInit(): void {  
     this.spinner.show();
     const code: string = this.route.snapshot.queryParamMap.get('code');
     if(typeof(code)!=undefined){

@@ -12,6 +12,7 @@ import { UploaderComponent } from './uploader/uploader.component';
 import { PramoolBidComponent } from './pramool-bid/pramool-bid.component';
 import { HistorydetailComponent } from './historydetail/historydetail.component';
 import { HereMapComponent  } from './here-map/here-map.component';
+import { EditorderpostComponent } from './editorderpost/editorderpost.component';
 
 
 const routes: Routes = [ 
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'history', component: HistoryComponent },
   { path: 'other', component: OthermenuComponent }, 
   { path: 'pramoonregister', component: PramoonregisterComponent },
-  { path: 'map', component: HereMapComponent }
+  { path: 'map', component: HereMapComponent },
+  { path: 'editorderpost/:id_token/:indexlistselect', component: EditorderpostComponent }
 ];
 
 

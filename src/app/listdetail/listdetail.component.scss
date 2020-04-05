@@ -1,6 +1,7 @@
 .wrapper-image-detail {
     text-align: center;
     padding-bottom: 100vh;
+    margin-top: 20% !important;
 }
 
 .wrapper-image {
@@ -18,7 +19,6 @@
     font-weight: 800;
     margin: 12px;
     color: #24ff42;
-    font-family: "Charmonman", cursive !important;
 }
 
 .wrapper-description {
@@ -34,12 +34,10 @@
 .wrapper-primary {
     font-size: 9vw;
     font-weight: 800;
-    font-family: "Charmonman", cursive !important;
 }
 
 .wrapper-font-btn {
     font-size: 7vw;
-    font-family: "Charmonman", cursive !important;
 }
 
 .wrapper-procee-pra {
@@ -47,7 +45,6 @@
     font-size: 9vw;
     padding-bottom: 10px;
     padding-top: 30px;
-    font-family: "Charmonman", cursive !important;
 }
 
 hr.hr-white {
@@ -94,7 +91,6 @@ hr.hr-white {
     font-size: 6vw;
     white-space: nowrap;
     color: white;
-    font-family: "Charmonman", cursive !important;
 }
 
 .wrapper-box-status {
@@ -144,8 +140,13 @@ agm-map {
 .ct {
     text-align: -webkit-center;
     color: white;
-    font-family: "Charmonman", cursive !important;
     padding: 18px;
 }
 
 //location
+.wrapper-enddate {
+    width: 100%;
+    font-size: 2rem;
+    text-align: end;
+    pointer-events: none;
+}

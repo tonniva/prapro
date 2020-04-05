@@ -5,7 +5,7 @@
 </div>
 <div class="wrapper-list">
     <div class="owl-carousel owl-theme card" *ngFor="let item of  list; let indexliistselect = index">
-        <div routerLink="/list/history/{{item.id_token}}/{{indexliistselect}}">
+        <div routerLink="/list/history/{{item.id_token}}/{{item._id}}">
             <div class="item" [ngClass]="{'img__wrapper': item.status =='close'}">
                 <div *ngIf="item.status=='close'">
                     <img src="http://www.savoy-sharm.com/media-room/images/hi-res/king-bed-room-accommodation-savoy-luxury-5-stars-accommodation-sharm-el-sheikh.jpg" alt="" />
@@ -15,7 +15,7 @@
                 <div class="wrapper-content-list">
 
                     <div class="wrapper-detial-price">
-                        {{item.pricestart}} บาท
+                        {{item.pricestart ||0 | number}} บาท
                     </div>
                     <div class="wrapper-detial text-white">
                         {{item.name}}

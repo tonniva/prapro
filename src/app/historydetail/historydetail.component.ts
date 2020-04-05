@@ -23,7 +23,7 @@ export class HistorydetailComponent implements OnInit {
     "firstname":"",
     "lastname":"",
     "tell":"",
-    "pictureUrl":""
+    "pictureUrl":"https://cdn.iconscout.com/icon/free/png-512/avatar-380-456332.png"
   }
   constructor(private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
@@ -33,13 +33,19 @@ export class HistorydetailComponent implements OnInit {
  
     this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
     this.id_token = this.route.snapshot.params.id_token; 
-     this.apiService.getlistdetail(this.id_token).then((response) => {this.listdetail =  response[this.index_list_select],
-      this.temp_pramoonperson =  response[this.index_list_select].pramoonperson,
+     this.apiService.getlistdetail(this.id_token).then((response) => {this.listdetail =  response
+     
+       for (let index = 0; index < this.listdetail.length; index++) {
+         if(this.listdetail[index]._id == this.index_list_select){ 
+          this.listdetail = response[index];
+          this.temp_pramoonperson =  response[index];
+          break;
+         } 
+       } 
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 1000);
-      console.log(this.listdetail)
+      }, 3000); 
       if(this.listdetail.pramoonperson){
 
          
@@ -79,5 +85,14 @@ export class HistorydetailComponent implements OnInit {
     });  
 
   }
+
+  clickclose() {
+    if(confirm("คุณต้องการปิดการขาย ใช้หรือไม่")) {
+      this.closeOrder();
+    }
+  }
+
+
+ 
 
 }

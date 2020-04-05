@@ -36,20 +36,24 @@ export class PramoolBidComponent implements OnInit {
     "date":"",
   }];
   temp_pramoonperson:any;
-   
+
+  
+  Registerdetail:any;
   ngOnInit(): void { 
     this.spinner.show();
-    this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
-    this.getdetail();
-    this.firstname = localStorage.getItem("firstname");
-    this.lastname = localStorage.getItem("lastname");
-    this.email = localStorage.getItem("email");
-    this.tel = localStorage.getItem("tel");
+    this.userId = localStorage.getItem("userId");
     this.userId = localStorage.getItem("userId");
     this.pictureUrl = localStorage.getItem("pictureUrl");
     this.displayName = localStorage.getItem("displayName"); 
+    this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
 
-    
+    this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response[0]
+
+    this.firstname = this.Registerdetail.firstname;
+    this.lastname = this.Registerdetail.lastname; 
+    this.email = this.Registerdetail.email;
+    this.tel = this.Registerdetail.tel;    
+
   this.pramoonperson[0].firstname = this.firstname;
   this.pramoonperson[0].lastname=this.lastname;
   this.pramoonperson[0].displayName=this.displayName;
@@ -58,6 +62,14 @@ export class PramoolBidComponent implements OnInit {
   this.pramoonperson[0].userId= this.userId;
   this.pramoonperson[0].email=this.email
   this.pramoonperson[0].date= new Date();
+  this.getdetail();
+  });  
+
+
+    
+ 
+  
+    
   setTimeout(() => {
     /** spinner ends after 5 seconds */
     this.spinner.hide();
@@ -67,9 +79,17 @@ export class PramoolBidComponent implements OnInit {
 
   onClickSubmit(data) {   
 
-    
+   
     this.id_token = localStorage.getItem("userId"); 
-    this.apiService.getlistdetail(this.id_token).then((response) => {this.list = response[this.index_list_select], 
+    this.apiService.getlistdetail(this.id_token).then((response) => {
+      this.list = response 
+      for (let index = 0; index < this.list.length; index++) {
+        if(this.list[index]._id == this.index_list_select){ 
+          debugger
+         this.list = response[index];
+         break;
+        } 
+      }
       console.log(this.list)
       if(data.priceBid <= this.list.pricestart)
       { 
@@ -95,8 +115,17 @@ export class PramoolBidComponent implements OnInit {
 getdetail(){
 
   this.id_token = localStorage.getItem("userId"); 
-  this.apiService.getlistdetail(this.id_token).then((response) => {this.list = response[this.index_list_select], 
-    console.log(this.list)
+  this.apiService.getlistdetail(this.id_token).then((response) => {
+    this.list = response  
+    
+    for (let index = 0; index < this.list.length; index++) {
+      if(this.list[index]._id == this.index_list_select){ 
+      
+       this.list = response[index];
+       break;
+      } 
+    }
+
     this.pricestart = this.list.pricestart
     this.pricebidend = this.list.priceend
   });  
@@ -116,6 +145,7 @@ getdetail(){
      //update ข้อมูล ใครที่ ประมูล บ้าง คนใหม่ ใส่ไป 
     
     this.id_token = localStorage.getItem("userId"); 
+    debugger
     this.apiService.updatepramoodetail(this.list._id, data.priceBid,this.temp_pramoonperson,null).then((response) => {this.list = response, 
       window.history.back();
       setTimeout(() => {

@@ -6,7 +6,7 @@
 <div class="wrapper-box-list">
     <div class="wrapper-list" *ngIf="list!=null">
         <div class="owl-carousel owl-theme card" *ngFor="let item of list; let indexliistselect = index">
-            <div [ngClass]="{'no-tuch-sold-out': item.status =='close'}" routerLink="/list/detail/{{item.id_token}}/{{indexliistselect}}">
+            <div [ngClass]="{'no-tuch-sold-out': item.status =='close'}" routerLink="/list/detail/{{item.id_token}}/{{item._id}}">
                 <div class="item" [ngClass]="{'img__wrapper': item.status =='close'}">
                     <div *ngIf="item.status=='close'">
                         <img src="http://www.savoy-sharm.com/media-room/images/hi-res/king-bed-room-accommodation-savoy-luxury-5-stars-accommodation-sharm-el-sheikh.jpg" alt="" />
@@ -47,6 +47,10 @@
                         </div>
                         <div class="wrapper-detial">
                             {{item.description}}
+                        </div>
+                        <div class="wrapper-detial-price text-white">
+                            เวลาปิดประมูล
+                            <input class="wrapper-enddate" type="datetime-local" [ngModel]="item.dateend | date:'yyyy-MM-ddTHH:mm'">
                         </div>
                     </div>
                 </div>

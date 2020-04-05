@@ -1,10 +1,13 @@
 .wrapper-title {
     text-align: center;
     font-size: 7vw;
+    margin-top: 15%;
 }
 
 body {
-    font-family: 'Charmonman', cursive !important;
+    font-family: 'Bai Jamjuree', sans-serif !important;
+    font-weight: 800 !important;
+    // font-family: 'Charmonman', cursive !important;
     // background: url('/app/src/assets/image/bg_thai.jpg') center center !important;
     background: url(https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/66091330-stock-vector-thai-art-pattern-on-black-background-vector-illustration.jpg) center;
     background-size: auto;
@@ -15,4 +18,38 @@ body {
 
 .wrapper-bg {
     min-height: 150vh;
+}
+
+.swal2-html-container {
+    display: block;
+    font-size: 1rem;
+    color: red;
+    word-break: break-word;
+}
+
+.swal2-cancel {
+    font-size: 1rem;
+}
+
+.swal2-confirm {
+    font-size: 1rem;
+}
+
+.wrapper-back {
+    font-size: 2rem;
+    margin-top: 20%;
+    text-indent: 8px;
+    border-style: hidden;
+    width: 22%;
+    padding: -1%;
+    border: dashed;
+    margin-left: 3%;
+    margin-bottom: -20%;
+}
+
+.wrapper-title-header {
+    color: white;
+    text-align: center;
+    font-size: 10vw;
+    padding: 5px;
 }

@@ -3,39 +3,39 @@
 <div class="wrapper-post-content">
     <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
         <div class="container">
-            <div class="wrapper-title-header"> สร้างรายการ
+            <div class="wrapper-title-header"> แก้ไขรายการ
             </div>
 
             <div class="row">
                 <div class="col wrapper-upload ">
                     <span class="hiddenFileInput post-click">
-                                <input name="theFile1" class="wrapper-theFile bb" type="file" accept="image/*" (change)="changeListener_one($event)"/>
-                        </span>
+                                    <input name="theFile1" class="wrapper-theFile bb" type="file" accept="image/*" (change)="changeListener_one($event)"/>
+                            </span>
                     <div>
                         <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1" [hidden]="!temp_path_image1">
                     </div>
                 </div>
                 <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image1 == null}">
                     <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image1 != null &&  temp_path_image2 == null}">
-                            <input name="theFile2"  class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_two($event)"/>
-                    </span>
+                                <input name="theFile2"  class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_two($event)"/>
+                        </span>
                     <div>
                         <img class="img-fluid wrapper-uploaded" [src]="temp_path_image2" [hidden]="!temp_path_image2">
                     </div>
                 </div>
                 <div class="w-100"></div>
                 <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image2 == null}">
-                    <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image2 != null  &&  temp_path_image3 == null}">
-                            <input name="theFile3" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_three($event)"/>
-                    </span>
+                    <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image2 != null &&  temp_path_image3 == null}">
+                                <input name="theFile3" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_three($event)"/>
+                        </span>
                     <div>
                         <img class="img-fluid wrapper-uploaded" [src]="temp_path_image3" [hidden]="!temp_path_image3">
                     </div>
                 </div>
                 <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image3 == null}">
-                    <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image3 != null  &&  temp_path_image4 == null}">
-                            <input name="theFile4" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_four($event)"/>
-                    </span>
+                    <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image3 != null &&  temp_path_image4 == null}">
+                                <input name="theFile4" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_four($event)"/>
+                        </span>
                     <div>
                         <img class="img-fluid wrapper-uploaded" [src]="temp_path_image4" [hidden]="!temp_path_image4">
                     </div>
@@ -43,14 +43,14 @@
             </div>
         </div>
 
-
         <div class="container pt-3">
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">ราคาเปิดประมูล</span>
                 </div>
-                <input type="number" class="form-control" ngModel ngDefaultControl rows="5" cols="60" required name="pricestart" aria-label="Amount (to the nearest dollar)">
+
+                <input type="number" [(ngModel)]="listdetail.pricestart" class="form-control" ngModel ngDefaultControl rows="5" cols="60" required name="pricestart" aria-label="Amount (to the nearest dollar)">
                 <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                 </div>
@@ -59,7 +59,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">วันปิดประมูล</span>
                 </div>
-                <input type="datetime-local" id="dateEnd" ngModel ngDefaultControl rows="5" cols="60" required name="dateEnd">
+
+                <input type="datetime-local" [ngModel]="listdetail.dateend | date:'yyyy-MM-ddTHH:mm'" id="dateEnd" ngModel ngDefaultControl rows="5" cols="60" required name="dateEnd" name="dateEnd">
                 <div class="input-group-append">
                     <span class="input-group-text"></span>
                 </div>
@@ -69,12 +70,12 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">รายละเอียด</span>
                 </div>
-                <textarea class="form-control wrapper-text-area" ngModel ngDefaultControl name="description" rows="5" cols="60" required></textarea>
+                <textarea class="form-control wrapper-text-area" [(ngModel)]="listdetail.description" ngModel ngDefaultControl name="description" rows="5" cols="60" required></textarea>
             </div>
-            <app-here-map></app-here-map>
+
         </div>
         <div class="wrapper-input p-3">
-            <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>
+            <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">แก้ไขข้อมูล</button>
         </div>
 
     </form>

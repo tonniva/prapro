@@ -3,6 +3,7 @@ import { RestService } from '../rest.service';
 import { UtilService } from '../util.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-listdetail',
   templateUrl: './listdetail.component.html',
@@ -33,7 +34,9 @@ export class ListdetailComponent implements OnInit {
 firstname_own_pra:string;
 lastname_own_pra:string;
 tell_own_pra:string; 
+bankname_own_pra:string; 
 bankaccount_own_pra:string; 
+Isdisable:boolean= false; 
 
 
 
@@ -55,22 +58,39 @@ bankaccount_own_pra:string;
   lat: number =0;
   lng: number = 0; 
   //location
-
+  userId:string;
+  Registerdetail :any;
 
   constructor(private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
   
   ngOnInit(): void {   
     this.spinner.show();
-    this.firstname_own_pra = localStorage.getItem("firstname");
-    this.lastname_own_pra= localStorage.getItem("lastname");
-    this.tell_own_pra= localStorage.getItem("tel");
-    this.bankaccount_own_pra= localStorage.getItem("bankaccount");
+    this.userId = localStorage.getItem("userId");
+    this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response[0]
+     
+      this.firstname_own_pra = this.Registerdetail.firstname;
+      this.lastname_own_pra=  this.Registerdetail.lastname; 
+      this.tell_own_pra= this.Registerdetail.tel;    
+      this.bankname_own_pra= this.Registerdetail.bankname;
+      this.bankaccount_own_pra= this.Registerdetail.bankaccount
+  });  
+ 
+
     
     this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
     this.id_token = this.route.snapshot.params.id_token; 
-     this.apiService.getlistdetail(this.id_token).then((response) => {this.listdetail = response[this.index_list_select],
-      this.temp_pramoonperson =  response[this.index_list_select].pramoonperson,
+     this.apiService.getlistdetail(this.id_token).then((response) => {
+       this.listdetail  = response;
+       for (let index = 0; index < this.listdetail.length; index++) {
+         if(this.listdetail[index]._id == this.index_list_select){ 
+         localStorage.setItem("userId",this.listdetail[index].id_token); 
+          this.listdetail = response[index];
+          break;
+         } 
+       }
+     
+   
      
       console.log(this.listdetail)
       setTimeout(() => {
@@ -99,23 +119,101 @@ bankaccount_own_pra:string;
   }
 
 
+  clickonclick_count_pra_true() {
 
+    Swal.fire({
+      title: 'คุณต้องการ โหวด พระแท้',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText:'ยกเลิก'
+    }).then((result) => {
+      if (result.value) {
+        this.onclick_count_pra_true()
+        Swal.fire(
+          'ขอบคุณที่ โหวด พระแท้!',
+          '',
+          'success'
+        )
+      }
+    })
+    
+  }
+  clickonclick_count_pra_false() {
+
+    Swal.fire({
+      title: 'คุณต้องการ โหวด พระไม่แท้',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+        cancelButtonText:'ยกเลิก'
+    }).then((result) => {
+      if (result.value) {
+        this.onclick_count_pra_false()
+        Swal.fire(
+          'ขอบคุณที่ โหวด พระไม่แท้!',
+          '',
+          'success'
+        )
+      }
+    })
+   
+  }
+  clickonclick_count_pra_criminals() {
+
+    Swal.fire({
+      title: 'คุณต้องการ โหวด เค้าเป็นมิจฉาชีพ',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText:'ยกเลิก'
+    }).then((result) => {
+      if (result.value) {
+        this.onclick_count_pra_criminals()
+        Swal.fire(
+          'ขอบคุณที่ โหวด เค้าเป็นมิจฉาชีพ!',
+          '',
+          'success'
+        )
+      }
+    })
+   
+  }
 
   //ฟังค์ชัน ตรวจสอบพระ 
   onclick_count_pra_true(){ 
-    this.Getupdatedetail("pra_true");  
+    this.Isdisable=true;
+    this.Getupdatedetail("pra_true");   
   }
   onclick_count_pra_false(){
-    this.Getupdatedetail("pra_false");  
+    this.Isdisable=true;
+    this.Getupdatedetail("pra_false");   
   }
-  onclick_count_pra_criminals(){
-    this.Getupdatedetail("pra_criminals");  
+  onclick_count_pra_criminals(){ 
+    this.Isdisable=true;
+    this.Getupdatedetail("pra_criminals");   
   }
 
   
 Getupdatedetail(fact_check){ 
   this.id_token = this.route.snapshot.params.id_token; 
-  this.apiService.getlistdetail(this.id_token).then((response) => {this.listdetail = response[this.index_list_select] 
+  this.apiService.getlistdetail(this.id_token).then((response) => {
+    this.listdetail = response 
+    for (let index = 0; index < this.listdetail.length; index++) {
+      if(this.listdetail[index]._id == this.index_list_select){ 
+       this.listdetail = response[index];
+       break;
+      } 
+    }
  
     if(fact_check =="pra_true"){
       this.count_pra_true =  parseInt(this.listdetail.count_pra_true||0) +1;
@@ -144,7 +242,6 @@ updatecheckpra() {
             this.checkpra_data.count_pra_false = this.count_pra_false;
             this.checkpra_data.count_pra_criminals = this.count_pra_criminals;
             this.checkpra_data.status_check = "checking";
-            debugger
             this.apiService.updatecheckpra(this.listdetail._id,this.checkpra_data).then((response) => {  
         
               setTimeout(() => {
@@ -260,8 +357,7 @@ showlocation(){
 
 }
 
-  
-  
+ 
 }
 
 

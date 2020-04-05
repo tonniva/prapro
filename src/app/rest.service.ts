@@ -46,7 +46,7 @@ optionsGetProfile = {
 
  
  PramoonRegister(item:any,file:any){ 
-      
+       
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
   };  
@@ -55,6 +55,7 @@ optionsGetProfile = {
   this.body.set('lastname', item.lastname);
   this.body.set('email', item.email);
   this.body.set('tel', item.tel);
+  this.body.set('bankname', item.bankname);
   this.body.set('bankaccount', item.bankaccount); 
   this.body.set('password', "123456"); 
   this.body.set('cpassword',"123456"); 
@@ -68,7 +69,7 @@ optionsGetProfile = {
 
   localStorage.setItem("status_pramoon_register","waitingcheck"); 
 
-return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/register', this.body.toString(), PramoonRegisteroptions)
+return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/api/account/register', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -77,10 +78,14 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/register'
 
 
 uploadimage(profileImage:File){  
-  
+   
+  const Pramoonuploadimage = {
+    headers: new HttpHeaders().set('Access-Control-Allow-Origin', '*')
+    .set("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept")
+  };  
 const formData = new FormData();
 formData.append('image', profileImage);
-return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/upload/image-upload', formData)
+return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/upload/image-upload', formData,Pramoonuploadimage)
  .toPromise()
  .then((response) => response);
 }
@@ -114,8 +119,9 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('status_pramoon_check',item.status_pramoon_check);  
   this.body.set('Latitude',item.Latitude);  
   this.body.set('Longitude',item.Longitude);   
+  this.body.set('ip',item.ip);   
   // this.UtilService.GetAPIurl()+
-return this.httpClient.post('http://localhost:3000/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
+return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -126,11 +132,11 @@ itemgetdetailRegister= {
   
 getdetailRegister(userId:any){
   const PramoonRegisteroptions = {
-    headers: new HttpHeaders().set('Content-Type', 'application/json')
+    headers: new HttpHeaders().set('Content-Type', 'application/json') 
   };  
 // ต้องใช้ Token login
 this.itemgetdetailRegister.userId = userId.toString();  
-return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/getprofileregister', this.itemdatadetail,PramoonRegisteroptions)
+return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/getprofileregister', this.itemgetdetailRegister,PramoonRegisteroptions)
 .toPromise()
 .then((response) => response); 
 }
@@ -211,6 +217,43 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   .toPromise()
   .then((response) => response); 
   }
+
+
+
+
+  itemedit= {
+    "user":"",
+    "pricestart":"",
+    "description":"",
+    "dateend":"", 
+    "imageone":"",
+    "imagetwo":"",
+    "imagethree":"",
+    "imagefour":"", 
+    "updated":""
+    }
+ editpramoodetail(detail:any,arrayPathfile:any){
+    const PramoonRegisteroptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };   
+ this.itemedit.user = detail._id.toString();  
+  this.itemedit.pricestart = detail.pricestart.toString();  
+  this.itemedit.description = detail.description.toString();  
+  this.itemedit.imageone = arrayPathfile[0];
+  this.itemedit.imagetwo = arrayPathfile[1];
+  this.itemedit.imagethree = arrayPathfile[2];
+  this.itemedit.imagefour = arrayPathfile[3]; 
+  this.itemedit.dateend = detail.dateEnd;  
+  this.itemedit.updated = new Date().toString();
+  
+   
+  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/edit-order-detail',this.itemedit
+  ,PramoonRegisteroptions)
+  .toPromise()
+  .then((response) => response); 
+  }
+
+
 
   itemupdatecheckpra= {
     "user":"",

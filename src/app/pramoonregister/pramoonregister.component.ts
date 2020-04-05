@@ -8,8 +8,9 @@ import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { NgxSpinnerService } from "ngx-spinner";
 import {DomSanitizer} from '@angular/platform-browser';
+import { UtilService } from '../util.service';
  
-
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-pramoonregister',
   templateUrl: './pramoonregister.component.html',
@@ -41,15 +42,36 @@ export class PramoonregisterComponent implements OnInit {
   temp_path_image2:any;
   temp_path_image3:any;
   temp_path_image4:any;
+
+  userId:any;
+  Registerdetail:any;
+  BankName: string = '';
   
-  constructor(private router: Router,private apiService:RestService,private sanitizer:DomSanitizer,private spinner: NgxSpinnerService) { }
+  constructor(private UtilService:UtilService,private router: Router,private apiService:RestService,private sanitizer:DomSanitizer,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     window.scrollTo(0,0);
-    this.status_pramoon_register = localStorage.getItem("status_pramoon_register");
-    if(this.status_pramoon_register){ 
-        this.router.navigate(['/list/two'])  
-    } 
+    this.spinner.show();
+
+    this.userId = localStorage.getItem("userId");
+debugger
+    this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response
+      debugger
+      setTimeout(() => { 
+        this.spinner.hide();
+      }, 1000);
+      
+    if( this.Registerdetail.length > 0 && this.Registerdetail[0].status_pramoon_register == "waitingcheck"){ 
+   
+      this.router.navigate(['/list/two'])  
+  } 
+   }); 
+ 
+    // if(this.status_pramoon_register !="waitingcheck" && this.status_pramoon_register){ 
+    //     this.router.navigate(['/list/two'])  
+    // } 
+
+ 
   }
 
 
@@ -76,43 +98,146 @@ export class PramoonregisterComponent implements OnInit {
     
   }
 
+  selectBankFrom (event: any) {
+    //update the ui
+    this.BankName = event.target.value;
+    localStorage.setItem("Bankfrom",this.BankName);
+  }
   onClickSubmit(data) {  
+    
+    data.bankname = this.BankName;
+ 
+    if(data.firstname =="" || data.firstname.trim().length == 0){
+      this.UtilService.showError("กรุณากรอก <br/> ชื่อ","")
+      return;
+    }else if(data.lastname =="" || data.lastname.trim().length == 0){
+      this.UtilService.showError("กรุณากรอก <br/> นามสกุล","")
+      return;
+    }  else if(data.tel =="" || data.tel.trim().length == 0){
+      this.UtilService.showError("กรุณากรอก <br/> เบอร์โทร","")
+      return;
+    }else if(!this.UtilService.CheckMobileNumber(data.tel)){
+      var msg = 'โปรดกรอกหมายเลขโทรศัพท์ 10 หลัก <br/> ด้วยรูปแบบดังนี้ 08XXXXXXXX <br/> ไม่ต้องใส่เครื่องหมายขีด (-) วงเล็บหรือเว้นวรรค';
+      this.UtilService.showError(msg,"")
+
+    } else if(data.email == "" || data.email.trim().length == 0){ 
+      this.UtilService.showError("กรุณากรอก <br/> Email","")
+      return;
+    }  
+    else if(!this.UtilService.ValidateEmail(data.email)){
+        this.UtilService.showError("กรุณากรอก <br/> Email ให้ถูกต้อง","");
+        return;
+    }
+    else if(data.BankName == ""){ 
+      this.UtilService.showError("กรุณากรอก <br/> ชื่อธนาคาร","")
+      return;
+    }  
+    else if(data.bankaccount == ""){ 
+      this.UtilService.showError("กรุณากรอก <br/> เลขบัญชี","")
+      return;
+    }  
+    else if(!this.UtilService.CheckBankNumber(data.bankaccount)){
+      var msg = 'โปรดกรอกเลข บัญชี 10 หลัก <br/> ด้วยรูปแบบดังนี้ 0651xxxxxx <br/> ไม่ต้องใส่เครื่องหมายขีด (-) วงเล็บหรือเว้นวรรค';
+      this.UtilService.showError(msg,"")
+
+    }
+    else if(typeof(this.image1) ==='undefined'){
+      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัตรประขาชน ","");
+      return;
+    }
+    else if(typeof(this.image2) ==='undefined'){
+      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน ","");
+      return;
+    }
+    else if(typeof(this.image3) ==='undefined'){
+      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัตรประขาชน พร้อม ถ่ายกับข้อความ หลวงปู่ทวด","");
+      return;
+    }
+    else if(typeof(this.image4) ==='undefined'){
+      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัญชีธนาคาร ","");
+      return;
+    }
+    else{
+
+      // this.UtilService.showConfirm("คุณต้องการลงทะเบียนใช่หรือไม่"
+      // ,"เมื่อทำการลงทะเบียนแล้ว <br/> ไม่สามารถแก้ไขได้ <br/> ต้องแจ้ง ผ่านแอดมินเท่านั้น <br/> เพื่อเป็นการป้องกัน 'มิจฉาชีพ' ปลอมแปลง"
+      // ,function(){ 
+       
+      //     this.Dopost(data);  
+        
+      // }); 
+
+      Swal.fire({
+        title: 'คุณต้องการลงทะเบียนใช่หรือไม่',
+        text: "เมื่อทำการลงทะเบียนแล้ว ไม่สามารถแก้ไขได้ ต้องแจ้ง ผ่านแอดมินเท่านั้น เพื่อเป็นการป้องกัน 'มิจฉาชีพ' ปลอมแปลง",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText:'ยกเลิก'
+      }).then((result) => {
+        if (result.value) {
+          this.Dopost(data);   
+        }
+      }) 
+   
+    } 
+  }
+
+
+  Dopost(data)
+  {
+ 
     this.spinner.show();
     this.arrayfile[0] =this.image1;
     this.arrayfile[1] =this.image2;
     this.arrayfile[2] =this.image3;
     this.arrayfile[3] =this.image4;
-    setTimeout(() => {
-     
+
    
     this.arrayPathfile=[];
     for (let index = 0; index < 4; index++) { 
         this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
         this.resultFile = response; 
-        this.arrayPathfile.push(this.resultFile.imageUrl);  
-          
-        if(this.arrayPathfile.length == 4)
-            { 
-                localStorage.setItem("email", data.email); 
-                data.userId = localStorage.getItem("userId"); 
-                data.access_token = localStorage.getItem("access_token");
-                data.id_token = localStorage.getItem("id_token"); 
-                this.apiService.PramoonRegister(data,this.arrayPathfile).then((response) => {  
-                  console.log(data)   
-                  this.router.navigate(['/list/two'])   
-                  setTimeout(() => { 
-                    this.spinner.hide();
-                  }, 1000);
-                });    
-            } 
-       });   
-      } 
-    }, 3000);
+        this.arrayPathfile.push(this.resultFile.imageUrl);    
+      
+        if(index ==3 ){
 
-
+          setTimeout(() => {   
+      
+            localStorage.setItem("email", data.email); 
+            data.userId = localStorage.getItem("userId"); 
+            data.access_token = localStorage.getItem("access_token");
+            data.id_token = localStorage.getItem("id_token"); 
 
  
+            this.apiService.PramoonRegister(data,this.arrayPathfile).then((response) => {  
+              Swal.fire(
+                'สำเร็จ !',
+                'ขอบคุณครับ',
+                'success'
+              )
+              this.router.navigate(['/list/two'])   
+              setTimeout(() => { 
+                this.spinner.hide();
+              }, 100);
+            });   
+    
+      }, 0);
+        }
+       });   
+
+
+      } 
+   
+
+
+
+
   }
+
+  
 
  
 }
