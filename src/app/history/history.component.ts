@@ -19,7 +19,11 @@ export class HistoryComponent implements OnInit {
   
     
     this.id_token = localStorage.getItem("userId");  
-    this.apiService.getlistdetail(this.id_token).then((response) => {this.list = response,
+    this.apiService.getlistdetail(this.id_token).then((response) => 
+    {this.list = response 
+   
+    
+    
       setTimeout(() => { 
         this.spinner.hide();
       }, 3000);

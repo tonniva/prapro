@@ -29,8 +29,8 @@ optionsGetProfile = {
     "grant_type":"authorization_code",
     "code":"",
     "redirect_uri":this.UtilService.Getweb(),
-    "client_id":"1653915528", 
-    "client_secret":"e394b8a72a9bcdf28d44e6867e8c878c",
+    "client_id":this.UtilService.client_id(), 
+    "client_secret":this.UtilService.GetSecretCode(),
     }
 
   GetAccessTokensLine(code:any){   
@@ -69,7 +69,7 @@ optionsGetProfile = {
 
   localStorage.setItem("status_pramoon_register","waitingcheck"); 
 
-return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/api/account/register', this.body.toString(), PramoonRegisteroptions)
+return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/register', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
 }
@@ -120,7 +120,10 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('Latitude',item.Latitude);  
   this.body.set('Longitude',item.Longitude);   
   this.body.set('ip',item.ip);   
-  // this.UtilService.GetAPIurl()+
+
+  this.body.set('pictureUrl',item.pictureUrl);   
+  this.body.set('displayName',item.displayName);   
+  
 return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
@@ -207,7 +210,7 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     };   
   this.itemupdate.user = _id.toString();  
-  this.itemupdate.priceend = priceBid.toString();  
+  this.itemupdate.priceend = priceBid;  
   this.itemupdate.pramoonperson = pramoonperson;
   this.itemupdate.status = status;
   

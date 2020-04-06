@@ -48,14 +48,14 @@
             เวลาปิดประมูล
             <input class="wrapper-enddate" type="datetime-local" [ngModel]="listdetail.dateend | date:'yyyy-MM-ddTHH:mm'" id="dateEnd" ngModel ngDefaultControl rows="5" cols="60" required name="dateEnd" name="dateEnd">
         </div>
-        <div class="wrapper-detial-price text-warning" [hidden]="!lastperson_bid.firstname && lastperson_bid.lastname">
+        <div class="wrapper-detial-price text-warning" [hidden]="!lastperson_bid.firstname">
             ล่าสุด !!คุณ
             <div>
                 {{lastperson_bid.firstname }} {{lastperson_bid.lastname }}
             </div>
         </div>
-        <div class="wrapper-input p-3 ">
-            <button routerLink="/list/bid/{{id_token}}/{{index_list_select}}" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">กดประมูล</button>
+        <div class="wrapper-input p-3">
+            <button *ngIf="!Ishidebtnpramoon" routerLink="/list/bid/{{id_token}}/{{index_list_select}}" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">กดประมูล</button>
         </div>
         <div class="text-success  wrapper-description">
             {{listdetail.description}}
@@ -67,7 +67,14 @@
             {{listdetail.description}}
         </div>
         <div class="wrapper-procee-pra">
-            ข้อมูลส่วนตัว เจ้าของพระ<br/>
+            ข้อมูลส่วนตัว เจ้าของพระ<br/> {{listdetail.displayName}}
+            <br/>
+
+            <div class="row">
+                <div class="col p-4 d-flex justify-content-center" *ngIf="listdetail.pictureUrl !=null">
+                    <img class="card-img-top" [src]="listdetail.pictureUrl" alt="Card image cap">
+                </div>
+            </div>
             <hr class="hr-white" /> คุณ {{firstname_own_pra}} {{lastname_own_pra}} {{tell_own_pra}}
             <div class="wrapper-procee-pra">
                 {{bankname_own_pra}}

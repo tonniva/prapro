@@ -4,7 +4,7 @@ import {Router,ActivatedRoute,Params} from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import {DomSanitizer} from '@angular/platform-browser';
 import {UtilService} from '../util.service';
-
+import { Ng2ImgMaxService } from 'ng2-img-max';
 import Swal from 'sweetalert2'
  
 @Component({
@@ -28,9 +28,13 @@ export class PostlistComponent implements OnInit {
 
  
 
-
-
-  constructor(private UtilService :UtilService, private router: Router,private apiService:RestService,private spinner: NgxSpinnerService,private sanitizer:DomSanitizer) { }
+  constructor(private ng2ImgMax: Ng2ImgMaxService,
+    private UtilService :UtilService, 
+    private router: Router,
+    private apiService:RestService,
+    private spinner: NgxSpinnerService,
+    private sanitizer:DomSanitizer) { }
+   
     email:any;
     token:any; 
     arrayfile:Array<File> = [];
@@ -55,18 +59,60 @@ export class PostlistComponent implements OnInit {
   changeListener_one($event) : void { 
     this.image1 =  this.readThis($event.target); 
     this.temp_path_image1 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image1));  
+    
+    this.ng2ImgMax.resizeImage(this.image1, 1000, 1000).subscribe(
+      result => {
+        this.image1 = result;
+        
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
+
   }
   changeListener_two($event) : void { 
     this.image2 =   this.readThis($event.target);
     this.temp_path_image2 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image2));  
+
+    this.ng2ImgMax.resizeImage(this.image2, 1000, 1000).subscribe(
+      result => {
+        this.image2 = result;
+        
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
+ 
   }
   changeListener_three($event) : void { 
     this.image3 =   this.readThis($event.target);
     this.temp_path_image3 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image3));  
+
+    this.ng2ImgMax.resizeImage(this.image3, 1000, 1000).subscribe(
+      result => {
+        this.image3 = result;
+        
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
   }
   changeListener_four($event) : void { 
     this.image4 =  this.readThis($event.target);
     this.temp_path_image4 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image4));  
+
+    this.ng2ImgMax.resizeImage(this.image4, 1000, 1000).subscribe(
+      result => {
+        this.image4 = result;
+        
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
   }
   
   readThis(inputValue: any) { 
@@ -74,6 +120,7 @@ export class PostlistComponent implements OnInit {
     return file;
     
   }
+
   
 
   onClickSubmit(data) {  
@@ -139,13 +186,15 @@ export class PostlistComponent implements OnInit {
   public postpra(data){
 
     setTimeout(() => {  
-      debugger
+      
       data.access_token = localStorage.getItem("access_token");
       data.id_token = localStorage.getItem("userId"); 
       data.Latitude =   localStorage.getItem("Latitude");
       data.Longitude = localStorage.getItem("Longitude");
       data.ip = localStorage.getItem("ip"); 
-      data.status_pramoon_check = "checking"; 
+      data.status_pramoon_check = "checking";  
+      data.pictureUrl = localStorage.getItem("pictureUrl");
+      data.displayName= localStorage.getItem("displayName"); 
       
       this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => { 
       

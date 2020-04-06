@@ -3,6 +3,7 @@ import { RestService } from '../rest.service';
 import { UtilService } from '../util.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-historydetail',
   templateUrl: './historydetail.component.html',
@@ -42,10 +43,12 @@ export class HistorydetailComponent implements OnInit {
           break;
          } 
        } 
+       
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
       }, 3000); 
+      
       if(this.listdetail.pramoonperson){
 
          
@@ -53,16 +56,14 @@ export class HistorydetailComponent implements OnInit {
         
         this.splitted = this.subobject.split("||"); 
         //เอาค่า คนที่ประมูลคนล่าสุด มาแสดง
+        
         this.lastperson_bid.firstname = JSON.parse(this.splitted[this.splitted.length-1])[0].firstname;
         this.lastperson_bid.lastname = JSON.parse(this.splitted[this.splitted.length-1])[0].lastname;
         this.lastperson_bid.tell = JSON.parse(this.splitted[this.splitted.length-1])[0].tell;
         this.lastperson_bid.pictureUrl = JSON.parse(this.splitted[this.splitted.length-1])[0].pictureUrl;
         
       }
-      else {
-        this.lastperson_bid.firstname="";
-        this.lastperson_bid.lastname="";
-      }
+    
 
     }); 
   }
@@ -80,16 +81,46 @@ export class HistorydetailComponent implements OnInit {
   closeOrder(){
     this.id_token = localStorage.getItem("userId"); 
      this.status ="close";
-    this.apiService.updatepramoodetail(this.listdetail._id, this.listdetail.priceend,this.temp_pramoonperson,this.status).then((response) => {this.detail_after_close = response, 
-      window.history.back();
+
+ 
+    this.apiService.updatepramoodetail(this.listdetail._id, this.listdetail.priceend,this.temp_pramoonperson.pramoonperson,this.status).then((response) => {this.detail_after_close = response, 
+      setTimeout(() => { 
+        this.spinner.hide();
+      }, 0);
+
+
+      Swal.fire(
+        'ปิดสำเร็จ !',
+        'ขอบคุณครับ',
+        'success'
+      )
+      
+    
+
+      setTimeout(() => { 
+        window.location.href = window.location.origin+'/history';
+      }, 1000);
+     
     });  
 
   }
 
   clickclose() {
-    if(confirm("คุณต้องการปิดการขาย ใช้หรือไม่")) {
-      this.closeOrder();
-    }
+    Swal.fire({
+      title: 'คุณต้องการปิดการขาย ใช้หรือไม่',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText:'ยกเลิก'
+    }).then((result) => {
+      if (result.value) { 
+        this.closeOrder(); 
+      }
+    })
+ 
   }
 
 

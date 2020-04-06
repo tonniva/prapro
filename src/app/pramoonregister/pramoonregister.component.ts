@@ -9,6 +9,8 @@ import { finalize, tap } from 'rxjs/operators';
 import { NgxSpinnerService } from "ngx-spinner";
 import {DomSanitizer} from '@angular/platform-browser';
 import { UtilService } from '../util.service';
+
+import { Ng2ImgMaxService } from 'ng2-img-max';
  
 import Swal from 'sweetalert2'
 @Component({
@@ -47,16 +49,16 @@ export class PramoonregisterComponent implements OnInit {
   Registerdetail:any;
   BankName: string = '';
   
-  constructor(private UtilService:UtilService,private router: Router,private apiService:RestService,private sanitizer:DomSanitizer,private spinner: NgxSpinnerService) { }
+  constructor(private ng2ImgMax: Ng2ImgMaxService,private UtilService:UtilService,private router: Router,private apiService:RestService,private sanitizer:DomSanitizer,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     window.scrollTo(0,0);
     this.spinner.show();
 
     this.userId = localStorage.getItem("userId");
-debugger
+
     this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response
-      debugger
+  
       setTimeout(() => { 
         this.spinner.hide();
       }, 1000);
@@ -78,18 +80,58 @@ debugger
   changeListener_one($event) : void { 
     this.image1 =  this.readThis($event.target); 
     this.temp_path_image1 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image1));  
+   
+    this.ng2ImgMax.resizeImage(this.image1, 1000, 1000).subscribe(
+      result => {
+        this.image1 = result;
+        
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
   }
   changeListener_two($event) : void { 
     this.image2 =   this.readThis($event.target);
     this.temp_path_image2 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image2));  
+
+    this.ng2ImgMax.resizeImage(this.image2, 1000, 1000).subscribe(
+      result => {
+        this.image2 = result;
+        
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
   }
   changeListener_three($event) : void { 
     this.image3 =   this.readThis($event.target);
     this.temp_path_image3 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image3));  
+
+    this.ng2ImgMax.resizeImage(this.image3, 1000, 1000).subscribe(
+      result => {
+        this.image3 = result;
+        
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
   }
   changeListener_four($event) : void { 
     this.image4 =  this.readThis($event.target);
     this.temp_path_image4 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image4));  
+
+    this.ng2ImgMax.resizeImage(this.image4, 1000, 1000).subscribe(
+      result => {
+        this.image4 = result;
+        
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
   }
   
   readThis(inputValue: any) { 

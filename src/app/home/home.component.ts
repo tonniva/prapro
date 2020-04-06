@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(private apiService: RestService, private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {  
+    
     this.spinner.show();
     const code: string = this.route.snapshot.queryParamMap.get('code');
     if(typeof(code)!=undefined){
@@ -50,8 +51,8 @@ export class HomeComponent implements OnInit {
   }
   
 GetRegisterdetail(p_userId:string){  
-  this.apiService.getdetailRegister(p_userId).then((response) => {this.Registerdetail = response, 
- 
+  this.apiService.getdetailRegister(p_userId).then((response) => {this.Registerdetail = response
+ if(this.Registerdetail.length > 0){
      localStorage.setItem("status_pramoon_register",this.Registerdetail[0].status_pramoon_register); 
      localStorage.setItem("email", this.Registerdetail[0].email); 
      localStorage.setItem("name", this.Registerdetail[0].email); 
@@ -59,7 +60,7 @@ GetRegisterdetail(p_userId:string){
      localStorage.setItem("lastname", this.Registerdetail[0].lastname); 
      localStorage.setItem("tel", this.Registerdetail[0].tel);    
      localStorage.setItem("bankaccount",this.Registerdetail[0].bankaccount); 
-    // console.log(this.Registerdetail)
+    }
     
   }); 
 

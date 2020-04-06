@@ -49,7 +49,8 @@ Isdisable:boolean= false;
   }
   lastperson_bid:any={
     "firstname":"",
-    "lastname":""
+    "lastname":"",
+    "pictureUrl":""
   }
 
   //location
@@ -61,19 +62,30 @@ Isdisable:boolean= false;
   userId:string;
   Registerdetail :any;
 
+  pictureUrl_own_pra :any;
+  displayName_own_pra :any;
+  userId_own_pra :any;
+  Ishidebtnpramoon :boolean= true; 
+
+  GetProfilelist:any;
   constructor(private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
   
-  ngOnInit(): void {   
+  ngOnInit(): void {    
+    this.pictureUrl_own_pra = localStorage.getItem("pictureUrl");
+    this.displayName_own_pra = localStorage.getItem("displayName"); 
     this.spinner.show();
-    this.userId = localStorage.getItem("userId");
-    this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response[0]
+ 
+    this.id_token = this.route.snapshot.params.id_token; 
+    this.apiService.getdetailRegister(this.id_token).then((response) => {this.Registerdetail = response[0]
      
       this.firstname_own_pra = this.Registerdetail.firstname;
       this.lastname_own_pra=  this.Registerdetail.lastname; 
       this.tell_own_pra= this.Registerdetail.tel;    
       this.bankname_own_pra= this.Registerdetail.bankname;
-      this.bankaccount_own_pra= this.Registerdetail.bankaccount
+      this.bankaccount_own_pra= this.Registerdetail.bankaccount;
+      this.userId_own_pra= this.Registerdetail.userId;
+      
   });  
  
 
@@ -81,11 +93,15 @@ Isdisable:boolean= false;
     this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
     this.id_token = this.route.snapshot.params.id_token; 
      this.apiService.getlistdetail(this.id_token).then((response) => {
+      
        this.listdetail  = response;
        for (let index = 0; index < this.listdetail.length; index++) {
-         if(this.listdetail[index]._id == this.index_list_select){ 
-         localStorage.setItem("userId",this.listdetail[index].id_token); 
+         if(this.listdetail[index]._id == this.index_list_select){  
+          
           this.listdetail = response[index];
+          //เปิดปิดปุ่ม
+          this.GetProfile(localStorage.getItem("access_token"),this.listdetail);
+        
           break;
          } 
        }
@@ -105,8 +121,7 @@ Isdisable:boolean= false;
         this.splitted = this.subobject.split("||"); 
         //เอาค่า คนที่ประมูลคนล่าสุด มาแสดง
         this.lastperson_bid.firstname =  JSON.parse(this.splitted[this.splitted.length-1])[0].firstname;
-        this.lastperson_bid.lastname = JSON.parse(this.splitted[this.splitted.length-1])[0].lastname;
-       
+        this.lastperson_bid.lastname = JSON.parse(this.splitted[this.splitted.length-1])[0].lastname; 
       }
       else {
         this.lastperson_bid.firstname="";
@@ -117,6 +132,21 @@ Isdisable:boolean= false;
    
     }); 
   }
+
+
+  GetProfile(access_token,listdetail:any){  
+    this.apiService.GetProfile(access_token).then((response) => {
+      this.GetProfilelist = response 
+      debugger
+      if(this.GetProfilelist.userId == listdetail.id_token){
+        return  this.Ishidebtnpramoon = true;
+      }
+      else{
+        return  this.Ishidebtnpramoon = false;
+      }
+      
+  }); 
+}
 
 
   clickonclick_count_pra_true() {
@@ -357,7 +387,10 @@ showlocation(){
 
 }
 
+
  
+
 }
+
 
 

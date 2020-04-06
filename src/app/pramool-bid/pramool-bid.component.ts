@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
- 
+import { UtilService } from '../util.service';
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-pramool-bid',
   templateUrl: './pramool-bid.component.html',
@@ -10,7 +11,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class PramoolBidComponent implements OnInit {
 
-  constructor(private apiService: RestService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
+  constructor(private UtilService :UtilService,private apiService: RestService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
   firstname:string;
   lastname:string;
   email:string;
@@ -41,29 +42,35 @@ export class PramoolBidComponent implements OnInit {
   Registerdetail:any;
   ngOnInit(): void { 
     this.spinner.show();
-    this.userId = localStorage.getItem("userId");
-    this.userId = localStorage.getItem("userId");
-    this.pictureUrl = localStorage.getItem("pictureUrl");
-    this.displayName = localStorage.getItem("displayName"); 
+    this.userId = localStorage.getItem("userId"); 
+ 
     this.index_list_select = this.route.snapshot.paramMap.get("indexlistselect");
-
-    this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response[0]
+    
+    this.id_token = this.route.snapshot.params.id_token; 
+    this.apiService.getdetailRegister(this.id_token).then((response) => {this.Registerdetail = response[0]
 
     this.firstname = this.Registerdetail.firstname;
     this.lastname = this.Registerdetail.lastname; 
     this.email = this.Registerdetail.email;
-    this.tel = this.Registerdetail.tel;    
-
-  this.pramoonperson[0].firstname = this.firstname;
-  this.pramoonperson[0].lastname=this.lastname;
-  this.pramoonperson[0].displayName=this.displayName;
-  this.pramoonperson[0].tell= this.tel
-  this.pramoonperson[0].pictureUrl=this.pictureUrl;
-  this.pramoonperson[0].userId= this.userId;
-  this.pramoonperson[0].email=this.email
-  this.pramoonperson[0].date= new Date();
-  this.getdetail();
+    this.tel = this.Registerdetail.tel;       
+    this.getdetail();
   });  
+
+  this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response[0]
+    
+    this.pramoonperson[0].firstname = this.Registerdetail.firstname;
+    this.pramoonperson[0].lastname=this.Registerdetail.lastname;
+    this.pramoonperson[0].displayName=localStorage.getItem("displayName"); 
+    this.pramoonperson[0].tell= this.Registerdetail.tel;
+    this.pramoonperson[0].pictureUrl= localStorage.getItem("pictureUrl"); 
+    this.pramoonperson[0].userId= this.Registerdetail.userId;
+    this.pramoonperson[0].email=this.Registerdetail.email;
+    this.pramoonperson[0].date= new Date(); 
+
+ 
+  });  
+
+ 
 
 
     
@@ -80,29 +87,47 @@ export class PramoolBidComponent implements OnInit {
   onClickSubmit(data) {   
 
    
-    this.id_token = localStorage.getItem("userId"); 
+    // this.id_token = localStorage.getItem("userId"); 
+     
     this.apiService.getlistdetail(this.id_token).then((response) => {
       this.list = response 
       for (let index = 0; index < this.list.length; index++) {
         if(this.list[index]._id == this.index_list_select){ 
-          debugger
+           
          this.list = response[index];
          break;
         } 
-      }
-      console.log(this.list)
+      } 
+      
       if(data.priceBid <= this.list.pricestart)
       { 
-        alert("กรุณากรอกราคาประมูลให้สูงกว่า ราคาปัจจุบัน");
+        this.UtilService.showError("กรุณากรอก ราคาประมูลให้สูงกว่า ราคาเริ่มต้น","")
         this.iserror = true;
+        return;
+        
       }
       else if(data.priceBid <= this.list.priceend)
       { 
-        alert("กรุณากรอกราคาประมูลให้สูงกว่า ราคาปัจจุบัน");
+        this.UtilService.showError("กรุณากรอก ราคาประมูลให้สูงกว่า ราคาปัจจุบัน","")
         this.iserror = true;
       }
       else{
-       this.postbid(data);
+
+        Swal.fire({
+          title: 'คุณต้องการประมูลใช่หรือไม่',
+          text: "",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'ตกลง',
+          cancelButtonText:'ยกเลิก'
+        }).then((result) => {
+          if (result.value) {
+            this.postbid(data);   
+          }
+        }) 
+    
       }
       setTimeout(() => {
         /** spinner ends after 5 seconds */
@@ -113,8 +138,7 @@ export class PramoolBidComponent implements OnInit {
   }
 
 getdetail(){
-
-  this.id_token = localStorage.getItem("userId"); 
+ 
   this.apiService.getlistdetail(this.id_token).then((response) => {
     this.list = response  
     
@@ -144,8 +168,8 @@ getdetail(){
     }
      //update ข้อมูล ใครที่ ประมูล บ้าง คนใหม่ ใส่ไป 
     
-    this.id_token = localStorage.getItem("userId"); 
-    debugger
+    
+    
     this.apiService.updatepramoodetail(this.list._id, data.priceBid,this.temp_pramoonperson,null).then((response) => {this.list = response, 
       window.history.back();
       setTimeout(() => {

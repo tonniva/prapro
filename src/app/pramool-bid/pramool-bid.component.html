@@ -5,8 +5,8 @@
         <div class="container pt-3">
             <fieldset disabled>
                 <div class="form-group">
-                    <label for="disabledTextInput" class="text-white">คุณ</label>
-                    <div class="row">
+                    <label for="disabledTextInput" class="text-white">เจ้าของพระ {{list.displayName}}</label>
+                    <!-- <div class="row">
                         <div class="col">
                             <input type="text" value="{{firstname}}" id="firstname" class="form-control" placeholder="firstname" readonly>
                         </div>
@@ -14,18 +14,25 @@
                             <input type="text" value="{{lastname}}" id="lastname" class="form-control" placeholder="lastname" readonly>
                         </div>
 
+                    </div> -->
+                    <div class="row">
+                        <div class="col p-4 d-flex justify-content-center" *ngIf="list.pictureUrl!=null">
+                            <img class="card-img-top" [src]="list.pictureUrl" alt="Card image cap">
+                        </div>
                     </div>
 
 
+
+
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="disabledTextInput" class="text-white">E-mail</label>
                     <input type="text" value="{{email}}" id="tel" class="form-control" placeholder="email" readonly>
                 </div>
                 <div class="form-group">
                     <label for="disabledTextInput" class="text-white">เบอร์ติดต่อ</label>
                     <input type="text" value="{{tel}}" id="tel" class="form-control" placeholder="tel" readonly>
-                </div>
+                </div> -->
             </fieldset>
         </div>
         <div class="container pt-3">

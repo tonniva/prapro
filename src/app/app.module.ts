@@ -39,6 +39,8 @@ import { HereMapComponent } from './here-map/here-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { EditorderpostComponent } from './editorderpost/editorderpost.component';
  
+
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +63,7 @@ import { EditorderpostComponent } from './editorderpost/editorderpost.component'
     EditorderpostComponent
   ],
   imports: [
+    Ng2ImgMaxModule,
     BrowserModule,
     AppRoutingModule,
     CarouselModule,
