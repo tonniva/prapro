@@ -15,10 +15,17 @@
 }
 
 .wrapper-detial-price {
-    font-size: 12vw;
+    font-size: 8vw;
     font-weight: 800;
     margin: 12px;
     color: #24ff42;
+}
+
+.wrapper-detial-pricesell {
+    font-size: 7vw;
+    font-weight: 800;
+    margin: 12px;
+    color: orange;
 }
 
 .wrapper-description {
@@ -146,7 +153,7 @@ agm-map {
 //location
 .wrapper-enddate {
     width: 100%;
-    font-size: 2rem;
+    font-size: 7vw;
     text-align: end;
     pointer-events: none;
 }

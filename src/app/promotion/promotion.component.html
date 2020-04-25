@@ -1,0 +1,54 @@
+<!-- Facebook Pixel Code -->
+<script>
+    ! function(f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '509997103029704');
+    fbq('track', 'Promotion');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=509997103029704&ev=PageView&noscript=1"
+          /></noscript>
+<!-- End Facebook Pixel Code -->
+
+<div class="wrapper-title-header"> สร้าง Web Sale Page Promotion
+</div>
+
+<div class="container mt-4 wrapper-scroll">
+    <div class="mt-4 wrapper-title-header-promotion dotted" (click)="gotobill();" style="background: #333;">จ่าย bill
+    </div>
+
+    <div class="mt-4 wrapper-title-header-promotion dotted">1.ทดลองใช้ฟรี 14 วัน
+    </div>
+
+    <div class="mt-4 wrapper-title-header-promotion dotted">2.รายเดือน เดือนละ 390
+    </div>
+
+    <div class="mt-4 wrapper-title-header-promotion dotted">3.รายปี เดือนละ 1,900
+    </div>
+    <div class="mt-4 wrapper-title-header-promotion dotted" (click)="Getlink()" style="background: #333;">
+        ดูตัวอย่าง เว็บ
+    </div>
+    <div class="mt-4 wrapper-title-header-promotion dotted" (click)="coppylink()" style="background: #333;">
+        Coppy Link เว็บ (คลิ๊ก)
+    </div>
+
+    <div class="bg-black mt-4 wrapper-title-header-promotion dotted" [hidden]="!diffDays">
+        ลิ้ง ของคุณจะหมดอายุ ภายใน {{30-diffDays}} วัน
+    </div>
+</div>

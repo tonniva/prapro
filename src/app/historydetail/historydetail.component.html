@@ -1,7 +1,7 @@
 <ngx-spinner>
 </ngx-spinner>
 <div class="wrapper-image-detail" *ngIf="listdetail!=null">
-    <div class="owl-carousel owl-theme card">
+    <div class="wrapper-image">
         <img class="item img-fluid wrapper-image" [src]="listdetail.imageone">
         <img class="item img-fluid wrapper-image" [src]="listdetail.imagetwo">
         <img class="item img-fluid wrapper-image" [src]="listdetail.imagethree">
@@ -17,8 +17,8 @@
         <div class="wrapper-detial-price" [hidden]="listdetail.status =='close'">
             ราคาปัจจุบัน {{listdetail.priceend || 0 |number}} บาท
         </div>
-        <div class="wrapper-detial-price" [hidden]="listdetail.status !='close'">
-            ราคาปิด {{listdetail.priceend || 0 |number}} บาท
+        <div class="wrapper-detial-pricesell">
+            ราคาปิดด่วน {{listdetail.pricesell || 0 |number}} บาท
         </div>
         <div class="wrapper-detial-price text-white" [hidden]="!lastperson_bid.firstname && lastperson_bid.lastname">
             <div *ngIf="lastperson_bid.firstname == '' ">

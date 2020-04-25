@@ -1,5 +1,7 @@
 .wrapper-image-detail {
   text-align: center;
+  padding-bottom: 100vh;
+  margin-top: 20% !important;
 }
 
 .wrapper-image {
@@ -10,5 +12,154 @@
 .wrapper-tab {
   font-size: 5vw;
   padding: 10px;
+}
+
+.wrapper-detial-price {
+  font-size: 8vw;
+  font-weight: 800;
+  margin: 12px;
+  color: #24ff42;
+}
+
+.wrapper-detial-pricesell {
+  font-size: 7vw;
+  font-weight: 800;
+  margin: 12px;
+  color: orange;
+}
+
+.wrapper-description {
+  font-size: 12vw;
+  color: white !important;
+}
+
+.card {
+  background-color: black !important;
+  margin-top: -4%;
+}
+
+.wrapper-primary {
+  font-size: 9vw;
+  font-weight: 800;
+}
+
+.wrapper-font-btn {
+  font-size: 7vw;
+}
+
+.wrapper-procee-pra {
+  color: white;
+  font-size: 9vw;
+  padding-bottom: 10px;
+  padding-top: 30px;
+}
+
+hr.hr-white {
+  border-top: 2px dashed white;
+}
+
+.wrapper-ball {
+  height: auto;
+  width: 200px !important;
+  position: absolute;
+  top: -50px;
+  left: -3%;
+}
+
+.wrapper_pra_true {
+  height: auto;
+  width: 100% !important;
+  position: absolute;
+  top: -7px;
+  left: 350%;
+}
+
+.wrapper_pra_false {
+  height: auto;
+  width: 100% !important;
+  position: absolute;
+  top: 5%;
+  left: 400%;
+}
+
+.wrapper_pra_criminals {
+  height: auto;
+  width: 100% !important;
+  position: absolute;
+  top: -5px;
+  left: 250%;
+}
+
+.checking {
+  position: absolute;
+  left: 450%;
+  top: 10%;
+  font-size: 6vw;
+  white-space: nowrap;
+  color: white;
+}
+
+.wrapper-box-status {
+  padding-bottom: 10%;
+}
+
+.like {
+  position: absolute;
+  left: 530%;
+  top: -289%;
+  font-size: 9vw;
+  white-space: nowrap;
+  color: #1ef327;
+  font-weight: 800;
+}
+
+.un-like {
+  position: absolute;
+  left: 590%;
+  top: -400%;
+  font-size: 9vw;
+  white-space: nowrap;
+  color: red;
+  font-weight: 800;
+}
+
+.criminals {
+  position: absolute;
+  left: 450%;
+  top: -360%;
+  font-size: 9vw;
+  white-space: nowrap;
+  color: red;
+  font-weight: 800;
+}
+
+.zoom:hover {
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+}
+
+agm-map {
+  height: 300px;
+}
+
+.ct {
+  text-align: -webkit-center;
+  color: white;
+  padding: 18px;
+}
+
+.wrapper-enddate {
+  width: 100%;
+  font-size: 7vw;
+  text-align: end;
+  pointer-events: none;
+}
+
+.card-img-top {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  -webkit-box-shadow: 1px 3px 17px 9px rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 3px 17px 9px rgba(0, 0, 0, 0.5);
 }
 /*# sourceMappingURL=listdetail.component.css.map */

@@ -1,7 +1,7 @@
 <ngx-spinner>
 </ngx-spinner>
 <div class="wrapper-image-detail" *ngIf="listdetail!=null">
-    <div class="owl-carousel owl-theme card">
+    <div class="wrapper-image">
         <img class="shadow item img-fluid wrapper-image" [src]="listdetail.imageone">
         <img class="shadow item img-fluid wrapper-image" [src]="listdetail.imagetwo">
         <img class="shadow item img-fluid wrapper-image" [src]="listdetail.imagethree">
@@ -38,11 +38,14 @@
 
         <hr class="hr-white" />
 
-        <div class="wrapper-detial-price text-warning">
-            ราคาเปิด {{listdetail.pricestart | number}}
+        <div class="wrapper-detial-price text-warning" [hidden]="!(listdetail.type =='pra')">
+            ราคาเปิด {{listdetail.pricestart|| 0 | number}} บาท
         </div>
-        <div class="wrapper-detial-price">
-            ราคาปัจจุบัน {{listdetail.priceend || 0 | number}}
+        <div class="wrapper-detial-price" [hidden]="!(listdetail.type =='pra')">
+            ราคาปัจจุบัน {{listdetail.priceend || 0 | number}} บาท
+        </div>
+        <div class="wrapper-detial-pricesell">
+            ราคาขาย {{listdetail.pricesell || 0 | number}} บาท
         </div>
         <div class="wrapper-detial-price text-white">
             เวลาปิดประมูล
@@ -71,8 +74,8 @@
             <br/>
 
             <div class="row">
-                <div class="col p-4 d-flex justify-content-center" *ngIf="listdetail.pictureUrl !=null">
-                    <img class="card-img-top" [src]="listdetail.pictureUrl" alt="Card image cap">
+                <div class="col p-4 d-flex justify-content-center" *ngIf="listdetail.imagefour !=null">
+                    <img class="card-img-top" [src]="listdetail.imagefour" alt="Card image cap">
                 </div>
             </div>
             <hr class="hr-white" /> คุณ {{firstname_own_pra}} {{lastname_own_pra}} {{tell_own_pra}}

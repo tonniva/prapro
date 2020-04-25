@@ -36,6 +36,9 @@ export class ListComponent implements OnInit {
   isshow_pra_false:boolean=false;
   isshow_pra_criminals:boolean=false;
 
+
+  isclose:boolean=false; 
+
   constructor(private apiService: RestService,private spinner: NgxSpinnerService) { }
    
 
@@ -46,10 +49,12 @@ export class ListComponent implements OnInit {
  
    
     this.apiService.getlist().then((response) => {this.list = response,
+      this.list =  this.list.filter(
+        item => item.status != "close");
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
-      }, 5000);
+      }, 2000);
        console.log(this.list)
        setTimeout(() => {
         this.setupowl()
@@ -151,6 +156,40 @@ calcheckconditonstatus_pra_criminals(item){
   })
   }
 
+
+  noclose(){
+    this.spinner.show();
+    this.list=[]; 
+    this.apiService.getlist().then((response) => {this.list = response,
+      this.list =  this.list.filter(
+      item => item.status != "close");
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 1000); 
+       setTimeout(() => {
+        this.setupowl()
+      }, 0);
+      }); 
+    this.isclose = false;
+  }
+
+  closed(){
+    this.spinner.show();
+    this.list=[]; 
+    this.apiService.getlist().then((response) => {this.list = response,
+      this.list =  this.list.filter(
+      item => item.status == "close");
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 1000); 
+       setTimeout(() => {
+        this.setupowl()
+      }, 0);
+      }); 
+    this.isclose = true;
+  } 
 }
 
 

@@ -4,8 +4,25 @@
 <ngx-spinner>
 </ngx-spinner>
 <div class="wrapper-box-list">
+    <div class="container">
+        <div class="row pb-4">
+            <div class="col">
+                <div class="col">
+                    <button [ngClass]="{'btn-success': !isclose}" (click)="noclose()" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">รายการที่<br>ยังไม่ปิด</button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <button [ngClass]="{'btn-danger': isclose}" (click)="closed()" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">รายการที่<br>ปิดแล้ว</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="wrapper-list" *ngIf="list!=null">
         <div class="owl-carousel owl-theme card" *ngFor="let item of list; let indexliistselect = index">
+
+
             <div [ngClass]="{'no-tuch-sold-out': item.status =='close'}" routerLink="/list/detail/{{item.id_token}}/{{item._id}}">
                 <div class="item" [ngClass]="{'img__wrapper': item.status =='close'}">
                     <div *ngIf="item.status=='close'">
@@ -39,8 +56,11 @@
                                 <span class="criminals">อาจเป็น มิจฉาชีพ</span>
                             </div>
                         </div>
-                        <div class="wrapper-detial-price">
-                            เริ่มที่ {{item.pricestart|number}} บาท
+                        <div class="wrapper-detial-price" [hidden]="!(item.type =='pra')">
+                            เริ่มที่ {{item.pricestart||0 |number}} บาท
+                        </div>
+                        <div class="wrapper-detial-pricesell">
+                            ราคาขาย {{item.pricesell|| 0 |number}} บาท
                         </div>
                         <div class="wrapper-detial">
                             {{item.name}}
@@ -49,8 +69,11 @@
                             {{item.description}}
                         </div>
                         <div class="wrapper-detial-price text-white">
-                            เวลาปิดประมูล
+                            เวลาปิดประมูล ประมาณ
                             <input class="wrapper-enddate" type="datetime-local" [ngModel]="item.dateend | date:'yyyy-MM-ddTHH:mm'">
+                        </div>
+                        <div class="wrapper-detial-safe text-white">
+                            ส่งผ่าน Admin เพื่อความปลอดภัย
                         </div>
                     </div>
                 </div>

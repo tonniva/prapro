@@ -36,13 +36,17 @@ export class HistorydetailComponent implements OnInit {
     this.id_token = this.route.snapshot.params.id_token; 
      this.apiService.getlistdetail(this.id_token).then((response) => {this.listdetail =  response
      
-       for (let index = 0; index < this.listdetail.length; index++) {
-         if(this.listdetail[index]._id == this.index_list_select){ 
-          this.listdetail = response[index];
-          this.temp_pramoonperson =  response[index];
-          break;
-         } 
-       } 
+      this.listdetail =  this.listdetail.filter(
+        item => item._id == this.index_list_select)[0];  
+        this.temp_pramoonperson =   this.listdetail;
+ 
+      //  for (let index = 0; index < this.listdetail.length; index++) {
+      //    if(this.listdetail[index]._id == this.index_list_select){ 
+      //     this.listdetail = response[index];
+      //     this.temp_pramoonperson =  response[index];
+      //     break;
+      //    } 
+      //  } 
        
       setTimeout(() => {
         /** spinner ends after 5 seconds */

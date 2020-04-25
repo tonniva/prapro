@@ -1,0 +1,79 @@
+.wrapper-uploaded {
+  position: absolute;
+  top: 1px;
+  left: 0px;
+  height: -webkit-fill-available;
+  width: 100%;
+}
+
+.wrapper-post-content {
+  height: 200vh;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.wrapper-upload {
+  min-height: 25vh;
+  background-color: #d8d8d8;
+  border: dotted;
+  border-color: white;
+  margin: 10px;
+  background: url(https://cdn.pixabay.com/photo/2016/02/19/15/29/frame-1210511_960_720.png) no-repeat center center;
+  background-size: contain;
+}
+
+.hiddenFileInput > input {
+  height: 100%;
+  width: 100;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.hiddenFileInput {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  overflow: hidden;
+  /*for the background, optional*/
+  background: center center no-repeat;
+  background-size: 75% 75%;
+}
+
+.wrapper-text-area {
+  min-height: 30vh;
+}
+
+.current-price {
+  color: green;
+  font-weight: 800;
+  font-size: 7vw;
+  text-align: center;
+}
+
+.current-bid {
+  color: blue;
+  font-weight: 800;
+  font-size: 7vw;
+  text-align: center;
+}
+
+.wrapper-bid {
+  font-size: 8vw;
+}
+
+input {
+  font-size: 8vw;
+}
+
+.error-red {
+  border: 3px solid #FF0000;
+}
+
+.card-img-top {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  -webkit-box-shadow: 1px 3px 17px 9px rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 3px 17px 9px rgba(0, 0, 0, 0.5);
+}
+/*# sourceMappingURL=pramool-bid.component.css.map */

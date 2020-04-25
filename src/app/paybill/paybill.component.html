@@ -1,0 +1,52 @@
+<form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" style="overflow-y: scroll;">
+    <div class="container">
+
+
+        <div class="row pt-4">
+            <div class="custom-control custom-radio text-center m-auto">
+                <input id="month" type="radio" class="custom-control-input" value="รายเดือน" name="type" ngModel>
+                <label class="custom-control-label text-white" for="month">รายเดือน</label>
+            </div>
+
+            <div class="custom-control custom-radio text-center m-auto">
+                <input id="year" type="radio" class="custom-control-input" value="รายปี" name="type" ngModel>
+                <label class="custom-control-label text-white" for="year">รายปี</label>
+            </div>
+        </div>
+
+        <div>
+            <div class="row pt-4">
+                <div class="col text-white f-s text-center">
+                    ยอดโอนเงิน
+                </div>
+                <div class="col">
+                    <input class="form-control text-center" type="tel" name="pricepay" placeholder="กรอกยอดโอน" ngModel>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper-upload-slip">
+            <!-- <div>
+            <input type='file' (change)="readURL($event)" style="display: none;" />
+        </div> -->
+            <div class="file-input-wrapper">
+                <!-- <button class="btn-file-input">SELECT FILES</button> -->
+                <div class="wrapper-upload-file">
+                    อัพโหลดสลิป(คลิ๊ก)
+                </div>
+                <input type='file' (change)="readURL($event)" />
+            </div>
+            <div class="p-t-50">
+                <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1">
+            </div>
+        </div>
+    </div>
+    <div class="input-group wrapper-desc">
+        <div class="input-group-prepend ">
+            <span class="input-group-text ">รายละเอียดเพิ่มเติม</span>
+        </div>
+        <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description" rows="5 " cols="60 " required></textarea>
+    </div>
+    <div class="wrapper-input p-3 p-t-50">
+        <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>
+    </div>
+</form>

@@ -1,0 +1,79 @@
+<div class="wrapper-title-header">
+    รายการกรอบพระ
+</div>
+<ngx-spinner>
+</ngx-spinner>
+<div class="wrapper-box-list">
+    <div class="container">
+        <div class="row pb-4">
+            <div class="col">
+                <div class="col">
+                    <button [ngClass]="{'btn-success': !isclose}" (click)="noclose()" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">รายการที่<br>ยังไม่ปิด</button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <button [ngClass]="{'btn-danger': isclose}" (click)="closed()" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">รายการที่<br>ปิดแล้ว</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper-list" *ngIf="list!=null">
+        <div class="owl-carousel owl-theme card" *ngFor="let item of list; let indexliistselect = index">
+
+
+            <div [ngClass]="{'no-tuch-sold-out': item.status =='close'}" routerLink="/list/Farmedetail/{{item.id_token}}/{{item._id}}">
+                <div class="item" [ngClass]="{'img__wrapper': item.status =='close'}">
+                    <div *ngIf="item.status=='close'">
+                        <img src="http://www.savoy-sharm.com/media-room/images/hi-res/king-bed-room-accommodation-savoy-luxury-5-stars-accommodation-sharm-el-sheikh.jpg" alt="" />
+                        <a class="sold_out" href="https://abc.com/">บูชาแล้ว</a>
+                    </div>
+
+                    <img [ngClass]="{'filter_img__wrapper': item.status =='close'}" [src]="item.imageone" class="owl-lazy float-left wrapper-image shadow" alt="...">
+                    <div class="wrapper-content-list">
+                        <div class="row pb-1" [hidden]="!calcheckconditonstatus_pra_checking(item)">
+                            <div class="col d-flex wrapper-box-status" [hidden]="(item.status_pramoon_check =='checking')">
+                                <img src="https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/Ball-Drop-Preloader-1.gif" class="wrapper-ball" />
+                                <span class="checking">กำลังช่วยตรวจสอบพระ...</span>
+                            </div>
+                        </div>
+                        <div class="row pb-1" [hidden]="!calcheckconditonstatus_pra_true(item)">
+                            <div class="col d-flex wrapper-box-status" [hidden]="(item.status_pramoon_check =='checking')">
+                                <img src="https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/thumbs-clipart-outline-4.png" class="wrapper_pra_true" />
+                                <span class="like">พระแท้</span>
+                            </div>
+                        </div>
+                        <div class="row pb-1" [hidden]="!calcheckconditonstatus_pra_false(item)">
+                            <div class="col d-flex wrapper-box-status" [hidden]="(item.status_pramoon_check =='checking')">
+                                <img src="https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/unlike-png-8.png" class="wrapper_pra_false" />
+                                <span class="un-like">พระไม่แท้</span>
+                            </div>
+                        </div>
+                        <div class="row pb-1" [hidden]="!calcheckconditonstatus_pra_criminals(item)">
+                            <div class="col d-flex wrapper-box-status" [hidden]="(item.status_pramoon_check =='checking')">
+                                <img src="https://www.pngrepo.com/png/116085/170/criminal.png" class="wrapper_pra_criminals" />
+                                <span class="criminals">อาจเป็น มิจฉาชีพ</span>
+                            </div>
+                        </div>
+                        <!-- <div class="wrapper-detial-price">
+                            เริ่มที่ {{item.pricestart||0 |number}} บาท
+                        </div> -->
+                        <div class="wrapper-detial-price">
+                            ราคาขาย {{item.pricesell|| 0 |number}} บาท
+                        </div>
+                        <div class="wrapper-detial">
+                            {{item.name}}
+                        </div>
+                        <div class="wrapper-detial">
+                            {{item.description}}
+                        </div>
+                        <div class="wrapper-detial-safe text-white">
+                            ส่งผ่าน Admin เพื่อความปลอดภัย
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

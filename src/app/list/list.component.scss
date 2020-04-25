@@ -23,10 +23,18 @@
     ;
 }
 
+.wrapper-detial-pricesell {
+    // padding: 20px;
+    font-size: 6vw;
+    margin: 12px;
+    color: orange;
+    ;
+}
+
 .wrapper-title-header {
     color: white;
     text-align: center;
-    font-size: 10vw;
+    font-size: 2rem;
     padding: 5px;
 }
 
@@ -170,13 +178,19 @@
 
 .wrapper-enddate {
     width: 100%;
-    font-size: 2rem;
+    font-size: 1rem;
     text-align: end;
     pointer-events: none;
     background-color: transparent;
     border: none;
     color: #fcfcfc;
     padding-bottom: 10%;
+}
+
+.wrapper-detial-safe {
+    font-size: 5vw;
+    margin: 12px;
+    color: red;
 }
 
 //ตรวจสอบพระ สถานะ

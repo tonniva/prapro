@@ -1,4 +1,10 @@
 .wrapper-other-font {
   font-size: 6vw;
 }
+
+.border-btn {
+  border: dashed;
+  color: white;
+  font-size: 8vw;
+}
 /*# sourceMappingURL=othermenu.component.css.map */

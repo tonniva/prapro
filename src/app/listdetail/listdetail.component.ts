@@ -94,17 +94,21 @@ Isdisable:boolean= false;
     this.id_token = this.route.snapshot.params.id_token; 
      this.apiService.getlistdetail(this.id_token).then((response) => {
       
-       this.listdetail  = response;
-       for (let index = 0; index < this.listdetail.length; index++) {
-         if(this.listdetail[index]._id == this.index_list_select){  
-          
-          this.listdetail = response[index];
-          //เปิดปิดปุ่ม
-          this.GetProfile(localStorage.getItem("access_token"),this.listdetail);
-        
-          break;
-         } 
-       }
+       this.listdetail  = response; 
+       this.listdetail =  this.listdetail.filter(
+        item => item._id == this.index_list_select)[0]; 
+        this.GetProfile(localStorage.getItem("access_token"),this.listdetail);
+
+      //  for (let index = 0; index < this.listdetail.length; index++) {
+      //    if(this.listdetail[index]._id == this.index_list_select){  
+           
+      //     this.listdetail = response[index];
+      //     //เปิดปิดปุ่ม
+      //     this.GetProfile(localStorage.getItem("access_token"),this.listdetail);
+      //   debugger
+      //     break;
+      //    } 
+      //  }
      
    
      
@@ -137,7 +141,7 @@ Isdisable:boolean= false;
   GetProfile(access_token,listdetail:any){  
     this.apiService.GetProfile(access_token).then((response) => {
       this.GetProfilelist = response 
-      debugger
+       
       if(this.GetProfilelist.userId == listdetail.id_token){
         return  this.Ishidebtnpramoon = true;
       }
@@ -238,12 +242,15 @@ Getupdatedetail(fact_check){
   this.id_token = this.route.snapshot.params.id_token; 
   this.apiService.getlistdetail(this.id_token).then((response) => {
     this.listdetail = response 
-    for (let index = 0; index < this.listdetail.length; index++) {
-      if(this.listdetail[index]._id == this.index_list_select){ 
-       this.listdetail = response[index];
-       break;
-      } 
-    }
+    
+    this.listdetail =  this.listdetail.filter(
+      item => item._id == this.index_list_select)[0];   
+    // for (let index = 0; index < this.listdetail.length; index++) {
+    //   if(this.listdetail[index]._id == this.index_list_select){ 
+    //    this.listdetail = response[index];
+    //    break;
+    //   } 
+    // }
  
     if(fact_check =="pra_true"){
       this.count_pra_true =  parseInt(this.listdetail.count_pra_true||0) +1;

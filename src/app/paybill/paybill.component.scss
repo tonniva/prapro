@@ -1,0 +1,78 @@
+.wrapper-bill {
+    margin-top: 15%;
+}
+
+img {
+    max-width: 180px;
+}
+
+input[type=file] {
+    padding: 10px;
+    background: #2d2d2d;
+}
+
+.wrapper-upload-slip {
+    text-align: center;
+    margin-top: 10%;
+}
+
+$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100); // Adjust this to include the pixel amounts you need.
+$sides: (top, bottom, left, right); // Leave this variable alone
+@each $space in $spaceamounts {
+    @each $side in $sides {
+        .m-#{str-slice($side, 0, 1)}-#{$space} {
+            margin-#{$side}: #{$space}px !important;
+        }
+        .p-#{str-slice($side, 0, 1)}-#{$space} {
+            padding-#{$side}: #{$space}px !important;
+        }
+    }
+}
+
+.file-input-wrapper {
+    height: auto;
+    margin: 2px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.file-input-wrapper>input[type="file"] {
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-input-wrapper>.btn-file-input {
+    background-color: #494949;
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    height: 34px;
+    margin: 0 0 0 -1px;
+    padding-left: 0;
+    width: 121px;
+    cursor: pointer;
+}
+
+#img_text {
+    float: right;
+    margin-right: -80px;
+    margin-top: -14px;
+}
+
+.wrapper-upload-file {
+    background: black;
+    color: white;
+    font-size: 10vw;
+}
+
+.wrapper-desc {
+    padding: 15%;
+    padding-bottom: 0;
+}

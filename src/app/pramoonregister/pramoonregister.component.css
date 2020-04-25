@@ -36,4 +36,31 @@
 .f-s {
   font-size: 6vw;
 }
+
+.wrapper-input {
+  padding-bottom: 30vh !important;
+}
+
+.click-heigth {
+  height: 20vh;
+}
+
+.wrapper-title-upload {
+  color: white;
+  font-size: 7vw;
+}
+
+.non-active {
+  background-color: black;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.post-click {
+  background: url(https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/touch-here.gif) no-repeat center center;
+  background-size: contain;
+  height: 60%;
+  position: absolute;
+  left: 15%;
+}
 /*# sourceMappingURL=pramoonregister.component.css.map */

@@ -91,13 +91,15 @@ export class PramoolBidComponent implements OnInit {
      
     this.apiService.getlistdetail(this.id_token).then((response) => {
       this.list = response 
-      for (let index = 0; index < this.list.length; index++) {
-        if(this.list[index]._id == this.index_list_select){ 
-           
-         this.list = response[index];
-         break;
-        } 
-      } 
+      this.list =  this.list.filter(
+        item => item._id == this.index_list_select)[0];  
+
+      // for (let index = 0; index < this.list.length; index++) {
+      //   if(this.list[index]._id == this.index_list_select){  
+      //    this.list = response[index];
+      //    break;
+      //   } 
+      // } 
       
       if(data.priceBid <= this.list.pricestart)
       { 
@@ -141,14 +143,17 @@ getdetail(){
  
   this.apiService.getlistdetail(this.id_token).then((response) => {
     this.list = response  
-    
-    for (let index = 0; index < this.list.length; index++) {
-      if(this.list[index]._id == this.index_list_select){ 
+
+    this.list =  this.list.filter(
+      item => item._id == this.index_list_select)[0];  
+
+    // for (let index = 0; index < this.list.length; index++) {
+    //   if(this.list[index]._id == this.index_list_select){ 
       
-       this.list = response[index];
-       break;
-      } 
-    }
+    //    this.list = response[index];
+    //    break;
+    //   } 
+    // }
 
     this.pricestart = this.list.pricestart
     this.pricebidend = this.list.priceend

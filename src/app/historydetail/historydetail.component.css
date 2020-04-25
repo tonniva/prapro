@@ -1,0 +1,61 @@
+.wrapper-image-detail {
+  text-align: center;
+  padding-bottom: 100vh;
+  margin-top: 20% !important;
+}
+
+.wrapper-image {
+  width: 100%;
+  padding: 10px;
+}
+
+.wrapper-tab {
+  font-size: 5vw;
+  padding: 10px;
+}
+
+.wrapper-detial-price {
+  font-size: 8vw;
+  font-weight: 800;
+  margin: 12px;
+  color: #24ff42;
+}
+
+.wrapper-detial-pricesell {
+  font-size: 8vw;
+  font-weight: 800;
+  margin: 12px;
+  color: orangered;
+}
+
+.wrapper-description {
+  font-size: 12vw;
+  color: white !important;
+}
+
+.card {
+  background-color: black !important;
+  margin-top: -4%;
+}
+
+.wrapper-primary {
+  font-size: 9vw;
+  font-weight: 800;
+}
+
+.wrapper-font-btn {
+  font-size: 8vw;
+}
+
+.card-img-top {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  -webkit-box-shadow: 1px 3px 17px 9px rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 3px 17px 9px rgba(0, 0, 0, 0.5);
+}
+
+.no-tuch-sold-out {
+  pointer-events: none;
+}
+/*# sourceMappingURL=historydetail.component.css.map */

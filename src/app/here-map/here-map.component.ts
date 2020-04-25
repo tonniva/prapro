@@ -8,7 +8,7 @@ import { KeyValuePipe } from '@angular/common';
 })
 export class HereMapComponent implements OnInit {
   public geolocationPosition;
-  title: string = 'ระบบจะบันทึกตำแหน่งของคุณ เพื่อ ป้องกัน "มิจฉาชีพ"';
+  title: string = 'พิกัดร้านค้า';
   
   lat: number =0;
   lng: number = 0;  
@@ -19,9 +19,9 @@ export class HereMapComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-if(!localStorage.getItem("Latitude") && !localStorage.getItem("Longitude") && !localStorage.getItem("ip")){
+// if(!localStorage.getItem("Latitude") && !localStorage.getItem("Longitude") && !localStorage.getItem("ip")){
     Swal.fire({
-        title: 'ระบบต้องการ พิกัด Location ที่อยู่ของ ท่าน เพื่อ ป้องกัน มิจฉาชีพ',
+        title: 'คุณต้องการใช้ (ตำแหน่งตรงนี้) แสดงแผนที่ ของร้านค้าใช่หรือไม่',
         text: "",
         icon: 'warning',
         showCancelButton: true,
@@ -33,7 +33,7 @@ if(!localStorage.getItem("Latitude") && !localStorage.getItem("Longitude") && !l
         if (result.value) {
             this.domap();
 
-         this.getip();
+        //  this.getip();
 
 
         
@@ -41,18 +41,18 @@ if(!localStorage.getItem("Latitude") && !localStorage.getItem("Longitude") && !l
         else{
 
             Swal.fire(
-                'ท่านไม่ยอมรับ',
-                'เพื่อความปลอดภัยของ สมาชิกทุกท่าน ขอบคุณครับ',
+                'ท่านไม่ได้ใช้ตำแหน่งตรงนี้ แสดงใน ร้านค้าของท่าน',
+                'ขอบคุณครับ',
                 'success'
               )
-              setTimeout(() => { 
-                window.location.href = window.location.origin+'/list/one';
+        //       setTimeout(() => { 
+        //         window.location.href = window.location.origin+'/promotion';
              
-        }, 3000);
+        // }, 3000);
 
         }
       }) 
-}
+// }
   
 
    

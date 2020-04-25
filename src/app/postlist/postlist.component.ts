@@ -6,7 +6,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {UtilService} from '../util.service';
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import Swal from 'sweetalert2'
- 
+declare let $: any;
 @Component({
   selector: 'app-postlist',
   templateUrl: './postlist.component.html',
@@ -20,13 +20,15 @@ export class PostlistComponent implements OnInit {
   image2:any;
   image3:any;
   image4:any;
+  image5:any;
 
   temp_path_image1:any;
   temp_path_image2:any;
   temp_path_image3:any;
   temp_path_image4:any;
+  temp_path_image5:any;
 
- 
+  model: any = {};
 
   constructor(private ng2ImgMax: Ng2ImgMaxService,
     private UtilService :UtilService, 
@@ -39,30 +41,75 @@ export class PostlistComponent implements OnInit {
     token:any; 
     arrayfile:Array<File> = [];
     arrayPathfile:Array<String> = [];
+    image_header:File;
+    path_header:string;
+
+
+    arrayfile_slide:Array<File> = [];
+    arrayPathfile_slide:Array<String> = [];
+    arrayPathfile_slide_Posted:Array<String> = [];
+
+    arrayfile_product:Array<File> = [];
+    arrayPathfile_product:Array<String> = [];
+    arrayPathfile_product_Posted:Array<String> = [];
+
     resultFile:any;
 
-  ngOnInit(): void { 
-   
-    window.scrollTo(0,0);
-    // if()
-    // this.email = localStorage.getItem("email");
-    // this.apiService.logingetToken(this.email).then((response:any) => {  
-    
-    //   this.token = response.accessToken;
-    //   localStorage.setItem("logintoken",this.token);   
-    // });    
+    resultFilebase64:any;
+    resultProductFilebase64:any;
+    public line:string="";
 
 
-   
+  ngOnInit(): void {  
+    window.scrollTo(0,0); 
+    setTimeout(() => { 
+      this.spinner.hide();
+    }, 0);
   }
  
+
+  //รูป HEADER
   changeListener_one($event) : void { 
     this.image1 =  this.readThis($event.target); 
     this.temp_path_image1 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image1));  
-    
+      
     this.ng2ImgMax.resizeImage(this.image1, 1000, 1000).subscribe(
       result => {
-        this.image1 = result;
+        this.image_header = result; 
+        setTimeout(() => {
+          Swal.fire({
+            title: 'บันทึก รูป Header ใช่หรือไม่',
+            text: "",
+            imageUrl:this.temp_path_image1.changingThisBreaksApplicationSecurity,    
+            imageHeight: 100,
+            imageAlt: 'Custom image',  
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.value) {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'บันทึกเรียบร้อย!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              this.apiService.uploadimage(this.image_header).then((response) => {   
+                this.resultFile = response; 
+                this.path_header = this.resultFile.imageUrl;
+               
+               }); 
+            }
+            else{
+              this.image1="";
+              this.temp_path_image1="";
+            }
+          })
+         
+        }, 1000); 
+      
         
       },
       error => {
@@ -73,12 +120,54 @@ export class PostlistComponent implements OnInit {
   }
   changeListener_two($event) : void { 
     this.image2 =   this.readThis($event.target);
+    this.getBase64(this.image2).then(data => 
+      this.resultProductFilebase64 = data 
+      )
     this.temp_path_image2 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image2));  
 
     this.ng2ImgMax.resizeImage(this.image2, 1000, 1000).subscribe(
       result => {
         this.image2 = result;
-        
+               
+        this.arrayfile_product.push(this.image2);  
+        this.arrayPathfile_product.push(this.resultProductFilebase64)
+
+
+        setTimeout(() => {
+          Swal.fire({
+            title: 'บันทึก รูป สินค้านี้ ใช่หรือไม่',
+            text: "",
+            imageUrl:this.temp_path_image2.changingThisBreaksApplicationSecurity,  
+            imageHeight: 100,
+            imageAlt: 'Custom image', 
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.value) {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'บันทึกเรียบร้อย!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              this.apiService.uploadimage(this.image2).then((response) => {   
+                this.resultFile = response;  
+                this.arrayPathfile_product_Posted.push(this.resultFile.imageUrl); 
+               
+               }); 
+            }
+            else{
+              this.image2="";
+              this.temp_path_image2="";
+            }
+          })
+         
+        }, 1000); 
+
+
       },
       error => {
         console.log('😢 Oh no!', error);
@@ -86,28 +175,64 @@ export class PostlistComponent implements OnInit {
     );
  
   }
-  changeListener_three($event) : void { 
-    this.image3 =   this.readThis($event.target);
-    this.temp_path_image3 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image3));  
-
-    this.ng2ImgMax.resizeImage(this.image3, 1000, 1000).subscribe(
+ 
+  
+  changeListener_five($event) : void { 
+     
+    this.image5 =  this.readThis($event.target);
+    this.getBase64(this.image5).then(data => 
+      this.resultFilebase64 = data 
+      )
+    this.temp_path_image5 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image5));  
+ 
+    this.ng2ImgMax.resizeImage(this.image5, 1000, 1000).subscribe(
       result => {
-        this.image3 = result;
-        
-      },
-      error => {
-        console.log('😢 Oh no!', error);
-      }
-    );
-  }
-  changeListener_four($event) : void { 
-    this.image4 =  this.readThis($event.target);
-    this.temp_path_image4 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image4));  
+         
+        this.image5 = result;
+        this.arrayfile_slide.push(this.image5);  
+        this.arrayPathfile_slide.push(this.resultFilebase64)
+ 
 
-    this.ng2ImgMax.resizeImage(this.image4, 1000, 1000).subscribe(
-      result => {
-        this.image4 = result;
-        
+        setTimeout(() => {
+          Swal.fire({
+            title: 'บันทึก รูป สินค้านี้ ใช่หรือไม่',
+            text: "",
+            imageUrl:this.temp_path_image5.changingThisBreaksApplicationSecurity, 
+            imageHeight: 100,
+            imageAlt: 'Custom image', 
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.value) {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'บันทึกเรียบร้อย!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              this.apiService.uploadimage(this.image5).then((response) => {   
+                this.resultFile = response;  
+                this.arrayPathfile_slide_Posted.push(this.resultFile.imageUrl); 
+               
+               }); 
+            }
+            else{
+              this.image5="";
+              this.temp_path_image5="";
+            }
+          })
+         
+        }, 1000); 
+
+
+        $('.owl-carousel').owlCarousel('destroy'); 
+        setTimeout(() => {
+          this.setupowl()
+        }, 100);
+   
       },
       error => {
         console.log('😢 Oh no!', error);
@@ -115,51 +240,61 @@ export class PostlistComponent implements OnInit {
     );
   }
   
+  deleteimage(itemindex,type:String){ 
+    Swal.fire({
+      title: 'ลบรูป ใช่หรือไม่',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText:'ยกเลิก'
+    }).then((result) => {
+       
+      if (result.value && type == "product") { 
+        this.arrayPathfile_product.splice(itemindex, 1);  
+      }
+      if (result.value && type== "slide") { 
+        this.arrayPathfile_slide.splice(itemindex, 1); 
+        $('.owl-carousel').owlCarousel('destroy'); 
+        setTimeout(() => {
+          this.setupowl()
+        }, 100);
+      }
+    }) 
+
+
+  }
   readThis(inputValue: any) { 
     var file:File = inputValue.files[0];
     return file;
     
   }
 
-  
+
+   getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
 
   onClickSubmit(data) {  
 
-    if(data.pricestart <= 0){
-      this.UtilService.showError("กรุณากรอก <br/> ราคาเริ่มต้น","")
-      return;
-    }else if(data.dateEnd =="" || data.dateEnd.trim().length == 0){
-      this.UtilService.showError("กรุณากรอก <br/> วันที่-เวลา ปิดประมูล","")
-      return;
-    }
-    else if(typeof(this.temp_path_image1) ==='undefined'){
-      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัตรประขาชน ","");
-      return;
-    }
-    else if(typeof(this.temp_path_image2) ==='undefined'){
-      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน ","");
-      return;
-    }
-    else if(typeof(this.temp_path_image3) ==='undefined'){
-      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัตรประขาชน พร้อม ถ่ายกับข้อความ หลวงปู่ทวด","");
-      return;
-    }
-    else if(typeof(this.temp_path_image4) ==='undefined'){
-      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัญชีธนาคาร ","");
-      return;
-    }
-    else{
-
-      // this.UtilService.showConfirm("คุณต้องการเปิดประมูลใช่หรือไม่"
-      // ,"เมื่อทำการลงทะเบียนแล้ว <br/> สามารถแก้ไขได้ <br/> ที่ 'เพิมเติม'"
-      // ,function(response:any){ 
-      //   if(response){  
-      //   alert("asdasdasd");
-      //     this.douploadimage(data)
-          
-      //   } 
-      // }); 
-
+    // if(data.pricestart <= 0){
+    //   this.UtilService.showError("กรุณากรอก <br/> ราคาเริ่มต้น","")
+    //   return;
+    // } 
+    // else if(typeof(this.temp_path_image1) ==='undefined'){
+    //   this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพให้ครบ ","");
+    //   return;
+    // }
+   
+    // else{
+ 
       Swal.fire({
         title: 'คุณต้องการเปิดประมูลใช่หรือไม่',
         text: "เมื่อทำการลงทะเบียนแล้วสามารถแก้ไขได้  ที่ 'เพิมเติม'",
@@ -176,17 +311,164 @@ export class PostlistComponent implements OnInit {
       }) 
 
    
-      } 
+      // } 
   }
 
+
+  insertline(){ 
+    
+    Swal.mixin({
+      input: 'text',
+      confirmButtonText: 'ต่อไป &rarr;',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33', 
+      cancelButtonText:'ยกเลิก',
+      showCancelButton: true,
+      progressSteps: ['1', '2']
+    }).queue([
+      {
+        title: 'กรอก LINE ID',
+        text: '(คือ Line ที่ใช้ใน ชีวิตประจำวัน)'
+      },
+      {
+        title: 'กรอก LINE @ID (ไม่มีไม่เป็นไร)',
+        text: '(คือ Line ที่ใช้ใน ทางธุรกิจ ที่เรียว่า LINE@)'
+      }
+      
+    ]).then((result) => {
+      if (result.value) {
+        debugger
+        localStorage.setItem("lineid",result.value[0]);
+        localStorage.setItem("lineofficialid",result.value[1]);
+        const answers = JSON.stringify(result.value)
+        Swal.fire({
+          title: 'All done!',
+          html: `
+            LINE ID ที่ใช้ :
+            <pre><code>${result.value[0]}</code></pre>
+            LINE official ID (LINE@) ที่ใช้ :
+            <pre><code>${result.value[1]}</code></pre>
+          `,
+          confirmButtonText: 'ตกลง'
+        })
+      }
+    })
+  //  this.alertinsertdata("กรอก LINE ID",function(data){ 
+  //  localStorage.setItem("lineid",data);
+  //  });  
+  }
+
+  insertfacebook(){
+
+   this.alertinsertdata("กรอก facebook Id",function(data){ 
+   localStorage.setItem("facebooklink",data);
+   });  
+    
+  }
+  inserttel(){
+
+    this.alertinsertdata("กรอก เบอร์โทร",function(data){ 
+    localStorage.setItem("telsale",data);
+    });  
+     
+   }
+
+   insertyoutube(){
+
+    this.alertinsertdata("กรอก ลิ้ง ยูทูป",function(data){ 
+    localStorage.setItem("youtube",data);
+    });  
+     
+   }
+
+
+   
   
 
+  insertlinenotify(){ 
+    
+    this.alertinsertdata("กรอก LINE Notify",function(data){ 
+    localStorage.setItem("linenotify",data);
+    });  
+   }
+ 
+   insertfacebookpixel(){
+ 
+    this.alertinsertdata("กรอก Facebook Pixel code",function(data){ 
+    localStorage.setItem("facebookpixel",data);
+    });  
+     
+   }
 
 
-  public postpra(data){
+  insertshopee(){ 
+    
+    this.alertinsertdata("กรอก ลิ้งร้านค้า Shopee",function(data){ 
+    localStorage.setItem("shopeelink",data);
+    });  
+   }
 
-    setTimeout(() => {  
+   insertlazada(){ 
+    
+    this.alertinsertdata("กรอก ลิ้งร้านค้า LAZADA",function(data){ 
+    localStorage.setItem("lazadalink",data);
+    });  
+   }
+  alertinsertdata(text:string,callback){
+
+    Swal.fire({
+      title: text,
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText:'ยกเลิก',
+      showLoaderOnConfirm: true,
+      preConfirm: (login) => {
+      return  login
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.value) {
+        callback(result.value);
+        // Swal.fire({
+        //   title: `${result.value.login}`,
+        //   imageUrl: result.value.avatar_url
+        // }) 
       
+      }
+    })
+
+  }
+
+
+
+   
+  setupowl(){  
+    $('.owl-carousel').owlCarousel({ 
+      margin:10,
+      items:3,
+      loop:true, 
+      dot:true,
+      autoplay:true,
+      autoplayTimeout:1000,
+      autoplayHoverPause:true, 
+      nav:true 
+  })
+  }
+
+
+
+
+
+  public postpra(data,arrayPathfile_product_Posted:Array<String>,arrayPathfile_slide_Posted:Array<String>){
+ 
+    setTimeout(() => {  
+      debugger
       data.access_token = localStorage.getItem("access_token");
       data.id_token = localStorage.getItem("userId"); 
       data.Latitude =   localStorage.getItem("Latitude");
@@ -195,9 +477,40 @@ export class PostlistComponent implements OnInit {
       data.status_pramoon_check = "checking";  
       data.pictureUrl = localStorage.getItem("pictureUrl");
       data.displayName= localStorage.getItem("displayName"); 
+
+
+      // ******** 
+      debugger
+      data.product_header =   this.path_header;
+      data.product_picture =   this.arrayPathfile_product_Posted;
+      data.slide_picture =   this.arrayPathfile_slide_Posted;
+
+
+      data.lineid= localStorage.getItem("lineid");
+      data.facebooklink= localStorage.getItem("facebooklink"); 
+      data.linenotify= localStorage.getItem("linenotify"); 
+      data.facebookpixel= localStorage.getItem("facebookpixel"); 
+      data.shopeelink= localStorage.getItem("shopeelink"); 
+      data.lazadalink= localStorage.getItem("lazadalink"); 
+      data.telsale= localStorage.getItem("telsale"); 
+      data.description= data.description;
+      
+
+      // ********
+
+
+      data.type= "marketing";
+      data.pricestart= "0";
+    
+      data.pricestart= "0";
+      // product_picture:Array, 
+      // slide_picture:Array, 
+      
+      data.dateend=(new Date()).toString();
+      
       
       this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => { 
-      
+      debugger
        
         setTimeout(() => { 
           this.spinner.hide();
@@ -209,7 +522,7 @@ export class PostlistComponent implements OnInit {
           'ขอบคุณครับ',
           'success'
         )
-        window.location.href = window.location.origin+'/list/one';
+        window.location.href = window.location.origin+'/promotion';
          
       }); 
     
@@ -222,30 +535,139 @@ export class PostlistComponent implements OnInit {
   public douploadimage(data)
   {  
     this.spinner.show();
-    this.arrayfile[0] =this.image1;
-    this.arrayfile[1] =this.image2;
-    this.arrayfile[2] =this.image3;
-    this.arrayfile[3] =this.image4;
+    // this.arrayfile[0] =this.image1;
+    // this.arrayfile[1] =this.image2;
+    // this.arrayfile[2] =this.image3;
+    // this.arrayfile[3] =this.image4;
 
-    setTimeout(() => { 
-      for (let index = 0; index < this.arrayfile.length; index++) {
-        this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
-        this.resultFile = response; 
-        this.arrayPathfile.push(this.resultFile.imageUrl); 
-        if( this.arrayPathfile.length == 4 )
-        { 
-           
-          this.postpra(data);
-        } 
-       });   
 
-       if( this.arrayPathfile.length == 4 ) break;
-        }
-    }, 3000);
-    this.arrayPathfile =[];
+ //อัพโหลด path Header
+ //อัพโหลด path Header
+  
+ 
+    //อัพโหลด path slide
+    // setTimeout(() => { 
+    //   debugger
+    //   for (let index = 0; index < this.arrayfile_slide.length; index++) {
+    //     this.apiService.uploadimage(this.arrayfile_slide[index]).then((response) => {   
+    //     this.resultFile = response; 
+    //     this.arrayPathfile_slide_Posted.push(this.resultFile.imageUrl); 
+    //     if( index == this.arrayfile_slide.length-1 )
+    //     {  
+    //       //this.postpra(data);
+    //       //this.arrayPathfile_slide_Posted =[];
+    //     } 
+    //    });    
+    //   //  if( this.arrayPathfile.length == 4 ) break;
+    //     }
+    // }, 1000);  
+
+    //อัพโหลด path slide
+
+     //อัพโหลด path Product
+    //  setTimeout(() => { 
+    //   debugger
+    //   for (let index = 0; index < this.arrayfile_product.length; index++) {
+    //     this.apiService.uploadimage(this.arrayfile_product[index]).then((response) => {   
+          
+    //     this.resultFile = response; 
+    //     this.arrayPathfile_product_Posted.push(this.resultFile.imageUrl); 
+    //     if( index == this.arrayfile_slide.length-1 )
+    //     {  
+          
+    //       //this.arrayPathfile_product_Posted =[];
+    //     } 
+    //     setTimeout(() => {
+          
+    //       /** spinner ends after 5 seconds */
+    //       this.spinner.hide();
+    //     }, 0); 
+    //    });    
+    //   //  if( this.arrayPathfile.length == 4 ) break;
+    //     }
+    // }, 1000);  
+
+    //อัพโหลด path slide
+
+    setTimeout(() => {
+      debugger
+      this.postpra(data,this.arrayPathfile_product_Posted,this.arrayPathfile_slide_Posted);
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 5000); 
   }
   
 
- 
+ clickmap(){
+
+  Swal.fire({
+    title: 'คุณต้องการใช้ (ตำแหน่งตรงนี้) แสดงแผนที่ ของร้านค้าใช่หรือไม่',
+    text: "",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'ตกลง',
+    cancelButtonText:'ยกเลิก'
+  }).then((result) => {
+    if (result.value) {
+        this.domap();
+
+    //  this.getip();
+
+
+    
+    }
+    else{
+
+        Swal.fire(
+            'ท่านไม่ได้ใช้ตำแหน่งตรงนี้ แสดงใน ร้านค้าของท่าน',
+            'ขอบคุณครับ',
+            'success'
+          )
+          
+    //       setTimeout(() => { 
+    //         window.location.href = window.location.origin+'/promotion';
+         
+    // }, 3000);
+
+    }
+  }) 
+
+ }
+
+  domap(){
+
+    if (window.navigator && window.navigator.geolocation) {
+        window.navigator.geolocation.getCurrentPosition(
+            position => {
+                // this.geolocationPosition = position,
+  
+                   
+                    this.model.Longitude = position.coords.longitude,
+                    this.model.Latitude =  position.coords.latitude,
+  
+                    localStorage.setItem("Longitude",this.model.Longitude);
+                    localStorage.setItem("Latitude",this.model.Latitude);
+                    console.log(position)
+                    // this.lat = 14.598382
+                    // this.lng = 100.447521
+            },
+            error => {
+                switch (error.code) {
+                    case 1:
+                        console.log('Permission Denied');
+                        break;
+                    case 2:
+                        console.log('Position Unavailable');
+                        break;
+                    case 3:
+                        console.log('Timeout');
+                        break;
+                }
+            }
+        );
+    };
+  }
   
 }

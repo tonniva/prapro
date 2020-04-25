@@ -17,9 +17,9 @@ footer {
     min-height: 15vh;
     border: dotted;
     min-height: 15vh;
-    font-size: 7vw;
+    font-size: 1rem;
     text-align: center;
-    background: url(https://www.sikhiu.dk/wp-content/uploads/2019/02/66091330-stock-vector-thai-art-pattern-on-black-background-vector-illustration.jpg) center center;
+    background: #333;
     background-size: cover;
 }
 
@@ -28,6 +28,6 @@ footer {
     position: absolute;
     left: 50%;
     top: 50%;
-    line-height: 1;
+    line-height: 1.5;
     transform: translate(-50%, -53%);
 }

@@ -56,22 +56,23 @@ export class PramoonregisterComponent implements OnInit {
     this.spinner.show();
 
     this.userId = localStorage.getItem("userId");
-
+    if(this.userId==null){ 
+      window.location.href = window.location.origin+"/landing";
+    }
+     
     this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response
-  
+   
       setTimeout(() => { 
         this.spinner.hide();
       }, 1000);
       
     if( this.Registerdetail.length > 0 && this.Registerdetail[0].status_pramoon_register == "waitingcheck"){ 
    
-      this.router.navigate(['/list/two'])  
+       this.router.navigate(['/list/two'])  
   } 
    }); 
  
-    // if(this.status_pramoon_register !="waitingcheck" && this.status_pramoon_register){ 
-    //     this.router.navigate(['/list/two'])  
-    // } 
+ 
 
  
   }
@@ -158,57 +159,11 @@ export class PramoonregisterComponent implements OnInit {
     }  else if(data.tel =="" || data.tel.trim().length == 0){
       this.UtilService.showError("กรุณากรอก <br/> เบอร์โทร","")
       return;
-    }else if(!this.UtilService.CheckMobileNumber(data.tel)){
-      var msg = 'โปรดกรอกหมายเลขโทรศัพท์ 10 หลัก <br/> ด้วยรูปแบบดังนี้ 08XXXXXXXX <br/> ไม่ต้องใส่เครื่องหมายขีด (-) วงเล็บหรือเว้นวรรค';
-      this.UtilService.showError(msg,"")
-
     } else if(data.email == "" || data.email.trim().length == 0){ 
       this.UtilService.showError("กรุณากรอก <br/> Email","")
       return;
-    }  
-    else if(!this.UtilService.ValidateEmail(data.email)){
-        this.UtilService.showError("กรุณากรอก <br/> Email ให้ถูกต้อง","");
-        return;
-    }
-    else if(data.BankName == ""){ 
-      this.UtilService.showError("กรุณากรอก <br/> ชื่อธนาคาร","")
-      return;
-    }  
-    else if(data.bankaccount == ""){ 
-      this.UtilService.showError("กรุณากรอก <br/> เลขบัญชี","")
-      return;
-    }  
-    else if(!this.UtilService.CheckBankNumber(data.bankaccount)){
-      var msg = 'โปรดกรอกเลข บัญชี 10 หลัก <br/> ด้วยรูปแบบดังนี้ 0651xxxxxx <br/> ไม่ต้องใส่เครื่องหมายขีด (-) วงเล็บหรือเว้นวรรค';
-      this.UtilService.showError(msg,"")
-
-    }
-    else if(typeof(this.image1) ==='undefined'){
-      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัตรประขาชน ","");
-      return;
-    }
-    else if(typeof(this.image2) ==='undefined'){
-      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน ","");
-      return;
-    }
-    else if(typeof(this.image3) ==='undefined'){
-      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัตรประขาชน พร้อม ถ่ายกับข้อความ หลวงปู่ทวด","");
-      return;
-    }
-    else if(typeof(this.image4) ==='undefined'){
-      this.UtilService.showError("กรุณา อัพโหลด <br/> รูปภาพ บัญชีธนาคาร ","");
-      return;
-    }
-    else{
-
-      // this.UtilService.showConfirm("คุณต้องการลงทะเบียนใช่หรือไม่"
-      // ,"เมื่อทำการลงทะเบียนแล้ว <br/> ไม่สามารถแก้ไขได้ <br/> ต้องแจ้ง ผ่านแอดมินเท่านั้น <br/> เพื่อเป็นการป้องกัน 'มิจฉาชีพ' ปลอมแปลง"
-      // ,function(){ 
-       
-      //     this.Dopost(data);  
-        
-      // }); 
-
+    } 
+    else{ 
       Swal.fire({
         title: 'คุณต้องการลงทะเบียนใช่หรือไม่',
         text: "เมื่อทำการลงทะเบียนแล้ว ไม่สามารถแก้ไขได้ ต้องแจ้ง ผ่านแอดมินเท่านั้น เพื่อเป็นการป้องกัน 'มิจฉาชีพ' ปลอมแปลง",
@@ -237,41 +192,87 @@ export class PramoonregisterComponent implements OnInit {
     this.arrayfile[2] =this.image3;
     this.arrayfile[3] =this.image4;
 
-   
-    this.arrayPathfile=[];
-    for (let index = 0; index < 4; index++) { 
-        this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
-        this.resultFile = response; 
-        this.arrayPathfile.push(this.resultFile.imageUrl);    
-      
-        if(index ==3 ){
+    this.arrayPathfile[0]=null;
+    this.arrayPathfile[1]=null;
+    this.arrayPathfile[2]=null;
+    this.arrayPathfile[3]=null;
 
-          setTimeout(() => {   
-      
+    this.arrayPathfile=[];
+
+
+          
             localStorage.setItem("email", data.email); 
             data.userId = localStorage.getItem("userId"); 
             data.access_token = localStorage.getItem("access_token");
             data.id_token = localStorage.getItem("id_token"); 
 
+   
+            const date_webstart =  new Date().valueOf()
+            const current_date =  new Date().valueOf()
+
+  
+            const diffTime = Math.abs(current_date - date_webstart);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+
+
+             data.diffDays = 30-diffDays
+        
  
-            this.apiService.PramoonRegister(data,this.arrayPathfile).then((response) => {  
-              Swal.fire(
-                'สำเร็จ !',
-                'ขอบคุณครับ',
-                'success'
-              )
-              this.router.navigate(['/list/two'])   
-              setTimeout(() => { 
-                this.spinner.hide();
-              }, 100);
-            });   
+    this.apiService.PramoonRegister(data,this.arrayPathfile).then((response) => {  
+      Swal.fire(
+        'สำเร็จ !',
+        'ขอบคุณครับ',
+        'success'
+      )
+      this.router.navigate(['/list/two'])   
+      setTimeout(() => { 
+        this.spinner.hide();
+      }, 100);
+    });  
+    // for (let index = 0; index < 4; index++) { 
+    //     this.apiService.uploadimage(this.arrayfile[index]).then((response) => {   
+    //     this.resultFile = response; 
+    //     this.arrayPathfile.push(this.resultFile.imageUrl);    
+      
+    //     if(index ==3 ){
+
+    //       setTimeout(() => {   
+      
+    //         localStorage.setItem("email", data.email); 
+    //         data.userId = localStorage.getItem("userId"); 
+    //         data.access_token = localStorage.getItem("access_token");
+    //         data.id_token = localStorage.getItem("id_token"); 
+
+   
+    //         const date_webstart =  new Date().valueOf()
+    //         const current_date =  new Date().valueOf()
+
+  
+    //         const diffTime = Math.abs(current_date - date_webstart);
+    //         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+
+
+    //          data.diffDays = 30-diffDays
+        
+ 
+    //         this.apiService.PramoonRegister(data,this.arrayPathfile).then((response) => {  
+    //           Swal.fire(
+    //             'สำเร็จ !',
+    //             'ขอบคุณครับ',
+    //             'success'
+    //           )
+    //           this.router.navigate(['/list/two'])   
+    //           setTimeout(() => { 
+    //             this.spinner.hide();
+    //           }, 100);
+    //         });   
     
-      }, 0);
-        }
-       });   
+    //   }, 0);
+    //     }
+    //    });   
 
 
-      } 
+    //   } 
    
 
 

@@ -1,82 +1,231 @@
 <ngx-spinner>
 </ngx-spinner>
+
+
+<!-- Facebook Pixel Code -->
+<script>
+    ! function(f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '509997103029704');
+    fbq('track', 'Postlist');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+                    src="https://www.facebook.com/tr?id=509997103029704&ev=PageView&noscript=1"
+                  /></noscript>
+<!-- End Facebook Pixel Code -->
 <div class="wrapper-post-content">
     <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
-        <div class="container">
-            <div class="wrapper-title-header"> สร้างรายการ
+        <div class="container wrapper-pos">
+            <div class="wrapper-title-header"> สร้าง web Landing
             </div>
 
             <div class="row">
-                <div class="col wrapper-upload ">
-                    <span class="hiddenFileInput post-click">
+                <div class="wrapper-header-box">
+                    <div class="col-12 wrapper-upload ">
+                        <div class="wrapper-title-header text-left"> อัพโหลด Header (แก้ไข)
+                        </div>
+                        <span class="hiddenFileInput post-click">
                                 <input name="theFile1" class="wrapper-theFile bb" type="file" accept="image/*" (change)="changeListener_one($event)"/>
                         </span>
-                    <div>
-                        <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1" [hidden]="!temp_path_image1">
+                        <div>
+                            <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1" [hidden]="!temp_path_image1">
+                        </div>
                     </div>
                 </div>
-                <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image1 == null}">
-                    <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image1 != null &&  temp_path_image2 == null}">
+                <div class="wrapper-header-box">
+                    <div class="col-12 wrapper-upload">
+                        <div class="wrapper-title-header text-left"> อัพโหลด รูปสินค้า
+                        </div>
+                        <span class="hiddenFileInput post-click">
                             <input name="theFile2"  class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_two($event)"/>
                     </span>
-                    <div>
-                        <img class="img-fluid wrapper-uploaded" [src]="temp_path_image2" [hidden]="!temp_path_image2">
                     </div>
                 </div>
-                <div class="w-100"></div>
-                <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image2 == null}">
-                    <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image2 != null  &&  temp_path_image3 == null}">
-                            <input name="theFile3" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_three($event)"/>
+                <div class="container mt-3 wrapper-slide">
+                    <div class="row col-12">
+                        <div class="col-6" *ngFor="let item of arrayPathfile_product;let indexliistselect = index">
+                            <img src="{{item}}" class="w-100" alt="Italian Trulli " [hidden]="!item">
+                            <div class="text-center" (click)="deleteimage(indexliistselect,'product') "><button type="button" class="btn btn-danger">ลบรูป</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 wrapper-upload">
+                    <div class="wrapper-title-header-20"> อัพโหลด รูป รีวิว อื่นๆ (รายการ Slide)
+                    </div>
+                    <span class="hiddenFileInput post-click">
+                            <input name="theFile5" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_five($event)"/>
                     </span>
                     <div>
-                        <img class="img-fluid wrapper-uploaded" [src]="temp_path_image3" [hidden]="!temp_path_image3">
+                        <img class="img-fluid wrapper-uploaded">
                     </div>
                 </div>
-                <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image3 == null}">
-                    <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image3 != null  &&  temp_path_image4 == null}">
-                            <input name="theFile4" class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_four($event)"/>
-                    </span>
-                    <div>
-                        <img class="img-fluid wrapper-uploaded" [src]="temp_path_image4" [hidden]="!temp_path_image4">
+                <div class="container mt-3 wrapper-slide">
+                    <div class="row col-12">
+                        <div class="col-6" *ngFor="let item of arrayPathfile_slide;let indexliistselect = index">
+                            <img src="{{item}}" class="w-100" alt="Italian Trulli " [hidden]="!item">
+                            <div class="text-center" (click)="deleteimage(indexliistselect,'slide') "><button type="button" class="btn btn-danger">ลบรูป</button></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
+                <!-- <div class="owl-carousel owl-theme card">
+                    <div class="item" *ngFor="let item of arrayPathfile_slide; let indexliistselect = index">
+                        <img src="{{item}}" class="w-100" alt="Italian Trulli " [hidden]="!item">
 
-        <div class="container pt-3">
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">ราคาเปิดประมูล</span>
-                </div>
-                <input type="number" class="form-control" ngModel ngDefaultControl rows="5" cols="60" required name="pricestart" aria-label="Amount (to the nearest dollar)">
-                <div class="input-group-append">
-                    <span class="input-group-text">.00</span>
-                </div>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">วันปิดประมูล</span>
-                </div>
-                <input type="datetime-local" class="dateEnd" id="dateEnd" ngModel ngDefaultControl rows="5" cols="60" required name="dateEnd">
-                <!-- <div class="input-group-append">
-                    <span class="input-group-text"></span>
+                    </div>
                 </div> -->
-            </div>
 
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">รายละเอียด</span>
+                <div class="wrapper-title-header-contact ">ตัวอย่าง slide รีวิว</div>
+                <div class="owl-carousel owl-theme">
+                    <div *ngFor="let item of arrayPathfile_slide">
+                        <div class="item">
+                            <img src="{{item}}" class="w-100" alt="Italian Trulli " [hidden]="!item">
+                        </div>
+                    </div>
                 </div>
-                <textarea class="form-control wrapper-text-area" ngModel ngDefaultControl name="description" rows="5" cols="60" required></textarea>
+
+
+
+
             </div>
-            <app-here-map></app-here-map>
-        </div>
-        <div class="wrapper-input p-3">
-            <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>
         </div>
 
+        <div class="wrapper-title-header-contact ">ช่องทางการติดต่อ</div>
+
+        <div class="Line pb-4" (click)="insertline()">
+
+        </div>
+
+        <div class="facebook" (click)="insertfacebook()">
+
+        </div>
+
+        <div class="tel" (click)="inserttel()">
+
+        </div>
+        <div class="youtube" (click)="insertyoutube()">
+
+        </div>
+
+        <div class="wrapper-title-header-contact ">ช่องทาง Shopee (ใส่ ลิ้ง) </div>
+        <div class="shopee" (click)="insertshopee()">
+
+        </div>
+        <div class="wrapper-title-header-contact ">ช่องทาง LAZADA (ใส่ ลิ้ง) </div>
+        <div class="lazada" (click)="insertlazada()">
+
+        </div>
+        <div class="wrapper-title-header-contact ">เครื่องมือ ช่วย (ทางเทคนิค)</div>
+        <div class="line-notify" (click)="insertlinenotify()">
+
+        </div>
+
+        <div class="facebook-pixel" (click)="insertfacebookpixel()">
+
+        </div>
+
+        <div class="wrapper-title-header-contact ">รายละเอียดสินค้า</div>
+        <div class="container pt-3 ">
+
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    <span class="input-group-text ">ราคาสินค้า</span>
+                </div>
+                <input type="number " class="form-control " ngModel ngDefaultControl rows="5 " cols="60 " required name="pricesell" aria-label="Amount (to the nearest dollar) ">
+                <div class="input-group-append ">
+                    <span class="input-group-text ">.00</span>
+                </div>
+            </div>
+
+            <div class="input-group ">
+                <div class="input-group-prepend ">
+                    <span class="input-group-text ">รายละเอียด สินค้า</span>
+                </div>
+                <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description " rows="5 " cols="60 " required></textarea>
+            </div>
+            <!-- <app-here-map></app-here-map> -->
+            <div class="wrapper-title-header-contact" (click)="clickmap()">ใช้ตำแหน่ง ตรงนี้ เป็นพิกัดร้าน (คลิ๊ก)</div>
+            <hr class="hr-1 ">
+            <!-- <div class="wrapper-title-header-contact ">ช่องทางการติดต่อ</div>
+            <hr class="hr-1 ">
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    <span class="input-group-text ">ID LINE ติดต่อ</span>
+                </div>
+                <input type="text " class="form-control " ngModel ngDefaultControl rows="5 " cols="60 " required name="line" aria-label="Amount (to the nearest dollar) ">
+                <div class="input-group-append ">
+                    <span class="input-group-text "></span>
+                </div>
+            </div>
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    <span class="input-group-text ">Fackbook ติดต่อ</span>
+                </div>
+                <input type="text " class="form-control " ngModel ngDefaultControl rows="5 " cols="60 " required name="facebook" aria-label="Amount (to the nearest dollar) ">
+                <div class="input-group-append ">
+                    <span class="input-group-text "></span>
+                </div>
+            </div>
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    <span class="input-group-text ">shopee shop</span>
+                </div>
+                <input type="text " class="form-control " ngModel ngDefaultControl rows="5 " cols="60 " required name="shopee" aria-label="Amount (to the nearest dollar) ">
+                <div class="input-group-append ">
+                    <span class="input-group-text "></span>
+                </div>
+            </div>
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    <span class="input-group-text ">Lazada shop</span>
+                </div>
+                <input type="text " class="form-control " ngModel ngDefaultControl rows="5 " cols="60 " required name="Lazada" aria-label="Amount (to the nearest dollar) ">
+                <div class="input-group-append ">
+                    <span class="input-group-text "></span>
+                </div>
+            </div>
+
+            <div class="input-group ">
+                <div class="input-group-prepend ">
+                    <span class="input-group-text ">LINE Notify Token</span>
+                </div>
+                <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="linenotifytoken" rows="5 " cols="60 " required></textarea>
+            </div>
+            <div class="input-group ">
+                <div class="input-group-prepend ">
+                    <span class="input-group-text ">Facebook pixel key</span>
+                </div>
+                <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="facebookpixelkey" rows="5 " cols="60 " required></textarea>
+            </div>
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    <span class="input-group-text ">เบอร์โทรสั่งของ</span>
+                </div>
+                <input type="text " class="form-control " ngModel ngDefaultControl rows="5 " cols="60 " required name="tel" aria-label="Amount (to the nearest dollar) ">
+                <div class="input-group-append ">
+                    <span class="input-group-text "></span>
+                </div>
+            </div> -->
+        </div>
+        <div class="wrapper-input p-3 ">
+            <button type="submit " value="submit " class="btn btn-secondary w-100 wrapper-font-btn ">ยืนยัน</button>
+        </div>
     </form>
-
 </div>

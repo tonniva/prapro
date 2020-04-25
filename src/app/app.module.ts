@@ -1,5 +1,5 @@
  
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -41,6 +41,16 @@ import { EditorderpostComponent } from './editorderpost/editorderpost.component'
  
 
 import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { CollectComponent } from './collect/collect.component';
+import { FrameComponent } from './frame/frame.component';
+import { FrameListComponent } from './frame-list/frame-list.component';
+import { FramepostComponent } from './framepost/framepost.component';
+import { FrameDetailComponent } from './frame-detail/frame-detail.component';
+import { PromotionComponent } from './promotion/promotion.component';
+import { PreviewComponent } from './preview/preview.component';
+import { PaybillComponent } from './paybill/paybill.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,9 +70,18 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     PramoolBidComponent,
     HistorydetailComponent,
     HereMapComponent,
-    EditorderpostComponent
+    EditorderpostComponent,
+    CollectComponent,
+    FrameComponent,
+    FrameListComponent,
+    FramepostComponent,
+    FrameDetailComponent,
+    PromotionComponent,
+    PreviewComponent,
+    PaybillComponent
   ],
-  imports: [
+  imports: [ 
+    BrowserAnimationsModule,
     Ng2ImgMaxModule,
     BrowserModule,
     AppRoutingModule,

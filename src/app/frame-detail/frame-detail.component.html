@@ -1,0 +1,106 @@
+<ngx-spinner>
+</ngx-spinner>
+<div class="wrapper-image-detail" *ngIf="listdetail!=null">
+    <div class="wrapper-image">
+        <img class="shadow item img-fluid wrapper-image" [src]="listdetail.imageone">
+        <img class="shadow item img-fluid wrapper-image" [src]="listdetail.imagetwo">
+        <img class="shadow item img-fluid wrapper-image" [src]="listdetail.imagethree">
+        <img class="shadow item img-fluid wrapper-image" [src]="listdetail.imagefour">
+
+    </div>
+
+    <div class="container">
+        <hr class="hr-white" />
+        <div class="row pb-3">
+            <div class="row pb-1" [hidden]="!calcheckconditonstatus_pra_checking(listdetail)">
+                <div class="col d-flex wrapper-box-status" [hidden]="(listdetail.status_pramoon_check =='checking')">
+                    <img src="https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/Ball-Drop-Preloader-1.gif" class="wrapper-ball" />
+                    <span class="checking">กำลังช่วยตรวจสอบพระ...</span>
+                </div>
+            </div>
+            <div class="row pb-1" [hidden]="!calcheckconditonstatus_pra_true(listdetail)">
+                <div class="col d-flex wrapper-box-status" [hidden]="(listdetail.status_pramoon_check =='checking')">
+                    <img src="https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/thumbs-clipart-outline-4.png" class="wrapper_pra_true" />
+                    <span class="like">กรอบแท้</span>
+                </div>
+            </div>
+            <div class="row pb-1" [hidden]="!calcheckconditonstatus_pra_false(listdetail)">
+                <div class="col d-flex wrapper-box-status" [hidden]="(listdetail.status_pramoon_check =='checking')">
+                    <img src="https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/unlike-png-8.png" class="wrapper_pra_false" />
+                    <span class="un-like">กรอบไม่แท้</span>
+                </div>
+            </div>
+            <div class="row pb-1" [hidden]="!calcheckconditonstatus_pra_criminals(listdetail)">
+                <div class="col d-flex wrapper-box-status" [hidden]="(listdetail.status_pramoon_check =='checking')">
+                    <img src="https://www.pngrepo.com/png/116085/170/criminal.png" class="wrapper_pra_criminals" />
+                    <span class="criminals">มิจฉาชีพ</span>
+                </div>
+            </div>
+        </div>
+
+        <hr class="hr-white" />
+
+
+
+        <div class="wrapper-detial-price">
+            ราคาขาย {{listdetail.pricesell || 0 | number}} บาท
+        </div>
+        <div class="wrapper-input p-3">
+            <button *ngIf="!Ishidebtnpramoon" routerLink="/list/bid/{{id_token}}/{{index_list_select}}" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">กดประมูล</button>
+        </div>
+        <div class="text-success  wrapper-description">
+            {{listdetail.description}}
+        </div>
+        <div class="text-info" [hidden]="!ishowdetail">
+            {{listdetail.pricestart}}
+        </div>
+        <div class="text-light wrapper-primary" [hidden]="ishowdetail">
+            {{listdetail.description}}
+        </div>
+        <div class="wrapper-procee-pra">
+            ข้อมูลส่วนตัว เจ้าของพระ<br/> {{listdetail.displayName}}
+            <br/>
+
+            <div class="row">
+                <div class="col p-4 d-flex justify-content-center" *ngIf="listdetail.imagefour !=null">
+                    <img class="card-img-top" [src]="listdetail.imagefour" alt="Card image cap">
+                </div>
+            </div>
+            <hr class="hr-white" /> คุณ {{firstname_own_pra}} {{lastname_own_pra}} {{tell_own_pra}}
+            <div class="wrapper-procee-pra">
+                {{bankname_own_pra}}
+            </div>
+            <div class="wrapper-procee-pra">
+                เลขบัญชี ธนาคาร {{bankaccount_own_pra}}
+            </div>
+            <hr class="hr-white" />
+
+
+        </div>
+        <div>
+            <p id="demo"></p>
+
+            <h1 class="ct">แสดงตำแหน่งของผู้ประมูล เพื่อป้องกัน "มิจฉาชีพ"</h1>
+
+            <agm-map [latitude]="lat" [longitude]="lng">
+                <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            </agm-map>
+        </div>
+        <div class="wrapper-procee-pra">
+            ช่วยกันประเมิน สอดส่องได้ เพียงแค่ 1 คลิ๊ก ของท่าน จะนำไปประมวณผล ช่วยคัดกรอง จาก "มิจฉาชีพ"
+        </div>
+        <hr class="hr-white" />
+
+        <div class="row p-4">
+            <button [ngClass]="{'disabled': Isdisable}" #submitButton (click)="clickonclick_count_pra_true();submitButton.disabled = true" class="btn btn-success btn-lg btn-block  wrapper-font-btn">พระแท้</button>
+        </div>
+        <div class="row p-4">
+            <button [ngClass]="{'disabled': Isdisable}" #submitButton (click)="clickonclick_count_pra_false();submitButton.disabled = true" class="btn btn-secondary btn-lg btn-block  wrapper-font-btn">พระไม่แท้</button>
+        </div>
+        <div class="row p-4">
+            <button [ngClass]="{'disabled': Isdisable}" #submitButton (click)="clickonclick_count_pra_criminals();submitButton.disabled = true" class="btn btn btn-danger btn-lg btn-block  wrapper-font-btn">เค้าเป็นมิจฉาชีพ</button>
+        </div>
+
+        <hr class="hr-white" />
+    </div>
+</div>

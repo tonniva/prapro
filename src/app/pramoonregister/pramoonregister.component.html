@@ -6,6 +6,34 @@
 <ngx-spinner>
 </ngx-spinner>
 
+
+<!-- Facebook Pixel Code -->
+<script>
+    ! function(f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '509997103029704');
+    fbq('track', 'Register');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+                src="https://www.facebook.com/tr?id=509997103029704&ev=PageView&noscript=1"
+              /></noscript>
+<!-- End Facebook Pixel Code -->
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
 
 <div class="p-3 wrapper-bg ">
@@ -35,7 +63,7 @@
 
 
         </div> -->
-        <div class="text-white wrapper-title-pramool">ลงทะเบียนประมูล</div>
+        <div class="text-white wrapper-title-pramool">ลงทะเบียนใช้บริการ</div>
         <div class="row pt-4">
             <div class="col text-white f-s text-center">
                 ชื่อ
@@ -70,7 +98,7 @@
         </div>
 
 
-        <div class="row pt-4">
+        <!-- <div class="row pt-4">
 
             <div class="col text-white f-s text-center">
                 ชื่อธนาคาร
@@ -86,8 +114,8 @@
                             <option  value='ธนาคารทหารไทย'>ธนาคารทหารไทย</option>
                         </select>
             </div>
-        </div>
-        <div class="row pt-4">
+        </div> -->
+        <!-- <div class="row pt-4">
 
             <div class="col text-white f-s text-center">
                 เลขบัญชีธนาคาร
@@ -95,8 +123,8 @@
             <div class="col">
                 <input class="form-control text-center" type="number" name="bankaccount" placeholder="เลขบัญชีธนาคาร" ngModel>
             </div>
-        </div>
-        <div class="row pt-4">
+        </div> -->
+        <!-- <div class="row pt-4">
             <div class="container">
                 <div class="wrapper-title-upload">
                     อัพโหลดไฟล์ ส่วนตัว
@@ -114,7 +142,7 @@
                         </div>
                     </div>
                     <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image1 == null}">
-                        รูปภาพ ทะเบียนบ้าน ชื่อตรงกับบัตรประชาชน
+                        รูปภาพ ด่านหลังบัตรประขาชน
                         <div class="bg-gold">
                             <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image1 != null &&  temp_path_image2 == null }">
                                         <input [ngClass]="{'click-heigth': temp_path_image2 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_two($event)"/>
@@ -126,7 +154,7 @@
                     </div>
                     <div class="w-100"></div>
                     <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image2 == null}">
-                        รูปภาพ บัตรประขาชน ถ่ายพร้อม กับ หน้าตัวเอง
+                        รูปภาพ ใบขับขี่
                         <div class="bg-gold">
                             <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image2 != null &&  temp_path_image3 == null }">
                                         <input [ngClass]="{'click-heigth': temp_path_image3 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_three($event)"/>
@@ -137,7 +165,7 @@
                         </div>
                     </div>
                     <div class="col wrapper-upload" [ngClass]="{'non-active': temp_path_image3 == null}">
-                        รูปภาพ บัญชีธนาคาร
+                        รูปภาพ รูปภาพด้านหลัง ใบขับขี่
                         <div class="bg-gold">
                             <span class="hiddenFileInput" [ngClass]="{'post-click': temp_path_image3 != null &&  temp_path_image4 == null }">
                                         <input [ngClass]="{'click-heigth': temp_path_image4 == null}" name="theFile" type="file" accept="image/*" (change)="changeListener_four($event)"/>
@@ -149,7 +177,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="wrapper-input p-3">
             <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>

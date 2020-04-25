@@ -57,6 +57,16 @@
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
+                    <span class="input-group-text">ราคาปิดด่วน/ราคาขาย</span>
+                </div>
+
+                <input type="number" [(ngModel)]="listdetail.pricesell" class="form-control" ngModel ngDefaultControl rows="5" cols="60" required name="pricesell" aria-label="Amount (to the nearest dollar)">
+                <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
                     <span class="input-group-text">วันปิดประมูล</span>
                 </div>
 

@@ -6,7 +6,7 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -50,7 +50,6 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 60px;
         display: flex;
         align-items: center;
         background-color: #333;
@@ -60,6 +59,7 @@
     
     .toolbar img {
         margin: 0 16px;
+        width: 10%;
     }
     
     .toolbar #twitter-logo {
@@ -72,7 +72,7 @@
     }
     
     .content {
-        display: flex;
+        /* display: flex; */
         margin: 40px auto 32px;
         padding: 0 16px;
         max-width: 960px;
@@ -81,32 +81,32 @@
     }
     
     .Logo {
-        border-radius: 30px;
+        border-radius: 5px;
     }
     
     .fontsize-title {
-        font-size: 5vw;
+        font-size: 2rem;
     }
 </style>
 
 <!-- Toolbar -->
 
-<div class="toolbar" role="banner" routerLink="/landing">
+<div class="toolbar" role="banner" routerLink="/landing" [hidden]="!ishide()">
 
-    <img width="40" class="Logo" alt="Angular Logo" src="https://fq.lnwfile.com/dxsfhk.jpg" />
-    <span class="fontsize-title">เฉพาะหลวงปู่ทวด</span>
+    <img width="40" class="Logo" alt="Angular Logo" src="https://media2.s-nbcnews.com/j/newscms/2019_16/2813741/190408-facebook-documents-privacy-main-kh_f4a6bfef6b06cef6f61fdc00decbc67e.fit-760w.jpg" />
+    <span class="fontsize-title">เว็บ Sale Page</span>
     <div class="spacer"></div>
-    <img width="40" class="Logo" alt="Angular Logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-ronjrqSF1EIuIocSHV18RIDfEm6RqiCYkXIg38SEFguWjGVH" />
+    <!-- <img width="40" class="Logo" alt="Angular Logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-ronjrqSF1EIuIocSHV18RIDfEm6RqiCYkXIg38SEFguWjGVH" /> -->
 </div>
-<div [hidden]="!ishide()" class="text-light wrapper-back" (click)="goblak()">
+<!-- <div [hidden]="!ishide()" class="text-light wrapper-back" (click)="goblak()">
     กลับ
-</div>
+</div> -->
 <div class="content" role="main">
 
 
 </div>
 
 
-<app-footer></app-footer>
+<app-footer [hidden]="!ishide()"></app-footer>
 
 <router-outlet></router-outlet>

@@ -66,6 +66,7 @@ optionsGetProfile = {
   this.body.set('imgagehomeregistration', file[2]); //ทะเบียนบ้าน
   this.body.set('imgagabnkaccount', file[3]); //สมุทรบัญชี
   this.body.set('status_pramoon_register', "waitingcheck");
+  this.body.set('diffdate', item.diffdate);
 
   localStorage.setItem("status_pramoon_register","waitingcheck"); 
 
@@ -77,15 +78,10 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/register'
 
 
 
-uploadimage(profileImage:File){  
-   
-  const Pramoonuploadimage = {
-    headers: new HttpHeaders().set('Access-Control-Allow-Origin', '*')
-    .set("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept")
-  };  
+uploadimage(profileImage:File){   
 const formData = new FormData();
 formData.append('image', profileImage);
-return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/upload/image-upload', formData,Pramoonuploadimage)
+return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/upload/image-upload', formData)
  .toPromise()
  .then((response) => response);
 }
@@ -96,15 +92,16 @@ return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/upload/image-up
 
 
 postpramoon(item:any,file:any,token:any){  
+  debugger
       // ต้องใช้ Token login
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     .set('Authorization', 'Bearer '+token)
   };  
   this.body.set('pricestart', item.pricestart);
-  this.body.set('priceend', "");
+  this.body.set('pricesell', item.pricesell);
   this.body.set('date',(new Date()).toString());
-  this.body.set('dateend',item.dateEnd);
+  this.body.set('dateend',item.dateend);
   this.body.set('description', item.description); 
   this.body.set('imageone',file[0]); //บัตรประชาชน
   this.body.set('imagetwo', file[1]);  //บัตรประชาชน พร้อม เขียนข้อความ 
@@ -123,7 +120,23 @@ postpramoon(item:any,file:any,token:any){
 
   this.body.set('pictureUrl',item.pictureUrl);   
   this.body.set('displayName',item.displayName);   
-  
+
+
+  this.body.set('product_header',item.product_header);   
+  this.body.set('product_picture',item.product_picture);   
+  this.body.set('slide_picture',item.slide_picture);   
+
+
+  this.body.set('line',item.lineid);   
+  this.body.set('facebook',item.facebooklink);   
+  this.body.set('linenotifytoken',item.linenotify);   
+  this.body.set('facebookpixelkey',item.facebookpixel);   
+  this.body.set('tel',item.telsale);   
+  this.body.set('shopee',item.shopeelink);   
+  this.body.set('lazada',item.lazadalink);   
+
+  // this.UtilService.GetAPIurl()+
+ 
 return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramooncreate', this.body.toString(), PramoonRegisteroptions)
 .toPromise()
 .then((response) => response);
@@ -227,6 +240,7 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   itemedit= {
     "user":"",
     "pricestart":"",
+    "pricesell":"", 
     "description":"",
     "dateend":"", 
     "imageone":"",
@@ -241,6 +255,7 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
     };   
  this.itemedit.user = detail._id.toString();  
   this.itemedit.pricestart = detail.pricestart.toString();  
+  this.itemedit.pricesell = detail.pricesell.toString();  
   this.itemedit.description = detail.description.toString();  
   this.itemedit.imageone = arrayPathfile[0];
   this.itemedit.imagetwo = arrayPathfile[1];
@@ -249,8 +264,8 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   this.itemedit.dateend = detail.dateEnd;  
   this.itemedit.updated = new Date().toString();
   
-   
-  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/edit-order-detail',this.itemedit
+  // this.UtilService.GetAPIurl()+
+  return this.httpClient.post( this.UtilService.GetAPIurl()+'/api/pramoon/edit-order-detail',this.itemedit
   ,PramoonRegisteroptions)
   .toPromise()
   .then((response) => response); 
@@ -281,6 +296,29 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   .then((response) => response); 
   }
 
+
+
+    bill= {
+    "message":"",
+    "imageThumbnail":"",
+    "imageFullsize":"",
+    "token":""
+    } 
+    linenotifyPaybill(data:any){   
+      const option = {
+        headers: new HttpHeaders().set('Content-Type','application/json')
+      };    
+      this.bill.message = data.message; 
+      this.bill.imageThumbnail = data.imageThumbnail; 
+      this.bill.imageFullsize = data.imageThumbnail; 
+      this.bill.token = this.UtilService.tokenNotify();
+
+      return this.httpClient.post('http://localhost:3000/noti', this.bill,option)
+       .toPromise()
+       .then((response) => response);
+      }
+      
+      
 }
 
 

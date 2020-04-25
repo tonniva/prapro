@@ -1,8 +1,8 @@
 .wrapper-uploaded {
-    position: absolute;
-    top: 1px;
+    position: relative;
+    top: -2rem;
     left: 0px;
-    height: 24vh;
+    height: auto;
     width: 100%;
 }
 
@@ -14,12 +14,11 @@
 
 //upload image
 .wrapper-upload {
-    min-height: 25vh;
-    background-color: #d8d8d8;
+    min-height: 15vh;
+    background-color: #333333;
     border: dashed;
     border-color: #dbcb19;
-    margin: 10px;
-    background: url(https://cdn.pixabay.com/photo/2016/02/19/15/29/frame-1210511_960_720.png) no-repeat center center;
+    //background: url(https://cdn.pixabay.com/photo/2016/02/19/15/29/frame-1210511_960_720.png) no-repeat center center;
     background-size: cover;
 }
 
@@ -44,10 +43,13 @@
 
 .post-click {
     background: url(https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/touch-here.gif) no-repeat center center;
-    background-size: contain;
-    height: 60%;
-    position: absolute;
-    left: 15%;
+    background-size: 81px;
+    height: 31vw;
+    position: relative;
+    left: 5%;
+    top: -22%;
+    // width: 35rem;
+    margin-top: -5rem;
 }
 
 //upload image
@@ -62,5 +64,149 @@
 }
 
 .wrapper-font-btn {
-    font-size: 8vw;
+    font-size: 1.5rem;
+}
+
+.wrapper-title-header {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 20px;
+}
+
+.input-group-text {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+input {
+    font-size: 1.5rem;
+}
+
+.input-group {
+    padding-bottom: 20px;
+}
+
+.wrapper-title-header-contact {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 26px;
+    border: 2px dashed;
+}
+
+.wrapper-title-header-20 {
+    color: white;
+    text-align: left;
+    padding: 26px;
+    font-size: 1.5rem !important;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #ffffff;
+    margin: 10px;
+}
+
+.wrapper-pos {
+    padding-top: 10%;
+}
+
+.Line {
+    background: url("https://thaibasketball.com/wp-content/uploads/2018/11/Line_%E0%B8%AA%E0%B8%B1%E0%B9%88%E0%B8%87%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%84%E0%B8%A5%E0%B8%B4%E0%B8%81.png") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 10vh;
+    background-color: #26b826;
+    margin: 1rem 0rem 2rem 0rem;
+    border: 2px dashed white;
+}
+
+.facebook {
+    background: url("https://icons.iconarchive.com/icons/danleech/simple/256/facebook-icon.png") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 10vh;
+    background-color: #357ba0;
+    margin: 1rem 0rem 2rem 0rem;
+    border: 2px dashed white;
+}
+
+.line-notify {
+    background: url("https://leletobuy.com/images/line_notify.png") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 15vh;
+    background-color: #ffffff;
+    margin: 1rem 0rem 2rem 0rem;
+    border: 2px dashed white;
+}
+
+.facebook-pixel {
+    background: url("https://hanagahome.files.wordpress.com/2019/02/1-18.png?w=584") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 16vh;
+    background-color: #3a579d;
+    margin: 1rem 0rem 2rem 0rem;
+    border: 2px dashed white;
+}
+
+.shopee {
+    background: url("https://mmc.tirto.id/image/2020/01/14/shopeepay-shopee.co.id_ratio-16x9.jpg") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 16vh;
+    background-color: #f04d2c;
+    margin: 1rem 0rem 2rem 0rem;
+    border: 2px dashed white;
+}
+
+.lazada {
+    background: url("https://www.cu.co.th/wp-content/uploads/2017/09/Lazada.png") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 14vh;
+    background-color: #0f146d;
+    margin: 1rem 0rem 2rem 0rem;
+    border: 2px dashed white;
+}
+
+.tel {
+    background: url("https://www.breath-pure.com/images/editor/icon-tel.png") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 14vh;
+    background-color: #ffffff;
+    margin: 1rem 0rem 2rem 0rem;
+    border: 2px dashed white;
+}
+
+.youtube {
+    background: url("https://i.pinimg.com/originals/58/a7/2c/58a72cdc21309b636d3413463385e385.jpg") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 14vh;
+    background-color: #ffffff;
+    margin: 1rem 0rem 2rem 0rem;
+    border: 2px dashed white;
+}
+
+.wrapper-slide {
+    border: 2px dashed white;
+    margin: 34px;
+    padding: 10px;
+    min-height: 25vh;
+}
+
+.wrapper-header-box {
+    padding-bottom: 30px;
+    width: 100%;
+}
+
+.wrapper-owl {
+    border: 2px dashed white;
+    margin: 10px;
+    padding: 10px;
 }

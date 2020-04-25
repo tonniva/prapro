@@ -200,12 +200,16 @@ export class EditorderpostComponent implements OnInit {
      this.apiService.getlistdetail(this.id_token).then((response) => {
        
       this.listdetail =  response
-      for (let index = 0; index < this.listdetail.length; index++) {
-        if(this.listdetail[index]._id == this.index_list_select){ 
-         this.listdetail = response[index]; 
-         break;
-        } 
-      }  
+
+      this.listdetail =  this.listdetail.filter(
+        item => item._id == this.index_list_select)[0];  
+
+      // for (let index = 0; index < this.listdetail.length; index++) {
+      //   if(this.listdetail[index]._id == this.index_list_select){ 
+      //    this.listdetail = response[index]; 
+      //    break;
+      //   } 
+      // }  
     
  
       this.temp_path_image1=this.listdetail.imageone;

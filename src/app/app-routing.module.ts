@@ -13,6 +13,14 @@ import { PramoolBidComponent } from './pramool-bid/pramool-bid.component';
 import { HistorydetailComponent } from './historydetail/historydetail.component';
 import { HereMapComponent  } from './here-map/here-map.component';
 import { EditorderpostComponent } from './editorderpost/editorderpost.component';
+import { CollectComponent } from './collect/collect.component';
+import { FrameListComponent } from './frame-list/frame-list.component';
+import { FramepostComponent } from './framepost/framepost.component';
+import { FrameComponent } from './frame/frame.component';
+import { FrameDetailComponent } from './frame-detail/frame-detail.component';
+import { PromotionComponent } from './promotion/promotion.component';
+import { PreviewComponent } from './preview/preview.component';
+import { PaybillComponent } from './paybill/paybill.component';
 
 
 const routes: Routes = [ 
@@ -20,17 +28,24 @@ const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'list/one', component: ListComponent },
+  { path: 'promotion', component: PromotionComponent },
   { path: 'list/two', component: PostlistComponent },
   { path: 'list/detail/:id_token/:indexlistselect', component: ListdetailComponent },
+  { path: 'list/Farmedetail/:id_token/:indexlistselect', component: FrameDetailComponent },
   { path: 'list/history/:id_token/:indexlistselect', component: HistorydetailComponent },
   { path: 'list/bid/:id_token/:indexlistselect', component: PramoolBidComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'other', component: OthermenuComponent }, 
   { path: 'pramoonregister', component: PramoonregisterComponent },
   { path: 'map', component: HereMapComponent },
-  { path: 'editorderpost/:id_token/:indexlistselect', component: EditorderpostComponent }
-];
+  { path: 'editorderpost/:id_token/:indexlistselect', component: EditorderpostComponent },
+  { path: 'collect', component: CollectComponent},
+  { path: 'frammenu', component: FrameComponent},
+  { path: 'framlist', component: FrameListComponent},
+  { path: 'frampost', component: FramepostComponent},
+  { path: 'preview/:id_token', component: PreviewComponent},
+  { path: 'paybill', component: PaybillComponent},
+]
 
 
 @NgModule({
