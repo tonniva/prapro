@@ -33,7 +33,7 @@
         "cors": "^2.8.5",
         "fine-uploader": "^5.16.2",
         "firebase": "^7.10.0",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "ng2-img-max": "^2.2.4",
         "ngx-bootstrap": "^5.6.1",
         "ngx-loading": "^8.0.0",
