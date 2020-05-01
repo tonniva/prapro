@@ -81,11 +81,9 @@ export class PromotionComponent implements OnInit {
       confirmButtonText: 'ตกลง',
       cancelButtonText:'ยกเลิก'
     }).then((result) => {
-      if (result.value) {
+      if (result.value) { 
 
-        window.open("/preview/"+localStorage.getItem("userId")+"?salepage=true");
-          //this.router.navigate(["/preview/"+localStorage.getItem("userId")+"?salepage=true"]);   
-        // window.location.replace(); 
+        window.open("/preview?token="+localStorage.getItem("userId")); 
       }
     }) 
  
@@ -95,7 +93,8 @@ export class PromotionComponent implements OnInit {
   }
 
   coppylink(){
-  const link = window.location.origin+"/preview/"+localStorage.getItem("userId")+"?salepage=true";
+     
+  const link = this.UtilService.GetShortLink()+"?token="+localStorage.getItem("userId");
       this.copyMessage(link);
     
     

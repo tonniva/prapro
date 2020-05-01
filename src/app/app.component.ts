@@ -11,7 +11,7 @@ export class AppComponent {
   lat: number = 51.678418;
   lng: number = 7.809007; 
 
-  salepage:string;
+  salepage:any;
 
   goblak(){ 
     window.history.back();
@@ -21,8 +21,9 @@ export class AppComponent {
   ishide(){ 
      
     const urlParams = new URLSearchParams(window.location.search);
-    this.salepage = urlParams.get('salepage');  
-    if(this.salepage)
+    this.salepage = urlParams.get('token');  
+     
+    if(this.salepage) 
          return false
     else
           return true

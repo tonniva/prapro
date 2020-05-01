@@ -44,9 +44,9 @@ export class PreviewComponent implements OnInit {
   slipresizefile:any;
   path_slip:any;
   regsiterprofile:any;
-  Isshowbank:boolean; 
+  Isshowbank:boolean;  
   ngOnInit(): void { 
-
+    debugger
     this.Ishidemap=false;
     this.spinner.show();
    
@@ -54,9 +54,10 @@ export class PreviewComponent implements OnInit {
     setTimeout(() => { 
       this.spinner.show();
     }, 0);
-
-    this.id_token = this.route.snapshot.params.id_token; 
-    this.id_token = this.id_token.split('?')[0];
+ 
+const urlParams = new URLSearchParams(window.location.search); 
+ 
+    this.id_token = urlParams.get('token');  
 
      
     this.GetProfile(this.id_token);
@@ -113,6 +114,7 @@ export class PreviewComponent implements OnInit {
   }
 
   GetProfile(id_token){  
+    debugger
     this.apiService.getdetailRegister(id_token).then((response) => {
       
       this.regsiterprofile = response[0];

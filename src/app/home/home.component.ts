@@ -102,6 +102,6 @@ setupowl(){
 }
 
 gotopath(){
-window.open("https://web-pra.firebaseapp.com/preview/U9b7c614f44c264a14a27b86149b5f9ba?salepage=true"); 
+  window.open("/preview?t="+localStorage.getItem("userId")); 
 }
 }

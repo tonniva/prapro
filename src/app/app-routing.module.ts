@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'frammenu', component: FrameComponent},
   { path: 'framlist', component: FrameListComponent},
   { path: 'frampost', component: FramepostComponent},
-  { path: 'preview/:id_token', component: PreviewComponent},
+  { path: 'preview', component: PreviewComponent},
   { path: 'paybill/:id_token', component: PaybillComponent},
 ]
 
