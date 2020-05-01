@@ -92,7 +92,7 @@ return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/upload/image-up
 
 
 postpramoon(item:any,file:any,token:any){  
-  debugger
+  
       // ต้องใช้ Token login
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -145,6 +145,41 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/pramooncr
 itemgetdetailRegister= {
   "userId":""
   }
+
+  itemupbill= {
+    "userId":"",
+    "bill_product_level":"",
+    "bill_type":"",
+    "billurl":"",
+    "bill_date":"",
+    "bill_status":"",
+    "bill_description":"",
+    "bill_customer_detail":"",
+    "bill_price":""
+    
+    }
+  updatebill(_id:string,data:any){
+    const PramoonRegisteroptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };   
+  this.itemupbill.userId = _id.toString();  
+  this.itemupbill.bill_product_level = "";  
+  this.itemupbill.bill_type = data.type;
+  this.itemupbill.billurl = data.imageThumbnail;
+  this.itemupbill.bill_date = (new Date()).toString();
+  this.itemupbill.bill_status = "กำลังตรวจสอบ";
+  this.itemupbill.bill_description = data.description 
+  this.itemupbill.bill_customer_detail = data.message; 
+  this.itemupbill.bill_price = data.bill_price; 
+  
+  
+  // this.UtilService.GetAPIurl()+
+  return this.httpClient.post('http://localhost:3000/api/account/update-bill',this.itemupbill
+  ,PramoonRegisteroptions)
+  .toPromise()
+  .then((response) => response); 
+  }
+
   
 getdetailRegister(userId:any){
   const PramoonRegisteroptions = {
@@ -295,9 +330,7 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   .toPromise()
   .then((response) => response); 
   }
-
-
-
+ 
     bill= {
     "message":"",
     "imageThumbnail":"",
@@ -313,7 +346,7 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
       this.bill.imageFullsize = data.imageThumbnail; 
       this.bill.token = this.UtilService.tokenNotify();
 
-      return this.httpClient.post('http://localhost:3000/noti', this.bill,option)
+      return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/noti', this.bill,option)
        .toPromise()
        .then((response) => response);
       }

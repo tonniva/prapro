@@ -10,23 +10,23 @@ export class UtilService {
 
   Getweb(){
     //fo dev
-    return "http://localhost:4200/home";  
+    //return "http://localhost:4200/home";  
     //for test
     //production
-     //return "https://web-pra.firebaseapp.com/home";  
+     return "https://web-pra.firebaseapp.com/home";  
     //production
   }
   client_id(){
      //fo dev
-    return "1654042871"; 
+    //return "1654042871"; 
     //production
-     //return "1653915528";  
+     return "1653915528";  
   }
   GetSecretCode(){
     //fo dev
-    return "a6b04fa327cca94b9c01cd76dc02c19b"; 
+    //return "a6b04fa327cca94b9c01cd76dc02c19b"; 
     //production
-    //return "e394b8a72a9bcdf28d44e6867e8c878c";  
+    return "e394b8a72a9bcdf28d44e6867e8c878c";  
 
   } 
 

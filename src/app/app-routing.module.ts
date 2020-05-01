@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'framlist', component: FrameListComponent},
   { path: 'frampost', component: FramepostComponent},
   { path: 'preview/:id_token', component: PreviewComponent},
-  { path: 'paybill', component: PaybillComponent},
+  { path: 'paybill/:id_token', component: PaybillComponent},
 ]
 
 

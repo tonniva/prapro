@@ -337,7 +337,7 @@ export class PostlistComponent implements OnInit {
       
     ]).then((result) => {
       if (result.value) {
-        debugger
+  
         localStorage.setItem("lineid",result.value[0]);
         localStorage.setItem("lineofficialid",result.value[1]);
         const answers = JSON.stringify(result.value)
@@ -380,6 +380,16 @@ export class PostlistComponent implements OnInit {
     });  
      
    }
+
+   insertbank(item){ 
+    this.alertinsertdata("กรอก เลขบัญชี",function(data){ 
+    localStorage.setItem("bank_"+item,data);
+    });   
+   }
+ 
+
+
+
 
 
    
@@ -468,7 +478,7 @@ export class PostlistComponent implements OnInit {
   public postpra(data,arrayPathfile_product_Posted:Array<String>,arrayPathfile_slide_Posted:Array<String>){
  
     setTimeout(() => {  
-      debugger
+
       data.access_token = localStorage.getItem("access_token");
       data.id_token = localStorage.getItem("userId"); 
       data.Latitude =   localStorage.getItem("Latitude");
@@ -480,7 +490,7 @@ export class PostlistComponent implements OnInit {
 
 
       // ******** 
-      debugger
+
       data.product_header =   this.path_header;
       data.product_picture =   this.arrayPathfile_product_Posted;
       data.slide_picture =   this.arrayPathfile_slide_Posted;
@@ -510,7 +520,7 @@ export class PostlistComponent implements OnInit {
       
       
       this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => { 
-      debugger
+
        
         setTimeout(() => { 
           this.spinner.hide();
@@ -547,7 +557,7 @@ export class PostlistComponent implements OnInit {
  
     //อัพโหลด path slide
     // setTimeout(() => { 
-    //   debugger
+
     //   for (let index = 0; index < this.arrayfile_slide.length; index++) {
     //     this.apiService.uploadimage(this.arrayfile_slide[index]).then((response) => {   
     //     this.resultFile = response; 
@@ -566,7 +576,7 @@ export class PostlistComponent implements OnInit {
 
      //อัพโหลด path Product
     //  setTimeout(() => { 
-    //   debugger
+ 
     //   for (let index = 0; index < this.arrayfile_product.length; index++) {
     //     this.apiService.uploadimage(this.arrayfile_product[index]).then((response) => {   
           
@@ -590,7 +600,7 @@ export class PostlistComponent implements OnInit {
     //อัพโหลด path slide
 
     setTimeout(() => {
-      debugger
+      
       this.postpra(data,this.arrayPathfile_product_Posted,this.arrayPathfile_slide_Posted);
       /** spinner ends after 5 seconds */
       this.spinner.hide();

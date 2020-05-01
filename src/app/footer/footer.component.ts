@@ -36,6 +36,7 @@ if(menu =="A"){
       setTimeout(() => { 
         this.spinner.hide();
       }, 2000);
+       
     if( this.Registerdetail.length > 0 && this.Registerdetail[0].status_pramoon_register == "waitingcheck"){ 
       this.IsGoToPostItem = true; 
       this.router.navigate(['/list/two'])  

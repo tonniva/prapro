@@ -177,7 +177,7 @@ export class FramepostComponent implements OnInit {
       data.pricesell= data.pricesell;
       data.dateend = (new Date()).toString();
       
-      debugger
+
       this.apiService.postpramoon(data,this.arrayPathfile,this.token).then((response) => { 
       
        

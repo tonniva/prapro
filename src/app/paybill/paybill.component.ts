@@ -4,6 +4,9 @@ import { Ng2ImgMaxService } from 'ng2-img-max';
 import {DomSanitizer} from '@angular/platform-browser';
 import Swal from 'sweetalert2'
 import { RestService } from '../rest.service'; 
+import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
+
 declare let $: any;
 
 @Component({
@@ -15,9 +18,30 @@ export class PaybillComponent implements OnInit {
   temp_path_image1:any="http://placehold.it/180";
   slipresizefile:any;
   path_slip:any;
-  constructor(private apiService:RestService,private ng2ImgMax: Ng2ImgMaxService, private sanitizer:DomSanitizer) { }
+  id_token:any;
+  listdetail:any;
+  updatefinish:any;
+  datapaybill:any;
+  isdisable:any;
+  
+  
+  constructor(private spinner: NgxSpinnerService,private route: ActivatedRoute,private apiService:RestService,private ng2ImgMax: Ng2ImgMaxService, private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
+    this.id_token = this.route.snapshot.params.id_token; 
+    this.id_token = this.id_token.split('?')[0];
+   
+    this.apiService.getdetailRegister(this.id_token).then((response) => {
+      
+      this.listdetail  = response; 
+      this.listdetail = this.listdetail[this.listdetail.length-1]
+      this.datapaybill =  new Date(Date.parse(this.listdetail.bill_date)).toISOString().slice(0,10);
+       
+      if(this.listdetail.bill_status =="กำลังตรวจสอบ")
+      { 
+       this.isdisable = true;
+      }
+    });
   }
 
   onClickSubmit(data) {
@@ -28,17 +52,23 @@ export class PaybillComponent implements OnInit {
     var email = localStorage.getItem('email'); 
     var tel = localStorage.getItem('tel');
 
-    data.message =  "โอนเงิน : "+data.pricepay+" บาท  \r\nสมัรแบบ : "+data.type +"\r\nรายละเอียด ::\r\n"+data.description+"\r\nข้อมูลลูกค้า คุณ "+firstname+" "+lastname+"\r\nemail : "+email+"\r\nเบอร์ ติดต่อ : "+tel;
+    data.message =  "โอนเงิน : "+data.pricepay+" บาท  \r\nสมัคแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nข้อมูลลูกค้า คุณ "+firstname+" "+lastname+"\r\nemail : "+email+"\r\nเบอร์ ติดต่อ : "+tel;
     data.imageThumbnail =  this.path_slip;
     data.imageFile = this.slipresizefile; 
+    data.bill_price = data.pricepay; 
+//line noti
+    this.apiService.linenotifyPaybill(data).then((response) => {    
+//line noti
 
-    this.apiService.linenotifyPaybill(data).then((response) => {   
-   
-     
+      this.apiService.updatebill(this.listdetail.userId, data).then((response) => {this.updatefinish = response, 
+        window.history.back();
+        setTimeout(() => { 
+          this.spinner.hide();
+        }, 1000);
+
      });  
-
-
-  }
+    });  
+  } 
 
   readURL($event) : void { 
    
@@ -53,45 +83,7 @@ export class PaybillComponent implements OnInit {
           this.path_slip = response;
           this.path_slip = this.path_slip.imageUrl; 
          
-         }); 
-        // setTimeout(() => {
-        //   Swal.fire({
-        //     title: 'บันทึก รูป Header ใช่หรือไม่',
-        //     text: "",
-        //     imageUrl:this.temp_path_image1.changingThisBreaksApplicationSecurity,    
-        //     imageHeight: 100,
-        //     imageAlt: 'Custom image',  
-        //     showCancelButton: true,
-        //     confirmButtonColor: '#3085d6',
-        //     cancelButtonColor: '#d33',
-        //     confirmButtonText: 'Yes, delete it!'
-        //   }).then((result) => {
-
-        //     this.slipresizefile = slipfile; 
-        //     if (result.value) {
-            
-        //       Swal.fire({
-        //         position: 'top-end',
-        //         icon: 'success',
-        //         title: 'บันทึกเรียบร้อย!',
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //       })
-        //       // this.apiService.uploadimage(this.slipresizefile).then((response) => {   
-        //       //   this.path_slip = response;
-        //       //   this.path_slip = this.path_slip.imageUrl; 
-               
-        //       //  }); 
-        //     }
-        //     else{
-        //       this.path_slip="";
-        //       this.temp_path_image1="http://placehold.it/180";
-        //     }
-        //   })
-         
-        // }, 1000); 
-      
-        
+         });  
       },
       error => {
         console.log('😢 Oh no!', error);

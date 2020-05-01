@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
 import Swal from 'sweetalert2'
 import { ScaleControlStyle } from '@agm/core';
+ 
+import { Ng2ImgMaxService } from 'ng2-img-max';  
 declare let $: any;
 @Component({
   selector: 'app-preview', 
@@ -14,7 +16,7 @@ declare let $: any;
   styleUrls: ['./preview.component.scss']
 })
 export class PreviewComponent implements OnInit {
-  constructor(public sanitizer:DomSanitizer,private ref: ChangeDetectorRef,private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
+  constructor(private ng2ImgMax: Ng2ImgMaxService, public sanitizer:DomSanitizer,private ref: ChangeDetectorRef,private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
   id_token:string; 
   Registerdetail:any;
   listdetail:any;
@@ -35,6 +37,14 @@ export class PreviewComponent implements OnInit {
   
 
   urlmap:SafeResourceUrl;
+
+
+
+  temp_path_image1:any="http://placehold.it/180";
+  slipresizefile:any;
+  path_slip:any;
+
+  Isshowbank:boolean; 
   ngOnInit(): void {
    
     this.Ishidemap=false;
@@ -49,6 +59,8 @@ export class PreviewComponent implements OnInit {
     this.id_token = this.id_token.split('?')[0];
    
     this.apiService.getlistdetail(this.id_token).then((response) => {
+
+      
       this.listdetail  = response; 
       this.listdetail = this.listdetail[this.listdetail.length-1]
       
@@ -143,11 +155,67 @@ clicktel(tel){
 
 
 isUndefined(thing) {
-  debugger
+  
   return (typeof thing === "undefined");
 }
 
 
+readURL($event) : void { 
+   
+   
+  const slipfile =  this.readThis($event.target); 
+  this.temp_path_image1 = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(slipfile));  
+    
+  this.ng2ImgMax.resizeImage(slipfile, 240, 240).subscribe(
+    result => { 
+      this.slipresizefile = slipfile; 
+      this.apiService.uploadimage(this.slipresizefile).then((response) => {   
+        this.path_slip = response;
+        this.path_slip = this.path_slip.imageUrl; 
+       
+       }); 
+  
+      
+    },
+    error => {
+      console.log('😢 Oh no!', error);
+    }
+  );
+
+}
+
+readThis(inputValue: any) { 
+  var file:File = inputValue.files[0];
+  return file;
+  
+}
+onClickSubmit(data) { 
+  var firstname = localStorage.getItem('firstname');
+  var lastname = localStorage.getItem('firstname');
+  var email = localStorage.getItem('email'); 
+  var tel = localStorage.getItem('tel');
+
+  data.message =  "โอนเงิน : "+data.pricepay+" บาท  \r\nสมัคแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nข้อมูลลูกค้า คุณ "+firstname+" "+lastname+"\r\nemail : "+email+"\r\nเบอร์ ติดต่อ : "+tel;
+  data.imageThumbnail =  this.path_slip;
+  data.imageFile = this.slipresizefile; 
+
+  this.apiService.linenotifyPaybill(data).then((response) => {   
+ 
+   
+   });  
+
+
+}
+
+checkIsshowbank(select){ 
+  if(select=="1"){
+    this.Isshowbank = true; 
+  }
+  else{
+    this.Isshowbank = false;
+  }
+
+}
 
 }
 

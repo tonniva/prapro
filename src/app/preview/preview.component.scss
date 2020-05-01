@@ -28,6 +28,7 @@
 .header {
     background-size: cover;
     width: 100%;
+    text-align: center;
 }
 
 .Line {
@@ -187,5 +188,160 @@ footer {
 }
 
 .mapouter {
-    margin-bottom: 30vh;
+    // margin-bottom: 30vh;
+}
+
+.wrapper-bill {
+    margin-top: 15%;
+}
+
+img {
+    max-width: 180px;
+}
+
+input[type=file] {
+    padding: 10px;
+    background: #2d2d2d;
+}
+
+.wrapper-upload-slip {
+    text-align: center;
+    margin-top: 10%;
+}
+
+$spaceamounts: (5,
+10,
+15,
+20,
+25,
+30,
+35,
+40,
+45,
+50,
+75,
+100); // Adjust this to include the pixel amounts you need.
+$sides: (top,
+bottom,
+left,
+right); // Leave this variable alone
+@each $space in $spaceamounts {
+    @each $side in $sides {
+        .m-#{str-slice($side, 0, 1)}-#{$space} {
+            margin-#{$side}: #{$space}px !important;
+        }
+        .p-#{str-slice($side, 0, 1)}-#{$space} {
+            padding-#{$side}: #{$space}px !important;
+        }
+    }
+}
+
+.file-input-wrapper {
+    height: auto;
+    margin: 2px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.file-input-wrapper>input[type="file"] {
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-input-wrapper>.btn-file-input {
+    background-color: #494949;
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    height: 34px;
+    margin: 0 0 0 -1px;
+    padding-left: 0;
+    width: 121px;
+    cursor: pointer;
+}
+
+#img_text {
+    float: right;
+    margin-right: -80px;
+    margin-top: -14px;
+}
+
+.wrapper-upload-file {
+    background: black;
+    color: white;
+    font-size: 10vw;
+}
+
+.wrapper-desc {
+    padding-top: 5%;
+    padding-bottom: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.wrapper-btn-bill {
+    margin-top: 10%;
+    padding-bottom: 49vw;
+}
+
+.bank1 {
+    background: url("https://kidzandkai.com/wp-content/uploads/2018/04/kbank-icon.png") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 9vh;
+    background-color: #ffffff;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    border: 2px dashed white;
+}
+
+.bank2 {
+    background: url("https://www.pmgcorporation.co.th/wp-content/uploads/2017/03/5.png") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 9vh;
+    background-color: #ffffff;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    border: 2px dashed white;
+}
+
+.bank3 {
+    background: url("https://www.matichon.co.th/wp-content/uploads/2017/11/%E0%B9%82%E0%B8%A5%E0%B9%82%E0%B8%81%E0%B9%89-KTB.jpg") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 9vh;
+    background-color: #ffffff;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    border: 2px dashed white;
+}
+
+.bank4 {
+    background: url("https://www.thairath.co.th/media/HCtHFA7ele6Q2dUK4QCZa6tCw9DK55al8cHhy08mY6hctdGtieckwKIruAF0i5QbHq.jpg") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 9vh;
+    background-color: #ffffff;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    border: 2px dashed white;
+}
+
+.wrapper-bank {
+    border: 2px dashed white;
+    margin-bottom: 10%;
+}
+
+.wrapper-num-bank {
+    color: white;
+    margin: auto;
+    font-size: 2rem;
+}
+
+.wrapper-p15 {
+    padding: 15px;
 }

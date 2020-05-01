@@ -1,7 +1,5 @@
-<form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" style="overflow-y: scroll;">
-    <div class="container">
-
-
+<form *ngIf="!isdisable" #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" style="overflow-y: scroll;">
+    <div class="container wrapper-box-paybill">
         <div class="row pt-4">
             <div class="custom-control custom-radio text-center m-auto">
                 <input id="month" type="radio" class="custom-control-input" value="รายเดือน" name="type" ngModel>
@@ -35,7 +33,7 @@
                 </div>
                 <input type='file' (change)="readURL($event)" />
             </div>
-            <div class="p-t-50">
+            <div class="p-t-30">
                 <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1">
             </div>
         </div>
@@ -46,7 +44,35 @@
         </div>
         <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description" rows="5 " cols="60 " required></textarea>
     </div>
-    <div class="wrapper-input p-3 p-t-50">
+    <div class="wrapper-input wrapper-btn-bill">
         <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>
     </div>
 </form>
+
+<div class="wrapper-title-header"> สถานะการชำระเงิน </div>
+<div class="wrapper-box-status">
+    <table class="wrapper-table">
+        <thead>
+            <tr>
+                <!-- <th scope="col">#</th> -->
+                <th scope="col">ชื่อ</th>
+                <th scope="col">นามสกุล</th>
+                <th scope="col">จ่าย</th>
+                <th scope="col">จำนวนเงิน</th>
+                <th scope="col">ประเภท</th>
+                <th scope="col">สถานะ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!-- <th scope="row">1</th> -->
+                <td>{{listdetail.firstname}}</td>
+                <td>{{listdetail.lastname}}</td>
+                <td>{{datapaybill}}</td>
+                <td>{{listdetail.bill_price}}</td>
+                <td>{{listdetail.bill_type}}</td>
+                <td>{{listdetail.bill_status}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

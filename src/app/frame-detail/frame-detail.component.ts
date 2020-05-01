@@ -110,7 +110,7 @@ Isdisable:boolean= false;
       //     this.listdetail = response[index];
       //     //เปิดปิดปุ่ม
       //     this.GetProfile(localStorage.getItem("access_token"),this.listdetail);
-      //   debugger
+ 
       //     break;
       //    } 
       //  }

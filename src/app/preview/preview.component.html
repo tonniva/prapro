@@ -118,7 +118,7 @@
         .mapouter {
             position: relative;
             text-align: center;
-            height: 500px;
+            /* height: 500px; */
             width: 100%;
         }
         
@@ -131,7 +131,110 @@
     </style>
 </div>
 <div style="margin-bottom: 5vh;"></div>
+<form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" style="overflow-y: scroll;">
+    <div class="container">
 
+
+        <div class="row pt-4">
+            <div class="custom-control custom-radio text-center m-auto">
+                <input (click)="checkIsshowbank(1)" id="month" type="radio" class="custom-control-input" value="โอนเงิน" name="type" ngModel>
+                <label class="custom-control-label text-white" for="month">โอน</label>
+            </div>
+
+            <div class="custom-control custom-radio text-center m-auto">
+                <input (click)="checkIsshowbank(2)" id="year" type="radio" class="custom-control-input" value="เก็บเงินปลายทาง" name="type" ngModel>
+                <label class="custom-control-label text-white" for="year">เก็บเงินปลาทาง</label>
+            </div>
+        </div>
+        <div>
+            <div class="row pt-4">
+                <div class="col text-white f-s text-center">
+                    จำนวน สินค้า
+                </div>
+                <div class="col">
+                    <input class="form-control text-center" type="number" name="countproduct" placeholder="จำนวนสินค้า" ngModel>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row pt-4">
+                <div class="col text-white f-s text-center">
+                    ยอดโอนเงิน
+                </div>
+                <div class="col">
+                    <input class="form-control text-center" type="number" name="pricepay" placeholder="กรอกยอดโอน" ngModel>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row pt-4">
+                <div class="col text-white f-s text-center">
+                    เบอร์ติดต่อ
+                </div>
+                <div class="col">
+                    <input class="form-control text-center" type="number" name="pricepay" placeholder="กรอกยอดโอน" ngModel>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper-upload-slip" [hidden]="!Isshowbank">
+            <div class="container wrapper-bank">
+                <div class="row wrapper-p15">
+                    <div class="col bank1">
+                    </div>
+                    <div class="col wrapper-num-bank">
+                    </div>
+                </div>
+                <div class="row wrapper-p15">
+                    <div class="col bank2">
+                    </div>
+                    <div class="col wrapper-num-bank">
+                    </div>
+                </div>
+                <div class="row wrapper-p15">
+                    <div class="col bank3">
+                    </div>
+                    <div class="col wrapper-num-bank">
+                    </div>
+                </div>
+                <div class="row wrapper-p15">
+                    <div class="col bank4">
+                    </div>
+                    <div class="col wrapper-num-bank">
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div>
+            <input type='file' (change)="readURL($event)" style="display: none;" />
+        </div> -->
+            <div class="file-input-wrapper">
+                <!-- <button class="btn-file-input">SELECT FILES</button> -->
+                <div class="wrapper-upload-file">
+                    อัพโหลดสลิป(คลิ๊ก)
+                </div>
+                <input type='file' (change)="readURL($event)" />
+            </div>
+            <div class="p-t-30">
+                <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1">
+            </div>
+        </div>
+    </div>
+    <div class="input-group wrapper-desc">
+        <div class="input-group-prepend ">
+            <span class="input-group-text ">ที่อยู่</span>
+        </div>
+        <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description" rows="5 " cols="60 " required></textarea>
+    </div>
+    <div class="input-group wrapper-desc">
+        <div class="input-group-prepend ">
+            <span class="input-group-text ">รายละเอียดเพิ่มเติม</span>
+        </div>
+        <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description" rows="5 " cols="60 " required></textarea>
+    </div>
+    <div class="wrapper-input wrapper-btn-bill">
+        <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>
+    </div>
+</form>
 
 <footer>
     <div class="bg-footer">
@@ -155,8 +258,3 @@
         </div>
     </div>
 </footer>
-
-
-<!-- <div class="card-body">
-            <h5 class="card-title"><br>{{listdetail.lazada}}</h5>
-    </div> -->

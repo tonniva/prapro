@@ -115,9 +115,9 @@ export class PromotionComponent implements OnInit {
       })
     }
 
-    gotobill(){
- 
-      window.location.href = window.location.origin+"/paybill";
+    gotobill(){ 
+      window.location.replace("/paybill/"+localStorage.getItem("userId"));
+      // window.location.href = window.location.origin+"/paybill"+localStorage.getItem("userId");
     }
   }
   
