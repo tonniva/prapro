@@ -10,7 +10,7 @@ import { UtilService } from './util.service';
   providedIn: 'root'
 })
 export class RestService { 
-
+  dataAccessTokensLine:any;
   constructor(private httpClient: HttpClient,private UtilService:UtilService) { } 
  
 
@@ -25,20 +25,40 @@ optionsGetProfile = {
  
  body = new URLSearchParams();
 
-  data= {
-    "grant_type":"authorization_code",
-    "code":"",
-    "redirect_uri":this.UtilService.Getweb(),
-    "client_id":this.UtilService.client_id(), 
-    "client_secret":this.UtilService.GetSecretCode(),
-    }
+
+
+  
 
   GetAccessTokensLine(code:any){   
-    this.body.set('grant_type', this.data.grant_type);
+    this.dataAccessTokensLine = {
+      "grant_type":"authorization_code",
+      "code":"",
+      "redirect_uri":this.UtilService.Getweb(),
+      "client_id":this.UtilService.client_id(), 
+      "client_secret":this.UtilService.GetSecretCode(),
+      }
+
+    if(window.location.port != "4200"){
+ 
+      localStorage.getItem("SECRET_CODE");
+      localStorage.getItem("CLIENT_ID");
+      localStorage.getItem("WEB_URL");
+
+      this.dataAccessTokensLine = {
+        "grant_type":"authorization_code",
+        "code":"",
+        "redirect_uri":localStorage.getItem("WEB_URL"),
+        "client_id":localStorage.getItem("CLIENT_ID"), 
+        "client_secret":localStorage.getItem("SECRET_CODE"),
+        }
+      
+    }
+
+    this.body.set('grant_type', this.dataAccessTokensLine.grant_type);
     this.body.set('code', code);
-    this.body.set('redirect_uri', this.data.redirect_uri);
-    this.body.set('client_id', this.data.client_id);
-    this.body.set('client_secret', this.data.client_secret); 
+    this.body.set('redirect_uri', this.dataAccessTokensLine.redirect_uri);
+    this.body.set('client_id', this.dataAccessTokensLine.client_id);
+    this.body.set('client_secret', this.dataAccessTokensLine.client_secret); 
   return this.httpClient.post('https://api.line.me/oauth2/v2.1/token', this.body.toString(), this.options)
   .toPromise()
   .then((response) => response);
@@ -133,7 +153,13 @@ postpramoon(item:any,file:any,token:any){
   this.body.set('facebookpixelkey',item.facebookpixel);   
   this.body.set('tel',item.telsale);   
   this.body.set('shopee',item.shopeelink);   
-  this.body.set('lazada',item.lazadalink);   
+  this.body.set('lazada',item.lazadalink);
+  
+  this.body.set('bank_BBL',item.bank_BBL);   
+  this.body.set('bank_KBANK',item.bank_KBANK);   
+  this.body.set('bank_SCB',item.bank_SCB);   
+  this.body.set('bank_KTB',item.bank_KTB);   
+  
 
   // this.UtilService.GetAPIurl()+
  
@@ -174,7 +200,27 @@ itemgetdetailRegister= {
   
   
   // this.UtilService.GetAPIurl()+
-  return this.httpClient.post('http://localhost:3000/api/account/update-bill',this.itemupbill
+  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/update-bill',this.itemupbill
+  ,PramoonRegisteroptions)
+  .toPromise()
+  .then((response) => response); 
+  }
+
+  itemupbillexpire= {
+    "userId":"", 
+    "bill_status":"" 
+    
+    }
+  updatebillexpire(_id:string){
+    const PramoonRegisteroptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };   
+  this.itemupbill.userId = _id.toString();   
+  this.itemupbill.bill_status = "หมดอายุ"; 
+  
+  
+  // this.UtilService.GetAPIurl()+
+  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/update-billexpire',this.itemupbill
   ,PramoonRegisteroptions)
   .toPromise()
   .then((response) => response); 
@@ -182,6 +228,7 @@ itemgetdetailRegister= {
 
   
 getdetailRegister(userId:any){
+   
   const PramoonRegisteroptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/json') 
   };  
@@ -224,6 +271,14 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   }
 
  
+
+
+  Getconfig(){    
+     return this.httpClient.get('https://mighty-ocean-48427.herokuapp.com/detail')
+     .toPromise()
+     .then((response) => response);
+   }
+
   getlist(){   
     
      return this.httpClient.get(this.UtilService.GetAPIurl()+'/api/pramoon/pramoonlist')
@@ -344,7 +399,7 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
       this.bill.message = data.message; 
       this.bill.imageThumbnail = data.imageThumbnail; 
       this.bill.imageFullsize = data.imageThumbnail; 
-      this.bill.token = this.UtilService.tokenNotify();
+      this.bill.token = data.linetoken;
 
       return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/noti', this.bill,option)
        .toPromise()

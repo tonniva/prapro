@@ -41,10 +41,11 @@
 <ngx-spinner>
 </ngx-spinner>
 <div class="header">
-    <img class="img-fluid wrapper-uploaded img-top w-100" [src]="imageheader" [hidden]="!imageheader">
+    <img class="img-fluid wrapper-uploaded img-top w-100" [src]="imageheader" [hidden]="!imageheader||imageheader =='undefined'">
 </div>
 
 <div class="wrapper-title-header-contact ">สั่งซื้อ</div>
+<div class="wrapper-title-header-contact ">{{listdetail.description}}</div>
 
 <div class="Line pb-4" (click)="clickline(listdetail.line)">
 
@@ -73,6 +74,7 @@
     </div>
 </div>
 <div class="wrapper-title-header-contact ">รีวิว ลูกค้า</div>
+<div class="wrapper-title-header-contact ">{{listdetail.description}}</div>
 <div *ngFor="let item of slideimage" class="text-center wrapper-image">
     <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
 </div>
@@ -98,13 +100,7 @@
 
 <iframe *ngIf="Ishideyoutube" class="p-3" width="100%" height="500" frameBorder="0" [src]="urlyoutube"></iframe>
 
-<div class="wrapper-title-header-contact ">ช่องทาง Shopee</div>
-<div class="shopee" (click)="clickshopee(listdetail.shopee)">
 
-</div>
-<div class="wrapper-title-header-contact ">ช่องทาง LAZADA</div>
-<div class="lazada" (click)="clicklazada(listdetail.lazada)">
-</div>
 <!-- <div *ngIf="Ishidefacebook">
     <div class="wrapper-title-header-contact ">เพจ</div>
     <iframe class="p-3" [src]="urlpagefacebook" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
@@ -131,28 +127,32 @@
     </style>
 </div>
 <div style="margin-bottom: 5vh;"></div>
-<form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" style="overflow-y: scroll;">
+<div class="wrapper-title-header-contact" [hidden]="(regsiterprofile.bill_status =='หมดอายุ')">รูปแบบการสั่งซื้อ</div>
+
+<form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ')">
     <div class="container">
 
 
+        <div class="wrapper-title-header-contact ">ประเทการชำระเงิน</div>
         <div class="row pt-4">
             <div class="custom-control custom-radio text-center m-auto">
-                <input (click)="checkIsshowbank(1)" id="month" type="radio" class="custom-control-input" value="โอนเงิน" name="type" ngModel>
-                <label class="custom-control-label text-white" for="month">โอน</label>
+                <input (click)="checkIsshowbank(1)" id="one" type="radio" class="custom-control-input" value="โอนเงิน" name="type" ngModel>
+                <label class="custom-control-label text-white" for="one">โอน</label>
             </div>
 
             <div class="custom-control custom-radio text-center m-auto">
-                <input (click)="checkIsshowbank(2)" id="year" type="radio" class="custom-control-input" value="เก็บเงินปลายทาง" name="type" ngModel>
-                <label class="custom-control-label text-white" for="year">เก็บเงินปลาทาง</label>
+                <input (click)="checkIsshowbank(2)" id="two" type="radio" class="custom-control-input" value="เก็บเงินปลายทาง" name="type" ngModel>
+                <label class="custom-control-label text-white" for="two">เก็บเงินปลาทาง</label>
             </div>
         </div>
+        <div class="wrapper-title-header-contact ">ราคาสินค้า {{listdetail.pricesell}} บาท</div>
         <div>
             <div class="row pt-4">
                 <div class="col text-white f-s text-center">
-                    จำนวน สินค้า
+                    จำนวนสินค้า(ชิ้น)
                 </div>
                 <div class="col">
-                    <input class="form-control text-center" type="number" name="countproduct" placeholder="จำนวนสินค้า" ngModel>
+                    <input class="form-control text-center" type="number" min="1" max="100" name="countproduct" placeholder="จำนวนสินค้า" [(ngModel)]="countproduct">
                 </div>
             </div>
         </div>
@@ -162,7 +162,7 @@
                     ยอดโอนเงิน
                 </div>
                 <div class="col">
-                    <input class="form-control text-center" type="number" name="pricepay" placeholder="กรอกยอดโอน" ngModel>
+                    <input class="form-control text-center" type="number" name="pricepay" placeholder="ยอดโอนเงิน" [(ngModel)]="countproduct*listdetail.pricesell">
                 </div>
             </div>
         </div>
@@ -172,34 +172,38 @@
                     เบอร์ติดต่อ
                 </div>
                 <div class="col">
-                    <input class="form-control text-center" type="number" name="pricepay" placeholder="กรอกยอดโอน" ngModel>
+                    <input class="form-control text-center" type="tel" name="tel" placeholder="เบอร์ติดต่อ" ngModel>
                 </div>
             </div>
         </div>
         <div class="wrapper-upload-slip" [hidden]="!Isshowbank">
             <div class="container wrapper-bank">
-                <div class="row wrapper-p15">
+                <div class="row wrapper-p15" [hidden]="listdetail.bank_KBANK =='null' || listdetail.bank_KBANK=='' ">
                     <div class="col bank1">
                     </div>
                     <div class="col wrapper-num-bank">
+                        {{listdetail.bank_KBANK}}
                     </div>
                 </div>
-                <div class="row wrapper-p15">
+                <div class="row wrapper-p15" [hidden]="listdetail.bank_SCB =='null' || listdetail.bank_SCB==''">
                     <div class="col bank2">
                     </div>
                     <div class="col wrapper-num-bank">
+                        {{listdetail.bank_SCB}}
                     </div>
                 </div>
-                <div class="row wrapper-p15">
+                <div class="row wrapper-p15" [hidden]="listdetail.bank_KTB =='null' || listdetail.bank_KTB==''">
                     <div class="col bank3">
                     </div>
                     <div class="col wrapper-num-bank">
+                        {{listdetail.bank_KTB}}
                     </div>
                 </div>
-                <div class="row wrapper-p15">
+                <div class="row wrapper-p15" [hidden]="listdetail.bank_BBL =='null' || listdetail.bank_BBL==''">
                     <div class="col bank4">
                     </div>
                     <div class="col wrapper-num-bank">
+                        {{listdetail.bank_BBL}}
                     </div>
                 </div>
 
@@ -223,7 +227,7 @@
         <div class="input-group-prepend ">
             <span class="input-group-text ">ที่อยู่</span>
         </div>
-        <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description" rows="5 " cols="60 " required></textarea>
+        <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="deliveryaddress" rows="5 " cols="60 " required></textarea>
     </div>
     <div class="input-group wrapper-desc">
         <div class="input-group-prepend ">
@@ -234,24 +238,33 @@
     <div class="wrapper-input wrapper-btn-bill">
         <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">ยืนยัน</button>
     </div>
+    <div class="wrapper-title-header-contact" [hidden]="listdetail.shopee=='null'">ช่องทาง Shopee</div>
+    <div class="shopee" [hidden]="listdetail.shopee=='null'" (click)="clickshopee(listdetail.shopee)">
+
+    </div>
+    <div class="wrapper-title-header-contact" [hidden]="listdetail.lazada=='null'">ช่องทาง LAZADA</div>
+    <div class="lazada" [hidden]="listdetail.lazada=='null'" (click)="clicklazada(listdetail.lazada) ">
+    </div>
 </form>
+<div style="padding-bottom: 30vh;">
 
+</div>
 <footer>
-    <div class="bg-footer">
-        <div class="row">
-            <div class="col wrapper-box-footer">
-                <div class="Line-footer pb-4" (click)="clickline(listdetail.line)">
+    <div class="bg-footer ">
+        <div class="row ">
+            <div class="col wrapper-box-footer ">
+                <div class="Line-footer pb-4 " (click)="clickline(listdetail.line) ">
 
                 </div>
 
             </div>
-            <div class="col wrapper-box-footer">
-                <div class="tel-footer pb-4" (click)="clicktel(listdetail.line)">
+            <div class="col wrapper-box-footer ">
+                <div class="tel-footer pb-4 " (click)="clicktel(listdetail.line) ">
 
                 </div>
             </div>
-            <div class="col wrapper-box-footer">
-                <div class="facebook-footer pb-4" (click)="clickfacebook(listdetail.line)">
+            <div class="col wrapper-box-footer ">
+                <div class="facebook-footer pb-4 " (click)="clickfacebook(listdetail.line) ">
 
                 </div>
             </div>

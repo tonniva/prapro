@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import { RestService } from '../rest.service'; 
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
-
+import { UtilService } from '../util.service';
 declare let $: any;
 
 @Component({
@@ -25,7 +25,7 @@ export class PaybillComponent implements OnInit {
   isdisable:any;
   
   
-  constructor(private spinner: NgxSpinnerService,private route: ActivatedRoute,private apiService:RestService,private ng2ImgMax: Ng2ImgMaxService, private sanitizer:DomSanitizer) { }
+  constructor(private UtilService:UtilService, private spinner: NgxSpinnerService,private route: ActivatedRoute,private apiService:RestService,private ng2ImgMax: Ng2ImgMaxService, private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
     this.id_token = this.route.snapshot.params.id_token; 
@@ -56,20 +56,30 @@ export class PaybillComponent implements OnInit {
     data.imageThumbnail =  this.path_slip;
     data.imageFile = this.slipresizefile; 
     data.bill_price = data.pricepay; 
+    data.linetoken = this.UtilService.tokenNotify();
 //line noti
     this.apiService.linenotifyPaybill(data).then((response) => {    
 //line noti
 
       this.apiService.updatebill(this.listdetail.userId, data).then((response) => {this.updatefinish = response, 
-        window.history.back();
+        this.success();
+      
         setTimeout(() => { 
+          location.reload();
           this.spinner.hide();
-        }, 1000);
+        }, 2000);
 
      });  
     });  
   } 
-
+  success(){
+    Swal.fire(
+      'ทำรายการสั่งซื้อสำเร็จ !',
+      'ขอบคุณครับ',
+      'success'
+    )
+  }
+  
   readURL($event) : void { 
    
    

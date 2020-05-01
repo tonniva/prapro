@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner"; 
+declare let $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,12 +13,31 @@ export class HomeComponent implements OnInit {
   GetProfilelist:any;
   pictureUrl:any;
   Registerdetail:any;
+  preview:any;
+
   constructor(private apiService: RestService, private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {  
-    
+  
+    this.preview=[
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/1.png',
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/12.png',
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/14.png',
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/15.png',
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/2.png',
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/4.png',
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/5.png',
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/6.png',
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/7.png',
+    'https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/9.png'
+  ]
+
+  setTimeout(() => {
+    this.setupowl()
+  }, 3000); 
     this.spinner.show();
     const code: string = this.route.snapshot.queryParamMap.get('code');
+    
     if(typeof(code)!=undefined){
       this.apiService.GetAccessTokensLine(code).then((response) => {this.listdetail = response, 
         setTimeout(() => {
@@ -66,4 +86,22 @@ GetRegisterdetail(p_userId:string){
 
 }
 
+setupowl(){  
+  $('.owl-carousel').owlCarousel('destroy'); 
+  $('.owl-carousel').owlCarousel({ 
+    margin:50,
+    items:2,
+    loop:true, 
+    dot:true,
+    autoplay:true,
+    autoplayTimeout:1000,
+    autoplayHoverPause:true, 
+    nav:false
+})
+
+}
+
+gotopath(){
+window.open("https://web-pra.firebaseapp.com/preview/U9b7c614f44c264a14a27b86149b5f9ba?salepage=true"); 
+}
 }

@@ -28,8 +28,9 @@ export class PromotionComponent implements OnInit {
   
 
   ngOnInit(): void {
-
+    
     this.userId = localStorage.getItem("userId");
+ 
 
     this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response
      
@@ -51,13 +52,20 @@ export class PromotionComponent implements OnInit {
     const diffTime = Math.abs(current_date - date_webstart);
      this.diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
       
-    if(this.diffDays>31){ 
+    if((7-this.diffDays) <=0 ){ 
+      this.checkExpirewebsite();
     } 
         
  }); 
 
 
 
+  }
+
+  checkExpirewebsite(){ 
+      //line noti 
+            this.apiService.updatebillexpire(this.userId).then((response) => response
+           );   
   }
   
 

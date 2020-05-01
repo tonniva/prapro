@@ -38,15 +38,15 @@ export class PreviewComponent implements OnInit {
 
   urlmap:SafeResourceUrl;
 
-
+  countproduct:any;
 
   temp_path_image1:any="http://placehold.it/180";
   slipresizefile:any;
   path_slip:any;
-
+  regsiterprofile:any;
   Isshowbank:boolean; 
-  ngOnInit(): void {
-   
+  ngOnInit(): void { 
+
     this.Ishidemap=false;
     this.spinner.show();
    
@@ -57,6 +57,9 @@ export class PreviewComponent implements OnInit {
 
     this.id_token = this.route.snapshot.params.id_token; 
     this.id_token = this.id_token.split('?')[0];
+
+     
+    this.GetProfile(this.id_token);
    
     this.apiService.getlistdetail(this.id_token).then((response) => {
 
@@ -107,6 +110,13 @@ export class PreviewComponent implements OnInit {
    }); 
  
  
+  }
+
+  GetProfile(id_token){  
+    this.apiService.getdetailRegister(id_token).then((response) => {
+      
+      this.regsiterprofile = response[0];
+    }) 
   }
 
   mypixel() { 
@@ -190,21 +200,46 @@ readThis(inputValue: any) {
   
 }
 onClickSubmit(data) { 
-  var firstname = localStorage.getItem('firstname');
-  var lastname = localStorage.getItem('firstname');
-  var email = localStorage.getItem('email'); 
-  var tel = localStorage.getItem('tel');
+  
+  
+    if(data.type == ""){
+      this.UtilService.showError("กรุณาเลือก <br/> ประเภทการชำระเงิน","")
+      return;
+    }  
+    if(data.tel == ""){
+      this.UtilService.showError("กรุณากรอกเบอร์ติดต่อกลับ","")
+      return;
+    } 
+    if(data.deliveryaddress == ""){
+      this.UtilService.showError("กรุณากรอกที่อยู่การจัดส่ง","")
+      return;
+    } 
+    if(data.type == "โอนเงิน" && this.temp_path_image1 == "http://placehold.it/180"){
+      this.UtilService.showError("กรุณาอัพโหลดสลิป","")
+      return;
+    } 
+    
 
-  data.message =  "โอนเงิน : "+data.pricepay+" บาท  \r\nสมัคแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nข้อมูลลูกค้า คุณ "+firstname+" "+lastname+"\r\nemail : "+email+"\r\nเบอร์ ติดต่อ : "+tel;
+  data.message =  "\r\n\r\nโอนเงิน : "+data.pricepay+" บาท  \r\nสั่งแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nที่อยู่จัดส่ง ::\r\n\r\n "+data.deliveryaddress+"\r\n\r\nเบอร์ติดต่อกลับ : "+data.tel+"";
   data.imageThumbnail =  this.path_slip;
   data.imageFile = this.slipresizefile; 
+  data.linetoken = this.listdetail.linenotifytoken; 
 
   this.apiService.linenotifyPaybill(data).then((response) => {   
- 
+
+    this.success();
    
    });  
 
 
+}
+
+success(){
+  Swal.fire(
+    'ทำรายการสั่งซื้อสำเร็จ !',
+    'ขอบคุณครับ',
+    'success'
+  )
 }
 
 checkIsshowbank(select){ 

@@ -92,7 +92,7 @@
                     </div>
                 </div> -->
 
-                <div class="wrapper-title-header-contact ">ตัวอย่าง slide รีวิว</div>
+                <div class="wrapper-title-preview">ตัวอย่าง slide รีวิว</div>
                 <div class="owl-carousel owl-theme">
                     <div *ngFor="let item of arrayPathfile_slide">
                         <div class="item">
@@ -107,7 +107,7 @@
             </div>
         </div>
 
-        <div class="wrapper-title-header-contact ">ช่องทางการติดต่อ</div>
+        <div class="wrapper-title-preview">ช่องทางการติดต่อ</div>
 
         <div class="Line pb-4" (click)="insertline()">
 
@@ -173,10 +173,10 @@
                 <div class="input-group-prepend ">
                     <span class="input-group-text ">รายละเอียด สินค้า</span>
                 </div>
-                <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description " rows="5 " cols="60 " required></textarea>
+                <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description" rows="5 " cols="60 " required></textarea>
             </div>
             <!-- <app-here-map></app-here-map> -->
-            <div class="wrapper-title-header-contact" (click)="clickmap()">ใช้ตำแหน่ง ตรงนี้ เป็นพิกัดร้าน (คลิ๊ก)</div>
+            <div class="wrapper-title-header-contact" (click)="clickmap()" style="background-color: brown;">ใช้ตำแหน่ง ตรงนี้ เป็นพิกัดร้าน (คลิ๊กเลย)</div>
             <hr class="hr-1 ">
             <!-- <div class="wrapper-title-header-contact ">ช่องทางการติดต่อ</div>
             <hr class="hr-1 ">

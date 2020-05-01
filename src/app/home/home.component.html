@@ -10,17 +10,16 @@
 
         </div>
     </div>
+    <div class="mt-4 wrapper-title-header-promotion dotted" (click)="gotopath()" style="background: #333;">
+        ดูตัวอย่าง เว็บ
+    </div>
 
-    <div class="container mt-4">
-        <div class="mt-4 wrapper-title-header-promotion dotted">1.ทดลองใช้ฟรี 1 เดือน
+    <div class="owl-carousel owl-theme pt-4">
+        <div *ngFor="let item of preview">
+            <div class="item">
+                <img src="{{item}}" class="w-100 rounded" alt="Italian Trulli " [hidden]="!item">
+            </div>
         </div>
-
-        <div class="mt-4 wrapper-title-header-promotion dotted">2.รายเดือน เดือนละ 390
-        </div>
-
-        <div class="mt-4 wrapper-title-header-promotion dotted">3.รายปี เดือนละ 2,900
-        </div>
-
     </div>
     <!-- <div class="card">
         <div class="card-body shadow">

@@ -17,7 +17,7 @@
     min-height: 15vh;
     background-color: #333333;
     border: dashed;
-    border-color: #dbcb19;
+    border-color: white;
     //background: url(https://cdn.pixabay.com/photo/2016/02/19/15/29/frame-1210511_960_720.png) no-repeat center center;
     background-size: cover;
 }
@@ -43,10 +43,10 @@
 
 .post-click {
     background: url(https://upload-file-pra-1.s3-ap-southeast-1.amazonaws.com/assets-pra/touch-here.gif) no-repeat center center;
-    background-size: 81px;
+    background-size: 30px;
     height: 31vw;
     position: relative;
-    left: 5%;
+    left: 33%;
     top: -22%;
     // width: 35rem;
     margin-top: -5rem;
@@ -249,4 +249,12 @@ input {
     border: 2px dashed white;
     margin: 10px;
     padding: 10px;
+}
+
+.wrapper-title-preview {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 26px;
+    width: 100%;
 }

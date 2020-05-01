@@ -86,7 +86,8 @@ export class PostlistComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText:'ยกเลิก'
           }).then((result) => {
             if (result.value) {
               Swal.fire({
@@ -108,7 +109,7 @@ export class PostlistComponent implements OnInit {
             }
           })
          
-        }, 1000); 
+        }, 10); 
       
         
       },
@@ -143,7 +144,8 @@ export class PostlistComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText:'ยกเลิก'
           }).then((result) => {
             if (result.value) {
               Swal.fire({
@@ -203,7 +205,8 @@ export class PostlistComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText:'ยกเลิก'
           }).then((result) => {
             if (result.value) {
               Swal.fire({
@@ -296,8 +299,8 @@ export class PostlistComponent implements OnInit {
     // else{
  
       Swal.fire({
-        title: 'คุณต้องการเปิดประมูลใช่หรือไม่',
-        text: "เมื่อทำการลงทะเบียนแล้วสามารถแก้ไขได้  ที่ 'เพิมเติม'",
+        title: 'ยืนยัน ใช่หรือไม่',
+        text: "",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -504,6 +507,12 @@ export class PostlistComponent implements OnInit {
       data.lazadalink= localStorage.getItem("lazadalink"); 
       data.telsale= localStorage.getItem("telsale"); 
       data.description= data.description;
+
+      data.bank_BBL= localStorage.getItem("bank_BBL"); 
+      data.bank_KBANK= localStorage.getItem("bank_KBANK"); 
+      data.bank_SCB= localStorage.getItem("bank_SCB"); 
+      data.bank_KTB= localStorage.getItem("bank_KTB"); 
+
       
 
       // ********
