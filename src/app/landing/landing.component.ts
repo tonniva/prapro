@@ -24,6 +24,8 @@ export class LandingComponent implements OnInit {
         localStorage.setItem("SECRET_CODE",this.configresult.result[0].SECRET_CODE);
         localStorage.setItem("CLIENT_ID",this.configresult.result[1].CLIENT_ID);
         localStorage.setItem("WEB_URL",this.configresult.result[2].WEB_URL);
+        localStorage.setItem("SHORT_LINK_TOKEN_BITLY",this.configresult.result[3].SHORT_LINK_TOKEN_BITLY);
+        
         window.location.replace("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id="+this.configresult.result[1].CLIENT_ID+"&redirect_uri="+this.configresult.result[2].WEB_URL+"&state=12345abcde&scope=openid%20profile"); 
 
       }

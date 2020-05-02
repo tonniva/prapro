@@ -25,6 +25,10 @@ export class PromotionComponent implements OnInit {
   Registerdetail:any;
 
   diffDays:any;
+  resultshotlink:any;
+  resultdate:any;
+  profiledetail:any;
+  
   
 
   ngOnInit(): void {
@@ -33,7 +37,8 @@ export class PromotionComponent implements OnInit {
  
 
     this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response
-     
+      this.profiledetail=response[0];
+      
       setTimeout(() => { 
         this.spinner.hide();
       }, 1000); 
@@ -42,10 +47,12 @@ export class PromotionComponent implements OnInit {
   this.apiService.getlistdetail(this.userId).then((response) => { 
  
     this.Registerdetail = response
+
+   
     
-    const resultdate = this.Registerdetail[this.Registerdetail.length-1].date;
+    this.resultdate = this.Registerdetail[this.Registerdetail.length-1].date;
     
-    const date_webstart =  new Date(Date.parse(resultdate)).valueOf()
+    const date_webstart =  new Date(Date.parse(this.resultdate)).valueOf()
     const current_date =  new Date().valueOf()
 
   
@@ -92,15 +99,40 @@ export class PromotionComponent implements OnInit {
 
   }
 
-  coppylink(){
+  coppylink(){ 
      
-  const link = this.UtilService.GetShortLink()+"?token="+localStorage.getItem("userId");
-      this.copyMessage(link);
-    
-    
+    if(typeof(this.profiledetail.short_link)!='undefined'){
+      this.copyMessage(this.profiledetail.short_link);
+      return; 
+    }
+
+    if(window.location.hostname != "localhost"){  
+        const WEB_URL = localStorage.getItem("WEB_URL");
+        const SHORT_LINK_TOKEN_BITLY = localStorage.getItem("SHORT_LINK_TOKEN_BITLY"); 
+
+        const long_url = WEB_URL+"/preview?token="+localStorage.getItem("userId");
+        const acess_token = SHORT_LINK_TOKEN_BITLY;
+
+        this.apiService.GetShotLinkAPI(acess_token,long_url).then((response) => { 
+        this.resultshotlink = response
+
+
+        this.copyMessage(this.resultshotlink.url);
+ 
+ 
+        this.apiService.updateshortlink(this.userId,this.resultshotlink.url).then((response) => {
+          location.reload();
+        });   
+        });
+
+        } 
+        else{ 
+        this.copyMessage(window.location.origin+"/preview?token="+localStorage.getItem("userId")); 
+        }
      }
 
      copyMessage(val: string){
+        
       const selBox = document.createElement('textarea');
       selBox.style.position = 'fixed';
       selBox.style.left = '0';

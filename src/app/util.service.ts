@@ -42,9 +42,11 @@ export class UtilService {
      return "https://mighty-ocean-48427.herokuapp.com";  
   }
 
-  GetShortLink(){
-    return "https://bit.ly/2YkRYHX";
+  GetShortLinkToken(){
+    return "c01a4949533193a771ee2720d9c16b1becfbf92c";
   }
+
+
 
   
 

@@ -227,6 +227,28 @@ itemgetdetailRegister= {
   }
 
   
+  itemupshortlink= {
+    "userId":"", 
+    "short_link":"" 
+    
+    }
+  updateshortlink(_id:string,short_link){
+    const PramoonRegisteroptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };   
+  this.itemupshortlink.userId = _id.toString();   
+  this.itemupshortlink.short_link = short_link ; 
+  
+  
+  // this.UtilService.GetAPIurl()+
+  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/update-shortlink',this.itemupshortlink
+  ,PramoonRegisteroptions)
+  .toPromise()
+  .then((response) => response); 
+  }
+
+  
+  
 getdetailRegister(userId:any){
    
   const PramoonRegisteroptions = {
@@ -270,7 +292,11 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
     .then((response) => response);
   }
 
- 
+ GetShotLinkAPI(token_short_link,long_url){ 
+  return this.httpClient.get('https://api-ssl.bitly.com/v3/shorten?access_token='+token_short_link+'&longUrl='+long_url)
+  .toPromise()
+  .then((response) => response);
+ }
 
 
   Getconfig(){    
