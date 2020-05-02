@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2'
  
 import { RestService } from '../rest.service';
@@ -19,7 +19,7 @@ import { Ng2ImgMaxService } from 'ng2-img-max';
 })
 export class PromotionComponent implements OnInit {
 
-  constructor(private ng2ImgMax: Ng2ImgMaxService,private UtilService:UtilService,private router: Router,private apiService:RestService,private sanitizer:DomSanitizer,private spinner: NgxSpinnerService) { }
+  constructor(private ng2ImgMax: Ng2ImgMaxService,private UtilService:UtilService,private ref: ChangeDetectorRef,private router: Router,private apiService:RestService,private sanitizer:DomSanitizer,private spinner: NgxSpinnerService) { }
 
   userId:any;
   Registerdetail:any;
@@ -28,20 +28,20 @@ export class PromotionComponent implements OnInit {
   resultshotlink:any;
   resultdate:any;
   profiledetail:any;
-  
+  WEB_URL:any;
+  SHORT_LINK_TOKEN_BITLY:any;
+  datetotal:any;
   
 
   ngOnInit(): void {
-    
+    this.spinner.show();
     this.userId = localStorage.getItem("userId");
  
 
     this.apiService.getdetailRegister(this.userId).then((response) => {this.Registerdetail = response
       this.profiledetail=response[0];
       
-      setTimeout(() => { 
-        this.spinner.hide();
-      }, 1000); 
+  
    }); 
 
   this.apiService.getlistdetail(this.userId).then((response) => { 
@@ -58,10 +58,16 @@ export class PromotionComponent implements OnInit {
   
     const diffTime = Math.abs(current_date - date_webstart);
      this.diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-      
-    if((7-this.diffDays) <=0 ){ 
-      this.checkExpirewebsite();
+      const bill_date_total_active  = parseInt(this.profiledetail.bill_date_total_active);
+       
+      this.datetotal = ((7+bill_date_total_active)-this.diffDays);
+    if(this.datetotal <=0 ){ 
+      setTimeout(() => { 
+        this.spinner.hide();
+      }, 10); 
+      this.checkExpirewebsite(); 
     } 
+      this.ref.detectChanges(); 
         
  }); 
 
@@ -100,27 +106,29 @@ export class PromotionComponent implements OnInit {
   }
 
   coppylink(){ 
-     
-    if(typeof(this.profiledetail.short_link)!='undefined'){
+      
+    if(typeof(this.profiledetail.short_link)!='undefined'&& this.profiledetail.short_link!="" && this.profiledetail.short_link!=null){
       this.copyMessage(this.profiledetail.short_link);
       return; 
     }
 
     if(window.location.hostname != "localhost"){  
-        const WEB_URL = localStorage.getItem("WEB_URL");
-        const SHORT_LINK_TOKEN_BITLY = localStorage.getItem("SHORT_LINK_TOKEN_BITLY"); 
+       
 
-        const long_url = WEB_URL+"/preview?token="+localStorage.getItem("userId");
-        const acess_token = SHORT_LINK_TOKEN_BITLY;
+         this.WEB_URL = localStorage.getItem("WEB_URL").split("/home")[0].toString(); 
+         this.SHORT_LINK_TOKEN_BITLY = localStorage.getItem("SHORT_LINK_TOKEN_BITLY");  
+
+        const long_url = this.WEB_URL+"/preview?token="+localStorage.getItem("userId");
+        const acess_token = this.SHORT_LINK_TOKEN_BITLY;
 
         this.apiService.GetShotLinkAPI(acess_token,long_url).then((response) => { 
         this.resultshotlink = response
 
-
-        this.copyMessage(this.resultshotlink.url);
+        
+        this.copyMessage(this.resultshotlink.data.url);
  
  
-        this.apiService.updateshortlink(this.userId,this.resultshotlink.url).then((response) => {
+        this.apiService.updateshortlink(this.userId,this.resultshotlink.data.url).then((response) => {
           location.reload();
         });   
         });

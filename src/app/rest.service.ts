@@ -181,7 +181,8 @@ itemgetdetailRegister= {
     "bill_status":"",
     "bill_description":"",
     "bill_customer_detail":"",
-    "bill_price":""
+    "bill_price":"",
+    "bill_date_total":""
     
     }
   updatebill(_id:string,data:any){
@@ -196,7 +197,7 @@ itemgetdetailRegister= {
   this.itemupbill.bill_status = "กำลังตรวจสอบ";
   this.itemupbill.bill_description = data.description 
   this.itemupbill.bill_customer_detail = data.message; 
-  this.itemupbill.bill_price = data.bill_price; 
+  this.itemupbill.bill_price = data.bill_price;  
   
   
   // this.UtilService.GetAPIurl()+
@@ -205,6 +206,30 @@ itemgetdetailRegister= {
   .toPromise()
   .then((response) => response); 
   }
+
+
+  itemup_approve_bill= {
+    "userId":"", 
+    "bill_status":"",
+    "bill_date_total_active":"", 
+    
+    }
+    update_approve_bill(_id:string,data:any){
+    const PramoonRegisteroptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };   
+  this.itemup_approve_bill.userId = _id.toString();  
+  this.itemup_approve_bill.bill_date_total_active = data.bill_date_total_active;
+  this.itemup_approve_bill.bill_status = "จ่ายแล้ว" 
+    
+  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/update-approve-bill',this.itemup_approve_bill
+  ,PramoonRegisteroptions)
+  .toPromise()
+  .then((response) => response); 
+  }
+
+
+  
 
   itemupbillexpire= {
     "userId":"", 
@@ -229,8 +254,7 @@ itemgetdetailRegister= {
   
   itemupshortlink= {
     "userId":"", 
-    "short_link":"" 
-    
+    "short_link":""  
     }
   updateshortlink(_id:string,short_link){
     const PramoonRegisteroptions = {
@@ -426,6 +450,7 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
       this.bill.imageThumbnail = data.imageThumbnail; 
       this.bill.imageFullsize = data.imageThumbnail; 
       this.bill.token = data.linetoken;
+      
 
       return this.httpClient.post(this.UtilService.GetAPIuploadUrl()+'/noti', this.bill,option)
        .toPromise()

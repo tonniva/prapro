@@ -45,8 +45,7 @@ export class PreviewComponent implements OnInit {
   path_slip:any;
   regsiterprofile:any;
   Isshowbank:boolean;  
-  ngOnInit(): void { 
-    debugger
+  ngOnInit(): void {  
     this.Ishidemap=false;
     this.spinner.show();
    
@@ -113,8 +112,7 @@ const urlParams = new URLSearchParams(window.location.search);
  
   }
 
-  GetProfile(id_token){  
-    debugger
+  GetProfile(id_token){   
     this.apiService.getdetailRegister(id_token).then((response) => {
       
       this.regsiterprofile = response[0];
@@ -207,7 +205,12 @@ onClickSubmit(data) {
     if(data.type == ""){
       this.UtilService.showError("กรุณาเลือก <br/> ประเภทการชำระเงิน","")
       return;
-    }  
+    } 
+     
+    if(data.name_order == ""){
+      this.UtilService.showError("กรุณากรอก ชื่อนามสกุล","")
+      return;
+    } 
     if(data.tel == ""){
       this.UtilService.showError("กรุณากรอกเบอร์ติดต่อกลับ","")
       return;
@@ -222,10 +225,11 @@ onClickSubmit(data) {
     } 
     
 
-  data.message =  "\r\n\r\nโอนเงิน : "+data.pricepay+" บาท  \r\nสั่งแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nที่อยู่จัดส่ง ::\r\n\r\n "+data.deliveryaddress+"\r\n\r\nเบอร์ติดต่อกลับ : "+data.tel+"";
+  data.message =  "\r\n\r\nโอนเงิน : "+data.pricepay+" บาท  \r\nสั่งแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nที่อยู่จัดส่ง ::\r\n\r\nคุณ "+data.name_order+"\r\n"+data.deliveryaddress+"\r\n\r\nเบอร์ติดต่อกลับ : "+data.tel+"";
   data.imageThumbnail =  this.path_slip;
   data.imageFile = this.slipresizefile; 
-  data.linetoken = this.listdetail.linenotifytoken; 
+  data.linetoken = this.listdetail.linenotifytoken;  
+  
 
   this.apiService.linenotifyPaybill(data).then((response) => {   
 

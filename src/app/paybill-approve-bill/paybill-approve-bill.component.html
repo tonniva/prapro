@@ -1,0 +1,87 @@
+<form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" style="overflow-y: scroll;">
+    <div class="container wrapper-box-paybill">
+        <div class="row pt-4">
+            <div class="col text-white f-s text-center">
+                ประเภท : {{listdetail.bill_type}}
+            </div>
+        </div>
+
+        <div class="row pt-4">
+            <div class="col text-white f-s text-center">
+                สถานะลูกค้าล่าสุด : {{listdetail.bill_status}}
+            </div>
+        </div>
+
+        <div>
+            <div class="row pt-4">
+                <div class="col text-white f-s text-center">
+                    ยอดโอนเงิน
+                </div>
+                <div class="col">
+                    <input class="form-control text-center" type="tel" name="pricepay" placeholder="กรอกยอดโอน" [(ngModel)]="listdetail.bill_price">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row pt-4">
+                <div class="col text-white f-s text-center">
+                    ระยะเวลา web ative
+                </div>
+                <div class="col">
+                    <input class="form-control text-center" type="tel" name="bill_date_total_active" placeholder="กรอกยอดโอน" ngModel>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper-upload-slip">
+            <!-- <div>
+            <input type='file' (change)="readURL($event)" style="display: none;" />
+        </div> -->
+            <div class="file-input-wrapper">
+                <!-- <button class="btn-file-input">SELECT FILES</button> -->
+                <div class="wrapper-upload-file">
+                    ใบเสร็จลูกค้า
+                </div>
+            </div>
+            <div class="p-t-30">
+                <img class="img-fluid wrapper-uploaded" [src]="listdetail.billurl">
+            </div>
+        </div>
+    </div>
+    <div class="input-group wrapper-desc">
+        <div class="input-group-prepend ">
+            <span class="input-group-text ">รายละเอียดเพิ่มเติม</span>
+        </div>
+        <textarea class="form-control wrapper-text-area " [(ngModel)]="listdetail.bill_description" ngDefaultControl name="description" rows="5 " cols="60 "></textarea>
+    </div>
+    <div class="wrapper-input wrapper-btn-bill">
+        <button type="submit" value="submit" class="btn btn-secondary w-100  wrapper-font-btn">อนุญาติ</button>
+    </div>
+</form>
+
+<div class="wrapper-title-header"> สถานะการชำระเงิน </div>
+<div class="wrapper-box-status">
+    <table class="wrapper-table">
+        <thead>
+            <tr>
+                <!-- <th scope="col">#</th> -->
+                <th scope="col">ชื่อ</th>
+                <th scope="col">นามสกุล</th>
+                <th scope="col">จ่าย</th>
+                <th scope="col">จำนวนเงิน</th>
+                <th scope="col">ประเภท</th>
+                <th scope="col">สถานะ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!-- <th scope="row">1</th> -->
+                <td>{{listdetail.firstname}}</td>
+                <td>{{listdetail.lastname}}</td>
+                <td>{{datapaybill}}</td>
+                <td>{{listdetail.bill_price}}</td>
+                <td>{{listdetail.bill_type}}</td>
+                <td>{{listdetail.bill_status}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

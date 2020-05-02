@@ -21,6 +21,7 @@ import { FrameDetailComponent } from './frame-detail/frame-detail.component';
 import { PromotionComponent } from './promotion/promotion.component';
 import { PreviewComponent } from './preview/preview.component';
 import { PaybillComponent } from './paybill/paybill.component';
+import { PaybillApproveBillComponent } from './paybill-approve-bill/paybill-approve-bill.component';
 
 
 const routes: Routes = [ 
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'frampost', component: FramepostComponent},
   { path: 'preview', component: PreviewComponent},
   { path: 'paybill/:id_token', component: PaybillComponent},
+  { path: 'paybill-approve/:id_token', component: PaybillApproveBillComponent},
 ]
 
 

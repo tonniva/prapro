@@ -105,28 +105,7 @@
     <div class="wrapper-title-header-contact ">เพจ</div>
     <iframe class="p-3" [src]="urlpagefacebook" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 </div> -->
-<div class="mapouter">
-    <div class="wrapper-title-header-contact" *ngIf="Ishidemap">พิกัด แผนที่</div>
-    <div class="gmap_canvas" *ngIf="Ishidemap">
-        <iframe *ngIf="Ishidemap" class="p-3" width="100%" height="500" id="gmap_canvas" [src]="urlmap" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-    </div>
-    <style>
-        .mapouter {
-            position: relative;
-            text-align: center;
-            /* height: 500px; */
-            width: 100%;
-        }
-        
-        .gmap_canvas {
-            overflow: hidden;
-            background: none !important;
-            height: 500px;
-            width: 100%;
-        }
-    </style>
-</div>
-<div style="margin-bottom: 5vh;"></div>
+
 <div class="wrapper-title-header-contact" [hidden]="(regsiterprofile.bill_status =='หมดอายุ')">รูปแบบการสั่งซื้อ</div>
 
 <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ')">
@@ -163,6 +142,16 @@
                 </div>
                 <div class="col">
                     <input class="form-control text-center" type="number" name="pricepay" placeholder="ยอดโอนเงิน" [(ngModel)]="countproduct*listdetail.pricesell">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row pt-4">
+                <div class="col text-white f-s text-center">
+                    ชื่อ-นามสกุล
+                </div>
+                <div class="col">
+                    <input class="form-control text-center" type="text" name="name_order" placeholder="ชื่อ-นามสกุล" ngModel>
                 </div>
             </div>
         </div>
@@ -246,6 +235,27 @@
     <div class="lazada" [hidden]="listdetail.lazada=='null'" (click)="clicklazada(listdetail.lazada) ">
     </div>
 </form>
+<div class="mapouter">
+    <div class="wrapper-title-header-contact" *ngIf="Ishidemap">พิกัด แผนที่</div>
+    <div class="gmap_canvas" *ngIf="Ishidemap">
+        <iframe *ngIf="Ishidemap" class="p-3" width="100%" height="500" id="gmap_canvas" [src]="urlmap" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+    </div>
+    <style>
+        .mapouter {
+            position: relative;
+            text-align: center;
+            /* height: 500px; */
+            width: 100%;
+        }
+        
+        .gmap_canvas {
+            overflow: hidden;
+            background: none !important;
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</div>
 <div style="padding-bottom: 30vh;">
 
 </div>
