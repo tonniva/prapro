@@ -345,3 +345,25 @@ right); // Leave this variable alone
 img {
     border: 2px dashed white;
 }
+
+.wrapper-sold-out-l {
+    background: url("https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/sold-out.png") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 10vh;
+    position: absolute;
+    background-color: #00000000;
+    min-height: 240px;
+    margin-top: 7px;
+}
+
+.wrapper-sold-out-s {
+    background: url("https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/sold-out.png") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    min-height: 10vh;
+    position: relative;
+    background-color: #00000000;
+    min-height: 200px;
+    margin-top: 7px;
+}

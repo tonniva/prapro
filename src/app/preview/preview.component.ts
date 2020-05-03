@@ -17,6 +17,7 @@ declare let $: any;
 })
 export class PreviewComponent implements OnInit {
   constructor(private ng2ImgMax: Ng2ImgMaxService, public sanitizer:DomSanitizer,private ref: ChangeDetectorRef,private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
+  Isshowsoldout:any;
   id_token:string; 
   Registerdetail:any;
   listdetail:any;
@@ -40,12 +41,15 @@ export class PreviewComponent implements OnInit {
 
   countproduct:any;
 
+  product_count_current:any;
+
   temp_path_image1:any="http://placehold.it/180";
   slipresizefile:any;
   path_slip:any;
   regsiterprofile:any;
   Isshowbank:boolean;  
-  ngOnInit(): void {  
+  ngOnInit(): void {   
+    this.Isshowsoldout=false;
     this.Ishidemap=false;
     this.spinner.show();
    
@@ -66,6 +70,7 @@ const urlParams = new URLSearchParams(window.location.search);
       
       this.listdetail  = response; 
       this.listdetail = this.listdetail[this.listdetail.length-1]
+      this.checksoldout(this.listdetail);
       
   
  if(!this.listdetail.facebookpixelkey){ 
@@ -110,6 +115,19 @@ const urlParams = new URLSearchParams(window.location.search);
    }); 
  
  
+  }
+
+  checksoldout(data){
+debugger
+    if(data.bought >= data.quota){
+       this.Isshowsoldout = true;
+       this.product_count_current = 0;
+    }
+    else
+    {
+      this.product_count_current = parseInt(data.quota) - parseInt(data.bought);
+      this.Isshowsoldout = false;
+    } 
   }
 
   GetProfile(id_token){   
@@ -201,7 +219,10 @@ readThis(inputValue: any) {
 }
 onClickSubmit(data) { 
   
-  
+    if(this.Isshowsoldout){
+      this.UtilService.showError("สินค้า ไม่เพียงพอ ตอนนี้มี "+this.product_count_current+" ชิ้น","")
+      return;
+    } 
     if(data.type == ""){
       this.UtilService.showError("กรุณาเลือก <br/> ประเภทการชำระเงิน","")
       return;
@@ -211,6 +232,7 @@ onClickSubmit(data) {
       this.UtilService.showError("กรุณากรอก ชื่อนามสกุล","")
       return;
     } 
+  
     if(data.tel == ""){
       this.UtilService.showError("กรุณากรอกเบอร์ติดต่อกลับ","")
       return;
@@ -225,14 +247,24 @@ onClickSubmit(data) {
     } 
     
 
-  data.message =  "\r\n\r\nโอนเงิน : "+data.pricepay+" บาท  \r\nสั่งแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nที่อยู่จัดส่ง ::\r\n\r\nคุณ "+data.name_order+"\r\n"+data.deliveryaddress+"\r\n\r\nเบอร์ติดต่อกลับ : "+data.tel+"";
+  data.message =  "\r\n\r\nจำนวนสินค้าที่สั่ง  : "+data.countproduct+" ชิ้น\r\n\r\nโอนเงิน : "+data.pricepay+" บาท  \r\nสั่งแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nที่อยู่จัดส่ง ::\r\n\r\nคุณ "+data.name_order+"\r\n"+data.deliveryaddress+"\r\n\r\nเบอร์ติดต่อกลับ : "+data.tel+"";
   data.imageThumbnail =  this.path_slip;
   data.imageFile = this.slipresizefile; 
-  data.linetoken = this.listdetail.linenotifytoken;  
+  data.linetoken = this.listdetail.linenotifytoken;   
+   
   
 
   this.apiService.linenotifyPaybill(data).then((response) => {   
-
+  debugger
+  var total_buy = this.countproduct + this.listdetail.bought;
+    this.apiService.updateBuy(this.listdetail._id,total_buy).then((response) => {
+      window.history.back();
+      setTimeout(() => {
+        location.reload();
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 1000);
+    });  
     this.success();
    
    });  

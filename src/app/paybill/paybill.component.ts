@@ -7,6 +7,7 @@ import { RestService } from '../rest.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
 import { UtilService } from '../util.service';
+
 declare let $: any;
 
 @Component({
@@ -51,8 +52,9 @@ export class PaybillComponent implements OnInit {
     var lastname = localStorage.getItem('firstname');
     var email = localStorage.getItem('email'); 
     var tel = localStorage.getItem('tel');
+    var path_approve = this.UtilService.GetWebUrl()+ "/paybill-approve/"+this.id_token
 
-    data.message =  "โอนเงิน : "+data.pricepay+" บาท  \r\nสมัคแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nข้อมูลลูกค้า คุณ "+firstname+" "+lastname+"\r\nemail : "+email+"\r\nเบอร์ ติดต่อ : "+tel;
+    data.message =  "userId :: \r\n\r\n"+this.listdetail.userId+ "\r\n\r\nAprove Path : "+path_approve+"\r\n\r\nโอนเงิน : "+data.pricepay+" บาท  \r\nสมัคแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nข้อมูลลูกค้า คุณ "+firstname+" "+lastname+"\r\nemail : "+email+"\r\nเบอร์ ติดต่อ : "+tel;
     data.imageThumbnail =  this.path_slip;
     data.imageFile = this.slipresizefile; 
     data.bill_price = data.pricepay; 

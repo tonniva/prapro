@@ -119,6 +119,7 @@ postpramoon(item:any,file:any,token:any){
     .set('Authorization', 'Bearer '+token)
   };  
   this.body.set('pricestart', item.pricestart);
+  this.body.set('quota', item.quota); 
   this.body.set('pricesell', item.pricesell);
   this.body.set('date',(new Date()).toString());
   this.body.set('dateend',item.dateend);
@@ -350,6 +351,26 @@ return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/account/login', t
   .toPromise()
   .then((response) => response); 
   }
+
+
+  itemupdateBuy= {
+    "user":"",
+    "bought":""
+    }
+  updateBuy(_id:string,countbuyproduct:any){
+    const PramoonRegisteroptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };   
+  this.itemupdateBuy.user = _id.toString();  
+  this.itemupdateBuy.bought = countbuyproduct;   
+  
+  return this.httpClient.post(this.UtilService.GetAPIurl()+'/api/pramoon/update-buy',this.itemupdateBuy
+  ,PramoonRegisteroptions)
+  .toPromise()
+  .then((response) => response); 
+  }
+
+
 
 
   itemupdate= {

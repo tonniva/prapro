@@ -102,6 +102,6 @@ setupowl(){
 }
 
 gotopath(){
-  window.open("/preview?t="+localStorage.getItem("userId")); 
+  window.open("/preview?token="+localStorage.getItem("userId")); 
 }
 }

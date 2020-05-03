@@ -52,7 +52,7 @@ export class PaybillApproveBillComponent implements OnInit {
       this.apiService.update_approve_bill(this.listdetail.userId, data).then((response) => {this.updatefinish = response, 
         this.success(); 
         setTimeout(() => { 
-          location.reload();
+          window.history.back();
           this.spinner.hide();
         }, 2000); 
 
