@@ -48,9 +48,7 @@ export class HomeComponent implements OnInit {
         localStorage.setItem("access_token", this.listdetail.access_token);
         localStorage.setItem("id_token", this.listdetail.id_token);
         this.GetProfile(this.listdetail.access_token) 
-      });  
-
-     
+      });   
     }
 
    

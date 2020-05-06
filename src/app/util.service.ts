@@ -16,6 +16,20 @@ export class UtilService {
      //return "https://web-pra.firebaseapp.com/home";  
     //production
   }
+
+  //line Noti 
+  redirect_uri_line_noti(){
+  //fo dev
+  return "http://localhost:4200/list/two";   
+  }
+  client_id_line_noti(){
+    //fo dev
+    return "UlMab1mIzitAnUU1mWzPxl";   
+    }
+    client_secret_line_noti(){
+      //fo dev
+      return "rjKszA6OnL15spw4qKbNBjmk8QMom7SFhWME25cW2Yb";   
+      }
   client_id(){
      //fo dev
     return "1654042871"; 

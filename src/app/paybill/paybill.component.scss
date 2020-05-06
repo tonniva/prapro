@@ -35,7 +35,6 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     overflow: hidden;
     position: relative;
     width: 100%;
-    background-color: #fff;
     cursor: pointer;
 }
 
@@ -46,6 +45,7 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     right: 0;
     opacity: 0;
     cursor: pointer;
+    min-height: 30vh;
 }
 
 .file-input-wrapper>.btn-file-input {

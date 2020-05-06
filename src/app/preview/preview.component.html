@@ -11,83 +11,21 @@
     </div>
     <img class="img-fluid wrapper-uploaded img-top w-100" [src]="imageheader" [hidden]="!imageheader||imageheader =='undefined'">
 </div>
-
-<div class="wrapper-title-header-contact ">สั่งซื้อ</div>
-<div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{product_count_current}} ชิ้น)</span></div>
-<div class="wrapper-title-header-contact ">{{listdetail.description}}</div>
-
-<div class="Line pb-4" (click)="clickline(listdetail.line)">
-
-</div>
-<div class="Lineofficialid pb-4" (click)="clicklineofficialid(listdetail.lineofficialid)">
-
-</div>
-<div class="facebook" (click)="clickfacebook(listdetail.facebook)">
-
-</div>
-
-<div class="tel" (click)="clicktel(listdetail.tel)">
-
-</div>
-<div *ngFor="let item of productimage" class="text-center wrapper-image">
-    <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
-</div>
-
-
-
-<div class="owl-carousel owl-theme">
-    <div *ngFor="let item of productimage">
-        <div class="item">
-            <img src="{{item}}" class="w-100 rounded" alt="Italian Trulli " [hidden]="!item">
-        </div>
-    </div>
-</div>
-<div class="wrapper-title-header-contact ">รีวิว ลูกค้า</div>
-<div class="wrapper-title-header-contact ">{{listdetail.description}}</div>
-<div *ngFor="let item of slideimage" class="text-center wrapper-image">
-    <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
-</div>
-<div class="owl-carousel owl-theme">
-    <div *ngFor="let item of slideimage">
-        <div class="item">
-            <img src="{{item}}" class="w-100 rounded" alt="Italian Trulli " [hidden]="!item">
-        </div>
-    </div>
-</div>
-
-<div class="Line pb-4" (click)="clickline(listdetail.line)">
-
-</div>
-<div class="facebook" (click)="clickfacebook(listdetail.facebook)">
-
-</div>
-
-<div class="tel" (click)="clicktel(listdetail.tel)">
-
-</div>
-
-
-<iframe *ngIf="Ishideyoutube" class="p-3" width="100%" height="500" frameBorder="0" [src]="urlyoutube"></iframe>
-
-
-<!-- <div *ngIf="Ishidefacebook">
-    <div class="wrapper-title-header-contact ">เพจ</div>
-    <iframe class="p-3" [src]="urlpagefacebook" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-</div> -->
 <div class="wrapper-sold-out-s" [hidden]="!Isshowsoldout">
 
 </div>
 <div class="wrapper-title-header-contact" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout">รูปแบบการสั่งซื้อ</div>
+<div class="wrapper-title-header-contact ">สั่งซื้อ</div>
+<div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{product_count_current-countproduct}} ชิ้น)</span></div>
+<div class="wrapper-title-header-contact ">{{listdetail.description}}</div>
 
 <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout ">
     <div class="container">
-
-
         <div class="wrapper-title-header-contact ">ประเภทการชำระเงิน</div>
         <div class="row pt-4">
             <div class="custom-control custom-radio text-center m-auto">
                 <input (click)="checkIsshowbank(1)" id="one" type="radio" class="custom-control-input" value="โอนเงิน" name="type" ngModel>
-                <label class="custom-control-label text-white" for="one">โอน</label>
+                <label class="custom-control-label text-white" for="one">โอนเงิน</label>
             </div>
 
             <div class="custom-control custom-radio text-center m-auto">
@@ -105,7 +43,7 @@
                     <input class="form-control text-center" type="number" min="1" max="100" name="countproduct" placeholder="จำนวนสินค้า" [(ngModel)]="countproduct">
                 </div>
             </div>
-            <div class="text-left"><span class="text-info" style="font-size: 0.8rem;">(จำนวนสินค้า ณ ปัจจุบัน {{product_count_current}} ชิ้น)</span></div>
+            <div class="text-left"><span class="text-info" style="font-size: 0.8rem;">(มีสินค้าทั้งหมด {{product_count_current-countproduct}} ชิ้น)</span></div>
         </div>
         <div>
             <div class="row pt-4">
@@ -169,19 +107,16 @@
                 </div>
 
             </div>
-            <!-- <div>
-            <input type='file' (change)="readURL($event)" style="display: none;" />
-        </div> -->
             <div class="file-input-wrapper">
-                <!-- <button class="btn-file-input">SELECT FILES</button> -->
                 <div class="wrapper-upload-file">
                     อัพโหลดสลิป(คลิ๊ก)
                 </div>
                 <input type='file' (change)="readURL($event)" />
+                <div class="p-t-30">
+                    <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1">
+                </div>
             </div>
-            <div class="p-t-30">
-                <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1">
-            </div>
+
         </div>
     </div>
     <div class="input-group wrapper-desc">
@@ -207,7 +142,78 @@
     <div class="lazada" [hidden]="listdetail.lazada=='null'" (click)="clicklazada(listdetail.lazada) ">
     </div>
 </form>
-<div class="mapouter">
+
+
+<div class="Line pb-4" (click)="clickline(listdetail.line)">
+
+</div>
+<div class="Lineofficialid pb-4" (click)="clicklineofficialid(listdetail.lineofficialid)">
+
+</div>
+<div class="facebook" (click)="clickfacebook(listdetail.facebook)">
+
+</div>
+
+<div class="tel" (click)="clicktel(listdetail.tel)">
+
+</div>
+
+<div class="wrapper-title-header-contact ">สินค้า</div>
+<div *ngFor="let item of productimage;let indexliistselect = index" class="text-center wrapper-image">
+    <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
+
+    <div class="wrapper-title-header-contact ">ราคา {{showprice(productlistdetail[indexliistselect][0]) ||0 | number}} บาท </div>
+    <!-- <div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{showcount(productlistdetail[indexliistselect][0])}} ชิ้น)</span></div> -->
+    <div class="wrapper-title-header-contact pt-0">รายละเอียด<br>{{showdesc(productlistdetail[indexliistselect][0]) ||"" }}</div>
+    <div class=" pb-4">
+        <button type="button" class="btn btn-success" (click)="ordernow(item,productlistdetail[indexliistselect][0])">สั่งสินค้าแบบนี้</button>
+    </div>
+</div>
+
+
+<div class="owl-carousel owl-theme">
+    <div *ngFor="let item of productimage">
+        <div class="item">
+            <img src="{{item}}" class="w-100 rounded" alt="Italian Trulli " [hidden]="!item">
+        </div>
+    </div>
+</div>
+<div class="wrapper-title-header-contact ">รีวิว ลูกค้า</div>
+<div class="wrapper-title-header-contact ">{{listdetail.description}}</div>
+<div *ngFor="let item of slideimage" class="text-center wrapper-image">
+    <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
+</div>
+<div class="owl-carousel owl-theme">
+    <div *ngFor="let item of slideimage">
+        <div class="item">
+            <img src="{{item}}" class="w-100 rounded" alt="Italian Trulli " [hidden]="!item">
+        </div>
+    </div>
+</div>
+<!-- 
+<div class="Line pb-4" (click)="clickline(listdetail.line)">
+
+</div>
+<div class="facebook" (click)="clickfacebook(listdetail.facebook)">
+
+</div>
+
+<div class="tel" (click)="clicktel(listdetail.tel)">
+
+</div> -->
+
+
+<iframe *ngIf="Ishideyoutube" class="p-3" width="100%" height="500" frameBorder="0" [src]="urlyoutube"></iframe>
+
+
+<!-- <div *ngIf="Ishidefacebook">
+    <div class="wrapper-title-header-contact ">เพจ</div>
+    <iframe class="p-3" [src]="urlpagefacebook" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+</div> -->
+
+<div class="container">
+
+    <!-- <div class="mapouter">
     <div class="wrapper-title-header-contact" *ngIf="Ishidemap">พิกัด แผนที่</div>
     <div class="gmap_canvas" *ngIf="Ishidemap">
         <iframe *ngIf="Ishidemap" class="p-3" width="100%" height="500" id="gmap_canvas" [src]="urlmap" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
@@ -227,29 +233,29 @@
             width: 100%;
         }
     </style>
-</div>
-<div style="padding-bottom: 30vh;">
+</div> -->
+    <div style="padding-bottom: 30vh;">
 
-</div>
-<footer>
-    <div class="bg-footer ">
-        <div class="row ">
-            <div class="col wrapper-box-footer ">
-                <div class="Line-footer pb-4 " (click)="clickline(listdetail.line) ">
+    </div>
+    <footer>
+        <div class="bg-footer ">
+            <div class="row ">
+                <div class="col wrapper-box-footer ">
+                    <div class="Line-footer pb-4 " (click)="clickline(listdetail.line) ">
 
-                </div>
-
-            </div>
-            <div class="col wrapper-box-footer ">
-                <div class="tel-footer pb-4 " (click)="clicktel(listdetail.line) ">
+                    </div>
 
                 </div>
-            </div>
-            <div class="col wrapper-box-footer ">
-                <div class="facebook-footer pb-4 " (click)="clickfacebook(listdetail.line) ">
+                <div class="col wrapper-box-footer ">
+                    <div class="tel-footer pb-4 " (click)="clicktel(listdetail.tel) ">
 
+                    </div>
+                </div>
+                <div class="col wrapper-box-footer ">
+                    <div class="facebook-footer pb-4 " (click)="clickfacebook(listdetail.facebook) ">
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>

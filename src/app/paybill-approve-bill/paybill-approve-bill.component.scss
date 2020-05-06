@@ -46,6 +46,7 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     right: 0;
     opacity: 0;
     cursor: pointer;
+    min-height: 30vh;
 }
 
 .file-input-wrapper>.btn-file-input {

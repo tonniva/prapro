@@ -50,6 +50,7 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { PreviewComponent } from './preview/preview.component';
 import { PaybillComponent } from './paybill/paybill.component';
 import { PaybillApproveBillComponent } from './paybill-approve-bill/paybill-approve-bill.component';
+import { PrevieworderproductComponent } from './previeworderproduct/previeworderproduct.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { PaybillApproveBillComponent } from './paybill-approve-bill/paybill-appr
     PromotionComponent,
     PreviewComponent,
     PaybillComponent,
-    PaybillApproveBillComponent
+    PaybillApproveBillComponent,
+    PrevieworderproductComponent
   ],
   imports: [ 
     BrowserAnimationsModule,

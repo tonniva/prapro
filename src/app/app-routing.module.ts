@@ -22,6 +22,7 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { PreviewComponent } from './preview/preview.component';
 import { PaybillComponent } from './paybill/paybill.component';
 import { PaybillApproveBillComponent } from './paybill-approve-bill/paybill-approve-bill.component';
+import { PrevieworderproductComponent } from './previeworderproduct/previeworderproduct.component';
 
 
 const routes: Routes = [ 
@@ -45,8 +46,9 @@ const routes: Routes = [
   { path: 'framlist', component: FrameListComponent},
   { path: 'frampost', component: FramepostComponent},
   { path: 'preview', component: PreviewComponent},
+  { path: 'previeworderproduct', component: PrevieworderproductComponent},
   { path: 'paybill/:id_token', component: PaybillComponent},
-  { path: 'paybill-approve/:id_token', component: PaybillApproveBillComponent},
+  { path: 'paybill-approve/:id_token', component: PaybillApproveBillComponent}, 
 ]
 
 

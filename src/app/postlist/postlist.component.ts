@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'; 
+import { ChangeDetectorRef,Component, OnInit } from '@angular/core'; 
 import { RestService } from '../rest.service'; 
 import {Router,ActivatedRoute,Params} from "@angular/router"; 
 import { NgxSpinnerService } from "ngx-spinner";
@@ -28,14 +28,19 @@ export class PostlistComponent implements OnInit {
   temp_path_image4:any;
   temp_path_image5:any;
 
+
+  productlist:any = new Array();
+
+
   model: any = {};
 
-  constructor(private ng2ImgMax: Ng2ImgMaxService,
+  constructor(private ref: ChangeDetectorRef,private ng2ImgMax: Ng2ImgMaxService,
     private UtilService :UtilService, 
     private router: Router,
     private apiService:RestService,
     private spinner: NgxSpinnerService,
-    private sanitizer:DomSanitizer) { }
+    private sanitizer:DomSanitizer,
+    private route: ActivatedRoute) { }
    
     email:any;
     token:any; 
@@ -58,13 +63,95 @@ export class PostlistComponent implements OnInit {
     resultFilebase64:any;
     resultProductFilebase64:any;
     public line:string="";
-
-
+    dataAccessTokensLineNoti:any;
+    token_line_noti:any;
   ngOnInit(): void {  
+    const code: string = this.route.snapshot.queryParamMap.get('code');
+    if(code == null)
+    this.insertlinenotify()
+
+  
     window.scrollTo(0,0); 
     setTimeout(() => { 
       this.spinner.hide();
     }, 0);
+  }
+
+  line_noti_ask(){
+  
+   var line_noti_url = this.setpathlinenoti(); 
+    Swal.fire({
+      title: 'เลือกห้อง Chat ใน line ที่ต้องการให้ order สั่งซื้อจาลูกค้ายิงเข้ามา',
+      text: "",
+      imageUrl:"https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/linenoti.jpg",    
+      imageHeight: 200,
+      imageAlt: 'Custom image',  
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6', 
+      cancelButtonColor: '#d33',
+      confirmButtonText:
+      '<a href="'+line_noti_url+'"><i class="fa fa-thumbs-up" style="color: white !important;font-weight: 900;">ตกลง</i> </a>', 
+      cancelButtonText:
+      '<a href="'+line_noti_url+'"><i class="fa fa-thumbs-up" style="color: white !important;font-weight: 900;">บังคับกรอก</i> </a>', 
+    }).then((result) => {
+      // if (result.value) {
+        // Swal.fire({
+        //   position: 'top-end',
+        //   icon: 'success',
+        //   title: 'บันทึกเรียบร้อย!',
+        //   showConfirmButton: false,
+        //   timer: 1500
+        // })
+        // this.apiService.uploadimage(this.image_header).then((response) => {   
+        //   this.resultFile = response; 
+        //   this.path_header = this.resultFile.imageUrl;
+         
+        //  }); 
+      // }
+      // else{
+      //   this.image1="";
+      //   this.temp_path_image1="";
+      // }
+    })
+ 
+
+
+
+
+
+  }
+
+
+  setpathlinenoti(){
+
+    this.dataAccessTokensLineNoti = {
+      "grant_type":"authorization_code", 
+      "redirect_uri":this.UtilService.redirect_uri_line_noti(),
+      "client_id":this.UtilService.client_id_line_noti(), 
+      "client_secret":this.UtilService.client_secret_line_noti(),
+      }
+  
+    if(window.location.port != "4200"){
+  
+    
+      localStorage.getItem("REDIRECT_URL_LINE_NOTI");
+      localStorage.getItem("CLIENT_ID_LINE_NOTI");
+      localStorage.getItem("CLIENT_SECRET_LINE_NOTI"); 
+      
+  
+      this.dataAccessTokensLineNoti = {
+        "grant_type":"authorization_code", 
+        "redirect_uri":localStorage.getItem("REDIRECT_URL_LINE_NOTI"),
+        "client_id":localStorage.getItem("CLIENT_ID_LINE_NOTI"), 
+        "client_secret":localStorage.getItem("CLIENT_SECRET_LINE_NOTI")
+        }
+      
+    }
+
+    return "https://notify-bot.line.me/oauth/authorize?response_type=code&client_id="+this.dataAccessTokensLineNoti.client_id+"&redirect_uri="+this.dataAccessTokensLineNoti.redirect_uri+"&scope=notify&state=1234";
+   
+
+   
   }
  
 
@@ -161,9 +248,8 @@ export class PostlistComponent implements OnInit {
                
                }); 
             }
-            else{
-              this.image2="";
-              this.temp_path_image2="";
+            else{  
+              this.arrayPathfile_product.pop();
             }
           })
          
@@ -265,10 +351,49 @@ export class PostlistComponent implements OnInit {
           this.setupowl()
         }, 100);
       }
-    }) 
-
-
+    })  
   }
+
+
+  insertdetailproduct(itemindex,type:String){ 
+    Swal.mixin({
+      input: 'text',
+      confirmButtonText: 'Next &rarr;',
+      showCancelButton: true,
+      progressSteps: ['1', '2', '3']
+    }).queue([
+      {
+        title: 'ราคาสินค้า',
+        text: '(บังคับกรอก)'
+      },
+      {
+        title: 'รายละเอียด',
+        text: '(บังคับกรอก)'
+      },
+      {
+        title: 'จำนวนสินค้าที่มี(ชิ้น)',
+        text: '(บังคับกรอก)'
+      }
+    ]).then((result) => {
+      if (result.value) {
+        const answers = JSON.stringify(result.value)
+        var itemproduct = new Array(answers); 
+        this.productlist.push(itemproduct);
+        Swal.fire({
+          title: 'All done!',
+          html: `
+            Your answers:
+            <pre><code>${answers}</code></pre>
+          `,
+          confirmButtonText: 'Lovely!'
+        })
+      console.log(this.productlist);
+      } 
+
+    })
+  }
+
+
   readThis(inputValue: any) { 
     var file:File = inputValue.files[0];
     return file;
@@ -286,7 +411,34 @@ export class PostlistComponent implements OnInit {
   }
 
   onClickSubmit(data) {  
+    const code: string = this.route.snapshot.queryParamMap.get('code');
+ 
+    if(typeof(code)!=undefined && code && localStorage.getItem("linenotify") == null){
+      this.apiService.GetAccessTokensLineNotify(code).then((response) => {
+            
+        this.token_line_noti = response
+       const linenotitoken =  JSON.parse(this.token_line_noti.result[0]).access_token;
+        localStorage.setItem("linenotify", linenotitoken);
+        this.ref.detectChanges(); 
+      });   
+    }
+    // else
+    // {
+    //   if(localStorage.getItem("linenotify") == null)
+    //   this.line_noti_ask()
+    // }
 
+    
+
+    if(data.pricesell == ""){
+      this.UtilService.showError("กรุณากรอก ราคาสินค้า","")
+      return;
+    } 
+    if(data.quota == ""){
+      this.UtilService.showError("กรุณากรอก จำนวนสินค้าที่มีขาย","")
+      return;
+    } 
+  
     // if(data.pricestart <= 0){
     //   this.UtilService.showError("กรุณากรอก <br/> ราคาเริ่มต้น","")
     //   return;
@@ -399,10 +551,14 @@ export class PostlistComponent implements OnInit {
   
 
   insertlinenotify(){ 
-    
-    this.alertinsertdata("กรอก LINE Notify",function(data){ 
-    localStorage.setItem("linenotify",data);
-    });  
+     
+    // if(localStorage.getItem("linenotify") == null){ 
+      this.line_noti_ask()
+    // }
+    // window.location.replace("https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=UlMab1mIzitAnUU1mWzPxl&redirect_uri=http://localhost:4200/list/two&scope=notify&state=1234"); 
+    // this.alertinsertdata("กรอก LINE Notify",function(data){ 
+    // localStorage.setItem("linenotify",data);
+    // });  
    }
  
    insertfacebookpixel(){
@@ -478,7 +634,7 @@ export class PostlistComponent implements OnInit {
 
 
 
-  public postpra(data,arrayPathfile_product_Posted:Array<String>,arrayPathfile_slide_Posted:Array<String>){
+  public postpra(data,arrayPathfile_product_Posted:Array<String>,arrayPathfile_slide_Posted:Array<String>,productlist:Array<String>){
  
     setTimeout(() => {  
 
@@ -490,12 +646,15 @@ export class PostlistComponent implements OnInit {
       data.status_pramoon_check = "checking";  
       data.pictureUrl = localStorage.getItem("pictureUrl");
       data.displayName= localStorage.getItem("displayName"); 
+      data.typewebsite= this.typewebsite
+       
 
 
       // ******** 
 
       data.product_header =   this.path_header;
       data.product_picture =   this.arrayPathfile_product_Posted;
+      data.product_list_detail =   JSON.stringify(this.productlist);
       data.slide_picture =   this.arrayPathfile_slide_Posted;
 
 
@@ -610,12 +769,19 @@ export class PostlistComponent implements OnInit {
 
     setTimeout(() => {
       
-      this.postpra(data,this.arrayPathfile_product_Posted,this.arrayPathfile_slide_Posted);
+      this.postpra(data,this.arrayPathfile_product_Posted,this.arrayPathfile_slide_Posted,this.productlist);
       /** spinner ends after 5 seconds */
       this.spinner.hide();
     }, 5000); 
   }
   
+
+  public typewebsite: string = '';
+selectTypeFrom (event: any) {
+  //update the ui
+  this.typewebsite = event.target.value;
+  localStorage.setItem("typewebsite",this.typewebsite);
+}
 
  clickmap(){
 

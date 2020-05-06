@@ -1,3 +1,7 @@
+
+
+
+
 import {ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {DomSanitizer,SafeResourceUrl} from '@angular/platform-browser';
  
@@ -9,13 +13,14 @@ import Swal from 'sweetalert2'
 import { ScaleControlStyle } from '@agm/core';
  
 import { Ng2ImgMaxService } from 'ng2-img-max';  
-declare let $: any;
+import { json } from 'body-parser';
+declare let $: any; 
 @Component({
-  selector: 'app-preview', 
-  templateUrl: './preview.component.html',
-  styleUrls: ['./preview.component.scss']
+  selector: 'app-previeworderproduct',
+  templateUrl: './previeworderproduct.component.html',
+  styleUrls: ['./previeworderproduct.component.scss']
 })
-export class PreviewComponent implements OnInit {
+export class PrevieworderproductComponent implements OnInit {
   constructor(private ng2ImgMax: Ng2ImgMaxService, public sanitizer:DomSanitizer,private ref: ChangeDetectorRef,private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
   Isshowsoldout:any;
   id_token:string; 
@@ -41,7 +46,7 @@ export class PreviewComponent implements OnInit {
 
   urlmap:SafeResourceUrl;
 
-  countproduct:any=0;
+  countproduct:any;
 
   product_count_current:any;
 
@@ -52,8 +57,12 @@ export class PreviewComponent implements OnInit {
   Isshowbank:boolean; 
 
   ordernowproduct:any; 
+  ordernow_img:any; 
+  ordernow:any; 
    
   ngOnInit(): void {   
+    this.ordernow_img = localStorage.getItem("ordernow_img")
+    this.ordernow = JSON.parse(localStorage.getItem("ordernow"));
     this.Isshowsoldout=false;
     this.Ishidemap=false;
     this.spinner.show();
@@ -74,8 +83,7 @@ const urlParams = new URLSearchParams(window.location.search);
 
       
       this.listdetail  = response; 
-      this.listdetail = this.listdetail[this.listdetail.length-1]
-      this.checksoldout(this.listdetail);
+      this.listdetail = this.listdetail[this.listdetail.length-1] 
       
   
  if(!this.listdetail.facebookpixelkey){ 
@@ -125,19 +133,7 @@ const urlParams = new URLSearchParams(window.location.search);
  
   }
 
-  checksoldout(data){ 
-     
-    if(data.bought >= data.quota){
-       this.Isshowsoldout = true;
-       this.product_count_current = 0;
-    }
-    else
-    {
-
-      this.product_count_current = parseInt(data.quota) - parseInt(data.bought || 0);
-      this.Isshowsoldout = false;
-    } 
-  }
+ 
 
   GetProfile(id_token){   
     this.apiService.getdetailRegister(id_token).then((response) => {
@@ -245,8 +241,8 @@ readThis(inputValue: any) {
 }
 onClickSubmit(data) { 
   
-    if(parseInt(data.countproduct) > parseInt(this.product_count_current)){
-      this.UtilService.showError("ขออภัย สิค้าไม่เพียงพอ รบกวนสั่งไม่เกิน "+this.product_count_current+" ชิ้น","")
+    if(parseInt(data.countproduct) > parseInt(this.ordernow[2])){
+      this.UtilService.showError("ขออภัย สิค้าไม่เพียงพอ รบกวนสั่งไม่เกิน "+this.ordernow[2]+" ชิ้น","")
     //call update จำนวน สินค้า
       this.apiService.getlistdetail(this.id_token).then((response) => {
         this.listdetail_update  = response; 
@@ -279,8 +275,7 @@ onClickSubmit(data) {
       this.UtilService.showError("กรุณาอัพโหลดสลิป","")
       return;
     } 
-    
-
+    debugger
   data.message =  "\r\n\r\nจำนวนสินค้าที่สั่ง  : "+data.countproduct+" ชิ้น\r\n\r\nโอนเงิน : "+data.pricepay+" บาท  \r\nสั่งแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nที่อยู่จัดส่ง ::\r\n\r\nคุณ "+data.name_order+"\r\n"+data.deliveryaddress+"\r\n\r\nเบอร์ติดต่อกลับ : "+data.tel+"";
   data.imageThumbnail =  this.path_slip;
   data.imageFile = this.slipresizefile; 
@@ -288,16 +283,7 @@ onClickSubmit(data) {
    
   
 
-  this.apiService.linenotifyPaybill(data).then((response) => {    
-  var total_buy = this.countproduct + this.listdetail.bought;
-    this.apiService.updateBuy(this.listdetail._id,total_buy).then((response) => {
-      window.history.back();
-      setTimeout(() => {
-        location.reload();
-        /** spinner ends after 5 seconds */
-        this.spinner.hide();
-      }, 1000);
-    });  
+  this.apiService.linenotifyPaybill(data).then((response) => {      
     this.success();
    
    });  
@@ -311,6 +297,7 @@ success(){
     'ขอบคุณครับ',
     'success'
   )
+  window.history.back();
 }
 
 checkIsshowbank(select){ 
@@ -337,14 +324,7 @@ showcount(data){
   return JSON.parse(data)[2];
 }
 
-ordernow(img,data){
-  this.ordernowproduct = data;  
-  localStorage.setItem("ordernow", this.ordernowproduct)
-  localStorage.setItem("ordernow_img",img)
-
-  window.location.href = window.location.origin+ "/previeworderproduct"+window.location.search;
-
-}
+ 
  
 }
 

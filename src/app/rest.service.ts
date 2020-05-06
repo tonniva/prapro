@@ -11,6 +11,7 @@ import { UtilService } from './util.service';
 })
 export class RestService { 
   dataAccessTokensLine:any;
+  dataAccessTokensLineNoti:any;
   constructor(private httpClient: HttpClient,private UtilService:UtilService) { } 
  
 
@@ -63,6 +64,47 @@ optionsGetProfile = {
   .toPromise()
   .then((response) => response);
  }
+
+
+ GetAccessTokensLineNotify(code:any){    
+ 
+  const options_line_Noti = {
+    headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+  };  
+  
+  this.dataAccessTokensLineNoti = {
+    "grant_type":"authorization_code",
+    "code":code,
+    "redirect_uri":this.UtilService.redirect_uri_line_noti(),
+    "client_id":this.UtilService.client_id_line_noti(), 
+    "client_secret":this.UtilService.client_secret_line_noti(),
+    }
+
+  if(window.location.port != "4200"){
+
+  
+    localStorage.getItem("REDIRECT_URL_LINE_NOTI");
+    localStorage.getItem("CLIENT_ID_LINE_NOTI");
+    localStorage.getItem("CLIENT_SECRET_LINE_NOTI"); 
+    
+
+    this.dataAccessTokensLineNoti = {
+      "grant_type":"authorization_code",
+      "code":"",
+      "redirect_uri":localStorage.getItem("REDIRECT_URL_LINE_NOTI"),
+      "client_id":localStorage.getItem("CLIENT_ID_LINE_NOTI"), 
+      "client_secret":localStorage.getItem("CLIENT_SECRET_LINE_NOTI")
+      }
+    
+  }
+ 
+    
+  var url = "/get-noti-token?grant_type=authorization_code&code="+code+"&redirect_uri="+this.dataAccessTokensLineNoti.redirect_uri+"&client_id="+this.dataAccessTokensLineNoti.client_id+"&client_secret="+this.dataAccessTokensLineNoti.client_secret;
+return this.httpClient.get(this.UtilService.GetAPIuploadUrl()+url)
+.toPromise()
+.then((response) => response);
+
+}
 
  
  PramoonRegister(item:any,file:any){ 
@@ -118,6 +160,8 @@ postpramoon(item:any,file:any,token:any){
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     .set('Authorization', 'Bearer '+token)
   };  
+  
+  this.body.set('typewebsite', item.typewebsite);
   this.body.set('pricestart', item.pricestart);
   this.body.set('quota', item.quota); 
   this.body.set('pricesell', item.pricesell);
@@ -145,6 +189,7 @@ postpramoon(item:any,file:any,token:any){
 
   this.body.set('product_header',item.product_header);   
   this.body.set('product_picture',item.product_picture);   
+  this.body.set('product_list_detail',item.product_list_detail);   
   this.body.set('slide_picture',item.slide_picture);   
 
 

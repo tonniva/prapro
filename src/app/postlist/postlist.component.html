@@ -32,13 +32,32 @@
 <div class="wrapper-post-content">
     <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
         <div class="container wrapper-pos">
-            <div class="wrapper-title-header"> สร้าง web Landing
-            </div>
-
             <div class="row">
+                <div class="w-100 wrapper-title-header-contact ">เครื่องมือ ช่วย (ทางเทคนิค)
+                </div>
+                <div class="line-notify" (click)="insertlinenotify()">
+
+                </div>
+
+                <!-- <div class="facebook-pixel" (click)="insertfacebookpixel()">
+
+                </div> -->
+                <div class="wrapper-title-header"> สร้าง web Landing
+                </div>
+                <div class="container">
+                    <div class="row pb-4 p-4">
+                        <select class='form-control' (change)="selectTypeFrom($event)">
+                                    <option  value="" disabled selected hidden>เลือกประเภทธุรกิจ</option> 
+                                    <option  value='สินค้าทั้วไป'>สินค้าทั้วไป</option>
+                                    <option  value='สินค้าแบบตัดสต๊อก'>สินค้าแบบตัดสต๊อก(ลงได้ 1 ชิ้น)</option>
+                                    <option  value='คอร์สเรียนออนไลน์'>คอร์สเรียนออนไลน์</option> 
+                                </select>
+                    </div>
+                </div>
+
                 <div class="wrapper-header-box">
                     <div class="col-12 wrapper-upload ">
-                        <div class="wrapper-title-header text-left"> อัพโหลด Header (แก้ไข)
+                        <div class="wrapper-title-header text-left"> อัพโหลด รูปสินค้าหลัก (แก้ไข)
                         </div>
                         <span class="hiddenFileInput post-click">
                                 <input name="theFile1" class="wrapper-theFile bb" type="file" accept="image/*" (change)="changeListener_one($event)"/>
@@ -50,7 +69,7 @@
                 </div>
                 <div class="wrapper-header-box">
                     <div class="col-12 wrapper-upload">
-                        <div class="wrapper-title-header text-left"> อัพโหลด รูปสินค้า
+                        <div class="wrapper-title-header text-left"> อัพโหลด รูปสินค้า อื่นๆ
                         </div>
                         <span class="hiddenFileInput post-click">
                             <input name="theFile2"  class="wrapper-theFile" type="file" accept="image/*" (change)="changeListener_two($event)"/>
@@ -61,7 +80,8 @@
                     <div class="row col-12">
                         <div class="col-6" *ngFor="let item of arrayPathfile_product;let indexliistselect = index">
                             <img src="{{item}}" class="w-100" alt="Italian Trulli " [hidden]="!item">
-                            <div class="text-center" (click)="deleteimage(indexliistselect,'product') "><button type="button" class="btn btn-danger">ลบรูป</button></div>
+                            <div class="text-center" (click)="deleteimage(indexliistselect,'product') "><button type="button" class="btn btn-danger w-100">ลบรูป</button></div>
+                            <div class="text-center" (click)="insertdetailproduct(indexliistselect,'product') "><button type="button" class="btn btn-success wrapper-input-detail">ใส่รายละเอียด</button></div>
                         </div>
                     </div>
                 </div>
@@ -147,14 +167,7 @@
         <div class="lazada" (click)="insertlazada()">
 
         </div>
-        <div class="wrapper-title-header-contact ">เครื่องมือ ช่วย (ทางเทคนิค)</div>
-        <div class="line-notify" (click)="insertlinenotify()">
 
-        </div>
-
-        <div class="facebook-pixel" (click)="insertfacebookpixel()">
-
-        </div>
 
         <div class="wrapper-title-header-contact ">รายละเอียดสินค้า</div>
         <div class="container pt-3 ">
@@ -185,7 +198,7 @@
                 <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description" rows="5 " cols="60 " required></textarea>
             </div>
             <!-- <app-here-map></app-here-map> -->
-            <div class="wrapper-title-header-contact" (click)="clickmap()" style="background-color: brown;">ใช้ตำแหน่ง ตรงนี้ เป็นพิกัดร้าน (คลิ๊กเลย)</div>
+            <!-- <div class="wrapper-title-header-contact" (click)="clickmap()" style="background-color: brown;">ใช้ตำแหน่ง ตรงนี้ เป็นพิกัดร้าน (คลิ๊กเลย)</div> -->
             <hr class="hr-1 ">
             <!-- <div class="wrapper-title-header-contact ">ช่องทางการติดต่อ</div>
             <hr class="hr-1 ">
