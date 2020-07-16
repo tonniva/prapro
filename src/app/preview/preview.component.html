@@ -162,9 +162,9 @@
 <div *ngFor="let item of productimage;let indexliistselect = index" class="text-center wrapper-image">
     <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
 
-    <div class="wrapper-title-header-contact ">ราคา {{showprice(productlistdetail[indexliistselect][0]) ||0 | number}} บาท </div>
+    <!-- <div class="wrapper-title-header-contact ">ราคา {{showprice(productlistdetail[indexliistselect][0]) ||0 | number}} บาท </div> -->
     <!-- <div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{showcount(productlistdetail[indexliistselect][0])}} ชิ้น)</span></div> -->
-    <div class="wrapper-title-header-contact pt-0">รายละเอียด<br>{{showdesc(productlistdetail[indexliistselect][0]) ||"" }}</div>
+    <!-- <div class="wrapper-title-header-contact pt-0">รายละเอียด<br>{{showdesc(productlistdetail[indexliistselect][0]) ||"" }}</div> -->
     <div class=" pb-4">
         <button type="button" class="btn btn-success" (click)="ordernow(item,productlistdetail[indexliistselect][0])">สั่งสินค้าแบบนี้</button>
     </div>
