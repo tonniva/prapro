@@ -34,11 +34,11 @@
 
 </div>
 <div class="wrapper-title-header-contact" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout">รูปแบบการสั่งซื้อ</div>
-<div class="wrapper-title-header-contact "><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
-<ul class="wrapper-count"> 
+<div class="wrapper-title-header-contact-pro"><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
+<ul class="wrapper-count" style="padding-left: 25px;"> 
     <li><span   id="hourst"></span><mark class="b-r-5">ชม.</mark></li>
-    <li><span   id="minutest"></span><mark lass="b-r-5">นาที</mark></li>
-    <li><span   id="secondst"></span><mark lass="b-r-5">วินาที</mark></li>
+    <li><span   id="minutest"></span><mark class="b-r-5">นาที</mark></li>
+    <li><span   id="secondst"></span><mark class="b-r-5">วินาที</mark></li>
   </ul>
   <div id="codeendt" class="wrapper-title-header-contact ">CODE โปรโมชั่น : <mark><span  id="codet"></span></mark></div>
 <div class="wrapper-title-header-contact ">สั่งซื้อ</div>
@@ -101,12 +101,12 @@
 
 <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout ">
     <div class="container">
-        <div class="wrapper-title-header-contact "><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
+        <div class="wrapper-title-header-contact-pro"><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
             
 <ul class="wrapper-count"> 
     <li><span   id="hours"></span><mark class="b-r-5">ชม.</mark></li>
-    <li><span   id="minutes"></span><mark lass="b-r-5">นาที</mark></li>
-    <li><span   id="seconds"></span><mark lass="b-r-5">วินาที</mark></li>
+    <li><span   id="minutes"></span><mark class="b-r-5">นาที</mark></li>
+    <li><span   id="seconds"></span><mark class="b-r-5">วินาที</mark></li>
   </ul>
   <div id="codeend" class="wrapper-title-header-contact ">CODE โปรโมชั่น : <mark><span  id="code"></span></mark></div>
         <div class="wrapper-title-header-contact ">ประเภทการชำระเงิน</div>
