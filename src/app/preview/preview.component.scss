@@ -123,7 +123,7 @@
     text-align: center;
     font-size: 1.5rem;
     padding: 26px;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 //  footer
@@ -455,3 +455,48 @@ img {
         left: 26%;
     }
 }
+
+.wrapper-desc-title {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    /* padding: 10px; */
+    word-break: break-word;
+    padding-top: 18px;
+    padding-bottom: 10px;
+}
+
+.wrapper-font-btn-submit{
+    font-size: 2rem;
+}
+
+
+
+li {
+    display: inline-block;
+    font-size: 2em;
+    list-style-type: none;
+    padding: 0.9rem;
+    text-transform: uppercase;
+  }
+  
+  li span {
+    display: block;
+    font-size: 2.5rem;
+    background: orange;
+    border-radius: 5px;
+    text-align: center;
+    min-width: 60px;
+    margin-bottom: 10px;
+  }
+  .wrapper-count{ 
+    color: white;
+    padding-left: 15px;
+  }
+
+.b-r-5{
+    border-radius: 5px;
+}
+
+// count down
+

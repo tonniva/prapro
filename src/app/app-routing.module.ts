@@ -46,6 +46,7 @@ const routes: Routes = [
   { path: 'framlist', component: FrameListComponent},
   { path: 'frampost', component: FramepostComponent},
   { path: 'preview', component: PreviewComponent},
+  { path: 'thankyoupage', component: PreviewComponent},
   { path: 'previeworderproduct', component: PrevieworderproductComponent},
   { path: 'paybill/:id_token', component: PaybillComponent},
   { path: 'paybill-approve/:id_token', component: PaybillApproveBillComponent}, 

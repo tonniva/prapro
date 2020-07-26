@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 import { ScaleControlStyle } from '@agm/core';
  
 import { Ng2ImgMaxService } from 'ng2-img-max';  
+import { start } from 'repl';
 declare let $: any;
 @Component({
   selector: 'app-preview', 
@@ -23,6 +24,7 @@ export class PreviewComponent implements OnInit {
   listdetail:any;
   listdetail_update:any;
   imageheader:string;
+  codeInput:string;
   
   urlyoutube:SafeResourceUrl;
   Ishideyoutube:boolean=false;
@@ -53,7 +55,9 @@ export class PreviewComponent implements OnInit {
 
   ordernowproduct:any; 
    
-  ngOnInit(): void {   
+  ngOnInit(): void {    
+   
+    this.startcountdown();
     this.Isshowsoldout=false;
     this.Ishidemap=false;
     this.spinner.show();
@@ -102,7 +106,7 @@ const urlParams = new URLSearchParams(window.location.search);
       this.imageheader = this.listdetail.product_header;
 
       this.productimage = this.listdetail.product_picture[0].split(',');
-       debugger
+        
       //  this.productlistdetail = JSON.parse(this.listdetail.product_list_detail[0]);
       
       this.slideimage = this.listdetail.slide_picture[0].split(',');
@@ -146,10 +150,10 @@ const urlParams = new URLSearchParams(window.location.search);
     }) 
   }
 
-  mypixel() { 
-    this.Pixelfacebook ="<script>   ! function(f, b, e, v, n, t, s) {        if (f.fbq) return;        n = f.fbq = function() {            n.callMethod ?                n.callMethod.apply(n, arguments) : n.queue.push(arguments)        };        if (!f._fbq) f._fbq = n;        n.push = n;        n.loaded = !0;        n.version = '2.0';        n.queue = [];        t = b.createElement(e);        t.async = !0;        t.src = v;        s = b.getElementsByTagName(e)[0];        s.parentNode.insertBefore(t, s)    }(window, document, 'script',        'https://connect.facebook.net/en_US/fbevents.js');    fbq('init', '509997103029704');    fbq('track', 'Preview');</script><noscript><img height='1' width='1' style='display:none'        src='https://www.facebook.com/tr?id=509997103029704&ev=PageView&noscript=1'      /></noscript>";
-    return  this.Pixelfacebook;
-  }
+  // mypixel() { 
+  //   this.Pixelfacebook ="<script>   ! function(f, b, e, v, n, t, s) {        if (f.fbq) return;        n = f.fbq = function() {            n.callMethod ?                n.callMethod.apply(n, arguments) : n.queue.push(arguments)        };        if (!f._fbq) f._fbq = n;        n.push = n;        n.loaded = !0;        n.version = '2.0';        n.queue = [];        t = b.createElement(e);        t.async = !0;        t.src = v;        s = b.getElementsByTagName(e)[0];        s.parentNode.insertBefore(t, s)    }(window, document, 'script',        'https://connect.facebook.net/en_US/fbevents.js');    fbq('init', '509997103029704');    fbq('track', 'Preview');</script><noscript><img height='1' width='1' style='display:none'        src='https://www.facebook.com/tr?id=509997103029704&ev=PageView&noscript=1'      /></noscript>";
+  //   return  this.Pixelfacebook;
+  // }
   pixel_customer() { 
     return  this.pixel_customer_data;
   }
@@ -160,9 +164,9 @@ const urlParams = new URLSearchParams(window.location.search);
       margin:10,
       items:1,
       loop:true, 
-      dot:true,
+      dot:false,
       autoplay:true,
-      autoplayTimeout:500,
+      autoplayTimeout:1500,
       autoplayHoverPause:true, 
       nav:false,
       responsive:{
@@ -187,10 +191,10 @@ const urlParams = new URLSearchParams(window.location.search);
 clickline(line:string){
   window.location.replace("https://line.me/ti/p/~"+line);
 }
-clicklineofficialid(lineofficialid:string){
-  window.location.replace("https://line.me/R/ti/p/"+lineofficialid);
+clicklineofficialid(line:string){
+  window.location.replace("https://line.me/R/ti/p/"+line);
 }
-clickfacebook(facebook){
+clickfacebook(facebook){ 
   window.open("http://m.me/"+facebook);
   // window.location.replace("m.me/"+facebook);
 }
@@ -291,7 +295,9 @@ onClickSubmit(data) {
   this.apiService.linenotifyPaybill(data).then((response) => {    
   var total_buy = this.countproduct + this.listdetail.bought;
     this.apiService.updateBuy(this.listdetail._id,total_buy).then((response) => {
-      window.history.back();
+
+    
+      // window.history.back();
       setTimeout(() => {
         location.reload();
         /** spinner ends after 5 seconds */
@@ -311,6 +317,11 @@ success(){
     'ขอบคุณครับ',
     'success'
   )
+
+  setTimeout(() => {
+    window.location.href = window.location.origin+ "/thankyoupage?token="+this.id_token;
+    this.spinner.hide();
+  }, 1000);
 }
 
 checkIsshowbank(select){ 
@@ -343,9 +354,88 @@ ordernow(img,data){
   localStorage.setItem("ordernow_img",img)
 
   window.location.href = window.location.origin+ "/previeworderproduct"+window.location.search;
-
-}
  
+  
+}
+startcountdown(){ 
+  
+// // Set the date we're counting down to
+// var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+
+// // Update the count down every 1 second
+// var x = setInterval(function() {
+
+//   // Get today's date and time
+//   var now = new Date().getTime();
+
+//   // Find the distance between now and the count down date
+//   var distance = countDownDate - now;
+
+//   // Time calculations for days, hours, minutes and seconds
+  
+//   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+//   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+//   // Display the result in the element with id="demo"
+  
+//   // document.getElementById("days").innerHTML = days.toString();
+//   document.getElementById("hours").innerHTML = hours.toString()  ;
+//   document.getElementById("minutes").innerHTML = minutes.toString()  ;
+//   document.getElementById("seconds").innerHTML = seconds.toString();
+
+//   // If the count down is finished, write some text
+//   if (distance < 0) {
+//     clearInterval(x);
+//     document.getElementById("demo").innerHTML = "EXPIRED";
+//   }
+// }, 1000);
+// }
+ 
+this.makeid(4);
+var countdown = 29 * 60 * 1000;
+var timerId = setInterval(function(){
+
+  countdown -= 1000;
+  var min = Math.floor(countdown / (60 * 1000));
+  //var sec = Math.floor(countdown - (min * 60 * 1000));  // wrong
+  var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
+
+  if (countdown <= 0) {
+    document.getElementById("codeendt").innerHTML = "CODE โปรโมชั่น  <br><mark>รหัสหมดอายุ</mark>";
+    document.getElementById("codeend").innerHTML = "CODE โปรโมชั่น  <br><mark>รหัสหมดอายุ</mark>";
+     clearInterval(timerId);
+     //doSomething();
+  } else {
+     $("#countTime").html(min + " : " + sec);
+  }
+
+    // document.getElementById("days").innerHTML = days.toString();
+    document.getElementById("hourst").innerHTML = "00"  ;
+    document.getElementById("minutest").innerHTML = min.toString()  ;
+    document.getElementById("secondst").innerHTML = sec.toString();
+
+  document.getElementById("hours").innerHTML = "00"  ;
+  document.getElementById("minutes").innerHTML = min.toString()  ;
+  document.getElementById("seconds").innerHTML = sec.toString();
+
+}, 1000); //1000ms. = 1sec. 
+}
+
+ makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  document.getElementById("codet").innerHTML = result.toString();
+  document.getElementById("code").innerHTML = result.toString();
+  this.codeInput =  result.toString();
+  return result;
+}
+
 }
 
 
