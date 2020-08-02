@@ -81,9 +81,11 @@ const urlParams = new URLSearchParams(window.location.search);
       this.listdetail = this.listdetail[this.listdetail.length-1]
       this.checksoldout(this.listdetail);
       
-  
- if(!this.listdetail.facebookpixelkey){ 
-   this.pixel_customer_data =this.listdetail.facebookpixelkey
+    
+ if(this.listdetail.facebookpixelkey){ 
+     
+   this.pixel_customer_data =this.listdetail.facebookpixelkey 
+   localStorage.setItem("pixel_customer_data",this.pixel_customer_data);
  }
       
 
@@ -137,7 +139,7 @@ const urlParams = new URLSearchParams(window.location.search);
     }
     else
     {
-
+ debugger
       this.product_count_current = parseInt(data.quota) - parseInt(data.bought || 0);
       this.Isshowsoldout = false;
     } 
@@ -151,12 +153,24 @@ const urlParams = new URLSearchParams(window.location.search);
   }
 
   // mypixel() { 
-  //   this.Pixelfacebook ="<script>   ! function(f, b, e, v, n, t, s) {        if (f.fbq) return;        n = f.fbq = function() {            n.callMethod ?                n.callMethod.apply(n, arguments) : n.queue.push(arguments)        };        if (!f._fbq) f._fbq = n;        n.push = n;        n.loaded = !0;        n.version = '2.0';        n.queue = [];        t = b.createElement(e);        t.async = !0;        t.src = v;        s = b.getElementsByTagName(e)[0];        s.parentNode.insertBefore(t, s)    }(window, document, 'script',        'https://connect.facebook.net/en_US/fbevents.js');    fbq('init', '509997103029704');    fbq('track', 'Preview');</script><noscript><img height='1' width='1' style='display:none'        src='https://www.facebook.com/tr?id=509997103029704&ev=PageView&noscript=1'      /></noscript>";
+  //   if(!this.pixel_customer_data){
+  //     return;
+  //   }
+
+  //   this.Pixelfacebook ="<script>   ! function(f, b, e, v, n, t, s) {        if (f.fbq) return;        n = f.fbq = function() {            n.callMethod ?                n.callMethod.apply(n, arguments) : n.queue.push(arguments)        };        if (!f._fbq) f._fbq = n;        n.push = n;        n.loaded = !0;        n.version = '2.0';        n.queue = [];        t = b.createElement(e);        t.async = !0;        t.src = v;        s = b.getElementsByTagName(e)[0];        s.parentNode.insertBefore(t, s)    }(window, document, 'script',        'https://connect.facebook.net/en_US/fbevents.js');    fbq('init', '"+ this.pixel_customer_data+"');    fbq('track', 'Preview');</script><noscript><img height='1' width='1' style='display:none'        src='https://www.facebook.com/tr?id="+ this.pixel_customer_data+"&ev=PageView&noscript=1'      /></noscript>";
+  //    debugger
   //   return  this.Pixelfacebook;
   // }
   pixel_customer() { 
-    return  this.pixel_customer_data;
+    if(!this.pixel_customer_data){
+      return;
+    }
+
+    this.Pixelfacebook ="<script>   ! function(f, b, e, v, n, t, s) {        if (f.fbq) return;        n = f.fbq = function() {            n.callMethod ?                n.callMethod.apply(n, arguments) : n.queue.push(arguments)        };        if (!f._fbq) f._fbq = n;        n.push = n;        n.loaded = !0;        n.version = '2.0';        n.queue = [];        t = b.createElement(e);        t.async = !0;        t.src = v;        s = b.getElementsByTagName(e)[0];        s.parentNode.insertBefore(t, s)    }(window, document, 'script',        'https://connect.facebook.net/en_US/fbevents.js');    fbq('init', '"+ this.pixel_customer_data+"');    fbq('track', 'Preview');</script><noscript><img height='1' width='1' style='display:none'        src='https://www.facebook.com/tr?id="+ this.pixel_customer_data+"&ev=PageView&noscript=1'      /></noscript>";
+      
+    return  this.Pixelfacebook; 
   }
+
      
   setupowl(){  
     $('.owl-carousel').owlCarousel('destroy'); 
@@ -248,11 +262,12 @@ readThis(inputValue: any) {
   
 }
 onClickSubmit(data) { 
-  
+   
     if(parseInt(data.countproduct) > parseInt(this.product_count_current)){
       this.UtilService.showError("ขออภัย สิค้าไม่เพียงพอ รบกวนสั่งไม่เกิน "+this.product_count_current+" ชิ้น","")
     //call update จำนวน สินค้า
       this.apiService.getlistdetail(this.id_token).then((response) => {
+        
         this.listdetail_update  = response; 
         this.listdetail_update = this.listdetail[this.listdetail_update.length-1]
         this.product_count_current =parseInt(this.listdetail_update.quota) - parseInt(this.listdetail_update.bought);
@@ -293,7 +308,8 @@ onClickSubmit(data) {
   
 
   this.apiService.linenotifyPaybill(data).then((response) => {    
-  var total_buy = this.countproduct + this.listdetail.bought;
+   var total_buy = this.countproduct + this.listdetail.bought;
+    
     this.apiService.updateBuy(this.listdetail._id,total_buy).then((response) => {
 
     
@@ -303,8 +319,9 @@ onClickSubmit(data) {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
       }, 1000);
+      this.success();
+   
     });  
-    this.success();
    
    });  
 
@@ -403,7 +420,7 @@ var timerId = setInterval(function(){
   var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
 
   if (countdown <= 0) {
-    document.getElementById("codeendt").innerHTML = "CODE โปรโมชั่น  <br><mark>รหัสหมดอายุ</mark>";
+    //document.getElementById("codeendt").innerHTML = "CODE โปรโมชั่น  <br><mark>รหัสหมดอายุ</mark>";
     document.getElementById("codeend").innerHTML = "CODE โปรโมชั่น  <br><mark>รหัสหมดอายุ</mark>";
      clearInterval(timerId);
      //doSomething();
@@ -412,9 +429,9 @@ var timerId = setInterval(function(){
   }
 
     // document.getElementById("days").innerHTML = days.toString();
-    document.getElementById("hourst").innerHTML = "00"  ;
-    document.getElementById("minutest").innerHTML = min.toString()  ;
-    document.getElementById("secondst").innerHTML = sec.toString();
+    //document.getElementById("hourst").innerHTML = "00"  ;
+    //document.getElementById("minutest").innerHTML = min.toString()  ;
+    //document.getElementById("secondst").innerHTML = sec.toString();
 
   document.getElementById("hours").innerHTML = "00"  ;
   document.getElementById("minutes").innerHTML = min.toString()  ;
@@ -430,7 +447,7 @@ var timerId = setInterval(function(){
   for ( var i = 0; i < length; i++ ) {
      result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
-  document.getElementById("codet").innerHTML = result.toString();
+  //document.getElementById("codet").innerHTML = result.toString();
   document.getElementById("code").innerHTML = result.toString();
   this.codeInput =  result.toString();
   return result;

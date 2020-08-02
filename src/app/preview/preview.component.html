@@ -1,11 +1,11 @@
-<!-- <div class='mypixel' [innerHtml]="mypixel()">
+<!-- <div id="pix" class='mypixel' [innerHtml]="mypixel()">
 </div> -->
 
 <!-- Facebook Pixel Code -->
  
 
     <!-- Facebook Pixel Code -->
-<script>
+<!-- <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -19,7 +19,7 @@
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=304393414027780&ev=PageView&noscript=1"
-    /></noscript>
+    /></noscript> -->
     <!-- End Facebook Pixel Code -->
 <div class='mypixel_customer' [innerHtml]="pixel_customer()">
 </div>
@@ -33,7 +33,7 @@
 <div class="wrapper-sold-out-s" [hidden]="!Isshowsoldout">
 
 </div>
-<div class="wrapper-title-header-contact" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout">รูปแบบการสั่งซื้อ</div>
+<!-- <div class="wrapper-title-header-contact" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout">รูปแบบการสั่งซื้อ</div>
 <div class="wrapper-title-header-contact-pro"><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
 <ul class="wrapper-count" style="padding-left: 25px;"> 
     <li><span   id="hourst"></span><mark class="b-r-5">ชม.</mark></li>
@@ -41,19 +41,19 @@
     <li><span   id="secondst"></span><mark class="b-r-5">วินาที</mark></li>
   </ul>
   <div id="codeendt" class="wrapper-title-header-contact ">CODE โปรโมชั่น : <mark><span  id="codet"></span></mark></div>
-<div class="wrapper-title-header-contact ">สั่งซื้อ</div>
-<div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{product_count_current-countproduct}} ชิ้น)</span></div>
-<div class="wrapper-title-header-contact ">{{listdetail.description}}</div>
+<div class="wrapper-title-header-contact ">สั่งซื้อ</div> -->
+<!-- <div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{product_count_current-countproduct}} ชิ้น)</span></div> -->
+<!-- <div class="wrapper-title-header-contact ">{{listdetail.description}}</div> -->
 
 
-
+<!--  -->
 <!-- 
 <div class="Line pb-4" (click)="clickline(listdetail.line)">
 
 </div> -->
 
 
-<div class="wrapper-title-header-contact ">ข้อมูลสินค้า</div>
+<div class="wrapper-title-header-contact ">ข้อมูลสินค้าและประโยชน์</div>
 <div *ngFor="let item of productimage;let indexliistselect = index" class="text-center wrapper-image">
     <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
 
@@ -109,6 +109,7 @@
     <li><span   id="seconds"></span><mark class="b-r-5">วินาที</mark></li>
   </ul>
   <div id="codeend" class="wrapper-title-header-contact ">CODE โปรโมชั่น : <mark><span  id="code"></span></mark></div>
+  <div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{product_count_current-countproduct}} ชิ้น)</span></div>
         <div class="wrapper-title-header-contact ">ประเภทการชำระเงิน</div>
         <div class="row pt-4">
             <div class="custom-control custom-radio text-center m-auto">

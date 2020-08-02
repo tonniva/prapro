@@ -563,7 +563,7 @@ export class PostlistComponent implements OnInit {
  
    insertfacebookpixel(){
  
-    this.alertinsertdata("กรอก Facebook Pixel code",function(data){ 
+    this.alertinsertdata("กรอก Facebook Pixel ID",function(data){ 
     localStorage.setItem("facebookpixel",data);
     });  
      
