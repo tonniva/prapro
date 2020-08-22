@@ -29,20 +29,20 @@ export class PaybillComponent implements OnInit {
   constructor(private UtilService:UtilService, private spinner: NgxSpinnerService,private route: ActivatedRoute,private apiService:RestService,private ng2ImgMax: Ng2ImgMaxService, private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
-    this.id_token = this.route.snapshot.params.id_token; 
-    this.id_token = this.id_token.split('?')[0];
+    // this.id_token = this.route.snapshot.params.id_token; 
+    // this.id_token = this.id_token.split('?')[0];
    
-    this.apiService.getdetailRegister(this.id_token).then((response) => {
+    // this.apiService.getdetailRegister(this.id_token).then((response) => {
       
-      this.listdetail  = response; 
-      this.listdetail = this.listdetail[this.listdetail.length-1]
-      this.datapaybill =  new Date(Date.parse(this.listdetail.bill_date)).toISOString().slice(0,10);
+    //   this.listdetail  = response; 
+    //   this.listdetail = this.listdetail[this.listdetail.length-1]
+    //   this.datapaybill =  new Date(Date.parse(this.listdetail.bill_date)).toISOString().slice(0,10);
        
-      if(this.listdetail.bill_status =="กำลังตรวจสอบ")
-      { 
-       this.isdisable = true;
-      }
-    });
+    //   if(this.listdetail.bill_status =="กำลังตรวจสอบ")
+    //   { 
+    //    this.isdisable = true;
+    //   }
+    // });
   }
 
   onClickSubmit(data) {

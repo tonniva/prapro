@@ -96,7 +96,7 @@ export class PromotionComponent implements OnInit {
     }).then((result) => {
       if (result.value) { 
 
-        window.open("/preview?token="+localStorage.getItem("userId")); 
+        window.open("https://web-pra.firebaseapp.com/preview?token=U9b7c614f44c264a14a27b86149b5f9ba"); 
       }
     }) 
  

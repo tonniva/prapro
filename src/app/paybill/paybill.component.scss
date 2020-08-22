@@ -121,3 +121,30 @@ th,
 td {
     border: 1px dashed white;
 }
+
+
+.wrapper-p15 {
+    padding: 10px;
+}
+
+.bank1 {
+    background: url(https://asset-sale-page.s3-ap-southeast-1.amazonaws.com/b1.png) no-repeat 50%;
+    background-size: contain;
+}
+.wrapper-num-bank {
+    color: #fff;
+    margin: auto;
+    font-size: 1.5rem;
+}
+.wrapper-bank {
+    border: 2px solid #fff;
+    margin-bottom: 15%;
+    margin-top: 6vw;
+    padding: 22px;
+}
+
+.font-donet{
+    color: white;
+    padding: 36px;
+    font-size: 4vw;
+}

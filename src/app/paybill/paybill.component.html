@@ -1,4 +1,4 @@
-<form *ngIf="!isdisable" #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" style="overflow-y: scroll;">
+<!-- <form *ngIf="!isdisable" #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" style="overflow-y: scroll;">
     <div class="container wrapper-box-paybill">
         <div class="row pt-4">
             <div class="custom-control custom-radio text-center m-auto">
@@ -22,12 +22,8 @@
                 </div>
             </div>
         </div>
-        <div class="wrapper-upload-slip">
-            <!-- <div>
-            <input type='file' (change)="readURL($event)" style="display: none;" />
-        </div> -->
-            <div class="file-input-wrapper">
-                <!-- <button class="btn-file-input">SELECT FILES</button> -->
+        <div class="wrapper-upload-slip"> 
+            <div class="file-input-wrapper"> 
                 <div class="wrapper-upload-file">
                     อัพโหลดสลิป(คลิ๊ก)
                 </div>
@@ -54,8 +50,7 @@
 <div class="wrapper-box-status">
     <table class="wrapper-table">
         <thead>
-            <tr>
-                <!-- <th scope="col">#</th> -->
+            <tr> 
                 <th scope="col">ชื่อ</th>
                 <th scope="col">นามสกุล</th>
                 <th scope="col">จ่าย</th>
@@ -65,8 +60,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <!-- <th scope="row">1</th> -->
+            <tr> 
                 <td>{{listdetail.firstname}}</td>
                 <td>{{listdetail.lastname}}</td>
                 <td>{{datapaybill}}</td>
@@ -76,4 +70,16 @@
             </tr>
         </tbody>
     </table>
+</div> -->
+
+
+<div class="font-donet">วิธีการบริจาค บริจากแล้วแต่ ศรัทธา ไม่มีเงินไม่ต้องบริจาคก็ได้<br>(บริจาคแล้วแจ้งทางไลน์หน่อยนะ อยากขอบคุณ^^)</div>
+<div class="wrapper-bank"> 
+<div class="row wrapper-p15" [hidden]="listdetail.bank_KBANK =='null' || listdetail.bank_KBANK=='' ">
+    <div class="col bank1">
+    </div>
+    <div class="col wrapper-num-bank">
+    นพดล แสงอรุณ 038-3-35362-9
+    </div>
+</div>
 </div>

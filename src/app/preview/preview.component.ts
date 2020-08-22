@@ -138,8 +138,7 @@ const urlParams = new URLSearchParams(window.location.search);
        this.product_count_current = 0;
     }
     else
-    {
- debugger
+    { 
       this.product_count_current = parseInt(data.quota) - parseInt(data.bought || 0);
       this.Isshowsoldout = false;
     } 
@@ -158,7 +157,7 @@ const urlParams = new URLSearchParams(window.location.search);
   //   }
 
   //   this.Pixelfacebook ="<script>   ! function(f, b, e, v, n, t, s) {        if (f.fbq) return;        n = f.fbq = function() {            n.callMethod ?                n.callMethod.apply(n, arguments) : n.queue.push(arguments)        };        if (!f._fbq) f._fbq = n;        n.push = n;        n.loaded = !0;        n.version = '2.0';        n.queue = [];        t = b.createElement(e);        t.async = !0;        t.src = v;        s = b.getElementsByTagName(e)[0];        s.parentNode.insertBefore(t, s)    }(window, document, 'script',        'https://connect.facebook.net/en_US/fbevents.js');    fbq('init', '"+ this.pixel_customer_data+"');    fbq('track', 'Preview');</script><noscript><img height='1' width='1' style='display:none'        src='https://www.facebook.com/tr?id="+ this.pixel_customer_data+"&ev=PageView&noscript=1'      /></noscript>";
-  //    debugger
+ 
   //   return  this.Pixelfacebook;
   // }
   pixel_customer() { 
@@ -411,7 +410,7 @@ startcountdown(){
 // }
  
 this.makeid(4);
-var countdown = 29 * 60 * 1000;
+var countdown = 5 * 60 * 1000;
 var timerId = setInterval(function(){
 
   countdown -= 1000;

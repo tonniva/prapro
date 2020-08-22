@@ -274,8 +274,7 @@ onClickSubmit(data) {
     if(data.type == "โอนเงิน" && this.temp_path_image1 == "http://placehold.it/180"){
       this.UtilService.showError("กรุณาอัพโหลดสลิป","")
       return;
-    } 
-    debugger
+    }  
   data.message =  "\r\n\r\nจำนวนสินค้าที่สั่ง  : "+data.countproduct+" ชิ้น\r\n\r\nโอนเงิน : "+data.pricepay+" บาท  \r\nสั่งแบบ : "+data.type +"\r\nรายละเอียด ::\r\n\r\n"+data.description+"\r\n\r\nที่อยู่จัดส่ง ::\r\n\r\nคุณ "+data.name_order+"\r\n"+data.deliveryaddress+"\r\n\r\nเบอร์ติดต่อกลับ : "+data.tel+"";
   data.imageThumbnail =  this.path_slip;
   data.imageFile = this.slipresizefile; 
