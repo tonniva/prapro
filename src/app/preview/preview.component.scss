@@ -122,8 +122,9 @@
     color: white;
     text-align: center;
     font-size: 1.5rem;
-    padding: 26px;
-    word-break: break-word;
+    padding: 26px; 
+    word-break: break-all;
+    white-space: pre-line;
 }
 .wrapper-title-header-contact-pro{
     color: white;

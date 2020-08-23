@@ -117,7 +117,7 @@ export class PromotionComponent implements OnInit {
 
          this.WEB_URL = localStorage.getItem("WEB_URL").split("/home")[0].toString(); 
          this.SHORT_LINK_TOKEN_BITLY = localStorage.getItem("SHORT_LINK_TOKEN_BITLY");  
-
+ 
         const long_url = this.WEB_URL+"/preview?token="+localStorage.getItem("userId");
         const acess_token = this.SHORT_LINK_TOKEN_BITLY;
 

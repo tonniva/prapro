@@ -52,6 +52,9 @@ export class PreviewComponent implements OnInit {
   path_slip:any;
   regsiterprofile:any;
   Isshowbank:boolean; 
+  istypeservice:boolean = true; 
+  listdetail_index:any = true; 
+  
 
   ordernowproduct:any; 
    
@@ -69,7 +72,9 @@ export class PreviewComponent implements OnInit {
  
 const urlParams = new URLSearchParams(window.location.search); 
  
-    this.id_token = urlParams.get('token');  
+    this.id_token = urlParams.get('token');   
+
+    this.listdetail_index = urlParams.get('listdetail');   
 
      
     this.GetProfile(this.id_token);
@@ -77,8 +82,19 @@ const urlParams = new URLSearchParams(window.location.search);
     this.apiService.getlistdetail(this.id_token).then((response) => {
 
       
+
       this.listdetail  = response; 
-      this.listdetail = this.listdetail[this.listdetail.length-1]
+ 
+      if(this.listdetail_index){
+        this.listdetail = this.listdetail[this.listdetail_index] 
+      }
+      else
+      { 
+        this.listdetail = this.listdetail[this.listdetail.length-1]
+      }
+       
+      if(this.listdetail.typewebsite !="บริการ") this.istypeservice = true;
+ 
       this.checksoldout(this.listdetail);
       
     
