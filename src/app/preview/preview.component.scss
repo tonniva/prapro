@@ -123,7 +123,7 @@
     text-align: center;
     font-size: 1.5rem;
     padding: 26px; 
-    word-break: break-all;
+    word-break: break-word;
     white-space: pre-line;
 }
 .wrapper-title-header-contact-pro{
@@ -188,12 +188,14 @@ footer {
 }
 
 .facebook-footer {
-    background: url(https://icons.iconarchive.com/icons/danleech/simple/256/facebook-icon.png)no-repeat center center;
+    background: url(https://icons.iconarchive.com/icons/danleech/simple/256/facebook-icon.png) no-repeat 50%;
     background-size: contain;
     width: 100%;
+    max-width: 25vw;
     min-height: 15vh;
     text-align: center;
     position: relative;
+    left: -8px;
 }
 
 .mapouter {

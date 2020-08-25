@@ -52,7 +52,7 @@ export class PreviewComponent implements OnInit {
   path_slip:any;
   regsiterprofile:any;
   Isshowbank:boolean; 
-  istypeservice:boolean = true; 
+  istypeservice:boolean = false; 
   listdetail_index:any = true; 
   
 
@@ -92,8 +92,9 @@ const urlParams = new URLSearchParams(window.location.search);
       { 
         this.listdetail = this.listdetail[this.listdetail.length-1]
       }
-       
-      if(this.listdetail.typewebsite !="บริการ") this.istypeservice = true;
+       debugger
+      if(this.listdetail.typewebsite !="บริการ") 
+      {this.istypeservice = true;}
  
       this.checksoldout(this.listdetail);
       
@@ -218,10 +219,20 @@ const urlParams = new URLSearchParams(window.location.search);
 
 
 clickline(line:string){
-  window.location.replace("https://line.me/ti/p/~"+line);
+  if(line.substring(0,1) =="@"){
+    window.location.replace("https://line.me/R/ti/p/"+line);
+  }
+    else{
+      window.location.replace("https://line.me/ti/p/"+line);
+    }
 }
 clicklineofficialid(line:string){
+  if(line.substring(0,1) =="@"){
   window.location.replace("https://line.me/R/ti/p/"+line);
+}
+  else{ 
+    window.location.replace("https://line.me/ti/p/"+line);
+  }
 }
 clickfacebook(facebook){ 
   window.open("http://m.me/"+facebook);

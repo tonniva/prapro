@@ -98,8 +98,8 @@
 
 </div>
 <iframe *ngIf="Ishideyoutube" class="p-3" width="100%" height="500" frameBorder="0" [src]="urlyoutube"></iframe>
- 
-<form    #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout || istypeservice">
+  
+<form    #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="!istypeservice">
     <div class="container">
         <div class="wrapper-title-header-contact-pro"><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
             
@@ -234,14 +234,15 @@
     <div class="wrapper-input wrapper-btn-bill">
         <button type="submit" value="submit" class="btn btn-success w-100  wrapper-font-btn-submit">ยืนยัน</button>
     </div>
-    <div class="wrapper-title-header-contact" [hidden]="listdetail.shopee=='null'">ช่องทาง Shopee</div>
-    <div class="shopee" [hidden]="listdetail.shopee=='null'" (click)="clickshopee(listdetail.shopee)">
-
-    </div>
-    <div class="wrapper-title-header-contact" [hidden]="listdetail.lazada=='null'">ช่องทาง LAZADA</div>
-    <div class="lazada" [hidden]="listdetail.lazada=='null'" (click)="clicklazada(listdetail.lazada) ">
-    </div>
+ 
 </form>
+<div class="wrapper-title-header-contact" [hidden]="listdetail.shopee=='null'">ช่องทาง Shopee</div>
+<div class="shopee" [hidden]="listdetail.shopee=='null'" (click)="clickshopee(listdetail.shopee)">
+
+</div>
+<div class="wrapper-title-header-contact" [hidden]="listdetail.lazada=='null'">ช่องทาง LAZADA</div>
+<div class="lazada" [hidden]="listdetail.lazada=='null'" (click)="clicklazada(listdetail.lazada) ">
+</div>
 <div class="container"> 
     <div style="padding-bottom: 30vh;"> 
     </div>
