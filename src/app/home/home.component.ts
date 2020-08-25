@@ -100,6 +100,6 @@ setupowl(){
 }
 
 gotopath(){
-  window.open("https://web-pra.firebaseapp.com/preview?token=U9b7c614f44c264a14a27b86149b5f9ba"); 
+  window.open("https://web-circleacademy.firebaseapp.com/preview?token=U9b7c614f44c264a14a27b86149b5f9ba"); 
 }
 }

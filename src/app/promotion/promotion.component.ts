@@ -96,7 +96,7 @@ export class PromotionComponent implements OnInit {
     }).then((result) => {
       if (result.value) { 
 
-        window.open("https://web-pra.firebaseapp.com/preview?token=U9b7c614f44c264a14a27b86149b5f9ba"); 
+        window.open("https://web-circleacademy.firebaseapp.com/preview?token=U9b7c614f44c264a14a27b86149b5f9ba"); 
       }
     }) 
  
@@ -115,7 +115,7 @@ export class PromotionComponent implements OnInit {
     if(window.location.hostname != "localhost"){  
        
 
-         this.WEB_URL = localStorage.getItem("WEB_URL").split("/home")[0].toString(); 
+         this.WEB_URL = localStorage.getItem("WEB_URL").split("/home")[0].toString();  
          this.SHORT_LINK_TOKEN_BITLY = localStorage.getItem("SHORT_LINK_TOKEN_BITLY");  
  
         const long_url = this.WEB_URL+"/preview?token="+localStorage.getItem("userId");

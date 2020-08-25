@@ -7908,7 +7908,7 @@ class UtilService {
         return "c01a4949533193a771ee2720d9c16b1becfbf92c";
     }
     GetWebUrl() {
-        return "https://web-pra.firebaseapp.com";
+        return "https://web-circleacademy.firebaseapp.com";
     }
     showError(title, text) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({

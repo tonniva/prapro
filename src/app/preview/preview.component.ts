@@ -123,11 +123,11 @@ const urlParams = new URLSearchParams(window.location.search);
 
       this.imageheader = this.listdetail.product_header;
 
-      this.productimage = this.listdetail.product_picture[0].split(',');
+      this.productimage = this.listdetail.product_picture;
         
       //  this.productlistdetail = JSON.parse(this.listdetail.product_list_detail[0]);
       
-      this.slideimage = this.listdetail.slide_picture[0].split(',');
+      this.slideimage = this.listdetail.slide_picture;
      
       // this.pagefacebook(this.listdetail.facebook);
       setTimeout(() => {

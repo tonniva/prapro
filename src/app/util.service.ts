@@ -62,7 +62,7 @@ export class UtilService {
 
 
   GetWebUrl(){
-return "https://web-pra.firebaseapp.com";
+return "https://web-circleacademy.firebaseapp.com";
 
   }
 

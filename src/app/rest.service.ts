@@ -188,11 +188,38 @@ postpramoon(item:any,file:any,token:any){
 
 
   this.body.set('product_header',item.product_header);   
-  this.body.set('product_picture',item.product_picture);   
-  this.body.set('product_list_detail',item.product_list_detail);   
-  this.body.set('slide_picture',item.slide_picture);   
 
+  
+  // item.product_picture.forEach(function (value, i) {
+  //   this.body.set('product_picture['+i+']',value);  
+  // });
+ 
+  if(item.product_picture!="[]")  
+  {
+  item.product_picture.forEach( (element, index) => {
+    this.body.set('product_picture['+index+']',element)
+ });
+}
+ 
+  
+  // this.body.set('product_picture',item.product_picture);   
+  if(item.product_list_detail!="[]")  
+  {
+  item.product_list_detail.forEach( (element, index) => {
+    this.body.set('product_list_detail['+index+']',element)
+ });
+}
+ 
+  // this.body.set('product_list_detail',item.product_list_detail);   
+if(item.slide_picture!="[]")  
+{
+  item.slide_picture.forEach( (element, index) => {
+    this.body.set('slide_picture['+index+']',element)
+ }); 
+}
+  // this.body.set('slide_picture',item.slide_picture);   
 
+debugger
   this.body.set('line',item.lineid);   
   this.body.set('facebook',item.facebooklink);   
   this.body.set('linenotifytoken',item.linenotify);   
@@ -230,7 +257,7 @@ itemgetdetailRegister= {
     "bill_price":"",
     "bill_date_total":""
     
-    }
+    } 
   updatebill(_id:string,data:any){
     const PramoonRegisteroptions = {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
