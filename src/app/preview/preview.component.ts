@@ -218,10 +218,26 @@ const urlParams = new URLSearchParams(window.location.search);
 
 
 clickline(line:string){
-  window.location.replace("https://line.me/ti/p/~"+line);
+  if(line.substring(0,1) =="@"){
+    window.location.replace("https://line.me/R/ti/p/"+line);
+  }
+  else if(line.length ==7){ 
+    window.location.replace("https://lin.ee/"+line);
+  }
+    else{
+      window.location.replace("https://line.me/ti/p/"+line);
+    }
 }
 clicklineofficialid(line:string){
-  window.location.replace("https://line.me/R/ti/p/"+line);
+  if(line.substring(0,1) =="@"){
+    window.location.replace("https://line.me/R/ti/p/"+line);
+  }
+  else if(line.length ==7){ 
+    window.location.replace("https://lin.ee/"+line);
+  }
+    else{
+      window.location.replace("https://line.me/ti/p/"+line);
+    }
 }
 clickfacebook(facebook){ 
   window.open("http://m.me/"+facebook);
