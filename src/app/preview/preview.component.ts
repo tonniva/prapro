@@ -230,7 +230,10 @@ clicklineofficialid(line:string){
   if(line.substring(0,1) =="@"){
   window.location.replace("https://line.me/R/ti/p/"+line);
 }
-  else{ 
+else if(line.length ==7){ 
+  window.location.replace("https://lin.ee/"+line);
+}
+else{ 
     window.location.replace("https://line.me/ti/p/"+line);
   }
 }
