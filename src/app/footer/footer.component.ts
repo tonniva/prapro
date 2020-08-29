@@ -39,7 +39,7 @@ if(menu =="A"){
        
     if( this.Registerdetail.length > 0 && this.Registerdetail[0].status_pramoon_register == "waitingcheck"){ 
       this.IsGoToPostItem = true; 
-      this.router.navigate(['/list/two'])  
+      // this.router.navigate(['/list/two'])  
       } 
       else{ 
         this.router.navigate(['/pramoonregister'])  

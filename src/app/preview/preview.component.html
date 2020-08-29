@@ -2,8 +2,7 @@
 </div> -->
 
 <!-- Facebook Pixel Code -->
- 
-
+  
     <!-- Facebook Pixel Code -->
 <script>
     !function(f,b,e,v,n,t,s)
@@ -23,8 +22,15 @@
     <!-- End Facebook Pixel Code -->
 <div class='mypixel_customer' [innerHtml]="pixel_customer()">
 </div>
+<div>
+    <img class="img-preload" src="../../assets/image/bg.jpg" alt="">
+    <img class="img-preload-image-title" [src]="imageheader" alt="">
+  </div>
 <ngx-spinner>
 </ngx-spinner>
+
+   
+  
 <div class="header">
     <div class="wrapper-sold-out-l" [hidden]="!Isshowsoldout">
     </div>
@@ -53,8 +59,15 @@
 </div> -->
 
 
-<div class="wrapper-title-header-contact ">ข้อมูลและรายละเอียด</div> 
-<div class="wrapper-title-header-contact ">{{listdetail.description}}</div>
+
+<!-- <div class="wrapper-title-header-contact "  [innerHTML]="listdetail.description"></div> -->
+<div style="word-break: break-all;
+white-space: pre-line;width:100%;color: #777;background-color:white;text-align:center;padding: 10px 28px;text-align: justify;"> 
+    <div class="wrapper-title-header-contact">ข้อมูลและรายละเอียด</div> 
+    <p style="font-size: 1rem;
+    font-weight: 800;" [innerHTML]="listdetail.description"></p>
+    
+  </div>
 <div *ngFor="let item of productimage;let indexliistselect = index" class="text-center wrapper-image">
     <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
 
@@ -74,8 +87,12 @@
         </div>
     </div>
 </div>
-<div class="wrapper-title-header-contact ">รายละเอียด</div>
-<div class="wrapper-title-header-contact ">{{listdetail.description}}</div>
+<div style="word-break: break-all;
+white-space: pre-line;color: #777;background-color:white;text-align:center;padding: 10px 28px;text-align: justify;"> 
+    <div class="wrapper-title-header-contact">ข้อมูลและรายละเอียด</div> 
+    <p style="font-size: 1rem;
+    font-weight: 800;" [innerHTML]="listdetail.description"></p>
+  </div>
 <div *ngFor="let item of slideimage" class="text-center wrapper-image">
     <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
 </div>
@@ -86,8 +103,10 @@
         </div>
     </div>
 </div>
-<div class="wrapper-title-header-contact "><mark>ช่องทางการสั่งซื้อ</mark></div>
-<div class="Lineofficialid pb-4" (click)="clicklineofficialid(listdetail.line)">
+<!-- <div class="wrapper-title-header-contact "><mark>ช่องทางการติดต่อ</mark></div> -->
+
+
+<!-- <div class="Lineofficialid pb-4" (click)="clicklineofficialid(listdetail.line)">
 
 </div>
 <div class="facebook" (click)="clickfacebook(listdetail.facebook)">
@@ -96,10 +115,11 @@
 
 <div class="tel" (click)="clicktel(listdetail.tel)">
 
-</div>
+</div> -->
 <iframe *ngIf="Ishideyoutube" class="p-3" width="100%" height="500" frameBorder="0" [src]="urlyoutube"></iframe>
+
  
-<form    #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout || istypeservice">
+<form  #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout || istypeservice" >
     <div class="container">
         <div class="wrapper-title-header-contact-pro"><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
             
@@ -242,7 +262,8 @@
     <div class="lazada" [hidden]="listdetail.lazada=='null'" (click)="clicklazada(listdetail.lazada) ">
     </div>
 </form>
-<div class="container"> 
+ 
+<!-- <div class="container"> 
     <div style="padding-bottom: 30vh;"> 
     </div>
     <footer>
@@ -267,7 +288,276 @@
             </div>
         </div>
     </footer>
-</div>
+</div> -->
 
 
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    <!-- vuejs -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- vuejs -->
+        <!-- Boostrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">   
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+          <!-- Boostrap -->
+      
+         
+        <style>
+        
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+          position: relative;
+          opacity: 0.65;
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        
+        }
+        .bgimg-1 {
+          background-image: url("https://source.unsplash.com/user/erondu/1600x900");
+          min-height: 100%;
+        }
+        
+        .bgimg-2 {
+          background-image: url("https://source.unsplash.com/user/jackie/likes/1600x900");
+          min-height: 400px;
+        }
+        
+        .bgimg-3 {
+          background-image: url("https://source.unsplash.com/1600x900/?nature,water");
+          min-height: 400px;
+        }
+        
+        .caption {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          width: 100%;
+          text-align: center;
+          color: #000;
+        }
+        
+        .caption span.border {
+          background-color: #111;
+          color: #fff;
+          padding: 18px;
+          font-size: 25px;
+          letter-spacing: 10px;
+        }
+        
+        h3 {
+          letter-spacing: 5px;
+          text-transform: uppercase;
+          font: 20px "Lato", sans-serif;
+          color: #111;
+        }
+        
+        /* Turn off parallax scrolling for tablets and phones */
+        @media only screen and (max-device-width: 319px) {
+          .bgimg-1, .bgimg-2, .bgimg-3 {
+            background-attachment: scroll;
+          }
+        }
+    
+        .img-preload{
+        width: 100%; 
+        max-width: 100%;
+        max-height: 100%;
+        position: fixed;
+        z-index: 1;
+        height: 100%;
+        top:0;
+    }
+
+    .img-preload-image-title{
+        width: 100%; 
+        max-width: 100%;
+        max-height: 100%;
+        position: fixed;
+        z-index: 1;
+        height: 100%;
+        top:0;
+    }
+        </style>  
+         
+ 
+        <div class="bgimg-1" >
+          <div class="caption">
+          <span class="border">ยินดีต้อนรับ</span>
+          </div>
+        </div>
+        
+        <div style="word-break: break-all;
+        white-space: pre-line;width:100%;color: #777;background-color:white;text-align:center;padding: 82px 28px;text-align: justify;">
+          <h3 style="text-align:center;">รายละเอียด</h3>
+          <p [innerHTML]="listdetail.description"></p>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm p-1">
+                <div  class="myButtonLINE" (click)="clicklineofficialid(listdetail.line)">LINE</div>
+              </div>
+              <div class="col-sm p-1">
+                <div  class="myButtonTel" (click)="clicktel(listdetail.tel)">โทร</div>
+              </div>
+              <div class="col-sm p-1">
+                <div  class="myButtonFACEBOOK" (click)="clickfacebook(listdetail.facebook)">FACEBOOK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bgimg-2">
+          <div class="caption"> 
+            <div class="header">
+                <div class="wrapper-sold-out-l" [hidden]="!Isshowsoldout">
+                </div>
+                <img class="img-fluid wrapper-uploaded img-top-footer w-100" [src]="imageheader" [hidden]="!imageheader||imageheader =='undefined'">
+            </div>
+          <!-- <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">LESS HEIGHT</span> -->
+          </div>
+        </div>
+        
+        <div style="position:relative;">
+          <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+          <p>ช่องทางการติดต่อ</p>
+          </div>
+        </div>
+        
+        <div class="bgimg-3">
+          <div class="caption">
+          <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">ช่องทางติดต่อ</span>
+          </div>
+        </div>
+        
+        <div style="position:relative;">
+          <div style="color:#ddd;background-color:#282E34;text-align:center;padding-bottom: 30px;text-align: justify;">
+          
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm p-1">
+                    <div class="myButtonLINE" (click)="clicklineofficialid(listdetail.line)">LINE</div>
+                  </div>
+                  <div class="col-sm p-1">
+                    <div  class="myButtonTel" (click)="clicktel(listdetail.tel)">โทร</div>
+                  </div>
+                  <div class="col-sm p-1">
+                    <div class="myButtonFACEBOOK" (click)="clickfacebook(listdetail.facebook)">FACEBOOK</div>
+                  </div>
+                </div>
+              </div>
+     
+          <style>  
+    .myButtonLINE {
+      width: 100%;
+        box-shadow: 0px 0px 0px 0px #3dc21b;
+        background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+        background-color:#44c767;
+        border-radius:6px;
+        border:1px solid #18ab29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:21px;
+        padding:15px 60px;
+      font-weight:bold;
+        text-decoration:none;
+        text-shadow:2px -1px 3px #2f6627;
+      text-align: center;
+    }
+    .myButtonLINE:hover {
+        background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+        background-color:#5cbf2a;
+    }
+    .myButtonLINE:active {
+        position:relative;
+        top:1px;
+    }
+     
+    
+    .myButtonTel {
+      width: 100%;
+        box-shadow: 0px 0px 0px 0px #c21b1b;
+        background:linear-gradient(to bottom, #e63c58 5%, #f70d4b 100%);
+        background-color:#e63c58;
+        border-radius:6px;
+        border:1px solid #ab192a;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:21px;
+        font-weight:bold;
+        padding:15px 60px;
+        text-decoration:none;
+        text-shadow:-5px 6px 3px #ed2140;
+      text-align: center;
+    }
+    .myButtonTel:hover {
+        background:linear-gradient(to bottom, #f70d4b 5%, #e63c58 100%);
+        background-color:#f70d4b;
+    }
+    .myButtonTel:active {
+        position:relative;
+        top:1px;
+    }
+    
+    
+    .myButtonFACEBOOK {
+      width: 100%;
+        box-shadow: 0px 0px 0px 0px #1b2fc2;
+        background:linear-gradient(to bottom, #3e8de6 5%, #0e67f5 100%);
+        background-color:#3e8de6;
+        border-radius:6px;
+        border:1px solid #2d19ab;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:21px;
+        font-weight:bold;
+        padding:15px 60px;
+        text-decoration:none;
+        text-shadow:5px 2px 3px #2139eb;
+      text-align: center;
+    }
+    .myButtonFACEBOOK:hover {
+        background:linear-gradient(to bottom, #0e67f5 5%, #3e8de6 100%);
+        background-color:#0e67f5;
+    }
+    .myButtonFACEBOOK:active {
+        position:relative;
+        top:1px;
+    } 
+          </style>
+          </div>
+        </div> 
+        <div class="bgimg-1">
+          <div class="caption">
+          
+          </div>
+        </div>
+     
+    
+     
+      

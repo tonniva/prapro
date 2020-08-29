@@ -18,6 +18,7 @@ declare let $: any;
 })
 export class PreviewComponent implements OnInit {
   constructor(private ng2ImgMax: Ng2ImgMaxService, public sanitizer:DomSanitizer,private ref: ChangeDetectorRef,private apiService: RestService,private UtilService:UtilService,private route: ActivatedRoute,private spinner: NgxSpinnerService) { }
+  istypeservice:boolean = true; 
   Isshowsoldout:any;
   id_token:string; 
   Registerdetail:any;
@@ -52,7 +53,7 @@ export class PreviewComponent implements OnInit {
   path_slip:any;
   regsiterprofile:any;
   Isshowbank:boolean; 
-  istypeservice:boolean = true; 
+
   listdetail_index:any = true; 
   
 
@@ -131,13 +132,16 @@ const urlParams = new URLSearchParams(window.location.search);
      
       // this.pagefacebook(this.listdetail.facebook);
       setTimeout(() => {
+       
         this.setupowl()
       }, 100); 
 
       setTimeout(() => { 
         window.scrollTo(0,0);
+        $('.img-preload').fadeOut(3000);
+        $('.img-preload-image-title').fadeOut(4000);
         this.spinner.hide();
-      }, 0);
+      }, 1000);
   
      
       this.ref.detectChanges(); 
@@ -221,22 +225,23 @@ clickline(line:string){
   if(line.substring(0,1) =="@"){
     window.location.replace("https://line.me/R/ti/p/"+line);
   }
-  else if(line.length ==7){ 
-    window.location.replace("https://lin.ee/"+line);
-  }
+  // else if(line.length ==7){ 
+  //   window.location.replace("https://lin.ee/"+line);
+  // }
     else{
-      window.location.replace("https://line.me/ti/p/"+line);
+      window.location.replace("https://line.me/ti/p/~"+line);
     }
 }
 clicklineofficialid(line:string){
+   
   if(line.substring(0,1) =="@"){
     window.location.replace("https://line.me/R/ti/p/"+line);
   }
-  else if(line.length ==7){ 
-    window.location.replace("https://lin.ee/"+line);
-  }
+  // else if(line.length ==7){ 
+  //   window.location.replace("https://lin.ee/"+line);
+  // }
     else{
-      window.location.replace("https://line.me/ti/p/"+line);
+      window.location.replace("https://line.me/ti/p/~"+line);
     }
 }
 clickfacebook(facebook){ 

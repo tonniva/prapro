@@ -193,7 +193,7 @@ postpramoon(item:any,file:any,token:any){
   // item.product_picture.forEach(function (value, i) {
   //   this.body.set('product_picture['+i+']',value);  
   // });
- 
+ debugger
   if(item.product_picture!="[]")  
   {
   item.product_picture.forEach( (element, index) => {
