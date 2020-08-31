@@ -249,7 +249,18 @@ clickfacebook(facebook){
   // window.location.replace("m.me/"+facebook);
 }
 clickshopee(shopee){ 
-  window.location = shopee;
+  window.open(shopee);
+  // window.location.replace("m.me/"+facebook);
+} 
+
+showshopee(shopee){ 
+if( shopee != "null"){
+return true; 
+}else
+{ 
+ return false; 
+}
+
 }
 clicklazada(lazada){
   window.location = lazada;

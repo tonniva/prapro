@@ -23,7 +23,7 @@
 <div class='mypixel_customer' [innerHtml]="pixel_customer()">
 </div>
 <div>
-    <img class="img-preload" src="../../assets/image/bg.jpg" alt="">
+    <img class="img-preload" src="../../assets/image/mainbgImgUrl.jpg" alt="">
     <img class="img-preload-image-title" [src]="imageheader" alt="">
   </div>
 <ngx-spinner>
@@ -422,6 +422,9 @@ white-space: pre-line;color: #777;background-color:white;text-align:center;paddi
               <div class="col-sm p-1">
                 <div  class="myButtonFACEBOOK" (click)="clickfacebook(listdetail.facebook)">FACEBOOK</div>
               </div>
+              <div class="col-sm p-1"> 
+                <div class="myButtonshopee" *ngIf="showshopee(listdetail.shopee)" (click)="clickshopee(listdetail.shopee)" >shopee</div>
+              </div>
             </div>
           </div>
         </div>
@@ -462,6 +465,9 @@ white-space: pre-line;color: #777;background-color:white;text-align:center;paddi
                   </div>
                   <div class="col-sm p-1">
                     <div class="myButtonFACEBOOK" (click)="clickfacebook(listdetail.facebook)">FACEBOOK</div>
+                  </div>
+                  <div class="col-sm p-1"> 
+                    <div class="myButtonshopee" *ngIf="showshopee(listdetail.shopee)" (click)="clickshopee(listdetail.shopee)" >shopee</div>
                   </div>
                 </div>
               </div>
@@ -549,6 +555,25 @@ white-space: pre-line;color: #777;background-color:white;text-align:center;paddi
         position:relative;
         top:1px;
     } 
+
+    .myButtonshopee {
+      width: 100%;
+    box-shadow: 0px 0px 0px 0px #ee7627;
+    background: linear-gradient(to bottom, #e76e1f 5%, #eb5c0f 100%);
+    background-color: #e15423;
+    border-radius: 6px;
+    border: 1px solid #f25e0f;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 21px;
+    font-weight: bold;
+    padding: 15px 60px;
+    text-decoration: none;
+    text-shadow: 5px 2px 3px #c05d0f;
+    text-align: center;
+    }
           </style>
           </div>
         </div> 
