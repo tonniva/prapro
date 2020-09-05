@@ -61,7 +61,7 @@ export class PreviewComponent implements OnInit {
    
   ngOnInit(): void {    
    
-    this.startcountdown();
+    // this.startcountdown();
     this.Isshowsoldout=false;
     this.Ishidemap=false;
     this.spinner.show();
@@ -88,10 +88,12 @@ const urlParams = new URLSearchParams(window.location.search);
  
       if(this.listdetail_index){
         this.listdetail = this.listdetail[this.listdetail_index] 
+        debugger
       }
       else
       { 
         this.listdetail = this.listdetail[this.listdetail.length-1]
+        debugger
       }
        
       if(this.listdetail.typewebsite !="บริการ") this.istypeservice = true;
@@ -222,24 +224,25 @@ const urlParams = new URLSearchParams(window.location.search);
 
 
 clickline(line:string){
+  debugger
   if(line.substring(0,1) =="@"){
     window.location.replace("https://line.me/R/ti/p/"+line);
   }
-  // else if(line.length ==7){ 
-  //   window.location.replace("https://lin.ee/"+line);
-  // }
+  else if(line.length == 10){ 
+    window.location.replace("https://line.me/ti/p/"+line); 
+  }
     else{
       window.location.replace("https://line.me/ti/p/~"+line);
     }
 }
 clicklineofficialid(line:string){
-   
+  debugger
   if(line.substring(0,1) =="@"){
     window.location.replace("https://line.me/R/ti/p/"+line);
   }
-  // else if(line.length ==7){ 
-  //   window.location.replace("https://lin.ee/"+line);
-  // }
+  else if(line.length == 10){ 
+    window.location.replace("https://line.me/ti/p/"+line);
+  }
     else{
       window.location.replace("https://line.me/ti/p/~"+line);
     }

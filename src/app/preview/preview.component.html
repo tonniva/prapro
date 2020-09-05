@@ -34,7 +34,7 @@
 <div class="header">
     <div class="wrapper-sold-out-l" [hidden]="!Isshowsoldout">
     </div>
-    <img class="img-fluid wrapper-uploaded img-top w-100" [src]="imageheader" [hidden]="!imageheader||imageheader =='undefined'">
+    <img  class="img-fluid wrapper-uploaded img-top w-100" [src]="imageheader" [hidden]="!imageheader||imageheader =='undefined'">
 </div>
 <div class="wrapper-sold-out-s" [hidden]="!Isshowsoldout">
 
@@ -119,7 +119,7 @@ white-space: pre-line;color: #777;background-color:white;text-align:center;paddi
 <iframe *ngIf="Ishideyoutube" class="p-3" width="100%" height="500" frameBorder="0" [src]="urlyoutube"></iframe>
 
  
-<form  #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout || istypeservice" >
+<!-- <form  #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout || istypeservice" >
     <div class="container">
         <div class="wrapper-title-header-contact-pro"><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
             
@@ -261,7 +261,7 @@ white-space: pre-line;color: #777;background-color:white;text-align:center;paddi
     <div class="wrapper-title-header-contact" [hidden]="listdetail.lazada=='null'">ช่องทาง LAZADA</div>
     <div class="lazada" [hidden]="listdetail.lazada=='null'" (click)="clicklazada(listdetail.lazada) ">
     </div>
-</form>
+</form> -->
  
 <!-- <div class="container"> 
     <div style="padding-bottom: 30vh;"> 
