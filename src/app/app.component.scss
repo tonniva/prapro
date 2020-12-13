@@ -1,6 +1,6 @@
 .wrapper-title {
     text-align: center;
-    font-size: 7vw;
+    font-size: 2rem;
     margin-top: 15%;
 }
 
@@ -11,7 +11,7 @@ body {
     /* For browsers that do not support gradients */
     // background-image: linear-gradient(red, black);
     /* Standard syntax (must be last) */
-    font-size: 7vw !important;
+    font-size: 2rem !important;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -20,6 +20,10 @@ body {
     font-weight: 300;
     color: #cdbfe3;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+html{
+  max-width: 480px;
+  margin: auto;
 }
 
 .wrapper-bg {

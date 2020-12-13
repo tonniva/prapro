@@ -1,297 +1,96 @@
-<!-- <div id="pix" class='mypixel' [innerHtml]="mypixel()">
-</div> -->
+<div ng-if="listdetail != null">
 
-<!-- Facebook Pixel Code -->
-  
-    <!-- Facebook Pixel Code -->
-<script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+  <script>
+    ! function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '304393414027780');
     fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=304393414027780&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->
-<div class='mypixel_customer' [innerHtml]="pixel_customer()">
-</div>
-<div>
-    <img class="img-preload" src="../../assets/image/mainbgImgUrl.jpg" alt="">
-    <img class="img-preload-image-title" [src]="imageheader" alt="">
-  </div>
-<ngx-spinner>
-</ngx-spinner>
 
-   
-  
-<div class="header">
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=304393414027780&ev=PageView&noscript=1" /></noscript>
+  <!-- End Facebook Pixel Code -->
+  <div class='mypixel_customer' [innerHtml]="pixel_customer()">
+  </div>
+  <div>
+    <img class="img-preload" src="../../assets/image/mainbgImgUrl.jpg" alt="">
+
+    <div ng-if="imageheader != null ">
+      <img class="img-preload-image-title"  [src]="imageheader" alt="">
+    </div>
+
+  </div>
+  <ngx-spinner>
+  </ngx-spinner>
+
+
+
+  <div class="header">
     <div class="wrapper-sold-out-l" [hidden]="!Isshowsoldout">
     </div>
-    <img  class="img-fluid wrapper-uploaded img-top w-100" [src]="imageheader" [hidden]="!imageheader||imageheader =='undefined'">
-</div>
-<div class="wrapper-sold-out-s" [hidden]="!Isshowsoldout">
+    <img class="img-fluid wrapper-uploaded img-top w-100" [src]="imageheader"
+      [hidden]="!imageheader||imageheader =='undefined'">
+  </div>
+  <div class="wrapper-sold-out-s" [hidden]="!Isshowsoldout">
 
-</div>
-<!-- <div class="wrapper-title-header-contact" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout">รูปแบบการสั่งซื้อ</div>
-<div class="wrapper-title-header-contact-pro"><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
-<ul class="wrapper-count" style="padding-left: 25px;"> 
-    <li><span   id="hourst"></span><mark class="b-r-5">ชม.</mark></li>
-    <li><span   id="minutest"></span><mark class="b-r-5">นาที</mark></li>
-    <li><span   id="secondst"></span><mark class="b-r-5">วินาที</mark></li>
-  </ul>
-  <div id="codeendt" class="wrapper-title-header-contact ">CODE โปรโมชั่น : <mark><span  id="codet"></span></mark></div>
-<div class="wrapper-title-header-contact ">สั่งซื้อ</div> -->
-<!-- <div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{product_count_current-countproduct}} ชิ้น)</span></div> -->
-<!-- <div class="wrapper-title-header-contact ">{{listdetail.description}}</div> -->
+  </div>
 
-
-<!--  -->
-<!-- 
-<div class="Line pb-4" (click)="clickline(listdetail.line)">
-
-</div> -->
-
-
-
-<!-- <div class="wrapper-title-header-contact "  [innerHTML]="listdetail.description"></div> -->
-<div style="word-break: break-all;
-white-space: pre-line;width:100%;color: #777;background-color:white;text-align:center;padding: 10px 28px;text-align: justify;"> 
-    <div class="wrapper-title-header-contact">ข้อมูลและรายละเอียด</div> 
+  <div
+    style="word-break: break-all;
+white-space: pre-line;width:100%;color: #777;background-color:white;text-align:center;padding: 10px 28px;text-align: justify;">
+    <div class="wrapper-title-header-contact">ข้อมูลและรายละเอียด</div>
     <p style="font-size: 1rem;
     font-weight: 800;" [innerHTML]="listdetail.description"></p>
-    
+
   </div>
-<div *ngFor="let item of productimage;let indexliistselect = index" class="text-center wrapper-image">
+  <div *ngFor="let item of productimage;let indexliistselect = index" class="text-center wrapper-image">
     <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
 
-    <!-- <div class="wrapper-title-header-contact ">ราคา {{showprice(productlistdetail[indexliistselect][0]) ||0 | number}} บาท </div> -->
-    <!-- <div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{showcount(productlistdetail[indexliistselect][0])}} ชิ้น)</span></div> -->
-    <!-- <div class="wrapper-title-header-contact pt-0">รายละเอียด<br>{{showdesc(productlistdetail[indexliistselect][0]) ||"" }}</div> -->
-    <!-- <div class=" pb-4">
-        <button type="button" class="btn btn-success" (click)="ordernow(item,productlistdetail[indexliistselect][0])">สั่งสินค้าแบบนี้</button>
-    </div> -->
-</div>
+
+  </div>
 
 
-<div class="owl-carousel owl-theme">
+  <div class="owl-carousel owl-theme">
     <div *ngFor="let item of productimage">
-        <div class="item">
-            <img src="{{item}}" class="w-100 rounded" alt="Italian Trulli " [hidden]="!item">
-        </div>
+      <div class="item">
+        <img src="{{item}}" class="w-100 rounded" alt="Italian Trulli " [hidden]="!item">
+      </div>
     </div>
-</div>
-<div style="word-break: break-all;
-white-space: pre-line;color: #777;background-color:white;text-align:center;padding: 10px 28px;text-align: justify;"> 
-    <div class="wrapper-title-header-contact">ข้อมูลและรายละเอียด</div> 
+  </div>
+  <div style="word-break: break-all;
+white-space: pre-line;color: #777;background-color:white;text-align:center;padding: 10px 28px;text-align: justify;">
+    <div class="wrapper-title-header-contact">ข้อมูลและรายละเอียด</div>
     <p style="font-size: 1rem;
     font-weight: 800;" [innerHTML]="listdetail.description"></p>
   </div>
-<div *ngFor="let item of slideimage" class="text-center wrapper-image">
+  <div *ngFor="let item of slideimage" class="text-center wrapper-image">
     <img src="{{item}}" class="w-100 border-product rounded" alt="Italian Trulli " [hidden]="!item">
-</div>
-<div class="owl-carousel owl-theme">
+  </div>
+  <div class="owl-carousel owl-theme">
     <div *ngFor="let item of slideimage">
-        <div class="item">
-            <img src="{{item}}" class="w-100 rounded" alt="Italian Trulli " [hidden]="!item">
-        </div>
+      <div class="item">
+        <img src="{{item}}" class="w-100 rounded" alt="Italian Trulli " [hidden]="!item">
+      </div>
     </div>
-</div>
-<!-- <div class="wrapper-title-header-contact "><mark>ช่องทางการติดต่อ</mark></div> -->
+  </div>
 
-
-<!-- <div class="Lineofficialid pb-4" (click)="clicklineofficialid(listdetail.line)">
-
-</div>
-<div class="facebook" (click)="clickfacebook(listdetail.facebook)">
-
-</div>
-
-<div class="tel" (click)="clicktel(listdetail.tel)">
-
-</div> -->
-<iframe *ngIf="Ishideyoutube" class="p-3" width="100%" height="500" frameBorder="0" [src]="urlyoutube"></iframe>
-
- 
-<!-- <form  #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)" [hidden]="(regsiterprofile.bill_status =='หมดอายุ') || Isshowsoldout || istypeservice" >
-    <div class="container">
-        <div class="wrapper-title-header-contact-pro"><mark>สั่งตอนนี้ ได้สิทธิ ตามโปรโมชั่น !!</mark></div>
-            
-<ul class="wrapper-count"> 
-    <li><span   id="hours"></span><mark class="b-r-5">ชม.</mark></li>
-    <li><span   id="minutes"></span><mark class="b-r-5">นาที</mark></li>
-    <li><span   id="seconds"></span><mark class="b-r-5">วินาที</mark></li>
-  </ul>
-  <div id="codeend" class="wrapper-title-header-contact ">CODE โปรโมชั่น : <mark><span  id="code"></span></mark></div>
-  <div class="text-center"><span class="text-info" style="font-size: 1.2rem;">(จำนวนสินค้า ณ ปัจจุบัน {{product_count_current-countproduct}} ชิ้น)</span></div>
-        <div class="wrapper-title-header-contact ">ประเภทการชำระเงิน</div>
-        <div class="row pt-4">
-            <div class="custom-control custom-radio text-center m-auto">
-                <input (click)="checkIsshowbank(1)" id="one" type="radio" class="custom-control-input" value="โอนเงิน" name="type" ngModel>
-                <label class="custom-control-label text-white" for="one">โอนเงิน</label>
-            </div>
-
-            <div class="custom-control custom-radio text-center m-auto">
-                <input (click)="checkIsshowbank(2)" id="two" type="radio" class="custom-control-input" value="เก็บเงินปลายทาง" name="type" ngModel>
-                <label class="custom-control-label text-white" for="two">เก็บเงินปลาทาง</label>
-            </div>
-        </div>
-        <div class="wrapper-title-header-contact ">ราคาสินค้า {{listdetail.pricesell}} บาท</div>
-        <div>
-            <div class="row pt-4">
-                <div class="col text-white f-s text-center">
-                    จำนวนสินค้า(ชิ้น)
-                </div>
-                <div class="col">
-                    <input class="form-control text-center" type="number" min="1" max="100" name="countproduct" placeholder="จำนวนสินค้า" [(ngModel)]="countproduct">
-                </div>
-            </div>
-            <div class="text-left"><span class="text-info" style="font-size: 0.8rem;">(มีสินค้าทั้งหมด {{product_count_current-countproduct}} ชิ้น)</span></div>
-        </div>
-        <div>
-            <div class="row pt-4">
-                <div class="col text-white f-s text-center">
-                    ยอดเงิน
-                </div>
-                <div class="col">
-                    <input class="form-control text-center" type="number" name="pricepay" placeholder="ยอดโอนเงิน" [(ngModel)]="countproduct*listdetail.pricesell">
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="row pt-4">
-                <div class="col text-white f-s text-center">
-                    ชื่อ-นามสกุล
-                </div>
-                <div class="col">
-                    <input class="form-control text-center" type="text" name="name_order" placeholder="ชื่อ-นามสกุล" ngModel>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="row pt-4">
-                <div class="col text-white f-s text-center">
-                    เบอร์ติดต่อ
-                </div>
-                <div class="col">
-                    <input class="form-control text-center" type="tel" name="tel" placeholder="เบอร์ติดต่อ" ngModel>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="row pt-4">
-                <div class="col text-white f-s text-center">
-                    CODE โปรโมชั่น
-                </div>
-                <div class="col">
-                    <input class="form-control text-center" type="tel" name="code"  placeholder="code" [(ngModel)]="codeInput" readonly>
-                </div>
-            </div>
-        </div>
-        <div class="wrapper-upload-slip" [hidden]="!Isshowbank">
-            <div class="container wrapper-bank">
-                <div class="row wrapper-p15" [hidden]="listdetail.bank_KBANK =='null' || listdetail.bank_KBANK=='' ">
-                    <div class="col bank1">
-                    </div>
-                    <div class="col wrapper-num-bank">
-                        {{listdetail.bank_KBANK}}
-                    </div>
-                </div>
-                <div class="row wrapper-p15" [hidden]="listdetail.bank_SCB =='null' || listdetail.bank_SCB==''">
-                    <div class="col bank2">
-                    </div>
-                    <div class="col wrapper-num-bank">
-                        {{listdetail.bank_SCB}}
-                    </div>
-                </div>
-                <div class="row wrapper-p15" [hidden]="listdetail.bank_KTB =='null' || listdetail.bank_KTB==''">
-                    <div class="col bank3">
-                    </div>
-                    <div class="col wrapper-num-bank">
-                        {{listdetail.bank_KTB}}
-                    </div>
-                </div>
-                <div class="row wrapper-p15" [hidden]="listdetail.bank_BBL =='null' || listdetail.bank_BBL==''">
-                    <div class="col bank4">
-                    </div>
-                    <div class="col wrapper-num-bank">
-                        {{listdetail.bank_BBL}}
-                    </div>
-                </div>
-
-            </div>
-            <div class="file-input-wrapper">
-                <div class="wrapper-upload-file">
-                    อัพโหลดสลิป(คลิ๊ก)
-                </div>
-                <input type='file' (change)="readURL($event)" />
-                <div class="p-t-30">
-                    <img class="img-fluid wrapper-uploaded" [src]="temp_path_image1">
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="input-group wrapper-desc">
-        <div class="input-group-prepend ">
-            <span class="input-group-text ">ที่อยู่</span>
-        </div>
-        <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="deliveryaddress" rows="5 " cols="60 " required></textarea>
-    </div>
-    <div class="wrapper-desc-title">ใส่รายละเอียดสินค้า(<mark>ที่ต้องการ</mark>)</div>
-    <div class="input-group wrapper-desc">
-        <div class="input-group-prepend ">
-            <span class="input-group-text ">รายละเอียด</span>
-        </div>
-        <textarea class="form-control wrapper-text-area " ngModel ngDefaultControl name="description" rows="5 " cols="60 " required></textarea>
-    </div>
-    <div class="wrapper-input wrapper-btn-bill">
-        <button type="submit" value="submit" class="btn btn-success w-100  wrapper-font-btn-submit">ยืนยัน</button>
-    </div>
-    <div class="wrapper-title-header-contact" [hidden]="listdetail.shopee=='null'">ช่องทาง Shopee</div>
-    <div class="shopee" [hidden]="listdetail.shopee=='null'" (click)="clickshopee(listdetail.shopee)">
-
-    </div>
-    <div class="wrapper-title-header-contact" [hidden]="listdetail.lazada=='null'">ช่องทาง LAZADA</div>
-    <div class="lazada" [hidden]="listdetail.lazada=='null'" (click)="clicklazada(listdetail.lazada) ">
-    </div>
-</form> -->
- 
-<!-- <div class="container"> 
-    <div style="padding-bottom: 30vh;"> 
-    </div>
-    <footer>
-        <div class="bg-footer ">
-            <div class="row ">
-                <div class="col wrapper-box-footer ">
-                    <div class="Line-footer pb-4 " (click)="clickline(listdetail.line) ">
-
-                    </div>
-
-                </div>
-                <div class="col wrapper-box-footer ">
-                    <div class="tel-footer pb-4 " (click)="clicktel(listdetail.tel) ">
-
-                    </div>
-                </div>
-                <div class="col wrapper-box-footer ">
-                    <div class="facebook-footer pb-4 " (click)="clickfacebook(listdetail.facebook) ">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div> -->
-
-
- 
+  <iframe *ngIf="Ishideyoutube" class="p-3" width="100%" height="500" frameBorder="0" [src]="urlyoutube"></iframe>
 
 
 
@@ -310,279 +109,303 @@ white-space: pre-line;color: #777;background-color:white;text-align:center;paddi
 
 
 
- 
-    <!-- vuejs -->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <!-- vuejs -->
-        <!-- Boostrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">   
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-          <!-- Boostrap -->
-      
-         
-        <style>
-        
-        .bgimg-1, .bgimg-2, .bgimg-3 {
-          position: relative;
-          opacity: 0.65;
-          background-attachment: fixed;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: cover;
-        
-        }
-        .bgimg-1 {
-          background-image: url("https://source.unsplash.com/user/erondu/1600x900");
-          min-height: 100%;
-        }
-        
-        .bgimg-2 {
-          background-image: url("https://source.unsplash.com/user/jackie/likes/1600x900");
-          min-height: 400px;
-        }
-        
-        .bgimg-3 {
-          background-image: url("https://source.unsplash.com/1600x900/?nature,water");
-          min-height: 400px;
-        }
-        
-        .caption {
-          position: absolute;
-          left: 0;
-          top: 50%;
-          width: 100%;
-          text-align: center;
-          color: #000;
-        }
-        
-        .caption span.border {
-          background-color: #111;
-          color: #fff;
-          padding: 18px;
-          font-size: 25px;
-          letter-spacing: 10px;
-        }
-        
-        h3 {
-          letter-spacing: 5px;
-          text-transform: uppercase;
-          font: 20px "Lato", sans-serif;
-          color: #111;
-        }
-        
-        /* Turn off parallax scrolling for tablets and phones */
-        @media only screen and (max-device-width: 319px) {
-          .bgimg-1, .bgimg-2, .bgimg-3 {
-            background-attachment: scroll;
-          }
-        }
-    
-        .img-preload{
-        width: 100%; 
-        max-width: 100%;
-        max-height: 100%;
-        position: fixed;
-        z-index: 1;
-        height: 100%;
-        top:0;
+
+  <!-- vuejs -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- vuejs -->
+  <!-- Boostrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
+  <!-- Boostrap -->
+
+
+  <style>
+    .bgimg-1,
+    .bgimg-2,
+    .bgimg-3 {
+      position: relative;
+      opacity: 0.65;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
     }
 
-    .img-preload-image-title{
-        width: 100%; 
-        max-width: 100%;
-        max-height: 100%;
-        position: fixed;
-        z-index: 1;
-        height: 100%;
-        top:0;
+    .bgimg-1 {
+      background-image: url("https://source.unsplash.com/user/erondu/1600x900");
+      min-height: 100%;
     }
-        </style>  
-         
- 
-        <div class="bgimg-1" >
-          <div class="caption">
-          <span class="border">ยินดีต้อนรับ</span>
-          </div>
-        </div>
-        
-        <div style="word-break: break-all;
+
+    .bgimg-2 {
+      background-image: url("https://source.unsplash.com/user/jackie/likes/1600x900");
+      min-height: 400px;
+    }
+
+    .bgimg-3 {
+      background-image: url("https://source.unsplash.com/1600x900/?nature,water");
+      min-height: 400px;
+    }
+
+    .caption {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      text-align: center;
+      color: #000;
+    }
+
+    .caption span.border {
+      background-color: #111;
+      color: #fff;
+      padding: 18px;
+      font-size: 25px;
+      letter-spacing: 10px;
+    }
+
+    h3 {
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      font: 20px "Lato", sans-serif;
+      color: #111;
+    }
+
+    /* Turn off parallax scrolling for tablets and phones */
+    @media only screen and (max-device-width: 319px) {
+
+      .bgimg-1,
+      .bgimg-2,
+      .bgimg-3 {
+        background-attachment: scroll;
+      }
+    }
+
+    .img-preload {
+      width: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      position: fixed;
+      z-index: 1;
+      height: 100%;
+      top: 0;
+    }
+
+    .img-preload-image-title {
+      width: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      position: fixed;
+      z-index: 1;
+      height: 100%;
+      top: 0;
+    }
+
+  </style>
+
+
+  <div class="bgimg-1">
+    <div class="caption">
+      <span class="border">ยินดีต้อนรับ</span>
+    </div>
+  </div>
+
+  <div
+    style="word-break: break-all;
         white-space: pre-line;width:100%;color: #777;background-color:white;text-align:center;padding: 82px 28px;text-align: justify;">
-          <h3 style="text-align:center;">รายละเอียด</h3>
-          <p [innerHTML]="listdetail.description"></p>
-          <div class="container">
-            <div class="row">
-              <div class="col-sm p-1">
-                <div  class="myButtonLINE" (click)="clicklineofficialid(listdetail.line)">LINE</div>
-              </div>
-              <div class="col-sm p-1">
-                <div  class="myButtonTel" (click)="clicktel(listdetail.tel)">โทร</div>
-              </div>
-              <div class="col-sm p-1">
-                <div  class="myButtonFACEBOOK" (click)="clickfacebook(listdetail.facebook)">FACEBOOK</div>
-              </div>
-              <div class="col-sm p-1"> 
-                <div class="myButtonshopee" *ngIf="showshopee(listdetail.shopee)" (click)="clickshopee(listdetail.shopee)" >shopee</div>
-              </div>
-            </div>
-          </div>
+    <h3 style="text-align:center;">รายละเอียด</h3>
+    <p [innerHTML]="listdetail.description"></p>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm p-1">
+          <div class="myButtonLINE" (click)="clicklineofficialid(listdetail.line)">LINE</div>
         </div>
-        
-        <div class="bgimg-2">
-          <div class="caption"> 
-            <div class="header">
-                <div class="wrapper-sold-out-l" [hidden]="!Isshowsoldout">
-                </div>
-                <img class="img-fluid wrapper-uploaded img-top-footer w-100" [src]="imageheader" [hidden]="!imageheader||imageheader =='undefined'">
-            </div>
-          <!-- <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">LESS HEIGHT</span> -->
-          </div>
+        <div class="col-sm p-1">
+          <div class="myButtonTel" (click)="clicktel(listdetail.tel)">โทร</div>
         </div>
-        
-        <div style="position:relative;">
-          <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-          <p>ช่องทางการติดต่อ</p>
-          </div>
+        <div class="col-sm p-1">
+          <div class="myButtonFACEBOOK" (click)="clickfacebook(listdetail.facebook)">FACEBOOK</div>
         </div>
-        
-        <div class="bgimg-3">
-          <div class="caption">
-          <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">ช่องทางติดต่อ</span>
-          </div>
+        <div class="col-sm p-1">
+          <div class="myButtonshopee" *ngIf="showshopee(listdetail.shopee)" (click)="clickshopee(listdetail.shopee)">
+            shopee</div>
         </div>
-        
-        <div style="position:relative;">
-          <div style="color:#ddd;background-color:#282E34;text-align:center;padding-bottom: 30px;text-align: justify;">
-          
-            <div class="container">
-                <div class="row">
-                  <div class="col-sm p-1">
-                    <div class="myButtonLINE" (click)="clicklineofficialid(listdetail.line)">LINE</div>
-                  </div>
-                  <div class="col-sm p-1">
-                    <div  class="myButtonTel" (click)="clicktel(listdetail.tel)">โทร</div>
-                  </div>
-                  <div class="col-sm p-1">
-                    <div class="myButtonFACEBOOK" (click)="clickfacebook(listdetail.facebook)">FACEBOOK</div>
-                  </div>
-                  <div class="col-sm p-1"> 
-                    <div class="myButtonshopee" *ngIf="showshopee(listdetail.shopee)" (click)="clickshopee(listdetail.shopee)" >shopee</div>
-                  </div>
-                </div>
-              </div>
-     
-          <style>  
-    .myButtonLINE {
-      width: 100%;
-        box-shadow: 0px 0px 0px 0px #3dc21b;
-        background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-        background-color:#44c767;
-        border-radius:6px;
-        border:1px solid #18ab29;
-        display:inline-block;
-        cursor:pointer;
-        color:#ffffff;
-        font-family:Arial;
-        font-size:21px;
-        padding:15px 60px;
-      font-weight:bold;
-        text-decoration:none;
-        text-shadow:2px -1px 3px #2f6627;
-      text-align: center;
-    }
-    .myButtonLINE:hover {
-        background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-        background-color:#5cbf2a;
-    }
-    .myButtonLINE:active {
-        position:relative;
-        top:1px;
-    }
-     
-    
-    .myButtonTel {
-      width: 100%;
-        box-shadow: 0px 0px 0px 0px #c21b1b;
-        background:linear-gradient(to bottom, #e63c58 5%, #f70d4b 100%);
-        background-color:#e63c58;
-        border-radius:6px;
-        border:1px solid #ab192a;
-        display:inline-block;
-        cursor:pointer;
-        color:#ffffff;
-        font-family:Arial;
-        font-size:21px;
-        font-weight:bold;
-        padding:15px 60px;
-        text-decoration:none;
-        text-shadow:-5px 6px 3px #ed2140;
-      text-align: center;
-    }
-    .myButtonTel:hover {
-        background:linear-gradient(to bottom, #f70d4b 5%, #e63c58 100%);
-        background-color:#f70d4b;
-    }
-    .myButtonTel:active {
-        position:relative;
-        top:1px;
-    }
-    
-    
-    .myButtonFACEBOOK {
-      width: 100%;
-        box-shadow: 0px 0px 0px 0px #1b2fc2;
-        background:linear-gradient(to bottom, #3e8de6 5%, #0e67f5 100%);
-        background-color:#3e8de6;
-        border-radius:6px;
-        border:1px solid #2d19ab;
-        display:inline-block;
-        cursor:pointer;
-        color:#ffffff;
-        font-family:Arial;
-        font-size:21px;
-        font-weight:bold;
-        padding:15px 60px;
-        text-decoration:none;
-        text-shadow:5px 2px 3px #2139eb;
-      text-align: center;
-    }
-    .myButtonFACEBOOK:hover {
-        background:linear-gradient(to bottom, #0e67f5 5%, #3e8de6 100%);
-        background-color:#0e67f5;
-    }
-    .myButtonFACEBOOK:active {
-        position:relative;
-        top:1px;
-    } 
+      </div>
+    </div>
+  </div>
 
-    .myButtonshopee {
-      width: 100%;
-    box-shadow: 0px 0px 0px 0px #ee7627;
-    background: linear-gradient(to bottom, #e76e1f 5%, #eb5c0f 100%);
-    background-color: #e15423;
-    border-radius: 6px;
-    border: 1px solid #f25e0f;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 21px;
-    font-weight: bold;
-    padding: 15px 60px;
-    text-decoration: none;
-    text-shadow: 5px 2px 3px #c05d0f;
-    text-align: center;
-    }
-          </style>
+  <div class="bgimg-2">
+    <div class="caption">
+      <div class="header">
+        <div class="wrapper-sold-out-l" [hidden]="!Isshowsoldout">
+        </div>
+        <img class="img-fluid wrapper-uploaded img-top-footer w-100" [src]="imageheader"
+          [hidden]="!imageheader||imageheader =='undefined'">
+      </div>
+      <!-- <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">LESS HEIGHT</span> -->
+    </div>
+  </div>
+
+  <div style="position:relative;">
+    <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+      <p>ช่องทางการติดต่อ</p>
+    </div>
+  </div>
+
+  <div class="bgimg-3">
+    <div class="caption">
+      <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">ช่องทางติดต่อ</span>
+    </div>
+  </div>
+
+  <div style="position:relative;">
+    <div style="color:#ddd;background-color:#282E34;text-align:center;padding-bottom: 30px;text-align: justify;">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm p-1">
+            <div class="myButtonLINE" (click)="clicklineofficialid(listdetail.line)">LINE</div>
           </div>
-        </div> 
-        <div class="bgimg-1">
-          <div class="caption">
-          
+          <div class="col-sm p-1">
+            <div class="myButtonTel" (click)="clicktel(listdetail.tel)">โทร</div>
+          </div>
+          <div class="col-sm p-1">
+            <div class="myButtonFACEBOOK" (click)="clickfacebook(listdetail.facebook)">FACEBOOK</div>
+          </div>
+          <div class="col-sm p-1">
+            <div class="myButtonshopee" *ngIf="showshopee(listdetail.shopee)" (click)="clickshopee(listdetail.shopee)">
+              shopee</div>
           </div>
         </div>
-     
-    
-     
-      
+      </div>
+
+      <style>
+        .myButtonLINE {
+          width: 100%;
+          box-shadow: 0px 0px 0px 0px #3dc21b;
+          background: linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+          background-color: #44c767;
+          border-radius: 6px;
+          border: 1px solid #18ab29;
+          display: inline-block;
+          cursor: pointer;
+          color: #ffffff;
+          font-family: Arial;
+          font-size: 21px;
+          padding: 15px 60px;
+          font-weight: bold;
+          text-decoration: none;
+          text-shadow: 2px -1px 3px #2f6627;
+          text-align: center;
+        }
+
+        .myButtonLINE:hover {
+          background: linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+          background-color: #5cbf2a;
+        }
+
+        .myButtonLINE:active {
+          position: relative;
+          top: 1px;
+        }
+
+
+        .myButtonTel {
+          width: 100%;
+          box-shadow: 0px 0px 0px 0px #c21b1b;
+          background: linear-gradient(to bottom, #e63c58 5%, #f70d4b 100%);
+          background-color: #e63c58;
+          border-radius: 6px;
+          border: 1px solid #ab192a;
+          display: inline-block;
+          cursor: pointer;
+          color: #ffffff;
+          font-family: Arial;
+          font-size: 21px;
+          font-weight: bold;
+          padding: 15px 60px;
+          text-decoration: none;
+          text-shadow: -5px 6px 3px #ed2140;
+          text-align: center;
+        }
+
+        .myButtonTel:hover {
+          background: linear-gradient(to bottom, #f70d4b 5%, #e63c58 100%);
+          background-color: #f70d4b;
+        }
+
+        .myButtonTel:active {
+          position: relative;
+          top: 1px;
+        }
+
+
+        .myButtonFACEBOOK {
+          width: 100%;
+          box-shadow: 0px 0px 0px 0px #1b2fc2;
+          background: linear-gradient(to bottom, #3e8de6 5%, #0e67f5 100%);
+          background-color: #3e8de6;
+          border-radius: 6px;
+          border: 1px solid #2d19ab;
+          display: inline-block;
+          cursor: pointer;
+          color: #ffffff;
+          font-family: Arial;
+          font-size: 21px;
+          font-weight: bold;
+          padding: 15px 60px;
+          text-decoration: none;
+          text-shadow: 5px 2px 3px #2139eb;
+          text-align: center;
+        }
+
+        .myButtonFACEBOOK:hover {
+          background: linear-gradient(to bottom, #0e67f5 5%, #3e8de6 100%);
+          background-color: #0e67f5;
+        }
+
+        .myButtonFACEBOOK:active {
+          position: relative;
+          top: 1px;
+        }
+
+        .myButtonshopee {
+          width: 100%;
+          box-shadow: 0px 0px 0px 0px #ee7627;
+          background: linear-gradient(to bottom, #e76e1f 5%, #eb5c0f 100%);
+          background-color: #e15423;
+          border-radius: 6px;
+          border: 1px solid #f25e0f;
+          display: inline-block;
+          cursor: pointer;
+          color: #ffffff;
+          font-family: Arial;
+          font-size: 21px;
+          font-weight: bold;
+          padding: 15px 60px;
+          text-decoration: none;
+          text-shadow: 5px 2px 3px #c05d0f;
+          text-align: center;
+        }
+
+      </style>
+    </div>
+  </div>
+  <div class="bgimg-1">
+    <div class="caption">
+
+    </div>
+  </div>
+
+
+
+</div>
